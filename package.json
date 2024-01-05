@@ -2,13 +2,14 @@
   "name": "gdsc-client",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "test": "cypress open"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -31,7 +32,9 @@
     "@typescript-eslint/parser": "latest",
     "@vitejs/plugin-react": "^4.2.1",
     "cypress": "^13.6.2",
+    "cypress-react-selector": "^3.0.0",
     "eslint": "^8.55.0",
+    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
