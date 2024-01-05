@@ -707,6 +707,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.17.1":
+  version: 5.17.1
+  resolution: "@tanstack/query-core@npm:5.17.1"
+  checksum: 106b64af7986932220c85bbb07e79b8b0c83d03f2049efa64e8e6073e2931d28ab4d8510fb1bdc1e4de5c5c3cc52d98c36d5092799d2d074058b106bbcbee2c6
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-devtools@npm:5.17.1":
+  version: 5.17.1
+  resolution: "@tanstack/query-devtools@npm:5.17.1"
+  checksum: b39eda954dadb988526efe750c889840a92d1cff56be0d05c4b5d31c99f65982f7a3c7cac198a5603b5f1f0fc6b5f7c2710156d5b8e06d42c62ff22f743811a8
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:^5.17.1":
+  version: 5.17.1
+  resolution: "@tanstack/react-query-devtools@npm:5.17.1"
+  dependencies:
+    "@tanstack/query-devtools": 5.17.1
+  peerDependencies:
+    "@tanstack/react-query": ^5.17.1
+    react: ^18.0.0
+  checksum: d162fc6bb9604669f8df60e36d8e6b5e9ce8abf376804ae65f30c04fbb52d5cc81a3d1ef1d1ff7f01b0e60208c10086ed9925533ec9cd9f296e6dcd843336bfe
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.17.1":
+  version: 5.17.1
+  resolution: "@tanstack/react-query@npm:5.17.1"
+  dependencies:
+    "@tanstack/query-core": 5.17.1
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 94faffbc4ef427f7210e7e0e390bc2de7f855f9586d9676dfd15ac5542e633fcf3460c267d5ab3d22ab99a5458805ebd6431ffa470ad945588156f4ec31d4289
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.20.5":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -797,6 +834,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^18.0.9":
+  version: 18.2.18
+  resolution: "@types/react-dom@npm:18.2.18"
+  dependencies:
+    "@types/react": "*"
+  checksum: 8e3da404c980e2b2a76da3852f812ea6d8b9d0e7f5923fbaf3bfbbbfa1d59116ff91c129de8f68e9b7668a67ae34484fe9df74d5a7518cf8591ec07a0c4dad57
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:^18.2.46":
   version: 18.2.46
   resolution: "@types/react@npm:18.2.46"
@@ -822,7 +868,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:latest":
+"@typescript-eslint/eslint-plugin@latest":
   version: 6.17.0
   resolution: "@typescript-eslint/eslint-plugin@npm:6.17.0"
   dependencies:
@@ -847,7 +893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:latest":
+"@typescript-eslint/parser@latest":
   version: 6.17.0
   resolution: "@typescript-eslint/parser@npm:6.17.0"
   dependencies:
@@ -1727,10 +1773,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gdsc-client@workspace:."
   dependencies:
+    "@tanstack/react-query": ^5.17.1
+    "@tanstack/react-query-devtools": ^5.17.1
     "@types/eslint": ^8
     "@types/node": ^18.11.16
     "@types/react": ^18.2.46
     "@types/react-beautiful-dnd": ^13
+    "@types/react-dom": ^18.0.9
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
     "@vitejs/plugin-react": ^4.2.1
