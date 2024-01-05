@@ -8,19 +8,16 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-
-    /* Bundler mode */
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "jsxImportSource": "@emotion/react",
 
     /* 절대 경로 */
     "baseUrl": ".",
@@ -41,5 +38,4 @@
   },
   "include": ["src", "**/*.*"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "jsxImportSource": "@emotion/react"
 }
