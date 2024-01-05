@@ -23,6 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+.vite
+
 # zero-install
 .yarn/*
 !.yarn/cache
