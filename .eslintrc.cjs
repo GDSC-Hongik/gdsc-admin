@@ -15,15 +15,11 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
-    ],
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-      },
-    ],
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "react/no-unknown-property": ["error", { ignore: ["css"] }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { ignoreRestSiblings: true }],
   },
 };
