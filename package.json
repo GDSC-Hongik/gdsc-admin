@@ -12,7 +12,8 @@
     "cypress": "cypress open",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_7ac651aae20efee"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -42,6 +43,7 @@
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "@vitejs/plugin-react": "^4.2.1",
+    "chromatic": "^10.2.0",
     "cypress": "^13.6.2",
     "cypress-react-selector": "^3.0.0",
     "eslint": "^8.56.0",
@@ -70,5 +72,7 @@
     "@storybook/core-common/webpack": "^5",
     "@storybook/core-server/webpack": "^5",
     "@storybook/react/webpack": "^5"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "gdsc-client@0.0.0"
 }
