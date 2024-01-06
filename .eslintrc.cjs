@@ -6,6 +6,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "plugin:cypress/recommended",
+    "plugin:storybook/recommended",
   ],
   overrides: [],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
@@ -29,5 +30,10 @@ module.exports = {
     "cypress/no-force": "warn",
     "cypress/no-async-tests": "error",
     "cypress/no-pause": "error",
+  },
+  settings: {
+    react: {
+      version: "detect",
+    },
   },
 };

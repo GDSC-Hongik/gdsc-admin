@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "postinstall": "husky install",
     "cypress": "cypress open",
-    "test": "vitest"
+    "test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -24,6 +26,14 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
+    "@storybook/addon-essentials": "7.6.7",
+    "@storybook/addon-interactions": "7.6.7",
+    "@storybook/addon-links": "7.6.7",
+    "@storybook/addon-onboarding": "1.0.10",
+    "@storybook/blocks": "7.6.7",
+    "@storybook/react": "7.6.7",
+    "@storybook/react-webpack5": "7.6.7",
+    "@storybook/test": "7.6.7",
     "@types/eslint": "^8",
     "@types/node": "^18.11.16",
     "@types/react": "^18.2.46",
@@ -34,13 +44,17 @@
     "@vitejs/plugin-react": "^4.2.1",
     "cypress": "^13.6.2",
     "cypress-react-selector": "^3.0.0",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-cypress": "^2.15.1",
-    "eslint-plugin-react": "latest",
+    "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "storybook": "7.6.7",
     "vite": "^5.0.8",
     "vitest": "^1.1.2"
   },
@@ -50,5 +64,11 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "resolutions": {
+    "webpack": "5",
+    "@storybook/core-common/webpack": "^5",
+    "@storybook/core-server/webpack": "^5",
+    "@storybook/react/webpack": "^5"
   }
 }
