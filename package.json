@@ -1,0 +1,80 @@
+{
+  "name": "gdsc-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "postinstall": "husky install",
+    "cypress": "cypress open",
+    "test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_7ac651aae20efee"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@tanstack/react-query": "^5.17.1",
+    "@tanstack/react-query-devtools": "^5.17.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.4",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.11.0",
+    "@storybook/addon-essentials": "7.6.7",
+    "@storybook/addon-interactions": "7.6.7",
+    "@storybook/addon-links": "7.6.7",
+    "@storybook/addon-onboarding": "1.0.10",
+    "@storybook/blocks": "7.6.7",
+    "@storybook/react": "7.6.7",
+    "@storybook/react-webpack5": "7.6.7",
+    "@storybook/test": "7.6.7",
+    "@types/eslint": "^8",
+    "@types/node": "^18.11.16",
+    "@types/react": "^18.2.46",
+    "@types/react-beautiful-dnd": "^13",
+    "@types/react-dom": "^18.0.9",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "@vitejs/plugin-react": "^4.2.1",
+    "chromatic": "^10.2.0",
+    "cypress": "^13.6.2",
+    "cypress-react-selector": "^3.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^0.6.15",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "storybook": "7.6.7",
+    "vite": "^5.0.8",
+    "vitest": "^1.1.2"
+  },
+  "packageManager": "yarn@4.0.2",
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "resolutions": {
+    "webpack": "5",
+    "@storybook/core-common/webpack": "^5",
+    "@storybook/core-server/webpack": "^5",
+    "@storybook/react/webpack": "^5"
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "gdsc-client@0.0.0"
+}
