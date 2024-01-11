@@ -4,6 +4,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    'plugin:prettier/recommended',
     "plugin:react-hooks/recommended",
     "plugin:cypress/recommended",
     "plugin:storybook/recommended",
@@ -15,7 +16,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint", "cypress"],
+  plugins: ["react", "@typescript-eslint", "cypress", "prettier"],
   rules: {
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-var-requires": "off",
@@ -30,6 +31,12 @@ module.exports = {
     "cypress/no-force": "warn",
     "cypress/no-async-tests": "error",
     "cypress/no-pause": "error",
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
   settings: {
     react: {
