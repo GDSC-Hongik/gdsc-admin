@@ -2,6 +2,7 @@ const RoutePath = {
   Index: "/",
   Member: "/",
 
+  Signup: "/sign-up",
   Signin: "/sign-in",
 
   AuthorizedSuccess: "/authorized_success",
