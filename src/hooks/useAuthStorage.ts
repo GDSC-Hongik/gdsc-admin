@@ -1,21 +1,14 @@
-import { useCallback, useState } from "react";
+import useTokenStore from "@stores/token";
 
 export default function useAuthStorage() {
   // Todo: Use zustand
-  const [token, setToken] = useState<string | null>("");
+  const { token, setToken, clearToken } = useTokenStore();
 
   const isEmptyToken = token?.length === 0;
 
   function setAuthData({ accessToken }: { accessToken: string | null }) {
-    setToken(accessToken);
+    accessToken ? setToken(accessToken) : clearToken();
   }
 
-  const clear = useCallback(() => {
-    if (isEmptyToken) {
-      return;
-    }
-    setToken(null);
-  }, [isEmptyToken, setToken]);
-
-  return { token, isEmptyToken, setAuthData, clear };
+  return { token, isEmptyToken, setAuthData, clearToken };
 }
