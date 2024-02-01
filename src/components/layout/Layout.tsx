@@ -1,13 +1,11 @@
 import useAuthStorage from "@hooks/useAuthStorage";
-import { Stack, styled } from "@mui/material";
 import RoutePath from "@routes/routePath";
+import { Stack, styled } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function Layout() {
   const { isEmptyToken } = useAuthStorage();
-  isEmptyToken;
 
-  // Todo: get user hook
   if (isEmptyToken) {
     return <Navigate to={RoutePath.Signin} />;
   }
