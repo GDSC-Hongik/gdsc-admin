@@ -3,7 +3,7 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "allowJs": true,
-    "types": ["node", "cypress", "cypress-react-selector"],
+    "types": ["node", "cypress", "cypress-react-selector", "vite-plugin-svgr/client"],
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
@@ -32,9 +32,10 @@
       "@styles/*": ["src/styles/*"],
       "@tests/*": ["src/__tests__/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@routes/*": ["src/routes/*"]
     }
   },
   "include": ["src", "**/*.*"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
