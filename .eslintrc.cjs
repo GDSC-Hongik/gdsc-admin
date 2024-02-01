@@ -1,10 +1,10 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2021: true, "cypress/globals": true },
+  env: { "browser": true, "es2021": true, "cypress/globals": true },
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    'plugin:prettier/recommended',
+    "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
     "plugin:cypress/recommended",
     "plugin:storybook/recommended",
@@ -31,10 +31,10 @@ module.exports = {
     "cypress/no-force": "warn",
     "cypress/no-async-tests": "error",
     "cypress/no-pause": "error",
-    'prettier/prettier': [
-      'error',
+    "prettier/prettier": [
+      "error",
       {
-        endOfLine: 'auto',
+        endOfLine: "auto",
       },
     ],
   },
