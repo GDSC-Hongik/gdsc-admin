@@ -2,11 +2,10 @@ const RoutePath = {
   Index: "/",
   Member: "/",
 
-  Signup: "/sign-up",
   Signin: "/sign-in",
 
-  AuthorizedSuccess: "/authorized_success",
-  AuthorizedError: "/authorized_error",
+  AuthorizedSuccess: "/authorized-success",
+  AuthorizedError: "/authorized-error",
 
   Error: "/error",
   NotFoundError: "/404",
