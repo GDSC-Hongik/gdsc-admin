@@ -1,7 +1,6 @@
 import useTokenStore from "@stores/token";
 
 export default function useAuthStorage() {
-  // Todo: Use zustand
   const { token, setToken, clearToken } = useTokenStore();
 
   const isEmptyToken = token?.length === 0;
