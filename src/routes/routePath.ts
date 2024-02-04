@@ -8,7 +8,6 @@ const RoutePath = {
   AuthorizedError: "/authorized-error",
 
   Error: "/error",
-  NotFoundError: "/404",
 } as const;
 
 export default RoutePath;

@@ -3,7 +3,6 @@ import SigninPage from "@pages/SigninPage";
 import AuthSuccessRedirectPage from "@pages/AuthSuccessRedirectPage";
 import MemberPage from "@pages/MemberPage";
 import NotFoundErrorPage from "@pages/NotFoundErrorPage";
-import NotFoundErrorRedirectPage from "@pages/NotFoundErrorRedirectPage";
 import RoutePath from "@routes/routePath";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 
@@ -15,8 +14,7 @@ const routes: RouteObject[] = [
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
   { path: RoutePath.AuthorizedSuccess, element: <AuthSuccessRedirectPage /> },
-  { path: RoutePath.NotFoundError, element: <NotFoundErrorPage /> },
-  { path: "*", element: <NotFoundErrorRedirectPage /> },
+  { path: "*", element: <NotFoundErrorPage /> },
 ];
 
 const Router = createBrowserRouter(routes);
