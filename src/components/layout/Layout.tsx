@@ -1,24 +1,35 @@
 import useAuthStorage from "@hooks/useAuthStorage";
 import RoutePath from "@routes/routePath";
+import Sidebar from "@components/layout/sidebar/Sidebar";
 import { Stack, styled } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function Layout() {
   const { isEmptyToken } = useAuthStorage();
 
-  if (isEmptyToken) {
+  if (!isEmptyToken) {
     return <Navigate to={RoutePath.Signin} />;
   }
 
   return (
     <Container>
-      <Outlet />
+      <Sidebar />
+      <BodyContainer>
+        <Outlet />
+      </BodyContainer>
     </Container>
   );
 }
 
 const Container = styled(Stack)({
-  width: "100%",
-  height: "100%",
+  height: "100vh",
+  width: "100vw",
   flexDirection: "row",
+  margin: "-8px",
+});
+
+const BodyContainer = styled(Stack)({
+  padding: "80px",
+  width: "100%",
+  overflow: "scroll",
 });
