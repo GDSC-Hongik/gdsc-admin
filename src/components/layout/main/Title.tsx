@@ -1,8 +1,9 @@
+import { ManagementVariant } from "@types/main";
 import styled from "@emotion/styled";
 import { Stack, Box } from "@mui/material";
 
 type TitleProps = {
-  variant: "allMember" | "pendingMember" | "feePaymentStatus";
+  variant: ManagementVariant;
   descriptionText: string;
 };
 

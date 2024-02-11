@@ -7,8 +7,8 @@ const mockCreatedDate = new Date();
 export default function Header() {
   return (
     <Container>
-      <HeaderLeftCol />
-      <HeaderRightCol createdDate={mockCreatedDate} />
+      <HeaderLeftCol variant={"allMember"} />
+      <HeaderRightCol variant={"allMember"} createdDate={mockCreatedDate} />
     </Container>
   );
 }
