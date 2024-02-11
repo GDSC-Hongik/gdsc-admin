@@ -1,5 +1,5 @@
 import Header from "@components/layout/main/Header";
-import Table from "@components/layout/main/Table";
+import Table from "@components/layout/main/InfoTable";
 import Title from "@components/layout/main/Title";
 
 export default function AllMembersPage() {
