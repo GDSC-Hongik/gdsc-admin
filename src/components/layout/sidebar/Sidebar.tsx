@@ -25,11 +25,10 @@ const Container = styled(Stack)({
   minWidth: "256px",
   gap: "32px",
   paddingTop: "32px",
+  boxShadow: "0 2px 3px #00000033, 0 1px 1px #00000024, 0 1px 2px #0000001E",
 });
 
 const ListContainer = styled(Stack)({
-  overflow: "scroll",
   height: "100%",
-  paddingBottom: "32px",
-  padding: "0 8px",
+  padding: "8px",
 });
