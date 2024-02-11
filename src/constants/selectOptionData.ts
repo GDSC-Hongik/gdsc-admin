@@ -13,7 +13,7 @@ export const selectOptionData = [
   },
   {
     value: 4,
-    name: "소속학과",
+    name: "소속 학과",
   },
   {
     value: 5,

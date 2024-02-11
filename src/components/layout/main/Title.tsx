@@ -30,7 +30,7 @@ export default function Title({ variant, descriptionText }: TitleProps) {
 
 const Container = styled(Stack)({
   padding: "16px 0",
-  marginBottom: "32px",
+  marginBottom: "22px",
 });
 
 const HeaderTitle = styled(Box)({

@@ -29,7 +29,7 @@ const Container = styled(Stack)({
 });
 
 const BodyContainer = styled(Stack)({
-  padding: "50px",
+  padding: "40px",
   width: "100%",
-  overflow: "scroll",
+  overflow: "auto",
 });

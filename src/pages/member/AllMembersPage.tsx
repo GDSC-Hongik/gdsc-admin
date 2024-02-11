@@ -1,4 +1,5 @@
 import Header from "@components/layout/main/Header";
+import Table from "@components/layout/main/Table";
 import Title from "@components/layout/main/Title";
 
 export default function AllMembersPage() {
@@ -6,6 +7,7 @@ export default function AllMembersPage() {
     <>
       <Title variant={"allMember"} descriptionText={"멤버 관리 설명"} />
       <Header />
+      <Table />
     </>
   );
 }

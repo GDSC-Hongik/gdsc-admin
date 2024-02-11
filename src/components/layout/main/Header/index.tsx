@@ -19,4 +19,5 @@ const Container = styled(Stack)({
   justifyContent: "space-between",
   alignItems: "center",
   flexWrap: "wrap",
+  padding: "16px 0",
 });
