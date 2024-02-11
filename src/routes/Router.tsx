@@ -1,4 +1,4 @@
-import Layout from "@components/layout/Layout";
+import Layout from "@components/layout/common/Layout";
 import SigninPage from "@pages/SigninPage";
 import AuthSuccessRedirectPage from "@pages/AuthSuccessRedirectPage";
 import AllMembersPage from "@pages/member/AllMembersPage";

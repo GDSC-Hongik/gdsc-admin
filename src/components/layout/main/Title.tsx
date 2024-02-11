@@ -1,21 +1,21 @@
 import styled from "@emotion/styled";
 import { Stack, Box } from "@mui/material";
 
-type HeaderProps = {
+type TitleProps = {
   variant: "allMember" | "pendingMember" | "feePaymentStatus";
   descriptionText: string;
 };
 
-const headerTitleVariant = {
+const titleVariant = {
   allMember: "전체 멤버 관리",
   pendingMember: "가입 대기 멤버 관리",
   feePaymentStatus: "회비 납부 여부 관리",
-};
+} as const;
 
-export default function Header({ variant, descriptionText }: HeaderProps) {
+export default function Title({ variant, descriptionText }: TitleProps) {
   return (
     <Container>
-      <HeaderTitle sx={{ typography: "h6" }}>{headerTitleVariant[variant]}</HeaderTitle>
+      <HeaderTitle sx={{ typography: "h6" }}>{titleVariant[variant]}</HeaderTitle>
       <HeaderSubTitle
         sx={{
           typography: "subtitle1",
@@ -28,8 +28,8 @@ export default function Header({ variant, descriptionText }: HeaderProps) {
 }
 
 const Container = styled(Stack)({
-  padding: "16px",
-  marginBottom: "72px",
+  padding: "16px 0",
+  marginBottom: "32px",
 });
 
 const HeaderTitle = styled(Box)({

@@ -15,7 +15,6 @@ export default function Sidebar() {
             { label: "가입 대기 멤버 관리", path: RoutePath.PendingMembers },
           ]}
         />
-        <SidebarListButton label="(예시) 전체 멤버 관리" path={RoutePath.AllMembers} />
       </ListContainer>
     </Container>
   );
