@@ -1,4 +1,4 @@
-import { selectOptionData } from "@constants/selectOptionData";
+import { selectOptionData } from "@constants/table";
 import { ManagementVariant } from "@types/main";
 import { FormControl, InputLabel, Select, MenuItem, TextField, Stack, styled } from "@mui/material";
 

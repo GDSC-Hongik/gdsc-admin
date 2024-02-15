@@ -1,10 +1,10 @@
-import InfoTableBody from "./InfoTableBody";
 import InfoTableHeader from "./InfoTableHeader";
-import InfoTableFooter from "./InfoTableFooter";
-import { Paper, TableContainer } from "@mui/material";
+import InfoTableBody from "./InfoTableBody";
+import { Grid, TablePagination } from "@mui/material";
 import { useState } from "react";
+import styled from "@emotion/styled";
 
-const rows = [
+const studentInfoList = [
   {
     memberId: "1",
     studentId: "C123123",
@@ -29,9 +29,7 @@ const rows = [
 
 export default function Table() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
@@ -44,17 +42,30 @@ export default function Table() {
     setPage(0);
   };
 
+  const getStudentInfoDataList = () => {
+    return rowsPerPage > 0
+      ? studentInfoList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      : studentInfoList;
+  };
+
+  const studentInfoDataList = getStudentInfoDataList();
+
   return (
-    <TableContainer component={Paper} sx={{ overflow: "visible" }}>
+    <Grid container direction={"row"}>
       <InfoTableHeader />
-      <InfoTableBody rowsPerPage={rowsPerPage} emptyRows={emptyRows} page={page} rows={rows} />
-      <InfoTableFooter
-        rows={rows}
-        rowsPerPage={rowsPerPage}
-        handleChangePage={handleChangePage}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
+      <InfoTableBody dataList={studentInfoDataList} />
+      <InfoTablePagination
+        count={studentInfoList.length}
         page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </TableContainer>
+    </Grid>
   );
 }
+
+const InfoTablePagination = styled(TablePagination)({
+  marginLeft: "auto",
+  border: "transparent",
+});

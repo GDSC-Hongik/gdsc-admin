@@ -1,61 +1,65 @@
 import { InfoTableRowType } from "@types/main";
-import { TableBody, TableRow, TableCell, Button } from "@mui/material";
+import { tableWidthRatio } from "@constants/table";
+import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
 
 type InfoTableBodyProps = {
-  rowsPerPage: number;
-  emptyRows: number;
-  page: number;
-  rows: InfoTableRowType[];
+  dataList: InfoTableRowType[];
 };
 
-export default function InfoTableBody({ rowsPerPage, emptyRows, page, rows }: InfoTableBodyProps) {
-  const getTableData = (): InfoTableBodyProps["rows"] => {
-    return rowsPerPage > 0
-      ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      : rows;
+export default function InfoTableBody({ dataList }: InfoTableBodyProps) {
+  const getCellWidthRatio = (option: string) => {
+    return option === "studentId" || option === "name" || option === "phone"
+      ? tableWidthRatio["cell"][option]
+      : tableWidthRatio["cell"]["default"];
   };
 
   return (
-    <TableBody>
-      {getTableData()?.map(row => (
-        <TableRow key={row.memberId}>
+    <Container container direction={"column"}>
+      {dataList.map((row, rowIndex) => (
+        <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
-            ([key, value], index) => key !== "memberId" && <CellText key={index}>{value}</CellText>,
+            ([key, value], index) =>
+              key !== "memberId" && (
+                <TextContainer item key={index} xs={getCellWidthRatio(key)}>
+                  <Text>{value}</Text>
+                </TextContainer>
+              ),
           )}
-          <ButtonCellContainer>
-            <ButtonContainer>
-              <Button variant="outlined">수정</Button>
-              <Button variant="outlined" color="error">
-                탈퇴
-              </Button>
-            </ButtonContainer>
-          </ButtonCellContainer>
-        </TableRow>
+          <ButtonContainer>
+            <Button variant="outlined">수정</Button>
+            <Button variant="outlined" color="error">
+              탈퇴
+            </Button>
+          </ButtonContainer>
+        </CellContainer>
       ))}
-      {emptyRows > 0 && (
-        <EmptyTableRow emptyRows={emptyRows}>
-          <TableCell colSpan={6} />
-        </EmptyTableRow>
-      )}
-    </TableBody>
+    </Container>
   );
 }
 
-const CellText = styled(TableCell)({
-  fontSize: "12px",
+const Container = styled(Grid)({});
+
+const CellContainer = styled(Grid)({
+  borderBottom: "1px solid #0000001F",
+});
+
+const TextContainer = styled(Grid)({
   textAlign: "center",
 });
 
-const ButtonCellContainer = styled.div({
-  padding: "0px",
+const Text = styled(Box)({
+  maxHeight: "52px",
+  fontWeight: 500,
+  lineHeight: "24px",
+  fontSize: "14px",
+  color: "000000DD",
 });
 
-const ButtonContainer = styled(TableCell)({
+const ButtonContainer = styled.div({
   display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flex: 1,
   gap: 5,
 });
-
-const EmptyTableRow = styled(TableRow)(({ emptyRows }: { emptyRows: number }) => ({
-  height: 53 * emptyRows,
-}));

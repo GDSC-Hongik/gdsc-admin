@@ -28,3 +28,18 @@ export const selectOptionData = [
     name: "디스코드 닉네임",
   },
 ];
+
+export const tableWidthRatio = {
+  title: {
+    학번: 0.8,
+    이름: 0.8,
+    전화번호: 1.1,
+    default: 1.9,
+  },
+  cell: {
+    studentId: 0.8,
+    name: 0.8,
+    phone: 1.1,
+    default: 1.9,
+  },
+};
