@@ -1,3 +1,4 @@
+/* eslint-disable no-warning-comments */
 import Router from "@routes/Router";
 import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
