@@ -27,7 +27,7 @@
       "@constants/*": ["src/constants/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
-      "@stores/*": ["src/stores/*"],
+      "@store/*": ["src/store/*"],
       "@styles/*": ["src/styles/*"],
       "@tests/*": ["src/__tests__/*"],
       "@types/*": ["src/types/*"],
