@@ -1,4 +1,4 @@
-import { MemberInfoStateType } from "..";
+import { MemberInfoStateType } from "@types/main";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
@@ -16,12 +16,12 @@ export default function FirstRow({
   return (
     <RowContainer>
       <ColContainer>
-        <Box>이름</Box>
-        <TextField size="small" name="name" value={name} onChange={handleChangeMemberInfo} />
+        <StyledText>이름</StyledText>
+        <StyledTextField size="small" name="name" value={name} onChange={handleChangeMemberInfo} />
       </ColContainer>
       <ColContainer>
-        <Box>학번</Box>
-        <TextField
+        <StyledText>학번</StyledText>
+        <StyledTextField
           size="small"
           name="studentId"
           value={studentId}
@@ -29,8 +29,13 @@ export default function FirstRow({
         />
       </ColContainer>
       <ColContainer>
-        <Box>전화번호</Box>
-        <TextField size="small" name="phone" value={phone} onChange={handleChangeMemberInfo} />
+        <StyledText>전화번호</StyledText>
+        <StyledTextField
+          size="small"
+          name="phone"
+          value={phone}
+          onChange={handleChangeMemberInfo}
+        />
       </ColContainer>
     </RowContainer>
   );
@@ -46,4 +51,11 @@ const ColContainer = styled.div({
   display: "flex",
   flexDirection: "column",
   flex: 1,
+  alignItems: "flex-start",
 });
+
+const StyledText = styled(Box)({
+  marginBottom: "12px",
+});
+
+const StyledTextField = styled(TextField)({ width: "100%" });

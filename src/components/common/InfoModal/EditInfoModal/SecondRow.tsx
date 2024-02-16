@@ -1,4 +1,4 @@
-import { MemberInfoStateType } from "..";
+import { MemberInfoStateType } from "@types/main";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
@@ -11,8 +11,8 @@ export default function SecondRow({ department, email, handleChangeMemberInfo }:
   return (
     <RowContainer>
       <ColContainer>
-        <Box>소속학과</Box>
-        <TextField
+        <StyledText>소속학과</StyledText>
+        <StyledTextField
           size="small"
           sx={{ marginBottom: "18px" }}
           name="department"
@@ -23,8 +23,13 @@ export default function SecondRow({ department, email, handleChangeMemberInfo }:
         <div style={{ fontSize: "14px", fontWeight: "500", lineHeight: "140%" }}>학과</div>
       </ColContainer>
       <ColContainer>
-        <Box>이메일</Box>
-        <TextField size="small" name="email" value={email} onChange={handleChangeMemberInfo} />
+        <StyledText>이메일</StyledText>
+        <StyledTextField
+          size="small"
+          name="email"
+          value={email}
+          onChange={handleChangeMemberInfo}
+        />
       </ColContainer>
     </RowContainer>
   );
@@ -40,6 +45,7 @@ const ColContainer = styled.div({
   display: "flex",
   flexDirection: "column",
   flex: 1,
+  alignItems: "flex-start",
 });
 
 const Divider = styled.div({
@@ -48,3 +54,9 @@ const Divider = styled.div({
   backgroundColor: "#BEC3CC",
   marginBottom: "18px",
 });
+
+const StyledText = styled(Box)({
+  marginBottom: "12px",
+});
+
+const StyledTextField = styled(TextField)({ width: "100%" });

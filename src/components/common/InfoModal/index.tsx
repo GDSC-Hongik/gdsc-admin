@@ -1,19 +1,10 @@
+import { MemberInfoStateType } from "@types/main";
 import FirstRow from "./EditInfoModal/FirstRow";
 import SecondRow from "./EditInfoModal/SecondRow";
 import ThirdRow from "./EditInfoModal/ThirdRow";
 import { Modal, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
-
-export type MemberInfoStateType = {
-  name: string;
-  studentId: string;
-  phone: string;
-  department: string;
-  email: string;
-  discordUsername: string;
-  nickname: string;
-};
 
 type InfoModalProps = {
   isModalVisible: boolean;
@@ -82,7 +73,7 @@ const ModalContentContainer = styled(Box)({
 });
 
 const TitleContainer = styled(Box)({
-  fontSize: "36px",
+  fontSize: "24px",
   fontWeight: "400",
   lineHeight: "133.4%",
   marginBottom: "32px",

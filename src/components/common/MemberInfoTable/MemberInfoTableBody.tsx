@@ -1,15 +1,15 @@
-import { InfoTableRowType } from "@types/main";
+import { MemberInfoType } from "@types/main";
 import { tableWidthRatio } from "@constants/table";
 import InfoModal from "../InfoModal";
 import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { useState } from "react";
 
-type InfoTableBodyProps = {
-  dataList: InfoTableRowType[];
+type MemberInfoTableBodyProps = {
+  dataList: MemberInfoType[];
 };
 
-export default function InfoTableBody({ dataList }: InfoTableBodyProps) {
+export default function MemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
   const getCellWidthRatio = (option: string) => {
@@ -18,7 +18,7 @@ export default function InfoTableBody({ dataList }: InfoTableBodyProps) {
       : tableWidthRatio["cell"]["default"];
   };
 
-  const handleCloseModal = () => setIsEditModalVisible(false);
+  const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
 
   return (
     <Container container direction={"column"}>
@@ -33,7 +33,7 @@ export default function InfoTableBody({ dataList }: InfoTableBodyProps) {
               ),
           )}
           <ButtonContainer>
-            <Button variant="outlined" onClick={() => setIsEditModalVisible(true)}>
+            <Button variant="outlined" onClick={() => handleModalVisible(true)}>
               수정
             </Button>
             <Button variant="outlined" color="error">
@@ -42,7 +42,10 @@ export default function InfoTableBody({ dataList }: InfoTableBodyProps) {
           </ButtonContainer>
         </CellContainer>
       ))}
-      <InfoModal isModalVisible={isEditModalVisible} handleCloseModal={handleCloseModal} />
+      <InfoModal
+        isModalVisible={isEditModalVisible}
+        handleCloseModal={() => handleModalVisible(false)}
+      />
     </Container>
   );
 }

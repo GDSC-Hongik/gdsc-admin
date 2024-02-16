@@ -1,14 +1,19 @@
+import { ManagementVariant } from "@types/main";
 import HeaderLeftCol from "./HeaderLeftCol";
 import HeaderRightCol from "./HeaderRightCol";
 import { Stack, styled } from "@mui/material";
 
 const mockCreatedDate = new Date();
 
-export default function Header() {
+type HeaderProps = {
+  variant: ManagementVariant;
+};
+
+export default function Header({ variant }: HeaderProps) {
   return (
     <Container>
-      <HeaderLeftCol variant={"allMember"} />
-      <HeaderRightCol variant={"allMember"} createdDate={mockCreatedDate} />
+      <HeaderLeftCol variant={variant} />
+      <HeaderRightCol variant={variant} createdDate={mockCreatedDate} />
     </Container>
   );
 }

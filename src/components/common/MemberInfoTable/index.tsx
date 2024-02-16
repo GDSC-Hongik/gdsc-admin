@@ -1,10 +1,10 @@
-import InfoTableHeader from "./InfoTableHeader";
-import InfoTableBody from "./InfoTableBody";
+import MemberInfoTableHeader from "./MemberInfoTableHeader";
+import MemberInfoTableBody from "./MemberInfoTableBody";
 import { Grid, TablePagination } from "@mui/material";
 import { useState } from "react";
 import styled from "@emotion/styled";
 
-const studentInfoList = [
+const mockMemberInfoList = [
   {
     memberId: "1",
     studentId: "C123123",
@@ -27,11 +27,14 @@ const studentInfoList = [
   },
 ];
 
-export default function Table() {
+export default function MemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = (
+    _event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
     setPage(newPage);
   };
 
@@ -42,20 +45,20 @@ export default function Table() {
     setPage(0);
   };
 
-  const getStudentInfoDataList = () => {
+  const getMemberInfoDataList = () => {
     return rowsPerPage > 0
-      ? studentInfoList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      : studentInfoList;
+      ? mockMemberInfoList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      : mockMemberInfoList;
   };
 
-  const studentInfoDataList = getStudentInfoDataList();
+  const memberInfoDataList = getMemberInfoDataList();
 
   return (
     <Grid container direction={"row"}>
-      <InfoTableHeader />
-      <InfoTableBody dataList={studentInfoDataList} />
+      <MemberInfoTableHeader />
+      <MemberInfoTableBody dataList={memberInfoDataList} />
       <InfoTablePagination
-        count={studentInfoList.length}
+        count={mockMemberInfoList.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

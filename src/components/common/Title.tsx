@@ -1,4 +1,5 @@
 import { ManagementVariant } from "@types/main";
+import { titleVariant } from "@constants/common";
 import styled from "@emotion/styled";
 import { Stack, Box } from "@mui/material";
 
@@ -6,12 +7,6 @@ type TitleProps = {
   variant: ManagementVariant;
   descriptionText: string;
 };
-
-const titleVariant = {
-  allMember: "전체 멤버 관리",
-  pendingMember: "가입 대기 멤버 관리",
-  feePaymentStatus: "회비 납부 여부 관리",
-} as const;
 
 export default function Title({ variant, descriptionText }: TitleProps) {
   return (

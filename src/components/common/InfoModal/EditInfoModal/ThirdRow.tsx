@@ -1,4 +1,4 @@
-import { MemberInfoStateType } from "..";
+import { MemberInfoStateType } from "@types/main";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
@@ -15,8 +15,8 @@ export default function ThirdRow({
   return (
     <RowContainer>
       <ColContainer>
-        <Box>디스코드 핸들명</Box>
-        <TextField
+        <StyledText>디스코드 핸들명</StyledText>
+        <StyledTextField
           size="small"
           name="discordUsername"
           value={discordUsername}
@@ -24,8 +24,8 @@ export default function ThirdRow({
         />
       </ColContainer>
       <ColContainer>
-        <Box>디스코드 닉네임</Box>
-        <TextField
+        <StyledText>디스코드 닉네임</StyledText>
+        <StyledTextField
           size="small"
           name="nickname"
           value={nickname}
@@ -46,4 +46,12 @@ const ColContainer = styled.div({
   display: "flex",
   flexDirection: "column",
   flex: 1,
+  alignItems: "flex-start",
 });
+
+const StyledText = styled(Box)({
+  marginBottom: "12px",
+});
+
+const StyledTextField = styled(TextField)({ width: "100%" });
+
