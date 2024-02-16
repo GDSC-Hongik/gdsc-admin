@@ -1,6 +1,6 @@
 export type ManagementVariant = "allMember" | "pendingMember" | "feePaymentStatus";
 
-export type InfoTableRowType = {
+export type MemberInfoType = {
   memberId: string;
   studentId: string;
   name: string;
@@ -10,3 +10,5 @@ export type InfoTableRowType = {
   discordUsername: string;
   nickname: string;
 };
+
+export type MemberInfoStateType = Omit<MemberInfoType, "memberId">;
