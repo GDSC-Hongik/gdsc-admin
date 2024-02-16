@@ -3,6 +3,17 @@ import SecondRow from "./EditInfoModal/SecondRow";
 import ThirdRow from "./EditInfoModal/ThirdRow";
 import { Modal, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
+import { ChangeEvent, useState } from "react";
+
+export type MemberInfoStateType = {
+  name: string;
+  studentId: string;
+  phone: string;
+  department: string;
+  email: string;
+  discordUsername: string;
+  nickname: string;
+};
 
 type InfoModalProps = {
   isModalVisible: boolean;
@@ -10,13 +21,47 @@ type InfoModalProps = {
 };
 
 export default function InfoModal({ isModalVisible, handleCloseModal }: InfoModalProps) {
+  const [memberInfo, setMemberInfo] = useState<MemberInfoStateType>({
+    name: "",
+    studentId: "",
+    phone: "",
+    department: "",
+    email: "",
+    discordUsername: "",
+    nickname: "",
+  });
+
+  const handleChangeMemberInfo = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setMemberInfo(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const { name, studentId, phone, department, email, discordUsername, nickname } = memberInfo;
+
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
         <TitleContainer>멤버 정보 수정</TitleContainer>
-        <FirstRow />
-        <SecondRow />
-        <ThirdRow />
+        <FirstRow
+          name={name}
+          studentId={studentId}
+          phone={phone}
+          handleChangeMemberInfo={handleChangeMemberInfo}
+        />
+        <SecondRow
+          department={department}
+          email={email}
+          handleChangeMemberInfo={handleChangeMemberInfo}
+        />
+        <ThirdRow
+          discordUsername={discordUsername}
+          nickname={nickname}
+          handleChangeMemberInfo={handleChangeMemberInfo}
+        />
         <StyledButton variant={"contained"} size="large">
           저장하기
         </StyledButton>
