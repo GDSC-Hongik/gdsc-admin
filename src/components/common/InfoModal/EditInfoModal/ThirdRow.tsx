@@ -54,4 +54,3 @@ const StyledText = styled(Box)({
 });
 
 const StyledTextField = styled(TextField)({ width: "100%" });
-
