@@ -1,13 +1,13 @@
-import Header from "@components/layout/main/Header";
-import Table from "@components/layout/main/InfoTable";
-import Title from "@components/layout/main/Title";
+import Header from "@components/common/Header";
+import MemberInfoTable from "@components/common/MemberInfoTable";
+import Title from "@components/common/Title";
 
 export default function AllMembersPage() {
   return (
     <>
       <Title variant={"allMember"} descriptionText={"멤버 관리 설명"} />
-      <Header />
-      <Table />
+      <Header variant={"allMember"} />
+      <MemberInfoTable />
     </>
   );
 }
