@@ -1,18 +1,24 @@
 import { InfoTableRowType } from "@types/main";
 import { tableWidthRatio } from "@constants/table";
+import InfoModal from "../InfoModal";
 import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
+import { useState } from "react";
 
 type InfoTableBodyProps = {
   dataList: InfoTableRowType[];
 };
 
 export default function InfoTableBody({ dataList }: InfoTableBodyProps) {
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+
   const getCellWidthRatio = (option: string) => {
     return option === "studentId" || option === "name" || option === "phone"
       ? tableWidthRatio["cell"][option]
       : tableWidthRatio["cell"]["default"];
   };
+
+  const handleCloseModal = () => setIsEditModalVisible(false);
 
   return (
     <Container container direction={"column"}>
@@ -27,13 +33,16 @@ export default function InfoTableBody({ dataList }: InfoTableBodyProps) {
               ),
           )}
           <ButtonContainer>
-            <Button variant="outlined">수정</Button>
+            <Button variant="outlined" onClick={() => setIsEditModalVisible(true)}>
+              수정
+            </Button>
             <Button variant="outlined" color="error">
               탈퇴
             </Button>
           </ButtonContainer>
         </CellContainer>
       ))}
+      <InfoModal isModalVisible={isEditModalVisible} handleCloseModal={handleCloseModal} />
     </Container>
   );
 }
