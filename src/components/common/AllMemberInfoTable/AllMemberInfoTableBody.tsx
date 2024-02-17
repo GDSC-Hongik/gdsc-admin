@@ -9,7 +9,7 @@ type MemberInfoTableBodyProps = {
   dataList: MemberInfoType[];
 };
 
-export default function MemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
+export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
   const getCellWidthRatio = (option: string) => {

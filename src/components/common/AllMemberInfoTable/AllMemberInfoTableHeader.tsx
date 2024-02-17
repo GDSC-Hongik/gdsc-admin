@@ -2,7 +2,7 @@ import { selectOptionData, tableWidthRatio } from "@constants/table";
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 
-export default function MemberInfoTableHeader() {
+export default function AllMemberInfoTableHeader() {
   const getTitleWidthRatio = (option: string) => {
     return option === "학번" || option === "이름" || option === "전화번호"
       ? tableWidthRatio["title"][option]

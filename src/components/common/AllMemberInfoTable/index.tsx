@@ -1,5 +1,5 @@
-import MemberInfoTableHeader from "./MemberInfoTableHeader";
-import MemberInfoTableBody from "./MemberInfoTableBody";
+import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
+import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import { Grid, TablePagination } from "@mui/material";
 import { useState } from "react";
 import styled from "@emotion/styled";
@@ -27,7 +27,7 @@ const mockMemberInfoList = [
   },
 ];
 
-export default function MemberInfoTable() {
+export default function AllMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -55,8 +55,8 @@ export default function MemberInfoTable() {
 
   return (
     <Grid container direction={"row"}>
-      <MemberInfoTableHeader />
-      <MemberInfoTableBody dataList={memberInfoDataList} />
+      <AllMemberInfoTableHeader />
+      <AllMemberInfoTableBody dataList={memberInfoDataList} />
       <InfoTablePagination
         count={mockMemberInfoList.length}
         page={page}
