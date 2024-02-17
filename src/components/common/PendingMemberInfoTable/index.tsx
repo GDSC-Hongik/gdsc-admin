@@ -2,6 +2,7 @@ import { PendingMemberInfoType } from "@types/entities/member";
 import PendingMemberInfoTableHeader from "./PendingMemberInfoTableHeader";
 import PendingMemberInfoTableBody from "./PendingMemberInfoTableBody";
 import { Grid } from "@mui/material";
+import { Dispatch, SetStateAction } from "react";
 
 const mockPendingMemberInfoList: PendingMemberInfoType[] = [
   {
@@ -21,7 +22,7 @@ const mockPendingMemberInfoList: PendingMemberInfoType[] = [
     },
   },
   {
-    memberId: 1,
+    memberId: 2,
     studentId: "C123123",
     name: "홍서현",
     phone: "01012341234",
@@ -38,11 +39,26 @@ const mockPendingMemberInfoList: PendingMemberInfoType[] = [
   },
 ];
 
-export default function PendingMemberInfoTable() {
+export type PendingMemberInfoTableProps = {
+  setSelectedMemberList: Dispatch<SetStateAction<PendingMemberInfoType[]>>;
+  selectedMemberList: PendingMemberInfoType[];
+};
+
+export default function PendingMemberInfoTable({
+  setSelectedMemberList,
+  selectedMemberList,
+}: PendingMemberInfoTableProps) {
   return (
     <Grid container style={{ border: "1px solid red" }}>
-      <PendingMemberInfoTableHeader />
-      <PendingMemberInfoTableBody dataList={mockPendingMemberInfoList} />
+      <PendingMemberInfoTableHeader
+        dataList={mockPendingMemberInfoList}
+        setSelectedMemberList={setSelectedMemberList}
+      />
+      <PendingMemberInfoTableBody
+        dataList={mockPendingMemberInfoList}
+        setSelectedMemberList={setSelectedMemberList}
+        selectedMemberList={selectedMemberList}
+      />
     </Grid>
   );
 }

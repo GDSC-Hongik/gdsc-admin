@@ -5,15 +5,23 @@ import { Stack, styled } from "@mui/material";
 
 const mockCreatedDate = new Date();
 
-type HeaderProps = {
+export type HeaderProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
+  selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" ? number : undefined;
 };
 
-export default function Header({ variant }: HeaderProps) {
+export default function Header<T extends ManagementVariant>({
+  variant,
+  selectedMemberCount,
+}: HeaderProps<T>) {
   return (
     <Container>
       <HeaderLeftCol variant={variant} />
-      <HeaderRightCol variant={variant} createdDate={mockCreatedDate} />
+      <HeaderRightCol
+        variant={variant}
+        createdDate={mockCreatedDate}
+        selectedMemberCount={selectedMemberCount}
+      />
     </Container>
   );
 }

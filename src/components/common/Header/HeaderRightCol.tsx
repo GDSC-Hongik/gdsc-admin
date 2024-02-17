@@ -1,5 +1,6 @@
 import { formatDate } from "@utils/date/formatDate";
 import { ManagementVariant } from "@types/entities/member";
+import { HeaderProps } from ".";
 import styled from "@emotion/styled";
 import { Button, Stack, Box, Typography } from "@mui/material";
 import { ReactElement } from "react";
@@ -38,7 +39,7 @@ const HeaderRightElement = <T extends ManagementVariant>(
 type HeaderRightColProps<T extends ManagementVariant> = {
   variant: T;
   createdDate?: T extends "allMember" ? Date : undefined;
-  selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" ? number : undefined;
+  selectedMemberCount: HeaderProps<T>["selectedMemberCount"];
 };
 
 export default function HeaderRightCol<T extends ManagementVariant>({

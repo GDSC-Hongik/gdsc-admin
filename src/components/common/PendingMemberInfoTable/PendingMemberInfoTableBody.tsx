@@ -1,13 +1,21 @@
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@types/entities/member";
 import { pendingMemberTableWidthRatio } from "@constants/table";
+import { PendingMemberInfoTableProps } from ".";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
 import styled from "@emotion/styled";
+import { ChangeEvent } from "react";
 
 type PendingMemberInfoTableBodyProps = {
   dataList: PendingMemberInfoType[];
+  setSelectedMemberList: PendingMemberInfoTableProps["setSelectedMemberList"];
+  selectedMemberList: PendingMemberInfoTableProps["selectedMemberList"];
 };
 
-export default function PendingMemberInfoTableBody({ dataList }: PendingMemberInfoTableBodyProps) {
+export default function PendingMemberInfoTableBody({
+  dataList,
+  setSelectedMemberList,
+  selectedMemberList,
+}: PendingMemberInfoTableBodyProps) {
   const filterTableInfo = (dataList: PendingMemberInfoType[]) => {
     const newDataList: PendingMemberTableInfoType[] = [];
 
@@ -31,11 +39,30 @@ export default function PendingMemberInfoTableBody({ dataList }: PendingMemberIn
       : pendingMemberTableWidthRatio["cell"]["default"];
   };
 
+  const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    if (e.target.checked) {
+      setSelectedMemberList(prevMemberList => [...prevMemberList, dataList[index]]);
+    } else {
+      setSelectedMemberList(prevMemberList =>
+        prevMemberList.filter(data => data.memberId !== dataList[index].memberId),
+      );
+    }
+  };
+
+  const checked = (index: number) => {
+    return selectedMemberList.some(
+      selectedMember => selectedMember.memberId === dataList[index].memberId,
+    );
+  };
+
   return (
-    <Grid container direction={"column"} style={{ border: "1px solid green" }}>
+    <Grid container direction={"column"}>
       {filterTableInfo(dataList).map((row, rowIndex) => (
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
-          <Checkbox />
+          <Checkbox
+            checked={checked(rowIndex)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeCheckbox(e, rowIndex)}
+          />
           {Object.entries(row).map(([key, value], index) => (
             <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
               <Text>{typeof value === "object" ? JSON.stringify(value) : value}</Text>
@@ -68,8 +95,9 @@ const Text = styled(Box)({
 
 const ButtonContainer = styled.div({
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "flex-end",
   alignItems: "center",
+  marginRight: "15px",
   flex: 1,
   gap: 5,
 });

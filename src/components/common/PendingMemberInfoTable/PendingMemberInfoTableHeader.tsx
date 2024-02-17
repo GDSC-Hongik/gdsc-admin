@@ -1,17 +1,36 @@
 import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@constants/table";
+import { PendingMemberInfoType } from "@types/entities/member";
+import { PendingMemberInfoTableProps } from ".";
 import styled from "@emotion/styled";
 import { Box, Checkbox, Grid } from "@mui/material";
+import { ChangeEvent } from "react";
 
-export default function PendingMemberInfoTableHeader() {
+type PendingMemberInfoTableHeaderProps = {
+  dataList: PendingMemberInfoType[];
+  setSelectedMemberList: PendingMemberInfoTableProps["setSelectedMemberList"];
+};
+
+export default function PendingMemberInfoTableHeader({
+  dataList,
+  setSelectedMemberList,
+}: PendingMemberInfoTableHeaderProps) {
   const getTitleWidthRatio = (title: string) => {
     return title === "학번" || title === "이름" || title === "전화번호"
       ? pendingMemberTableWidthRatio["title"][title]
       : pendingMemberTableWidthRatio["title"]["default"];
   };
 
+  const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setSelectedMemberList(dataList);
+    } else {
+      setSelectedMemberList([]);
+    }
+  };
+
   return (
     <Container container>
-      <Checkbox />
+      <Checkbox onChange={handleChangeCheckbox} />
       {pendingMemberTableTitle.map(title => (
         <Title
           item
@@ -29,6 +48,7 @@ export default function PendingMemberInfoTableHeader() {
 const Container = styled(Grid)({
   height: "56px",
   flex: 1,
+  borderBottom: "1px solid #0000001F",
 });
 
 const Title = styled(Grid)({
