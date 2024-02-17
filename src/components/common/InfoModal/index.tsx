@@ -1,4 +1,4 @@
-import { MemberInfoStateType } from "@types/main";
+import { AllMemberInfoStateType } from "@types/member";
 import FirstRow from "./EditInfoModal/FirstRow";
 import SecondRow from "./EditInfoModal/SecondRow";
 import ThirdRow from "./EditInfoModal/ThirdRow";
@@ -12,7 +12,7 @@ type InfoModalProps = {
 };
 
 export default function InfoModal({ isModalVisible, handleCloseModal }: InfoModalProps) {
-  const [memberInfo, setMemberInfo] = useState<MemberInfoStateType>({
+  const [memberInfo, setMemberInfo] = useState<AllMemberInfoStateType>({
     name: "",
     studentId: "",
     phone: "",

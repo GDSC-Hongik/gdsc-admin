@@ -1,4 +1,4 @@
-import { MemberInfoType } from "@types/main";
+import { AllMemberInfoType } from "@types/member";
 import { allMemberTableWidthRatio } from "@constants/table";
 import InfoModal from "../InfoModal";
 import { Grid, Box, Button } from "@mui/material";
@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 
 type MemberInfoTableBodyProps = {
-  dataList: MemberInfoType[];
+  dataList: AllMemberInfoType[];
 };
 
 export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {

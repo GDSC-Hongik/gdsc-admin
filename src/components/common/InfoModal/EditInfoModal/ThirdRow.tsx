@@ -1,9 +1,9 @@
-import { MemberInfoStateType } from "@types/main";
+import { AllMemberInfoStateType } from "@types/member";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
 
-type ThirdRowProps = Pick<MemberInfoStateType, "discordUsername" | "nickname"> & {
+type ThirdRowProps = Pick<AllMemberInfoStateType, "discordUsername" | "nickname"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 

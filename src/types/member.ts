@@ -1,7 +1,7 @@
 export type ManagementVariant = "allMember" | "pendingMember" | "feePaymentStatus";
 
-export type MemberInfoType = {
-  memberId: string;
+export type AllMemberInfoType = {
+  memberId: number;
   studentId: string;
   name: string;
   phone: string;
@@ -11,4 +11,4 @@ export type MemberInfoType = {
   nickname: string;
 };
 
-export type MemberInfoStateType = Omit<MemberInfoType, "memberId">;
+export type AllMemberInfoStateType = Omit<AllMemberInfoType, "memberId">;

@@ -1,4 +1,4 @@
-import { ManagementVariant } from "@types/main";
+import { ManagementVariant } from "@types/member";
 import HeaderLeftCol from "./HeaderLeftCol";
 import HeaderRightCol from "./HeaderRightCol";
 import { Stack, styled } from "@mui/material";

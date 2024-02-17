@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 
 const mockMemberInfoList = [
   {
-    memberId: "1",
+    memberId: 1,
     studentId: "C123123",
     name: "홍서현",
     phone: "01012341234",
@@ -16,7 +16,7 @@ const mockMemberInfoList = [
     nickname: "ghdtjgus76",
   },
   {
-    memberId: "1",
+    memberId: 1,
     studentId: "C123123",
     name: "홍서현",
     phone: "01012341234",
