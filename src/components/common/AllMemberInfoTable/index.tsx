@@ -1,3 +1,4 @@
+import { AllMemberInfoType } from "@types/entities/member";
 import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
 import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import { Grid, TablePagination } from "@mui/material";
@@ -45,18 +46,18 @@ export default function AllMemberInfoTable() {
     setPage(0);
   };
 
-  const getMemberInfoDataList = () => {
+  const getAllMemberInfoDataList = (dataList: AllMemberInfoType[]) => {
     return rowsPerPage > 0
-      ? mockMemberInfoList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      : mockMemberInfoList;
+      ? dataList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      : dataList;
   };
 
-  const memberInfoDataList = getMemberInfoDataList();
+  const allMemberInfoDataList = getAllMemberInfoDataList(mockMemberInfoList);
 
   return (
     <Grid container direction={"row"}>
       <AllMemberInfoTableHeader />
-      <AllMemberInfoTableBody dataList={memberInfoDataList} />
+      <AllMemberInfoTableBody dataList={allMemberInfoDataList} />
       <InfoTablePagination
         count={mockMemberInfoList.length}
         page={page}

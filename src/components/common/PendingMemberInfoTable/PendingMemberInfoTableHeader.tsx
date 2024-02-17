@@ -7,11 +7,13 @@ import { ChangeEvent } from "react";
 
 type PendingMemberInfoTableHeaderProps = {
   dataList: PendingMemberInfoType[];
+  selectedMemberList: PendingMemberInfoTableProps["selectedMemberList"];
   setSelectedMemberList: PendingMemberInfoTableProps["setSelectedMemberList"];
 };
 
 export default function PendingMemberInfoTableHeader({
   dataList,
+  selectedMemberList,
   setSelectedMemberList,
 }: PendingMemberInfoTableHeaderProps) {
   const getTitleWidthRatio = (title: string) => {
@@ -28,9 +30,11 @@ export default function PendingMemberInfoTableHeader({
     }
   };
 
+  const checked = selectedMemberList.length === dataList.length;
+
   return (
     <Container container>
-      <Checkbox onChange={handleChangeCheckbox} />
+      <Checkbox checked={checked} onChange={handleChangeCheckbox} />
       {pendingMemberTableTitle.map(title => (
         <Title
           item
