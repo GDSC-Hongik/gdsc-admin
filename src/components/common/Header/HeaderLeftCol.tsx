@@ -1,4 +1,4 @@
-import { selectOptionData } from "@constants/table";
+import { allMemberTableTitle } from "@constants/table";
 import { ManagementVariant } from "@types/main";
 import { FormControl, InputLabel, Select, MenuItem, TextField, Stack, styled } from "@mui/material";
 
@@ -15,8 +15,8 @@ export default function HeaderLeftCol({ variant }: HeaderLeftColProps) {
         <FormControl sx={{ width: "180px" }}>
           <InputLabel>Type</InputLabel>
           <Select>
-            {selectOptionData.map(option => (
-              <MenuItem value={option.value}>{option.name}</MenuItem>
+            {allMemberTableTitle.map(title => (
+              <MenuItem value={title.value}>{title.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

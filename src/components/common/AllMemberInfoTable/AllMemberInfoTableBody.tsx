@@ -1,5 +1,5 @@
 import { MemberInfoType } from "@types/main";
-import { tableWidthRatio } from "@constants/table";
+import { allMemberTableWidthRatio } from "@constants/table";
 import InfoModal from "../InfoModal";
 import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
@@ -14,8 +14,8 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
 
   const getCellWidthRatio = (option: string) => {
     return option === "studentId" || option === "name" || option === "phone"
-      ? tableWidthRatio["cell"][option]
-      : tableWidthRatio["cell"]["default"];
+      ? allMemberTableWidthRatio["cell"][option]
+      : allMemberTableWidthRatio["cell"]["default"];
   };
 
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
