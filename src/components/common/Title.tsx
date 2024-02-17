@@ -1,4 +1,4 @@
-import { ManagementVariant } from "@types/member";
+import { ManagementVariant } from "@types/entities/member";
 import { titleVariant } from "@constants/common";
 import styled from "@emotion/styled";
 import { Stack, Box } from "@mui/material";

@@ -1,5 +1,5 @@
 import { allMemberTableTitle } from "@constants/table";
-import { ManagementVariant } from "@types/member";
+import { ManagementVariant } from "@types/entities/member";
 import { FormControl, InputLabel, Select, MenuItem, TextField, Stack, styled } from "@mui/material";
 
 type HeaderLeftColProps = {

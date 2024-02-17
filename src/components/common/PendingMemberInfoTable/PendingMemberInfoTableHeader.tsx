@@ -10,7 +10,7 @@ export default function PendingMemberInfoTableHeader() {
   };
 
   return (
-    <Grid container style={{ border: "1px solid blue", height: "56px", flex: 1 }}>
+    <Container container>
       <Checkbox />
       {pendingMemberTableTitle.map(title => (
         <Title
@@ -22,9 +22,14 @@ export default function PendingMemberInfoTableHeader() {
           <Text>{title.name}</Text>
         </Title>
       ))}
-    </Grid>
+    </Container>
   );
 }
+
+const Container = styled(Grid)({
+  height: "56px",
+  flex: 1,
+});
 
 const Title = styled(Grid)({
   padding: 16,

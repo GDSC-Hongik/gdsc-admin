@@ -1,4 +1,4 @@
-import { AllMemberInfoStateType } from "@types/member";
+import { AllMemberInfoStateType } from "@types/entities/member";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";

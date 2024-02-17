@@ -1,4 +1,4 @@
-import { AllMemberInfoType } from "@types/member";
+import { AllMemberInfoType } from "@types/entities/member";
 import { allMemberTableWidthRatio } from "@constants/table";
 import InfoModal from "../InfoModal";
 import { Grid, Box, Button } from "@mui/material";

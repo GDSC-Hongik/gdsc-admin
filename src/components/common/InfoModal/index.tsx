@@ -1,4 +1,4 @@
-import { AllMemberInfoStateType } from "@types/member";
+import { AllMemberInfoStateType } from "@types/entities/member";
 import FirstRow from "./EditInfoModal/FirstRow";
 import SecondRow from "./EditInfoModal/SecondRow";
 import ThirdRow from "./EditInfoModal/ThirdRow";
