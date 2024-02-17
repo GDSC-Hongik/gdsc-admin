@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
 import { BASE_URL } from "src/environment";
 import lStorage, { StorageKeys } from "@utils/storage/index";
+import axios, { AxiosError, AxiosInstance } from "axios";
 
 const createApiClient = (): AxiosInstance => {
   const apiClient = axios.create({
