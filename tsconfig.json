@@ -18,6 +18,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "jsxImportSource": "@emotion/react",
+    "jsx": "react-jsx",
     /* 절대 경로 */
     "baseUrl": ".",
     "paths": {
