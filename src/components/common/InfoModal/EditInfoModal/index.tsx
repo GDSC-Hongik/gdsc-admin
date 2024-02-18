@@ -80,6 +80,6 @@ const TitleContainer = styled(Box)({
 });
 
 const StyledButton = styled(Button)({
-  width: "316px",
-  height: "63px",
+  width: "216px",
+  height: "43px",
 });

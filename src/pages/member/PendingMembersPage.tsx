@@ -10,7 +10,11 @@ export default function PendingMembersPage() {
   return (
     <>
       <Title variant={"pendingMember"} descriptionText={"멤버 관리 설명"} />
-      <Header variant={"pendingMember"} selectedMemberCount={selectedMemberList.length} />
+      <Header
+        variant={"pendingMember"}
+        selectedMemberCount={selectedMemberList.length}
+        selectedMemberList={selectedMemberList}
+      />
       <PendingMemberInfoTable
         setSelectedMemberList={setSelectedMemberList}
         selectedMemberList={selectedMemberList}

@@ -85,3 +85,16 @@ export const pendingMemberTableWidthRatio = {
     default: 1.9,
   },
 };
+
+export const pendingMemberModalWidthRatio = {
+  title: {
+    학번: 1,
+    이름: 1,
+    default: 2,
+  },
+  cell: {
+    studentId: 1,
+    name: 1,
+    default: 2,
+  },
+};

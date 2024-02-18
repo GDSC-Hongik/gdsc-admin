@@ -1,13 +1,15 @@
 import { formatDate } from "@utils/date/formatDate";
 import { ManagementVariant } from "@types/entities/member";
+import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
 import { HeaderProps } from ".";
 import styled from "@emotion/styled";
 import { Button, Stack, Box, Typography } from "@mui/material";
-import { ReactElement } from "react";
+import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 
 const HeaderRightElement = <T extends ManagementVariant>(
   createdDate: HeaderRightColProps<T>["createdDate"],
   selectedMemberCount: HeaderRightColProps<T>["selectedMemberCount"],
+  setIsAcceptModalVisible: Dispatch<SetStateAction<boolean>>,
 ): Record<ManagementVariant, ReactElement | null> => ({
   allMember: createdDate ? (
     <RightColContainer>
@@ -19,7 +21,13 @@ const HeaderRightElement = <T extends ManagementVariant>(
   pendingMember: (
     <RightColContainer>
       <Typography style={{ marginRight: 20 }}>{selectedMemberCount}명 선택</Typography>
-      <Button variant="outlined">승인</Button>
+      <Button
+        variant="outlined"
+        onClick={() => setIsAcceptModalVisible(true)}
+        style={{ marginRight: 15 }}
+      >
+        승인
+      </Button>
     </RightColContainer>
   ),
   feePaymentStatus: (
@@ -37,14 +45,27 @@ type HeaderRightColProps<T extends ManagementVariant> = {
   variant: T;
   createdDate?: T extends "allMember" ? Date : undefined;
   selectedMemberCount: HeaderProps<T>["selectedMemberCount"];
+  selectedMemberList: HeaderProps<T>["selectedMemberList"];
 };
 
 export default function HeaderRightCol<T extends ManagementVariant>({
   variant,
   createdDate,
   selectedMemberCount,
+  selectedMemberList,
 }: HeaderRightColProps<T>) {
-  return HeaderRightElement(createdDate, selectedMemberCount)[variant];
+  const [isAcceptModalVisible, setIsAcceptModalVisible] = useState(false);
+
+  return (
+    <>
+      {HeaderRightElement(createdDate, selectedMemberCount, setIsAcceptModalVisible)[variant]}
+      <AcceptMemberListModal
+        isAcceptModalVisible={isAcceptModalVisible}
+        setIsAcceptModalVisible={setIsAcceptModalVisible}
+        selectedMemberList={selectedMemberList}
+      />
+    </>
+  );
 }
 
 const RightColContainer = styled(Stack)`

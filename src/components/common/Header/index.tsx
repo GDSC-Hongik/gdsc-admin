@@ -1,4 +1,4 @@
-import { ManagementVariant } from "@types/entities/member";
+import { ManagementVariant, PendingMemberInfoType } from "@types/entities/member";
 import HeaderLeftCol from "./HeaderLeftCol";
 import HeaderRightCol from "./HeaderRightCol";
 import { Stack, styled } from "@mui/material";
@@ -8,11 +8,13 @@ const mockCreatedDate = new Date();
 export type HeaderProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
   selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" ? number : undefined;
+  selectedMemberList?: T extends "pendingMember" ? PendingMemberInfoType[] : undefined;
 };
 
 export default function Header<T extends ManagementVariant>({
   variant,
   selectedMemberCount,
+  selectedMemberList,
 }: HeaderProps<T>) {
   return (
     <Container>
@@ -21,6 +23,7 @@ export default function Header<T extends ManagementVariant>({
         variant={variant}
         createdDate={mockCreatedDate}
         selectedMemberCount={selectedMemberCount}
+        selectedMemberList={selectedMemberList}
       />
     </Container>
   );
