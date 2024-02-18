@@ -1,6 +1,6 @@
 import { AllMemberInfoType } from "@types/entities/member";
 import { allMemberTableWidthRatio } from "@constants/table";
-import InfoModal from "../InfoModal";
+import EditInfoModal from "../InfoModal/EditInfoModal";
 import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { useState } from "react";
@@ -42,7 +42,7 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
           </ButtonContainer>
         </CellContainer>
       ))}
-      <InfoModal
+      <EditInfoModal
         isModalVisible={isEditModalVisible}
         handleCloseModal={() => handleModalVisible(false)}
       />

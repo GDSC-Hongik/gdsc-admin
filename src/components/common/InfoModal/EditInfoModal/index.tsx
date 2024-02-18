@@ -1,17 +1,17 @@
 import { AllMemberInfoStateType } from "@types/entities/member";
-import FirstRow from "./EditInfoModal/FirstRow";
-import SecondRow from "./EditInfoModal/SecondRow";
-import ThirdRow from "./EditInfoModal/ThirdRow";
+import FirstRow from "./FirstRow";
+import SecondRow from "./SecondRow";
+import ThirdRow from "./ThirdRow";
 import { Modal, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
 
-type InfoModalProps = {
+type EditInfoModalProps = {
   isModalVisible: boolean;
   handleCloseModal: () => void;
 };
 
-export default function InfoModal({ isModalVisible, handleCloseModal }: InfoModalProps) {
+export default function EditInfoModal({ isModalVisible, handleCloseModal }: EditInfoModalProps) {
   const [memberInfo, setMemberInfo] = useState<AllMemberInfoStateType>({
     name: "",
     studentId: "",

@@ -1,9 +1,10 @@
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@types/entities/member";
 import { pendingMemberTableWidthRatio } from "@constants/table";
+import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
 import { PendingMemberInfoTableProps } from ".";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
 import styled from "@emotion/styled";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 type PendingMemberInfoTableBodyProps = {
   dataList: PendingMemberInfoType[];
@@ -16,6 +17,9 @@ export default function PendingMemberInfoTableBody({
   setSelectedMemberList,
   selectedMemberList,
 }: PendingMemberInfoTableBodyProps) {
+  const [isMemberDetailInfoModalVisible, setIsMemberDetailInfoModalVisible] = useState(false);
+  const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] = useState<PendingMemberInfoType>();
+
   const filterTableInfo = (dataList: PendingMemberInfoType[]) => {
     const newDataList: PendingMemberTableInfoType[] = [];
 
@@ -69,10 +73,25 @@ export default function PendingMemberInfoTableBody({
             </TextContainer>
           ))}
           <ButtonContainer>
-            <Button variant="outlined">상세</Button>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setIsMemberDetailInfoModalVisible(true);
+                setSelectedMemberDetailInfo(dataList[rowIndex]);
+              }}
+            >
+              상세
+            </Button>
           </ButtonContainer>
         </CellContainer>
       ))}
+      {selectedMemberDetailInfo && (
+        <MemberDetailInfoModal
+          isModalVisible={isMemberDetailInfoModalVisible}
+          handleCloseModal={() => setIsMemberDetailInfoModalVisible(false)}
+          memberInfo={selectedMemberDetailInfo}
+        />
+      )}
     </Grid>
   );
 }
