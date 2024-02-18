@@ -21,6 +21,11 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
 
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
 
+  const handleClickEditMemberInfoButton = (index: number) => {
+    handleModalVisible(true);
+    setSelectedMemberInfo(dataList[index]);
+  };
+
   return (
     <Container container direction={"column"}>
       {dataList.map((row, rowIndex) => (
@@ -34,13 +39,7 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
               ),
           )}
           <ButtonContainer>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                handleModalVisible(true);
-                setSelectedMemberInfo(dataList[rowIndex]);
-              }}
-            >
+            <Button variant="outlined" onClick={() => handleClickEditMemberInfoButton(rowIndex)}>
               수정
             </Button>
             <Button variant="outlined" color="error">

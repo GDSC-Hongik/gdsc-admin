@@ -10,36 +10,36 @@ const HeaderRightElement = <T extends ManagementVariant>(
   createdDate: HeaderRightColProps<T>["createdDate"],
   selectedMemberCount: HeaderRightColProps<T>["selectedMemberCount"],
   setIsAcceptModalVisible: Dispatch<SetStateAction<boolean>>,
-): Record<ManagementVariant, ReactElement | null> => ({
-  allMember: createdDate ? (
-    <RightColContainer>
-      <DateText>생성 일시 : {formatDate(createdDate)}</DateText>
-      <Button variant="outlined">구글 시트 동기화</Button>
-      <Button variant="contained">구글 시트</Button>
-    </RightColContainer>
-  ) : null,
-  pendingMember: (
-    <RightColContainer>
-      <Typography style={{ marginRight: 20 }}>{selectedMemberCount}명 선택</Typography>
-      <Button
-        variant="outlined"
-        onClick={() => setIsAcceptModalVisible(true)}
-        style={{ marginRight: 15 }}
-      >
-        승인
-      </Button>
-    </RightColContainer>
-  ),
-  feePaymentStatus: (
-    <RightColContainer>
-      <Typography style={{ marginRight: 20 }}>{selectedMemberCount}명 선택</Typography>
-      <Button variant="outlined">납입</Button>
-      <Button variant="outlined" color="error">
-        미납
-      </Button>
-    </RightColContainer>
-  ),
-});
+): Record<ManagementVariant, ReactElement | null> => {
+  const handleClickAcceptMemberButton = () => setIsAcceptModalVisible(true);
+
+  return {
+    allMember: createdDate ? (
+      <RightColContainer>
+        <DateText>생성 일시 : {formatDate(createdDate)}</DateText>
+        <Button variant="outlined">구글 시트 동기화</Button>
+        <Button variant="contained">구글 시트</Button>
+      </RightColContainer>
+    ) : null,
+    pendingMember: (
+      <RightColContainer>
+        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
+        <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
+          승인
+        </StyledButton>
+      </RightColContainer>
+    ),
+    feePaymentStatus: (
+      <RightColContainer>
+        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
+        <Button variant="outlined">납입</Button>
+        <Button variant="outlined" color="error">
+          미납
+        </Button>
+      </RightColContainer>
+    ),
+  };
+};
 
 type HeaderRightColProps<T extends ManagementVariant> = {
   variant: T;
@@ -80,3 +80,11 @@ const DateText = styled(Box)`
   font-size: 14px;
   font-weight: 500;
 `;
+
+const SelectedMemberCountText = styled(Typography)({
+  marginRight: "20px",
+});
+
+const StyledButton = styled(Button)({
+  marginRight: 15,
+});
