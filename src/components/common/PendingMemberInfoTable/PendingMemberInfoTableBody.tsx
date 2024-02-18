@@ -59,27 +59,25 @@ export default function PendingMemberInfoTableBody({
     );
   };
 
+  const handleClickDetailInfoButton = (index: number) => {
+    setIsMemberDetailInfoModalVisible(true);
+    setSelectedMemberDetailInfo(dataList[index]);
+  };
+
+  const handleCloseMemberDetailInfoModal = () => setIsMemberDetailInfoModalVisible(false)
+
   return (
     <Grid container direction={"column"}>
       {filterTableInfo(dataList).map((row, rowIndex) => (
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
-          <Checkbox
-            checked={checked(rowIndex)}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeCheckbox(e, rowIndex)}
-          />
+          <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
           {Object.entries(row).map(([key, value], index) => (
             <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
               <Text>{typeof value === "object" ? JSON.stringify(value) : value}</Text>
             </TextContainer>
           ))}
           <ButtonContainer>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                setIsMemberDetailInfoModalVisible(true);
-                setSelectedMemberDetailInfo(dataList[rowIndex]);
-              }}
-            >
+            <Button variant="outlined" onClick={() => handleClickDetailInfoButton(rowIndex)}>
               상세
             </Button>
           </ButtonContainer>
@@ -88,7 +86,7 @@ export default function PendingMemberInfoTableBody({
       {selectedMemberDetailInfo && (
         <MemberDetailInfoModal
           isModalVisible={isMemberDetailInfoModalVisible}
-          handleCloseModal={() => setIsMemberDetailInfoModalVisible(false)}
+          handleCloseModal={handleCloseMemberDetailInfoModal}
           memberInfo={selectedMemberDetailInfo}
         />
       )}
