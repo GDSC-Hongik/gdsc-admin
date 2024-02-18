@@ -1,4 +1,4 @@
-import { PendingMemberInfoType } from "@types/entities/member";
+import { PendingMemberInfoType, StatusType } from "@types/entities/member";
 import { Box, Grid, Modal } from "@mui/material";
 import styled from "@emotion/styled";
 
@@ -13,33 +13,23 @@ export default function MemberDetailInfoModal({
   handleCloseModal,
   memberInfo,
 }: MemberDetailInfoModalProps) {
-  console.log(memberInfo);
+  const getStatus = (status: StatusType) => {
+    return status === "PENDING" ? "미완료" : "완료";
+  };
 
-  const filterMemberDetailInfo = (memberInfo: PendingMemberInfoType) => {
-    const detailInfoList = [
-      {
-        name: "이름",
-        value: memberInfo.name,
-      },
-      {
-        name: "학번",
-        value: memberInfo.studentId,
-      },
-      {
-        name: "소속 학과",
-        value: memberInfo.department,
-      },
-      {
-        name: "전화번호",
-        value: memberInfo.phone,
-      },
-      {
-        name: "이메일",
-        value: memberInfo.email,
-      },
-    ];
-
-    return detailInfoList;
+  const filterMemberDetailInfo = () => {
+    return {
+      ["이름"]: memberInfo.name,
+      ["학번"]: memberInfo.studentId,
+      ["전화번호"]: memberInfo.phone,
+      ["소속 학과"]: memberInfo.department,
+      ["이메일"]: memberInfo.email,
+      ["디스코드 사용자명"]: memberInfo.discordUsername,
+      ["디스코드 닉네임"]: memberInfo.nickname,
+      ["재학생 인증 여부"]: getStatus(memberInfo.requirement.univStatus),
+      ["디스코드 인증 여부"]: getStatus(memberInfo.requirement.discordStatus),
+      ["회비 납입 여부"]: getStatus(memberInfo.requirement.paymentStatus),
+    };
   };
 
   return (
@@ -47,10 +37,10 @@ export default function MemberDetailInfoModal({
       <ModalContentContainer>
         <TitleContainer>멤버 상세 정보</TitleContainer>
         <DetailInfoContainer container direction={"column"}>
-          {filterMemberDetailInfo(memberInfo).map((detailInfo, index) => (
+          {Object.entries(filterMemberDetailInfo()).map(([key, value], index) => (
             <Grid key={index} container gap={2}>
-              <DetailInfoTitle>{detailInfo.name}</DetailInfoTitle>
-              <DetailInfoField>{detailInfo.value}</DetailInfoField>
+              <DetailInfoTitle>{key}</DetailInfoTitle>
+              <DetailInfoField>{value}</DetailInfoField>
             </Grid>
           ))}
         </DetailInfoContainer>
@@ -61,7 +51,7 @@ export default function MemberDetailInfoModal({
 
 const ModalContentContainer = styled(Box)({
   width: "500px",
-  height: "200px",
+  height: "340px",
   backgroundColor: "white",
   position: "absolute",
   top: "50%",
