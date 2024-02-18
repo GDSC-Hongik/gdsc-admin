@@ -11,6 +11,7 @@ type MemberInfoTableBodyProps = {
 
 export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoType>();
 
   const getCellWidthRatio = (option: string) => {
     return option === "studentId" || option === "name" || option === "phone"
@@ -33,7 +34,13 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
               ),
           )}
           <ButtonContainer>
-            <Button variant="outlined" onClick={() => handleModalVisible(true)}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                handleModalVisible(true);
+                setSelectedMemberInfo(dataList[rowIndex]);
+              }}
+            >
               수정
             </Button>
             <Button variant="outlined" color="error">
@@ -42,10 +49,13 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
           </ButtonContainer>
         </CellContainer>
       ))}
-      <EditInfoModal
-        isModalVisible={isEditModalVisible}
-        handleCloseModal={() => handleModalVisible(false)}
-      />
+      {selectedMemberInfo && (
+        <EditInfoModal
+          isModalVisible={isEditModalVisible}
+          handleCloseModal={() => handleModalVisible(false)}
+          selectedMemberInfo={selectedMemberInfo}
+        />
+      )}
     </Container>
   );
 }

@@ -1,4 +1,4 @@
-import { AllMemberInfoStateType } from "@types/entities/member";
+import { AllMemberInfoStateType, AllMemberInfoType } from "@types/entities/member";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
@@ -9,17 +9,22 @@ import { ChangeEvent, useState } from "react";
 type EditInfoModalProps = {
   isModalVisible: boolean;
   handleCloseModal: () => void;
+  selectedMemberInfo: AllMemberInfoType;
 };
 
-export default function EditInfoModal({ isModalVisible, handleCloseModal }: EditInfoModalProps) {
+export default function EditInfoModal({
+  isModalVisible,
+  handleCloseModal,
+  selectedMemberInfo,
+}: EditInfoModalProps) {
   const [memberInfo, setMemberInfo] = useState<AllMemberInfoStateType>({
-    name: "",
-    studentId: "",
-    phone: "",
-    department: "",
-    email: "",
-    discordUsername: "",
-    nickname: "",
+    name: selectedMemberInfo.name,
+    studentId: selectedMemberInfo.studentId,
+    phone: selectedMemberInfo.phone,
+    department: selectedMemberInfo.department,
+    email: selectedMemberInfo.email,
+    discordUsername: selectedMemberInfo.discordUsername,
+    nickname: selectedMemberInfo.nickname,
   });
 
   const handleChangeMemberInfo = (e: ChangeEvent<HTMLInputElement>) => {
