@@ -20,9 +20,6 @@ const HeaderRightElement = <T extends ManagementVariant>(
     <RightColContainer>
       <Typography style={{ marginRight: 20 }}>{selectedMemberCount}명 선택</Typography>
       <Button variant="outlined">승인</Button>
-      <Button variant="outlined" color="error">
-        거부
-      </Button>
     </RightColContainer>
   ),
   feePaymentStatus: (
