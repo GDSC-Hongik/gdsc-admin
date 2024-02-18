@@ -44,31 +44,41 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
 
   const handleCloseModal = () => setIsAcceptModalVisible(false);
 
+  const filteredSelectedMemberList = filterSelectedMemberList();
+
   return (
     <Modal open={isAcceptModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
         <TitleContainer>가입 승인 명단 확인</TitleContainer>
-        <BodyContainer>
-          <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
-            {allMemberTableTitle.map(tableTitle => (
-              <ColumnTitle key={tableTitle.value} xs={getTableWidth(tableTitle.name, "title")}>
-                {tableTitle.name}
-              </ColumnTitle>
-            ))}
-          </BodyCellTitle>
-          <BodyCellRowContainer>
-            {filterSelectedMemberList()?.map(selectedMember => (
-              <BodyCellRow container alignItems="center" justifyContent="center">
-                {Object.entries(selectedMember).map(([key, value]) => (
-                  <BodyCell xs={getTableWidth(key, "cell")}>{value}</BodyCell>
+        {filteredSelectedMemberList?.length ? (
+          <>
+            <BodyContainer>
+              <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
+                {allMemberTableTitle.map(tableTitle => (
+                  <ColumnTitle key={tableTitle.value} xs={getTableWidth(tableTitle.name, "title")}>
+                    {tableTitle.name}
+                  </ColumnTitle>
                 ))}
-              </BodyCellRow>
-            ))}
-          </BodyCellRowContainer>
-        </BodyContainer>
-        <StyledButton variant={"contained"} size="large">
-          승인하기
-        </StyledButton>
+              </BodyCellTitle>
+              <BodyCellRowContainer>
+                {filteredSelectedMemberList?.map(selectedMember => (
+                  <BodyCellRow container alignItems="center" justifyContent="center">
+                    {Object.entries(selectedMember).map(([key, value]) => (
+                      <BodyCell xs={getTableWidth(key, "cell")}>{value}</BodyCell>
+                    ))}
+                  </BodyCellRow>
+                ))}
+              </BodyCellRowContainer>
+            </BodyContainer>
+            <StyledButton variant={"contained"} size="large">
+              승인하기
+            </StyledButton>
+          </>
+        ) : (
+          <EmptyTextContainer container alignItems="center" justifyContent="center">
+            <Box>선택된 멤버가 없습니다. 멤버 선택 후 다시 확인해주세요.</Box>
+          </EmptyTextContainer>
+        )}
       </ModalContentContainer>
     </Modal>
   );
@@ -105,7 +115,7 @@ const BodyCellTitle = styled(Grid)({
 });
 
 const BodyCellRowContainer = styled.div({
-  "overflow-y": "scroll",
+  "overflow-y": "auto",
   "maxHeight": "240px",
 
   "&::-webkit-scrollbar": {
@@ -140,4 +150,8 @@ const ColumnTitle = styled(Grid)({
   fontWeight: "500",
   fontSize: "14px",
   lineHeight: "24px",
+});
+
+const EmptyTextContainer = styled(Grid)({
+  height: "60%",
 });
