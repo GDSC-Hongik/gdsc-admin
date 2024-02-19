@@ -1,25 +1,30 @@
-import { MemberInfoStateType } from "@types/main";
-import FirstRow from "./EditInfoModal/FirstRow";
-import SecondRow from "./EditInfoModal/SecondRow";
-import ThirdRow from "./EditInfoModal/ThirdRow";
+import { AllMemberInfoStateType, AllMemberInfoType } from "@types/entities/member";
+import FirstRow from "./FirstRow";
+import SecondRow from "./SecondRow";
+import ThirdRow from "./ThirdRow";
 import { Modal, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
 
-type InfoModalProps = {
+type EditInfoModalProps = {
   isModalVisible: boolean;
   handleCloseModal: () => void;
+  selectedMemberInfo: AllMemberInfoType;
 };
 
-export default function InfoModal({ isModalVisible, handleCloseModal }: InfoModalProps) {
-  const [memberInfo, setMemberInfo] = useState<MemberInfoStateType>({
-    name: "",
-    studentId: "",
-    phone: "",
-    department: "",
-    email: "",
-    discordUsername: "",
-    nickname: "",
+export default function EditInfoModal({
+  isModalVisible,
+  handleCloseModal,
+  selectedMemberInfo,
+}: EditInfoModalProps) {
+  const [memberInfo, setMemberInfo] = useState<AllMemberInfoStateType>({
+    name: selectedMemberInfo.name,
+    studentId: selectedMemberInfo.studentId,
+    phone: selectedMemberInfo.phone,
+    department: selectedMemberInfo.department,
+    email: selectedMemberInfo.email,
+    discordUsername: selectedMemberInfo.discordUsername,
+    nickname: selectedMemberInfo.nickname,
   });
 
   const handleChangeMemberInfo = (e: ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +85,6 @@ const TitleContainer = styled(Box)({
 });
 
 const StyledButton = styled(Button)({
-  width: "316px",
-  height: "63px",
+  width: "216px",
+  height: "43px",
 });

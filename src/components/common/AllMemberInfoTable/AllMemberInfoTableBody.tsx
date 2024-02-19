@@ -1,24 +1,30 @@
-import { MemberInfoType } from "@types/main";
-import { tableWidthRatio } from "@constants/table";
-import InfoModal from "../InfoModal";
+import { AllMemberInfoType } from "@types/entities/member";
+import { allMemberTableWidthRatio } from "@constants/table";
+import EditInfoModal from "../InfoModal/EditInfoModal";
 import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { useState } from "react";
 
 type MemberInfoTableBodyProps = {
-  dataList: MemberInfoType[];
+  dataList: AllMemberInfoType[];
 };
 
-export default function MemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
+export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoType>();
 
   const getCellWidthRatio = (option: string) => {
     return option === "studentId" || option === "name" || option === "phone"
-      ? tableWidthRatio["cell"][option]
-      : tableWidthRatio["cell"]["default"];
+      ? allMemberTableWidthRatio["cell"][option]
+      : allMemberTableWidthRatio["cell"]["default"];
   };
 
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
+
+  const handleClickEditMemberInfoButton = (index: number) => {
+    handleModalVisible(true);
+    setSelectedMemberInfo(dataList[index]);
+  };
 
   return (
     <Container container direction={"column"}>
@@ -33,7 +39,7 @@ export default function MemberInfoTableBody({ dataList }: MemberInfoTableBodyPro
               ),
           )}
           <ButtonContainer>
-            <Button variant="outlined" onClick={() => handleModalVisible(true)}>
+            <Button variant="outlined" onClick={() => handleClickEditMemberInfoButton(rowIndex)}>
               수정
             </Button>
             <Button variant="outlined" color="error">
@@ -42,10 +48,13 @@ export default function MemberInfoTableBody({ dataList }: MemberInfoTableBodyPro
           </ButtonContainer>
         </CellContainer>
       ))}
-      <InfoModal
-        isModalVisible={isEditModalVisible}
-        handleCloseModal={() => handleModalVisible(false)}
-      />
+      {selectedMemberInfo && (
+        <EditInfoModal
+          isModalVisible={isEditModalVisible}
+          handleCloseModal={() => handleModalVisible(false)}
+          selectedMemberInfo={selectedMemberInfo}
+        />
+      )}
     </Container>
   );
 }

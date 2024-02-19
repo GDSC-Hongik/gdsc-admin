@@ -1,6 +1,6 @@
 import LogoIcon from "@assets/logo.svg?react";
 import SidebarListButton from "@components/layout/sidebar/SidebarListButton";
-import RoutePath from "@routes/routePath";
+import { pageList } from "@constants/common";
 import { styled, Stack } from "@mui/material";
 
 export default function Sidebar() {
@@ -8,13 +8,7 @@ export default function Sidebar() {
     <Container>
       <LogoIcon style={{ alignSelf: "center" }} />
       <ListContainer>
-        <SidebarListButton
-          label="멤버 관리"
-          pageList={[
-            { label: "전체 멤버 관리", path: RoutePath.AllMembers },
-            { label: "가입 대기 멤버 관리", path: RoutePath.PendingMembers },
-          ]}
-        />
+        <SidebarListButton label="멤버 관리" pageList={pageList} />
       </ListContainer>
     </Container>
   );

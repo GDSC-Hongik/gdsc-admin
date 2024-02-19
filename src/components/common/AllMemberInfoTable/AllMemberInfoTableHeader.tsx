@@ -1,24 +1,24 @@
-import { selectOptionData, tableWidthRatio } from "@constants/table";
+import { allMemberTableTitle, allMemberTableWidthRatio } from "@constants/table";
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 
-export default function MemberInfoTableHeader() {
-  const getTitleWidthRatio = (option: string) => {
-    return option === "학번" || option === "이름" || option === "전화번호"
-      ? tableWidthRatio["title"][option]
-      : tableWidthRatio["title"]["default"];
+export default function AllMemberInfoTableHeader() {
+  const getTitleWidthRatio = (title: string) => {
+    return title === "학번" || title === "이름" || title === "전화번호"
+      ? allMemberTableWidthRatio["title"][title]
+      : allMemberTableWidthRatio["title"]["default"];
   };
 
   return (
     <Container container xs={12}>
-      {selectOptionData.map(option => (
+      {allMemberTableTitle.map(title => (
         <Title
           item
-          xs={getTitleWidthRatio(option.name)}
+          xs={getTitleWidthRatio(title.name)}
           alignItems="center"
           justifyContent={"center"}
         >
-          <Text>{option.name}</Text>
+          <Text>{title.name}</Text>
         </Title>
       ))}
       <EmptyTitle />

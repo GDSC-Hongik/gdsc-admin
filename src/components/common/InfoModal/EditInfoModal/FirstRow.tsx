@@ -1,9 +1,9 @@
-import { MemberInfoStateType } from "@types/main";
+import { AllMemberInfoStateType } from "@types/entities/member";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
 
-type FirstRowProps = Pick<MemberInfoStateType, "name" | "studentId" | "phone"> & {
+type FirstRowProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 

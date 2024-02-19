@@ -1,9 +1,9 @@
-import { MemberInfoStateType } from "@types/main";
+import { AllMemberInfoStateType } from "@types/entities/member";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { ChangeEvent } from "react";
 
-type SecondRowProps = Pick<MemberInfoStateType, "department" | "email"> & {
+type SecondRowProps = Pick<AllMemberInfoStateType, "department" | "email"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 

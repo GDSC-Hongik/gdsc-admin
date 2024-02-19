@@ -1,4 +1,4 @@
-import { ManagementVariant } from "@types/main";
+import { ManagementVariant } from "@types/entities/member";
 import { titleVariant } from "@constants/common";
 import styled from "@emotion/styled";
 import { Stack, Box } from "@mui/material";
@@ -11,14 +11,8 @@ type TitleProps = {
 export default function Title({ variant, descriptionText }: TitleProps) {
   return (
     <Container>
-      <HeaderTitle sx={{ typography: "h6" }}>{titleVariant[variant]}</HeaderTitle>
-      <HeaderSubTitle
-        sx={{
-          typography: "subtitle1",
-        }}
-      >
-        {descriptionText}
-      </HeaderSubTitle>
+      <HeaderTitle>{titleVariant[variant]}</HeaderTitle>
+      <HeaderSubTitle>{descriptionText}</HeaderSubTitle>
     </Container>
   );
 }
@@ -32,10 +26,12 @@ const HeaderTitle = styled(Box)({
   fontWeight: "500",
   fontSize: "24",
   color: "#212121",
+  typography: "h6",
 });
 
 const HeaderSubTitle = styled(Box)({
   fontWeight: "regular",
   fontSize: 14,
   color: "#757575",
+  typography: "subtitle1",
 });

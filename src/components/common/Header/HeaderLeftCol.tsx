@@ -1,25 +1,26 @@
-import { selectOptionData } from "@constants/table";
-import { ManagementVariant } from "@types/main";
-import { FormControl, InputLabel, Select, MenuItem, TextField, Stack, styled } from "@mui/material";
+import { allMemberTableTitle } from "@constants/table";
+import { ManagementVariant } from "@types/entities/member";
+import { FormControl, InputLabel, Select, MenuItem, TextField, Stack } from "@mui/material";
+import styled from "@emotion/styled";
 
 type HeaderLeftColProps = {
   variant: ManagementVariant;
 };
 
 export default function HeaderLeftCol({ variant }: HeaderLeftColProps) {
-  const textFieldWidth = variant === "allMember" ? "180px" : "300px";
+  const textFieldWidth = variant === "allMember" ? 180 : 300;
 
   return (
     <Container>
       {variant === "allMember" && (
-        <FormControl sx={{ width: "180px" }}>
+        <FormContainer>
           <InputLabel>Type</InputLabel>
           <Select>
-            {selectOptionData.map(option => (
-              <MenuItem value={option.value}>{option.name}</MenuItem>
+            {allMemberTableTitle.map(title => (
+              <MenuItem value={title.value}>{title.name}</MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </FormContainer>
       )}
       <TextField
         label="search"
@@ -36,4 +37,8 @@ const Container = styled(Stack)({
   flexDirection: "row",
   alignItems: "center",
   flexWrap: "wrap",
+});
+
+const FormContainer = styled(FormControl)({
+  width: "180px",
 });

@@ -1,12 +1,13 @@
-import MemberInfoTableHeader from "./MemberInfoTableHeader";
-import MemberInfoTableBody from "./MemberInfoTableBody";
+import { AllMemberInfoType } from "@types/entities/member";
+import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
+import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import { Grid, TablePagination } from "@mui/material";
 import { useState } from "react";
 import styled from "@emotion/styled";
 
 const mockMemberInfoList = [
   {
-    memberId: "1",
+    memberId: 1,
     studentId: "C123123",
     name: "홍서현",
     phone: "01012341234",
@@ -16,7 +17,7 @@ const mockMemberInfoList = [
     nickname: "ghdtjgus76",
   },
   {
-    memberId: "1",
+    memberId: 1,
     studentId: "C123123",
     name: "홍서현",
     phone: "01012341234",
@@ -27,7 +28,7 @@ const mockMemberInfoList = [
   },
 ];
 
-export default function MemberInfoTable() {
+export default function AllMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -45,18 +46,18 @@ export default function MemberInfoTable() {
     setPage(0);
   };
 
-  const getMemberInfoDataList = () => {
+  const getAllMemberInfoDataList = (dataList: AllMemberInfoType[]) => {
     return rowsPerPage > 0
-      ? mockMemberInfoList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      : mockMemberInfoList;
+      ? dataList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      : dataList;
   };
 
-  const memberInfoDataList = getMemberInfoDataList();
+  const allMemberInfoDataList = getAllMemberInfoDataList(mockMemberInfoList);
 
   return (
     <Grid container direction={"row"}>
-      <MemberInfoTableHeader />
-      <MemberInfoTableBody dataList={memberInfoDataList} />
+      <AllMemberInfoTableHeader />
+      <AllMemberInfoTableBody dataList={allMemberInfoDataList} />
       <InfoTablePagination
         count={mockMemberInfoList.length}
         page={page}
