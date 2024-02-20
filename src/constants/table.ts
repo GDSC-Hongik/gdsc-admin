@@ -99,6 +99,21 @@ export const pendingMemberModalWidthRatio = {
   },
 };
 
+export const paymentStatusTableSelectOptionList = [
+  {
+    value: 1,
+    name: "전체",
+  },
+  {
+    value: 2,
+    name: "납입",
+  },
+  {
+    value: 3,
+    name: "미납입",
+  },
+];
+
 export const paymentStatusTableTitle = [
   {
     value: 1,
