@@ -40,3 +40,13 @@ export type PendingMemberTableInfoType = {
   nickname: string;
   paymentStatus: "완료" | "미완료";
 };
+
+export type PaymentStatusInfoType = {
+  memberId: number;
+  studentId: string;
+  name: string;
+  phone: string;
+  discordUsername: string;
+  nickname: string;
+  paymentStatus: "VERIFIED" | "PENDING";
+};

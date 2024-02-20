@@ -98,3 +98,41 @@ export const pendingMemberModalWidthRatio = {
     default: 2,
   },
 };
+
+export const paymentStatusTableTitle = [
+  {
+    value: 1,
+    name: "학번",
+  },
+  {
+    value: 2,
+    name: "이름",
+  },
+  {
+    value: 3,
+    name: "전화번호",
+  },
+  {
+    value: 4,
+    name: "디스코드 핸들명",
+  },
+  {
+    value: 5,
+    name: "디스코드 닉네임",
+  },
+];
+
+export const paymentStatusTableWidthRatio = {
+  title: {
+    학번: 0.8,
+    이름: 0.8,
+    전화번호: 1.1,
+    default: 1.9,
+  },
+  cell: {
+    studentId: 0.8,
+    name: 0.8,
+    phone: 1.1,
+    default: 1.9,
+  },
+};
