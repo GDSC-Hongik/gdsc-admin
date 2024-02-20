@@ -48,5 +48,5 @@ export type PaymentStatusInfoType = {
   phone: string;
   discordUsername: string;
   nickname: string;
-  paymentStatus: "VERIFIED" | "PENDING";
+  paymentStatus: StatusType;
 };

@@ -106,11 +106,11 @@ export const paymentStatusTableSelectOptionList = [
   },
   {
     value: 2,
-    name: "납입",
+    name: "납부 완료",
   },
   {
     value: 3,
-    name: "미납입",
+    name: "납부 미완료",
   },
 ];
 

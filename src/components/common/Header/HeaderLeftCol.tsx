@@ -23,7 +23,7 @@ const HeaderLeftElement = {
     </FormContainer>
   ),
   pendingMember: null,
-  feePaymentStatus: (
+  paymentStatus: (
     <FormContainer>
       <InputLabel>Type</InputLabel>
       <Select>

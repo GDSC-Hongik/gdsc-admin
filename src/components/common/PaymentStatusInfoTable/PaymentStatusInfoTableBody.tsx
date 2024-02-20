@@ -1,4 +1,4 @@
-import { PaymentStatusInfoType } from "@types/entities/member";
+import { PaymentStatusInfoType, StatusType } from "@types/entities/member";
 import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@constants/table";
 import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
@@ -24,7 +24,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
                   <Text>
                     {key === "paymentStatus"
-                      ? paymentStatusFieldMapping[value as "VERIFIED" | "PENDING"]
+                      ? paymentStatusFieldMapping[value as StatusType]
                       : value}
                   </Text>
                 </TextContainer>
