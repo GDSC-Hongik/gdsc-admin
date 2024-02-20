@@ -22,7 +22,7 @@ const mockDataList: PaymentStatusInfoType[] = [
     phone: "01012341234",
     discordUsername: "ghdtjgus76",
     nickname: "ghdtjgus76",
-    paymentStatus: "VERIFIED",
+    paymentStatus: "PENDING",
   },
   {
     memberId: 3,
@@ -40,7 +40,7 @@ const mockDataList: PaymentStatusInfoType[] = [
     phone: "01012341234",
     discordUsername: "ghdtjgus76",
     nickname: "ghdtjgus76",
-    paymentStatus: "VERIFIED",
+    paymentStatus: "PENDING",
   },
   {
     memberId: 5,
@@ -49,7 +49,7 @@ const mockDataList: PaymentStatusInfoType[] = [
     phone: "01012341234",
     discordUsername: "ghdtjgus76",
     nickname: "ghdtjgus76",
-    paymentStatus: "VERIFIED",
+    paymentStatus: "PENDING",
   },
   {
     memberId: 6,
@@ -134,7 +134,7 @@ export default function PaymentStatusInfoTable() {
   const paymentStatusInfoDataList = getAllMemberInfoDataList(mockDataList);
 
   return (
-    <Grid container style={{ border: "1px solid red" }}>
+    <Grid container>
       <PaymentStatusInfoTableHeader />
       <PaymentStatusInfoTableBody dataList={paymentStatusInfoDataList} />
       <InfoTablePagination

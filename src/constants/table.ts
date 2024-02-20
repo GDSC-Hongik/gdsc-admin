@@ -120,13 +120,18 @@ export const paymentStatusTableTitle = [
     value: 5,
     name: "디스코드 닉네임",
   },
+  {
+    value: 6,
+    name: "납부 상태",
+  },
 ];
 
 export const paymentStatusTableWidthRatio = {
   title: {
-    학번: 0.8,
-    이름: 0.8,
+    학번: 1.1,
+    이름: 1.1,
     전화번호: 1.1,
+    ["납부 상태"]: 1.4,
     default: 1.9,
   },
   cell: {
@@ -135,4 +140,9 @@ export const paymentStatusTableWidthRatio = {
     phone: 1.1,
     default: 1.9,
   },
+};
+
+export const paymentStatusFieldMapping = {
+  VERIFIED: "완료",
+  PENDING: "미완료",
 };
