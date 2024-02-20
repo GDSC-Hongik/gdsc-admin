@@ -5,8 +5,8 @@ import Title from "@components/common/Title";
 export default function PaymentStatusPage() {
   return (
     <>
-      <Title variant={"feePaymentStatus"} descriptionText={"회비 납부 여부 관리 설명"} />
-      <Header variant={"feePaymentStatus"} />
+      <Title variant={"paymentStatus"} descriptionText={"회비 납부 여부 관리 설명"} />
+      <Header variant={"paymentStatus"} />
       <PaymentStatusInfoTable />
     </>
   );
