@@ -28,7 +28,11 @@ export default function PageListToggleButton({
         />
       </Container>
       {isOpen &&
-        pageList.map(({ label, path }) => <NavigateButton path={path}>{label}</NavigateButton>)}
+        pageList.map(({ label, path }) => (
+          <NavigateButton key={label} path={path}>
+            {label}
+          </NavigateButton>
+        ))}
     </>
   );
 }

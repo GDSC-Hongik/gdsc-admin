@@ -25,7 +25,9 @@ const HeaderLeftElement = (setAllMemberSearchType: Dispatch<SetStateAction<strin
         }
       >
         {allMemberTableTitle.map(title => (
-          <MenuItem value={title.value}>{title.name}</MenuItem>
+          <MenuItem value={title.value} key={title.value}>
+            {title.name}
+          </MenuItem>
         ))}
       </Select>
     </FormContainer>
@@ -36,7 +38,9 @@ const HeaderLeftElement = (setAllMemberSearchType: Dispatch<SetStateAction<strin
       <InputLabel>Type</InputLabel>
       <Select>
         {paymentStatusTableSelectOptionList.map(option => (
-          <MenuItem value={option.value}>{option.name}</MenuItem>
+          <MenuItem value={option.value} key={option.value}>
+            {option.name}
+          </MenuItem>
         ))}
       </Select>
     </FormContainer>

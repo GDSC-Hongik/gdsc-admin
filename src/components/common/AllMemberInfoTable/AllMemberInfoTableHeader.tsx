@@ -10,10 +10,11 @@ export default function AllMemberInfoTableHeader() {
   };
 
   return (
-    <Container container xs={12}>
+    <Container container>
       {allMemberTableTitle.map(title => (
         <Title
           item
+          key={title.value}
           xs={getTitleWidthRatio(title.name)}
           alignItems="center"
           justifyContent={"center"}
