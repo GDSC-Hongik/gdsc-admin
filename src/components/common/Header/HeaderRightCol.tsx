@@ -29,15 +29,7 @@ const HeaderRightElement = <T extends ManagementVariant>(
         </StyledButton>
       </RightColContainer>
     ),
-    feePaymentStatus: (
-      <RightColContainer>
-        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
-        <Button variant="outlined">납입</Button>
-        <Button variant="outlined" color="error">
-          미납
-        </Button>
-      </RightColContainer>
-    ),
+    feePaymentStatus: null,
   };
 };
 

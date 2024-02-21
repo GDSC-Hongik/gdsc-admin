@@ -24,14 +24,14 @@ const Container = styled(Stack)({
 
 const HeaderTitle = styled(Box)({
   fontWeight: "500",
-  fontSize: "24",
+  fontSize: "24px",
   color: "#212121",
   typography: "h6",
 });
 
 const HeaderSubTitle = styled(Box)({
   fontWeight: "regular",
-  fontSize: 14,
+  fontSize: "14px",
   color: "#757575",
   typography: "subtitle1",
 });

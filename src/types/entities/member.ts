@@ -1,4 +1,4 @@
-export type ManagementVariant = "allMember" | "pendingMember" | "feePaymentStatus";
+export type ManagementVariant = "allMember" | "pendingMember" | "paymentStatus";
 
 export type AllMemberInfoType = {
   memberId: number;
@@ -39,4 +39,14 @@ export type PendingMemberTableInfoType = {
   discordUsername: string;
   nickname: string;
   paymentStatus: "완료" | "미완료";
+};
+
+export type PaymentStatusInfoType = {
+  memberId: number;
+  studentId: string;
+  name: string;
+  phone: string;
+  discordUsername: string;
+  nickname: string;
+  paymentStatus: StatusType;
 };

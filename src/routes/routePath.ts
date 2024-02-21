@@ -1,6 +1,6 @@
 const RoutePath = {
   Index: "/",
-  AllMembers: "/",
+  AllMembers: "/member/all",
   PendingMembers: "/member/pending",
   PaymentStatus: "/payment-status",
 

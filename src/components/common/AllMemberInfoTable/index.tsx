@@ -55,7 +55,7 @@ export default function AllMemberInfoTable() {
   const allMemberInfoDataList = getAllMemberInfoDataList(mockMemberInfoList);
 
   return (
-    <Grid container direction={"row"}>
+    <Grid container>
       <AllMemberInfoTableHeader />
       <AllMemberInfoTableBody dataList={allMemberInfoDataList} />
       <InfoTablePagination
