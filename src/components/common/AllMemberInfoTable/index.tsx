@@ -1,36 +1,16 @@
 import { AllMemberInfoType } from "@types/entities/member";
+import useGetAllMemberListQuery from "@hooks/useGetAllMemberListQuery";
 import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
 import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import { Grid, TablePagination } from "@mui/material";
 import { useState } from "react";
 import styled from "@emotion/styled";
 
-const mockMemberInfoList = [
-  {
-    memberId: 1,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-  },
-  {
-    memberId: 1,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-  },
-];
-
 export default function AllMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const { allMemberList } = useGetAllMemberListQuery(page, rowsPerPage);
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -52,14 +32,14 @@ export default function AllMemberInfoTable() {
       : dataList;
   };
 
-  const allMemberInfoDataList = getAllMemberInfoDataList(mockMemberInfoList);
+  const allMemberInfoDataList = getAllMemberInfoDataList(allMemberList);
 
   return (
     <Grid container>
       <AllMemberInfoTableHeader />
       <AllMemberInfoTableBody dataList={allMemberInfoDataList} />
       <InfoTablePagination
-        count={mockMemberInfoList.length}
+        count={allMemberList.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
