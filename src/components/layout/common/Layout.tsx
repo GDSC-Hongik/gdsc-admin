@@ -3,6 +3,7 @@ import RoutePath from "@routes/routePath";
 import Sidebar from "@components/layout/sidebar/Sidebar";
 import { Stack, styled } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 export default function Layout() {
   const { isEmptyToken } = useAuthStorage();
@@ -17,6 +18,7 @@ export default function Layout() {
       <BodyContainer>
         <Outlet />
       </BodyContainer>
+      <ToastContainer />
     </Container>
   );
 }
