@@ -1,5 +1,5 @@
 import { AllMemberInfoType } from "@types/entities/member";
-import useGetAllMemberListQuery from "@hooks/useGetAllMemberListQuery";
+import useGetAllMemberListQuery from "@hooks/queries/useGetAllMemberListQuery";
 import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
 import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import { Grid, TablePagination } from "@mui/material";

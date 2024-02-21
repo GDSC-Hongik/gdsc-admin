@@ -1,5 +1,6 @@
 import { AllMemberInfoType } from "@types/entities/member";
 import { allMemberTableWidthRatio } from "@constants/table";
+import useDeleteMemberMutation from "@hooks/mutations/useDeleteMemberMutation";
 import EditInfoModal from "../InfoModal/EditInfoModal";
 import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
@@ -13,6 +14,8 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoType>();
 
+  const deleteMemberMutation = useDeleteMemberMutation();
+
   const getCellWidthRatio = (option: string) => {
     return option === "studentId" || option === "name" || option === "phone"
       ? allMemberTableWidthRatio["cell"][option]
@@ -24,6 +27,10 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
   const handleClickEditMemberInfoButton = (index: number) => {
     handleModalVisible(true);
     setSelectedMemberInfo(dataList[index]);
+  };
+
+  const handleClickDeleteMemberButton = (memberId: number) => {
+    deleteMemberMutation.mutate(memberId);
   };
 
   return (
@@ -42,7 +49,11 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
             <Button variant="outlined" onClick={() => handleClickEditMemberInfoButton(rowIndex)}>
               수정
             </Button>
-            <Button variant="outlined" color="error">
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => handleClickDeleteMemberButton(row.memberId)}
+            >
               탈퇴
             </Button>
           </ButtonContainer>
