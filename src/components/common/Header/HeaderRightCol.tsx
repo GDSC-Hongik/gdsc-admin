@@ -29,7 +29,7 @@ const HeaderRightElement = <T extends ManagementVariant>(
         </StyledButton>
       </RightColContainer>
     ),
-    feePaymentStatus: null,
+    paymentStatus: null,
   };
 };
 
