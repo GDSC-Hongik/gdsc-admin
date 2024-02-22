@@ -1,9 +1,9 @@
-import { PaymentStatusInfoType, StatusType } from "@types/entities/member";
-import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@constants/table";
-import useUpdateMemberPaymentStatusMutation from "@hooks/mutations/useUpdateMemberPaymentStatusMutation";
+import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
+import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@/constants/table";
+import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
+import { formatNullableValue } from "@/utils/formatNullableValue";
 import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
-import { formatNullableValue } from "@utils/formatNullableValue";
 
 type PaymentStatusInfoBodyProps = {
   dataList: PaymentStatusInfoType[];

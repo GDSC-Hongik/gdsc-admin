@@ -1,8 +1,8 @@
-import { PendingMemberInfoType, PendingMemberTableInfoType } from "@types/entities/member";
-import { pendingMemberTableWidthRatio } from "@constants/table";
-import { formatNullableValue } from "@utils/formatNullableValue";
 import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
 import { PendingMemberInfoTableProps } from ".";
+import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
+import { pendingMemberTableWidthRatio } from "@/constants/table";
+import { formatNullableValue } from "@/utils/formatNullableValue";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
 import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";

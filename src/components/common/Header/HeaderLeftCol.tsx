@@ -1,6 +1,6 @@
-import { allMemberTableTitle, paymentStatusTableSelectOptionList } from "@constants/table";
-import { ManagementVariant } from "@types/entities/member";
 import { HeaderProps } from ".";
+import { allMemberTableTitle, paymentStatusTableSelectOptionList } from "@/constants/table";
+import { ManagementVariant } from "@/types/entities/member";
 import {
   FormControl,
   InputLabel,

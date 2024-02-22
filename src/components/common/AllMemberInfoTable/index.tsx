@@ -1,7 +1,7 @@
-import { AllMemberInfoType } from "@types/entities/member";
-import useGetAllMemberListQuery from "@hooks/queries/useGetAllMemberListQuery";
 import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
 import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
+import { AllMemberInfoType } from "@/types/entities/member";
+import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { Grid, TablePagination } from "@mui/material";
 import { useState } from "react";
 import styled from "@emotion/styled";

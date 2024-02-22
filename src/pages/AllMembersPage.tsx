@@ -1,6 +1,6 @@
-import Header from "@components/common/Header";
-import AllMemberInfoTable from "@components/common/AllMemberInfoTable";
-import Title from "@components/common/Title";
+import Header from "@/components/common/Header";
+import AllMemberInfoTable from "@/components/common/AllMemberInfoTable";
+import Title from "@/components/common/Title";
 import { useState } from "react";
 
 export default function AllMembersPage() {

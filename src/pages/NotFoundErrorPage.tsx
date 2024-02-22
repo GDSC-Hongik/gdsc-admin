@@ -1,4 +1,4 @@
-import RoutePath from "@routes/routePath";
+import RoutePath from "@/routes/routePath";
 import { Button, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 

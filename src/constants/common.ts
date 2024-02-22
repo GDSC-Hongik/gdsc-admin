@@ -1,4 +1,4 @@
-import RoutePath from "@routes/routePath";
+import RoutePath from "@/routes/routePath";
 
 export const memberPageList = [
   { label: "전체 멤버 관리", path: RoutePath.AllMembers },

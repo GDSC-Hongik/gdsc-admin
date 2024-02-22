@@ -1,4 +1,4 @@
-import useAuthStorage from "@hooks/useAuthStorage";
+import useAuthStorage from "@/hooks/useAuthStorage";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { isEmpty } from "lodash";

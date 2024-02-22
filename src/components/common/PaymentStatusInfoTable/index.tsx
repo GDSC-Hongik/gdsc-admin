@@ -1,7 +1,7 @@
-import { PaymentStatusInfoType } from "@types/entities/member";
-import useGetPaymentStatusMemberListQuery from "@hooks/queries/useGetPaymentStatusMemberListQuery";
 import PaymentStatusInfoTableHeader from "./PaymentStatusInfoTableHeader";
 import PaymentStatusInfoTableBody from "./PaymentStatusInfoTableBody";
+import { PaymentStatusInfoType } from "@/types/entities/member";
+import useGetPaymentStatusMemberListQuery from "@/hooks/queries/useGetPaymentStatusMemberListQuery";
 import { Grid, TablePagination } from "@mui/material";
 import styled from "@emotion/styled";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import { allMemberTableTitle, allMemberTableWidthRatio } from "@constants/table";
+import { allMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 

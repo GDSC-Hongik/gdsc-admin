@@ -1,5 +1,5 @@
-import { PendingMemberInfoType, StatusType } from "@types/entities/member";
-import { formatNullableValue } from "@utils/formatNullableValue";
+import { PendingMemberInfoType, StatusType } from "@/types/entities/member";
+import { formatNullableValue } from "@/utils/formatNullableValue";
 import { Box, Grid, Modal } from "@mui/material";
 import styled from "@emotion/styled";
 

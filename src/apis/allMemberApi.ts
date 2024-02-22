@@ -1,5 +1,5 @@
-import { AllMemberListDtoType } from "@types/dtos/member";
 import { apiClient } from ".";
+import { AllMemberListDtoType } from "@/types/dtos/member";
 
 export const allMemberApi = {
   getAllMemberList: async (

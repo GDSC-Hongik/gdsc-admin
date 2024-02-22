@@ -1,6 +1,6 @@
-import useAuthStorage from "@hooks/useAuthStorage";
-import RoutePath from "@routes/routePath";
-import Sidebar from "@components/layout/sidebar/Sidebar";
+import useAuthStorage from "@/hooks/useAuthStorage";
+import RoutePath from "@/routes/routePath";
+import Sidebar from "@/components/layout/sidebar/Sidebar";
 import { Stack, styled } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
 

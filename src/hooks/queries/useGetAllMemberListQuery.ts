@@ -1,5 +1,5 @@
-import { allMemberApi } from "@apis/allMemberApi";
-import { QueryKey } from "@constants/queryKey";
+import { allMemberApi } from "@/apis/allMemberApi";
+import { QueryKey } from "@/constants/queryKey";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useGetAllMemberListQuery(

@@ -1,6 +1,6 @@
-import { MemberPaymentStatusDtoType, PaymentStatusMemberListDtoType } from "@types/dtos/member";
-import { StatusType } from "@types/entities/member";
 import { apiClient } from ".";
+import { MemberPaymentStatusDtoType, PaymentStatusMemberListDtoType } from "@/types/dtos/member";
+import { StatusType } from "@/types/entities/member";
 
 export const paymentStatusApi = {
   getPaymentStatusMemberList: async (

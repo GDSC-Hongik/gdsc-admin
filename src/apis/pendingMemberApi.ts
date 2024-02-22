@@ -1,9 +1,9 @@
+import { apiClient } from ".";
 import {
   GrantPendingMemberDtoType,
   GrantPendingMemberRequestBodyDtoType,
   PendingMemberListDtoType,
-} from "@types/dtos/member";
-import { apiClient } from ".";
+} from "@/types/dtos/member";
 
 export const pendingMemberApi = {
   getPendingMemberList: async (page: number, size: number): Promise<PendingMemberListDtoType> => {

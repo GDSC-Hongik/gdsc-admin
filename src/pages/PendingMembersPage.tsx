@@ -1,7 +1,7 @@
-import Header from "@components/common/Header";
-import PendingMemberInfoTable from "@components/common/PendingMemberInfoTable";
-import Title from "@components/common/Title";
-import { PendingMemberInfoType } from "@types/entities/member";
+import Header from "@/components/common/Header";
+import PendingMemberInfoTable from "@/components/common/PendingMemberInfoTable";
+import Title from "@/components/common/Title";
+import { PendingMemberInfoType } from "@/types/entities/member";
 import { useState } from "react";
 
 export default function PendingMembersPage() {

@@ -1,11 +1,11 @@
-import Layout from "@components/layout/common/Layout";
-import SigninPage from "@pages/SigninPage";
-import AuthSuccessRedirectPage from "@pages/AuthSuccessRedirectPage";
-import AllMembersPage from "@pages/AllMembersPage";
-import NotFoundErrorPage from "@pages/NotFoundErrorPage";
-import RoutePath from "@routes/routePath";
-import PendingMembersPage from "@pages/PendingMembersPage";
-import PaymentStatusMembersPage from "@pages/PaymentStatusMembersPage";
+import Layout from "@/components/layout/common/Layout";
+import SigninPage from "@/pages/SigninPage";
+import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
+import AllMembersPage from "@/pages/AllMembersPage";
+import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
+import RoutePath from "@/routes/routePath";
+import PendingMembersPage from "@/pages/PendingMembersPage";
+import PaymentStatusMembersPage from "@/pages/PaymentStatusMembersPage";
 import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
 
 const routes: RouteObject[] = [

@@ -1,6 +1,6 @@
-import Header from "@components/common/Header";
-import PaymentStatusInfoTable from "@components/common/PaymentStatusInfoTable";
-import Title from "@components/common/Title";
+import Header from "@/components/common/Header";
+import PaymentStatusInfoTable from "@/components/common/PaymentStatusInfoTable";
+import Title from "@/components/common/Title";
 
 export default function PaymentStatusMembersPage() {
   return (

@@ -1,5 +1,5 @@
-import { paymentStatusApi } from "@apis/paymentStatusApi";
-import { QueryKey } from "@constants/queryKey";
+import { paymentStatusApi } from "@/apis/paymentStatusApi";
+import { QueryKey } from "@/constants/queryKey";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useGetPaymentStatusMemberListQuery(page: number, size: number) {

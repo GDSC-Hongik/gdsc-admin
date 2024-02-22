@@ -1,4 +1,4 @@
-import lStorage, { StorageKeys } from "@utils/storage/index";
+import lStorage, { StorageKeys } from "@/utils/storage/index";
 import { create } from "zustand";
 
 type TokenStore = {

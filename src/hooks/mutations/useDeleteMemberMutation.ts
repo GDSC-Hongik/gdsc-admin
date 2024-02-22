@@ -1,5 +1,5 @@
-import { allMemberApi } from "@apis/allMemberApi";
-import { QueryKey } from "@constants/queryKey";
+import { allMemberApi } from "@/apis/allMemberApi";
+import { QueryKey } from "@/constants/queryKey";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 

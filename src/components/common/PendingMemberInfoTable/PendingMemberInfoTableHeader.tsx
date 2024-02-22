@@ -1,6 +1,6 @@
-import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@constants/table";
-import { PendingMemberInfoType } from "@types/entities/member";
 import { PendingMemberInfoTableProps } from ".";
+import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@/constants/table";
+import { PendingMemberInfoType } from "@/types/entities/member";
 import styled from "@emotion/styled";
 import { Box, Checkbox, Grid } from "@mui/material";
 import { ChangeEvent } from "react";

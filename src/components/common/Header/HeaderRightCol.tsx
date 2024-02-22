@@ -1,7 +1,7 @@
-import { formatDate } from "@utils/date/formatDate";
-import { ManagementVariant } from "@types/entities/member";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
 import { HeaderProps } from ".";
+import { formatDate } from "@/utils/date/formatDate";
+import { ManagementVariant } from "@/types/entities/member";
 import styled from "@emotion/styled";
 import { Button, Stack, Box, Typography } from "@mui/material";
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
