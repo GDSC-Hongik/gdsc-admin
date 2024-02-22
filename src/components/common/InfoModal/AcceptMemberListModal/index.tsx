@@ -2,6 +2,7 @@ import { HeaderProps } from "@components/common/Header";
 import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@constants/table";
 import { ManagementVariant } from "@types/entities/member";
 import { formatTableValue } from "@utils/formatTableValue";
+import useGrantMemberMutation from "@hooks/mutations/useGrantMemberMutation";
 import { Modal, Grid, Box, Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import styled from "@emotion/styled";
@@ -17,6 +18,8 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
   setIsAcceptModalVisible,
   selectedMemberList,
 }: AcceptMemberListModalProps<T>) {
+  const grantMemberMutation = useGrantMemberMutation();
+
   const getTableWidth = (option: string, variant: "title" | "cell") => {
     if (variant === "title") {
       return option === "학번" || option === "이름"
@@ -47,6 +50,18 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
 
   const filteredSelectedMemberList = filterSelectedMemberList();
 
+  const handleClickGrantMemberButton = () => {
+    const memberIdList = selectedMemberList?.map(selectedMember => selectedMember.memberId);
+
+    if (memberIdList) {
+      grantMemberMutation.mutate({
+        memberIdList,
+      });
+    }
+
+    setIsAcceptModalVisible(false);
+  };
+
   return (
     <Modal open={isAcceptModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
@@ -71,7 +86,7 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
                 ))}
               </BodyCellRowContainer>
             </BodyContainer>
-            <StyledButton variant={"contained"} size="large">
+            <StyledButton variant={"contained"} size="large" onClick={handleClickGrantMemberButton}>
               승인하기
             </StyledButton>
           </>
