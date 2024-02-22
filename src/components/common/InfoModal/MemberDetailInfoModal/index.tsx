@@ -1,5 +1,5 @@
 import { PendingMemberInfoType, StatusType } from "@types/entities/member";
-import { formatTableValue } from "@utils/formatTableValue";
+import { formatNullableValue } from "@utils/formatNullableValue";
 import { Box, Grid, Modal } from "@mui/material";
 import styled from "@emotion/styled";
 
@@ -41,7 +41,7 @@ export default function MemberDetailInfoModal({
           {Object.entries(filterMemberDetailInfo()).map(([key, value], index) => (
             <Grid key={index} container gap={2}>
               <DetailInfoTitle>{key}</DetailInfoTitle>
-              <DetailInfoField>{formatTableValue(value)}</DetailInfoField>
+              <DetailInfoField>{formatNullableValue(value)}</DetailInfoField>
             </Grid>
           ))}
         </DetailInfoContainer>

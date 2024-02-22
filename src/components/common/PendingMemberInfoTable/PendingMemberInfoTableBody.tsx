@@ -1,6 +1,6 @@
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@types/entities/member";
 import { pendingMemberTableWidthRatio } from "@constants/table";
-import { formatTableValue } from "@utils/formatTableValue";
+import { formatNullableValue } from "@utils/formatNullableValue";
 import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
 import { PendingMemberInfoTableProps } from ".";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
@@ -74,7 +74,7 @@ export default function PendingMemberInfoTableBody({
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
           {Object.entries(row).map(([key, value], index) => (
             <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
-              <Text>{formatTableValue(value)}</Text>
+              <Text>{formatNullableValue(value)}</Text>
             </TextContainer>
           ))}
           <ButtonContainer>
