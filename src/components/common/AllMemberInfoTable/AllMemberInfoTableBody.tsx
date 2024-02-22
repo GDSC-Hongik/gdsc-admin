@@ -1,6 +1,7 @@
 import { AllMemberInfoType } from "@types/entities/member";
 import { allMemberTableWidthRatio } from "@constants/table";
 import useDeleteMemberMutation from "@hooks/mutations/useDeleteMemberMutation";
+import { formatTableValue } from "@utils/formatTableValue";
 import EditInfoModal from "../InfoModal/EditInfoModal";
 import { Grid, Box, Button } from "@mui/material";
 import styled from "@emotion/styled";
@@ -41,7 +42,7 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
             ([key, value], index) =>
               key !== "memberId" && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
-                  <Text>{value}</Text>
+                  <Text>{formatTableValue(value)}</Text>
                 </TextContainer>
               ),
           )}
