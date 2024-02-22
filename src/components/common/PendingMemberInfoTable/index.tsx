@@ -1,188 +1,10 @@
 import { PendingMemberInfoType } from "@types/entities/member";
+import useGetPendingMemberListQuery from "@hooks/queries/useGetPendingMemberListQuery";
 import PendingMemberInfoTableHeader from "./PendingMemberInfoTableHeader";
 import PendingMemberInfoTableBody from "./PendingMemberInfoTableBody";
 import { Grid, TablePagination } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import styled from "@emotion/styled";
-
-const mockPendingMemberInfoList: PendingMemberInfoType[] = [
-  {
-    memberId: 1,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 2,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 3,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 4,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 5,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 6,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 7,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 8,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 9,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 10,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-  {
-    memberId: 11,
-    studentId: "C123123",
-    name: "홍서현",
-    phone: "01012341234",
-    department: "컴퓨터공학전공",
-    email: "123123123@naver.com",
-    discordUsername: "ghdtjgus76",
-    nickname: "ghdtjgus76",
-    requirement: {
-      univStatus: "PENDING",
-      discordStatus: "PENDING",
-      paymentStatus: "PENDING",
-      univPending: true,
-    },
-  },
-];
 
 export type PendingMemberInfoTableProps = {
   setSelectedMemberList: Dispatch<SetStateAction<PendingMemberInfoType[]>>;
@@ -195,6 +17,8 @@ export default function PendingMemberInfoTable({
 }: PendingMemberInfoTableProps) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const { pendingMemberList } = useGetPendingMemberListQuery(page, rowsPerPage);
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -216,7 +40,7 @@ export default function PendingMemberInfoTable({
       : dataList;
   };
 
-  const pendingMemberInfoDataList = getPendingMemberInfoDataList(mockPendingMemberInfoList);
+  const pendingMemberInfoDataList = getPendingMemberInfoDataList(pendingMemberList);
 
   return (
     <Grid container>
@@ -231,7 +55,7 @@ export default function PendingMemberInfoTable({
         selectedMemberList={selectedMemberList}
       />
       <InfoTablePagination
-        count={mockPendingMemberInfoList.length}
+        count={pendingMemberList.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

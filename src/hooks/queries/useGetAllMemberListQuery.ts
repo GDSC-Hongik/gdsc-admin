@@ -1,5 +1,5 @@
 import { allMemberApi } from "@apis/allMemberApi";
-import { allMemberQueryKey } from "@constants/queryKey";
+import { QueryKey } from "@constants/queryKey";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useGetAllMemberListQuery(
@@ -9,7 +9,7 @@ export default function useGetAllMemberListQuery(
   searchText: string,
 ) {
   const { data: allMemberList = [] } = useQuery({
-    queryKey: [allMemberQueryKey.allMemberList, page, size, searchType, searchText],
+    queryKey: [QueryKey.allMemberList, page, size, searchType, searchText],
     queryFn: () => allMemberApi.getAllMemberList(page, size, searchType, searchText),
   });
 

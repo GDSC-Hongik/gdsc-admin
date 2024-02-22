@@ -1,5 +1,6 @@
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@types/entities/member";
 import { pendingMemberTableWidthRatio } from "@constants/table";
+import { formatTableValue } from "@utils/formatTableValue";
 import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
 import { PendingMemberInfoTableProps } from ".";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
@@ -64,7 +65,7 @@ export default function PendingMemberInfoTableBody({
     setSelectedMemberDetailInfo(dataList[index]);
   };
 
-  const handleCloseMemberDetailInfoModal = () => setIsMemberDetailInfoModalVisible(false)
+  const handleCloseMemberDetailInfoModal = () => setIsMemberDetailInfoModalVisible(false);
 
   return (
     <Grid container direction={"column"}>
@@ -73,7 +74,7 @@ export default function PendingMemberInfoTableBody({
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
           {Object.entries(row).map(([key, value], index) => (
             <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
-              <Text>{typeof value === "object" ? JSON.stringify(value) : value}</Text>
+              <Text>{formatTableValue(value)}</Text>
             </TextContainer>
           ))}
           <ButtonContainer>

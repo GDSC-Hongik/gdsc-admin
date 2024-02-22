@@ -1,6 +1,7 @@
 import { HeaderProps } from "@components/common/Header";
 import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@constants/table";
 import { ManagementVariant } from "@types/entities/member";
+import { formatTableValue } from "@utils/formatTableValue";
 import { Modal, Grid, Box, Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import styled from "@emotion/styled";
@@ -64,7 +65,7 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
                 {filteredSelectedMemberList?.map(selectedMember => (
                   <BodyCellRow container alignItems="center" justifyContent="center">
                     {Object.entries(selectedMember).map(([key, value]) => (
-                      <BodyCell xs={getTableWidth(key, "cell")}>{value}</BodyCell>
+                      <BodyCell xs={getTableWidth(key, "cell")}>{formatTableValue(value)}</BodyCell>
                     ))}
                   </BodyCellRow>
                 ))}
