@@ -5,7 +5,9 @@ export const memberPageList = [
   { label: "가입 대기 멤버 관리", path: RoutePath.PendingMembers },
 ];
 
-export const paymentPageList = [{ label: "회비 납부 여부 관리", path: RoutePath.PaymentStatus }];
+export const paymentPageList = [
+  { label: "회비 납부 여부 관리", path: RoutePath.PaymentStatusMembers },
+];
 
 export const titleVariant = {
   allMember: "전체 멤버 관리",

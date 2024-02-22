@@ -5,7 +5,7 @@ import AllMembersPage from "@pages/AllMembersPage";
 import NotFoundErrorPage from "@pages/NotFoundErrorPage";
 import RoutePath from "@routes/routePath";
 import PendingMembersPage from "@pages/PendingMembersPage";
-import PaymentStatusPage from "@pages/PaymentStatusPage";
+import PaymentStatusMembersPage from "@pages/PaymentStatusMembersPage";
 import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
 
 const routes: RouteObject[] = [
@@ -22,7 +22,7 @@ const routes: RouteObject[] = [
         element: <AllMembersPage />,
       },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
-      { path: RoutePath.PaymentStatus, element: <PaymentStatusPage /> },
+      { path: RoutePath.PaymentStatusMembers, element: <PaymentStatusMembersPage /> },
     ],
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
