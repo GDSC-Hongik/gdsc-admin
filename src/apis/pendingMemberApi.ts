@@ -15,6 +15,6 @@ export const pendingMemberApi = {
     memberIdList: GrantPendingMemberRequestBodyDtoType,
   ): Promise<GrantPendingMemberDtoType> => {
     const response = await apiClient.put(`/members/grant`, memberIdList);
-    return response.data.grantedMembers;
+    return response.data;
   },
 };

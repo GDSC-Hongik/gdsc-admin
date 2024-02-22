@@ -70,17 +70,19 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
           <>
             <BodyContainer>
               <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
-                {allMemberTableTitle.map(tableTitle => (
-                  <ColumnTitle key={tableTitle.value} xs={getTableWidth(tableTitle.name, "title")}>
+                {allMemberTableTitle.map((tableTitle, index) => (
+                  <ColumnTitle key={index} xs={getTableWidth(tableTitle.name, "title")}>
                     {tableTitle.name}
                   </ColumnTitle>
                 ))}
               </BodyCellTitle>
               <BodyCellRowContainer>
-                {filteredSelectedMemberList?.map(selectedMember => (
-                  <BodyCellRow container alignItems="center" justifyContent="center">
-                    {Object.entries(selectedMember).map(([key, value]) => (
-                      <BodyCell xs={getTableWidth(key, "cell")}>{formatTableValue(value)}</BodyCell>
+                {filteredSelectedMemberList?.map((selectedMember, index) => (
+                  <BodyCellRow container key={index} alignItems="center" justifyContent="center">
+                    {Object.entries(selectedMember).map(([key, value], index) => (
+                      <BodyCell xs={getTableWidth(key, "cell")} key={index}>
+                        {formatTableValue(value)}
+                      </BodyCell>
                     ))}
                   </BodyCellRow>
                 ))}
@@ -131,7 +133,7 @@ const BodyCellTitle = styled(Grid)({
 });
 
 const BodyCellRowContainer = styled.div({
-  "overflow-y": "auto",
+  "overflowY": "auto",
   "maxHeight": "240px",
 
   "&::-webkit-scrollbar": {

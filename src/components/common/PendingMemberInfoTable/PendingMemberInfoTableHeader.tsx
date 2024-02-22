@@ -35,10 +35,11 @@ export default function PendingMemberInfoTableHeader({
   return (
     <Container container>
       <Checkbox checked={checked} onChange={handleChangeCheckbox} />
-      {pendingMemberTableTitle.map(title => (
+      {pendingMemberTableTitle.map((title, index) => (
         <Title
           item
           xs={getTitleWidthRatio(title.name)}
+          key={index}
           alignItems="center"
           justifyContent={"center"}
         >
