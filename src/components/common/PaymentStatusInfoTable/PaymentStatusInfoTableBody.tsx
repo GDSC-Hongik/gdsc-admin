@@ -1,5 +1,6 @@
 import { PaymentStatusInfoType, StatusType } from "@types/entities/member";
 import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@constants/table";
+import useUpdateMemberPaymentStatusMutation from "@hooks/mutations/useUpdateMemberPaymentStatusMutation";
 import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
 
@@ -8,10 +9,16 @@ type PaymentStatusInfoBodyProps = {
 };
 
 export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusInfoBodyProps) {
+  const updateMemberPaymentStatusMutation = useUpdateMemberPaymentStatusMutation();
+
   const getCellWidthRatio = (option: string) => {
     return option === "studentId" || option === "name" || option === "phone"
       ? pendingMemberTableWidthRatio["cell"][option]
       : pendingMemberTableWidthRatio["cell"]["default"];
+  };
+
+  const handleChangePaymentStatus = (memberId: number, paymentStatus: StatusType) => {
+    updateMemberPaymentStatusMutation.mutate({ memberId, paymentStatus });
   };
 
   return (
@@ -31,10 +38,19 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
               ),
           )}
           <ButtonContainer>
-            <Button variant="outlined" disabled={row.paymentStatus === "VERIFIED"}>
+            <Button
+              variant="outlined"
+              disabled={row.paymentStatus === "VERIFIED"}
+              onClick={() => handleChangePaymentStatus(row.memberId, "VERIFIED")}
+            >
               납입
             </Button>
-            <Button variant="outlined" color="error" disabled={row.paymentStatus === "PENDING"}>
+            <Button
+              variant="outlined"
+              color="error"
+              disabled={row.paymentStatus === "PENDING"}
+              onClick={() => handleChangePaymentStatus(row.memberId, "PENDING")}
+            >
               미납
             </Button>
           </ButtonContainer>
