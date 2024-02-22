@@ -12,10 +12,10 @@ export default function useDeleteMemberMutation() {
       queryClient.invalidateQueries({
         queryKey: [allMemberQueryKey.allMemberList],
       });
-      toast("탈퇴 처리 완료하였습니다!");
+      toast.success("탈퇴 처리 완료하였습니다!");
     },
     onError: () => {
-      toast("탈퇴 처리 실패하였습니다!");
+      toast.error("탈퇴 처리 실패하였습니다!");
     },
   });
 }
