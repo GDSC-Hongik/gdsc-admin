@@ -6,16 +6,16 @@ type NavigateButtonProps = { path: string };
 
 export default function NavigateButton({ path, children }: PropsWithChildren<NavigateButtonProps>) {
   const { pathname } = useLocation();
-  const isActive = pathname === path || pathname.startsWith(path + "/");
+  const isActive = Number(pathname === path || pathname.startsWith(path + "/"));
 
   return (
-    <LinkButton to={path} isActive={isActive}>
+    <LinkButton to={path} active={isActive}>
       {children}
     </LinkButton>
   );
 }
 
-const LinkButton = styled(Link)<{ isActive: boolean }>`
+const LinkButton = styled(Link)<{ active: number }>`
   color: black;
   border-radius: 4px;
   padding: 13px 0px 13px 55px;
@@ -25,8 +25,8 @@ const LinkButton = styled(Link)<{ isActive: boolean }>`
   &:hover {
     background-color: #0000000a;
   }
-  ${({ isActive }) =>
-    isActive &&
+  ${({ active }) =>
+    active &&
     `
     background: #0000000A;
   `}
