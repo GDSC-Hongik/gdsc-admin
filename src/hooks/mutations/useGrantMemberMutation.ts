@@ -13,7 +13,7 @@ export default function useGrantMemberMutation() {
         queryKey: [QueryKey.pendingMemberList],
       });
       data.grantedMembers.forEach(member => {
-        toast.success(`${member}님이 승인이 완료되었습니다!`);
+        toast.success(`${member}님의 승인이 완료되었습니다!`);
       });
       data.notGrantedMembers.forEach(member => {
         toast.error(`${member}님의 승인이 실패하였습니다!`);
