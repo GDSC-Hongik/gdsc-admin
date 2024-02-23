@@ -69,7 +69,7 @@ module.exports = {
     "cypress/no-pause": "error",
     "no-implicit-coercion": "off",
     "prettier/prettier": [
-      "error",
+      "off",
       {
         endOfLine: "auto",
       },
@@ -85,7 +85,29 @@ module.exports = {
       { format: ["PascalCase"], selector: "interface" },
       { format: ["PascalCase"], selector: "typeAlias" },
     ],
-    "import/order": ["error"],
+    "import/order": [
+      "error",
+      {
+        groups: ["builtin", "external", "internal", "type"],
+        pathGroups: [
+          {
+            pattern: "react+(|-native)",
+            group: "builtin",
+            position: "before",
+          },
+          {
+            pattern: "@**",
+            group: "external",
+            position: "after",
+          },
+        ],
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+        pathGroupsExcludedImportTypes: ["builtin"],
+      },
+    ],
   },
   settings: {
     react: {

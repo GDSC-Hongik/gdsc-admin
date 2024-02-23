@@ -1,11 +1,11 @@
-import { AllMemberInfoType } from "@types/entities/member";
-import { allMemberTableWidthRatio } from "@constants/table";
-import useDeleteMemberMutation from "@hooks/mutations/useDeleteMemberMutation";
-import { formatTableValue } from "@utils/formatTableValue";
-import EditInfoModal from "../InfoModal/EditInfoModal";
-import { Grid, Box, Button } from "@mui/material";
-import styled from "@emotion/styled";
 import { useState } from "react";
+import styled from "@emotion/styled";
+import { Grid, Box, Button } from "@mui/material";
+import EditInfoModal from "../InfoModal/EditInfoModal";
+import { allMemberTableWidthRatio } from "@/constants/table";
+import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
+import { AllMemberInfoType } from "@/types/entities/member";
+import { formatNullableValue } from "@/utils/formatNullableValue";
 
 type MemberInfoTableBodyProps = {
   dataList: AllMemberInfoType[];
@@ -42,7 +42,7 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
             ([key, value], index) =>
               key !== "memberId" && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
-                  <Text>{formatTableValue(value)}</Text>
+                  <Text>{formatNullableValue(value)}</Text>
                 </TextContainer>
               ),
           )}

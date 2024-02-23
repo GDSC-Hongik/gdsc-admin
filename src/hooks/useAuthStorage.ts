@@ -1,4 +1,4 @@
-import useTokenStore from "@store/token";
+import useTokenStore from "@/store/token";
 
 export default function useAuthStorage() {
   const { token, setToken, clearToken } = useTokenStore();

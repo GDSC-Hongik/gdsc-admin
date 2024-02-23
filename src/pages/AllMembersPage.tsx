@@ -1,7 +1,7 @@
-import Header from "@components/common/Header";
-import AllMemberInfoTable from "@components/common/AllMemberInfoTable";
-import Title from "@components/common/Title";
 import { useState } from "react";
+import AllMemberInfoTable from "@/components/common/AllMemberInfoTable";
+import Header from "@/components/common/Header";
+import Title from "@/components/common/Title";
 
 export default function AllMembersPage() {
   const [allMemberSearchType, setAllMemberSearchType] = useState("");

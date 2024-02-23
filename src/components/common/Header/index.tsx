@@ -1,8 +1,8 @@
-import { ManagementVariant, PendingMemberInfoType } from "@types/entities/member";
+import { Dispatch, SetStateAction } from "react";
+import { Stack, styled } from "@mui/material";
 import HeaderLeftCol from "./HeaderLeftCol";
 import HeaderRightCol from "./HeaderRightCol";
-import { Stack, styled } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { ManagementVariant, PendingMemberInfoType } from "@/types/entities/member";
 
 const mockCreatedDate = new Date();
 

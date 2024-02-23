@@ -1,4 +1,9 @@
-import { AllMemberInfoType, PendingMemberInfoType, StatusType } from "@types/entities/member";
+import {
+  AllMemberInfoType,
+  PaymentStatusInfoType,
+  PendingMemberInfoType,
+  StatusType,
+} from "@/types/entities/member";
 
 export type AllMemberListDtoType = AllMemberInfoType[];
 

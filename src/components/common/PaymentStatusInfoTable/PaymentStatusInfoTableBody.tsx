@@ -1,8 +1,9 @@
-import { PaymentStatusInfoType, StatusType } from "@types/entities/member";
-import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@constants/table";
-import useUpdateMemberPaymentStatusMutation from "@hooks/mutations/useUpdateMemberPaymentStatusMutation";
 import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
+import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@/constants/table";
+import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
+import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
+import { formatNullableValue } from "@/utils/formatNullableValue";
 
 type PaymentStatusInfoBodyProps = {
   dataList: PaymentStatusInfoType[];
@@ -32,7 +33,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
                   <Text>
                     {key === "paymentStatus"
                       ? paymentStatusFieldMapping[value as StatusType]
-                      : value}
+                      : formatNullableValue(value)}
                   </Text>
                 </TextContainer>
               ),

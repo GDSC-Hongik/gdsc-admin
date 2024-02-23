@@ -1,7 +1,7 @@
-import useAuthStorage from "@hooks/useAuthStorage";
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { isEmpty } from "lodash";
+import { useSearchParams } from "react-router-dom";
+import useAuthStorage from "@/hooks/useAuthStorage";
 
 const enum Params {
   AccessToken = "access_token",

@@ -1,11 +1,11 @@
-import { HeaderProps } from "@components/common/Header";
-import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@constants/table";
-import { ManagementVariant } from "@types/entities/member";
-import { formatTableValue } from "@utils/formatTableValue";
-import useGrantMemberMutation from "@hooks/mutations/useGrantMemberMutation";
-import { Modal, Grid, Box, Button } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import styled from "@emotion/styled";
+import { Modal, Grid, Box, Button } from "@mui/material";
+import { HeaderProps } from "@/components/common/Header";
+import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
+import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
+import { ManagementVariant } from "@/types/entities/member";
+import { formatNullableValue } from "@/utils/formatNullableValue";
 
 type AcceptMemberListModalProps<T extends ManagementVariant> = {
   isAcceptModalVisible: boolean;
@@ -81,7 +81,7 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
                   <BodyCellRow container key={index} alignItems="center" justifyContent="center">
                     {Object.entries(selectedMember).map(([key, value], index) => (
                       <BodyCell xs={getTableWidth(key, "cell")} key={index}>
-                        {formatTableValue(value)}
+                        {formatNullableValue(value)}
                       </BodyCell>
                     ))}
                   </BodyCellRow>

@@ -1,6 +1,6 @@
-import { paymentStatusApi } from "@apis/paymentStatusApi";
-import { QueryKey } from "@constants/queryKey";
 import { useQuery } from "@tanstack/react-query";
+import { paymentStatusApi } from "@/apis/paymentStatusApi";
+import { QueryKey } from "@/constants/queryKey";
 
 export default function useGetPaymentStatusMemberListQuery(page: number, size: number) {
   const { data: paymentStatusMemberList = [] } = useQuery({

@@ -1,10 +1,10 @@
-import { PaymentStatusInfoType } from "@types/entities/member";
-import useGetPaymentStatusMemberListQuery from "@hooks/queries/useGetPaymentStatusMemberListQuery";
-import PaymentStatusInfoTableHeader from "./PaymentStatusInfoTableHeader";
-import PaymentStatusInfoTableBody from "./PaymentStatusInfoTableBody";
-import { Grid, TablePagination } from "@mui/material";
-import styled from "@emotion/styled";
 import { useState } from "react";
+import styled from "@emotion/styled";
+import { Grid, TablePagination } from "@mui/material";
+import PaymentStatusInfoTableBody from "./PaymentStatusInfoTableBody";
+import PaymentStatusInfoTableHeader from "./PaymentStatusInfoTableHeader";
+import useGetPaymentStatusMemberListQuery from "@/hooks/queries/useGetPaymentStatusMemberListQuery";
+import { PaymentStatusInfoType } from "@/types/entities/member";
 
 export default function PaymentStatusInfoTable() {
   const [page, setPage] = useState(0);

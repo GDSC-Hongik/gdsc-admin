@@ -1,7 +1,7 @@
-import ToggleIcon from "@assets/toggle.svg?react";
-import NavigateButton from "@components/layout/sidebar/NavigateButton";
-import { MenuItem, MenuItemProps, styled } from "@mui/material";
 import { useState } from "react";
+import { MenuItem, MenuItemProps, styled } from "@mui/material";
+import ToggleIcon from "@/assets/toggle.svg?react";
+import NavigateButton from "@/components/layout/sidebar/NavigateButton";
 
 export type NavigatePage = { label: string; path: string };
 

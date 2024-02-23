@@ -1,6 +1,6 @@
-import { allMemberTableTitle, allMemberTableWidthRatio } from "@constants/table";
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
+import { allMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
 
 export default function AllMemberInfoTableHeader() {
   const getTitleWidthRatio = (title: string) => {

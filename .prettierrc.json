@@ -8,25 +8,5 @@
   "printWidth": 100,
   "semi": true,
   "endOfLine": "lf",
-  "quoteProps": "consistent",
-  "importOrder": [
-    "^react$",
-    "<THIRD_PARTY_MODULES>",
-    "^@layouts/(.*)$",
-    "^@stores/(.*)$",
-    "^@tests/(.*)$",
-    "^@pages/(.*)$",
-    "^@components/(.*)$",
-    "^@hooks/(.*)$",
-    "^@api/(.*)$",
-    "^@routes/(.*)$",
-    "^@utils/(.*)$",
-    "^@constants/(.*)$",
-    "^@types/(.*)$",
-    "^@styles/(.*)$",
-    "^@assets/(.*)$",
-    "^[./]"
-  ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "quoteProps": "consistent"
 }
