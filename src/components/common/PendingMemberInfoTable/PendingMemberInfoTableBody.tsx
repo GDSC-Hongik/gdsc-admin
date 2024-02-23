@@ -4,6 +4,7 @@ import { Box, Button, Checkbox, Grid } from "@mui/material";
 import { PendingMemberInfoTableProps } from ".";
 import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
 import { pendingMemberTableWidthRatio } from "@/constants/table";
+import { theme } from "@/styles/typo";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -96,7 +97,7 @@ export default function PendingMemberInfoTableBody({
 }
 
 const CellContainer = styled(Grid)({
-  borderBottom: "1px solid #0000001F",
+  borderBottom: `1px solid ${theme.palette.gray1}`,
 });
 
 const TextContainer = styled(Grid)({
@@ -108,7 +109,7 @@ const Text = styled(Box)({
   fontWeight: 500,
   lineHeight: "24px",
   fontSize: "14px",
-  color: "000000DD",
+  color: theme.palette.gray2,
 });
 
 const ButtonContainer = styled.div({

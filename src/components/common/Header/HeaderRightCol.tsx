@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Button, Stack, Box, Typography } from "@mui/material";
 import { HeaderProps } from ".";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
+import { theme } from "@/styles/typo";
 import { ManagementVariant } from "@/types/entities/member";
 import { formatDate } from "@/utils/date/formatDate";
 
@@ -68,7 +69,7 @@ const RightColContainer = styled(Stack)`
 `;
 
 const DateText = styled(Box)`
-  color: #b0b5bd;
+  color: ${theme.palette.gray5};
   font-size: 14px;
   font-weight: 500;
 `;

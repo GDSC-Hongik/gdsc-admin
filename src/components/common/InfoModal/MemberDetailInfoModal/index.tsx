@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Box, Grid, Modal } from "@mui/material";
+import { theme } from "@/styles/typo";
 import { PendingMemberInfoType, StatusType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -76,7 +77,7 @@ const DetailInfoContainer = styled(Grid)({
 });
 
 const DetailInfoTitle = styled(Box)({
-  color: "#888B91",
+  color: theme.palette.gray7,
   fontWeight: "700",
   fontSize: "16px",
   lineHeight: "16px",

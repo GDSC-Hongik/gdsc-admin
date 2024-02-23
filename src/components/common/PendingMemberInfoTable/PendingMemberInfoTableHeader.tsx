@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Box, Checkbox, Grid } from "@mui/material";
 import { PendingMemberInfoTableProps } from ".";
 import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@/constants/table";
+import { theme } from "@/styles/typo";
 import { PendingMemberInfoType } from "@/types/entities/member";
 
 type PendingMemberInfoTableHeaderProps = {
@@ -53,7 +54,7 @@ export default function PendingMemberInfoTableHeader({
 const Container = styled(Grid)({
   height: "56px",
   flex: 1,
-  borderBottom: "1px solid #0000001F",
+  borderBottom: `1px solid ${theme.palette.gray1}`,
 });
 
 const Title = styled(Grid)({

@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import styled from "@emotion/styled";
 import { Link, useLocation } from "react-router-dom";
+import { theme } from "@/styles/typo";
 
 type NavigateButtonProps = { path: string };
 
@@ -23,11 +24,11 @@ const LinkButton = styled(Link)<{ active: number }>`
   font-size: 14px;
   font-weight: 400;
   &:hover {
-    background-color: #0000000a;
+    background-color: ${theme.palette.black1};
   }
   ${({ active }) =>
     active &&
     `
-    background: #0000000A;
+    background: ${theme.palette.black1};
   `}
 `;

@@ -4,6 +4,7 @@ import { Modal, Grid, Box, Button } from "@mui/material";
 import { HeaderProps } from "@/components/common/Header";
 import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
+import { theme } from "@/styles/typo";
 import { ManagementVariant } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -129,7 +130,7 @@ const BodyContainer = styled.div({
 
 const BodyCellTitle = styled(Grid)({
   height: "56px",
-  borderBottom: "1px solid #0000001E",
+  borderBottom: `1px solid ${theme.palette.black2}`,
 });
 
 const BodyCellRowContainer = styled.div({
@@ -139,18 +140,18 @@ const BodyCellRowContainer = styled.div({
   "&::-webkit-scrollbar": {
     width: "8px",
     borderRadius: "20px",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: theme.palette.white1,
   },
 
   "&::-webkit-scrollbar-thumb": {
-    backgroundColor: "#888",
+    backgroundColor: theme.palette.gray8,
     borderRadius: "20px",
   },
 });
 
 const BodyCellRow = styled(Grid)({
   height: "52px",
-  borderBottom: "1px solid #0000001E",
+  borderBottom: `1px solid ${theme.palette.black2}`,
 });
 
 const BodyCell = styled(Grid)({
