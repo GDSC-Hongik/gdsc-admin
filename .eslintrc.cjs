@@ -9,9 +9,6 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:cypress/recommended",
     "plugin:storybook/recommended",
-    'plugin:import/typescript',
-    'plugin:import/recommended',
-
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts", "__mocks__"],
   parser: "@typescript-eslint/parser",
@@ -88,27 +85,11 @@ module.exports = {
       { format: ["PascalCase"], selector: "interface" },
       { format: ["PascalCase"], selector: "typeAlias" },
     ],
-    "import/order": [
-      "error",
-      {
-        groups: ["builtin", "external", "parent", "sibling", "index"],
-        alphabetize: {
-          order: "asc",
-          caseInsensitive: true,
-        },
-        "newlines-between": "never",
-      },
-    ],
-    "import/no-unresolved": "off",
-    "import/export": "off",
+    "import/order": ["error"],
   },
   settings: {
-    'import/resolver': {
-      node: {},
-      typescript: {
-        directory: './src',
-      },
+    react: {
+      version: "detect",
     },
-    'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
   },
 };
