@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Box, Checkbox, Grid } from "@mui/material";
 import { PendingMemberInfoTableProps } from ".";
 import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@/constants/table";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 import { PendingMemberInfoType } from "@/types/entities/member";
 
 type PendingMemberInfoTableHeaderProps = {
@@ -64,8 +64,6 @@ const Title = styled(Grid)({
 
 const Text = styled(Box)({
   maxHeight: "52px",
-  fontWeight: 500,
-  lineHeight: "24px",
-  fontSize: "14px",
+  ...theme.typo.body2,
   color: "000000DD",
 });

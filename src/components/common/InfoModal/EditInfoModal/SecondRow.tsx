@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 
 type SecondRowProps = Pick<AllMemberInfoStateType, "department" | "email"> & {

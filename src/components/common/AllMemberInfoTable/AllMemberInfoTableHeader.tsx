@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 import { allMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 
 export default function AllMemberInfoTableHeader() {
   const getTitleWidthRatio = (title: string) => {
@@ -38,11 +38,9 @@ const Title = styled(Grid)({
 });
 
 const Text = styled(Box)({
-  maxHeight: "52px",
-  fontWeight: 500,
-  lineHeight: "24px",
-  fontSize: "14px",
+  ...theme.typo.body2,
   color: theme.palette.gray2,
+  maxHeight: "52px",
 });
 
 const EmptyTitle = styled.div({

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Stack, Box } from "@mui/material";
 import { titleVariant } from "@/constants/common";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
 
 type TitleProps = {
@@ -24,15 +24,14 @@ const Container = styled(Stack)({
 });
 
 const HeaderTitle = styled(Box)({
-  fontWeight: "500",
-  fontSize: "24px",
+  ...theme.typo.title2,
   color: theme.palette.gray4,
   typography: "h6",
 });
 
 const HeaderSubTitle = styled(Box)({
+  color: theme.palette.gray3,
   fontWeight: "regular",
   fontSize: "14px",
-  color: theme.palette.gray3,
   typography: "subtitle1",
 });

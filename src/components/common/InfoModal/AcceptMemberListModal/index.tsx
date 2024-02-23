@@ -4,7 +4,7 @@ import { Modal, Grid, Box, Button } from "@mui/material";
 import { HeaderProps } from "@/components/common/Header";
 import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -116,9 +116,7 @@ const ModalContentContainer = styled(Box)({
 });
 
 const TitleContainer = styled(Box)({
-  fontSize: "24px",
-  fontWeight: "400",
-  lineHeight: "133.4%",
+  ...theme.typo.title1,
   marginBottom: "32px",
 });
 
@@ -155,9 +153,7 @@ const BodyCellRow = styled(Grid)({
 });
 
 const BodyCell = styled(Grid)({
-  fontSize: "14px",
-  fontWeight: "400",
-  lineHeight: "20px",
+  ...theme.typo.title1
 });
 
 const StyledButton = styled(Button)({
@@ -166,9 +162,7 @@ const StyledButton = styled(Button)({
 });
 
 const ColumnTitle = styled(Grid)({
-  fontWeight: "500",
-  fontSize: "14px",
-  lineHeight: "24px",
+  ...theme.typo.body2,
 });
 
 const EmptyTextContainer = styled(Grid)({

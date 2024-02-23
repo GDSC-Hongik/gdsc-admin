@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Box, Grid, Modal } from "@mui/material";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, StatusType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -64,9 +64,7 @@ const ModalContentContainer = styled(Box)({
 });
 
 const TitleContainer = styled(Box)({
-  fontSize: "24px",
-  fontWeight: "400",
-  lineHeight: "133.4%",
+  ...theme.typo.title1,
   marginBottom: "32px",
 });
 
@@ -78,13 +76,9 @@ const DetailInfoContainer = styled(Grid)({
 
 const DetailInfoTitle = styled(Box)({
   color: theme.palette.gray7,
-  fontWeight: "700",
-  fontSize: "16px",
-  lineHeight: "16px",
+  ...theme.typo.title3
 });
 
 const DetailInfoField = styled(Box)({
-  fontWeight: "500",
-  fontSize: "16px",
-  lineHeight: "16px",
+  ...theme.typo.body1
 });

@@ -4,7 +4,7 @@ import { Box, Button, Checkbox, Grid } from "@mui/material";
 import { PendingMemberInfoTableProps } from ".";
 import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
 import { pendingMemberTableWidthRatio } from "@/constants/table";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -106,9 +106,7 @@ const TextContainer = styled(Grid)({
 
 const Text = styled(Box)({
   maxHeight: "52px",
-  fontWeight: 500,
-  lineHeight: "24px",
-  fontSize: "14px",
+  ...theme.typo.body2,
   color: theme.palette.gray2,
 });
 

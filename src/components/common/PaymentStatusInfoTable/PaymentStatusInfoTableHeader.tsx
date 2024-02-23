@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 import { paymentStatusTableTitle, paymentStatusTableWidthRatio } from "@/constants/table";
-import { theme } from "@/styles/typo";
+import { theme } from "@/styles/theme";
 
 export default function PaymentStatusInfoTableHeader() {
   const getTitleWidthRatio = (title: string) => {
@@ -37,10 +37,8 @@ const Title = styled(Grid)({
 });
 
 const Text = styled(Box)({
+  ...theme.typo.body2,
   maxHeight: "52px",
-  fontWeight: 500,
-  lineHeight: "24px",
-  fontSize: "14px",
   color: theme.palette.gray2,
 });
 
