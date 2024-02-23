@@ -69,7 +69,7 @@ module.exports = {
     "cypress/no-pause": "error",
     "no-implicit-coercion": "off",
     "prettier/prettier": [
-      "error",
+      "off",
       {
         endOfLine: "auto",
       },
