@@ -4,6 +4,7 @@ import { Modal, Grid, Box, Button } from "@mui/material";
 import { HeaderProps } from "@/components/common/Header";
 import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
+import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -115,9 +116,7 @@ const ModalContentContainer = styled(Box)({
 });
 
 const TitleContainer = styled(Box)({
-  fontSize: "24px",
-  fontWeight: "400",
-  lineHeight: "133.4%",
+  ...theme.typo.title1,
   marginBottom: "32px",
 });
 
@@ -129,7 +128,7 @@ const BodyContainer = styled.div({
 
 const BodyCellTitle = styled(Grid)({
   height: "56px",
-  borderBottom: "1px solid #0000001E",
+  borderBottom: `1px solid ${theme.palette.black2}`,
 });
 
 const BodyCellRowContainer = styled.div({
@@ -139,24 +138,22 @@ const BodyCellRowContainer = styled.div({
   "&::-webkit-scrollbar": {
     width: "8px",
     borderRadius: "20px",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: theme.palette.white1,
   },
 
   "&::-webkit-scrollbar-thumb": {
-    backgroundColor: "#888",
+    backgroundColor: theme.palette.gray8,
     borderRadius: "20px",
   },
 });
 
 const BodyCellRow = styled(Grid)({
   height: "52px",
-  borderBottom: "1px solid #0000001E",
+  borderBottom: `1px solid ${theme.palette.black2}`,
 });
 
 const BodyCell = styled(Grid)({
-  fontSize: "14px",
-  fontWeight: "400",
-  lineHeight: "20px",
+  ...theme.typo.title1
 });
 
 const StyledButton = styled(Button)({
@@ -165,9 +162,7 @@ const StyledButton = styled(Button)({
 });
 
 const ColumnTitle = styled(Grid)({
-  fontWeight: "500",
-  fontSize: "14px",
-  lineHeight: "24px",
+  ...theme.typo.body2,
 });
 
 const EmptyTextContainer = styled(Grid)({

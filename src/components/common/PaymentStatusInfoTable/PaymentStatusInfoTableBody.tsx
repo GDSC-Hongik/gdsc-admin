@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
 import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@/constants/table";
 import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
+import { theme } from "@/styles/theme";
 import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
@@ -64,7 +65,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
 const Container = styled(Grid)({});
 
 const CellContainer = styled(Grid)({
-  borderBottom: "1px solid #0000001F",
+  borderBottom: `1px solid ${theme.palette.gray1}`,
 });
 
 const TextContainer = styled(Grid)({
@@ -73,10 +74,8 @@ const TextContainer = styled(Grid)({
 
 const Text = styled(Box)({
   maxHeight: "52px",
-  fontWeight: 500,
-  lineHeight: "24px",
-  fontSize: "14px",
-  color: "000000DD",
+  ...theme.typo.body2,
+  color: `${theme.palette.gray2}`,
 });
 
 const ButtonContainer = styled.div({

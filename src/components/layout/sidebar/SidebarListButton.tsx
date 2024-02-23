@@ -4,6 +4,7 @@ import NavigateButton from "@/components/layout/sidebar/NavigateButton";
 import PageListToggleButton, {
   NavigatePage,
 } from "@/components/layout/sidebar/PageListToggleButton";
+import { theme } from "@/styles/theme";
 
 type SidebarListButtonProps = {
   label: string;
@@ -15,7 +16,7 @@ export default function SidebarListButton({ label, path, pageList }: SidebarList
   const title = () => (
     <TitleContainer>
       <StarIcon />
-      <Box sx={{ fontSize: "16px", fontWeight: "400", marginLeft: "12px" }}>{label}</Box>
+      <Box sx={{ ...theme.typo.body1, marginLeft: "12px" }}>{label}</Box>
     </TitleContainer>
   );
 

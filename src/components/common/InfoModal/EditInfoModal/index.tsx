@@ -4,6 +4,7 @@ import { Modal, Box, Button } from "@mui/material";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
+import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
 
 type EditInfoModalProps = {
@@ -78,9 +79,7 @@ const ModalContentContainer = styled(Box)({
 });
 
 const TitleContainer = styled(Box)({
-  fontSize: "24px",
-  fontWeight: "400",
-  lineHeight: "133.4%",
+  ...theme.typo.title1,
   marginBottom: "32px",
 });
 

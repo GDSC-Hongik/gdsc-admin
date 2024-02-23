@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Button, Stack, Box, Typography } from "@mui/material";
 import { HeaderProps } from ".";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
+import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
 import { formatDate } from "@/utils/date/formatDate";
 
@@ -67,11 +68,10 @@ const RightColContainer = styled(Stack)`
   flex-wrap: wrap;
 `;
 
-const DateText = styled(Box)`
-  color: #b0b5bd;
-  font-size: 14px;
-  font-weight: 500;
-`;
+const DateText = styled(Box)({
+  color: `${theme.palette.gray5}`,
+  ...theme.typo.body2,
+});
 
 const SelectedMemberCountText = styled(Typography)({
   marginRight: "20px",
