@@ -8,37 +8,58 @@ type StorageType = {
 };
 
 export class LocalStorage implements StorageType {
-  private serialize = <T>(value: T) => {
-    return JSON.stringify(value);
+  private serialize = <T>(value: T): string | null => {
+    try {
+      return JSON.stringify(value);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   };
 
-  private deserialize = (value: string) => {
+  private deserialize = (value: string): string | null => {
     try {
       return JSON.parse(value);
-    } catch (e) {
-      return "";
+    } catch (error) {
+      console.error(error);
+      return null;
     }
   };
-  get(key: string) {
+
+  get(key: string): string | null {
     try {
       return this.deserialize(localStorage.getItem(key) || "");
-    } catch (e) {
-      return "";
+    } catch (error) {
+      console.error(error);
+      return null;
     }
   }
 
-  set(key: string, value: string) {
-    localStorage.setItem(key, this.serialize(value));
+  set(key: string, value: string): void {
+    try {
+      localStorage.setItem(key, this.serialize(value) as string);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  remove(key: string) {
-    localStorage.removeItem(key);
+  remove(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  clearAll() {
-    localStorage.clear();
+  clearAll(): void {
+    try {
+      localStorage.clear();
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 
 const lStorage = new LocalStorage();
+
 export default lStorage;
