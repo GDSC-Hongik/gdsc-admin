@@ -1,6 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { pendingMemberApi } from "@/apis/pendingMemberApi";
 import { QueryKey } from "@/constants/queryKey";
-import { useQuery } from "@tanstack/react-query";
 
 export default function useGetPendingMemberListQuery(page: number, size: number) {
   const { data: pendingMemberList = [] } = useQuery({

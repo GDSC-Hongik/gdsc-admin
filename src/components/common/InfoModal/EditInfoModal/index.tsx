@@ -1,10 +1,10 @@
+import { ChangeEvent, useState } from "react";
+import styled from "@emotion/styled";
+import { Modal, Box, Button } from "@mui/material";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
 import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
-import { Modal, Box, Button } from "@mui/material";
-import styled from "@emotion/styled";
-import { ChangeEvent, useState } from "react";
 
 type EditInfoModalProps = {
   isModalVisible: boolean;

@@ -1,7 +1,7 @@
-import { paymentStatusApi } from "@/apis/paymentStatusApi";
-import { QueryKey } from "@/constants/queryKey";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { paymentStatusApi } from "@/apis/paymentStatusApi";
+import { QueryKey } from "@/constants/queryKey";
 
 export default function useUpdateMemberPaymentStatusMutation() {
   const queryClient = useQueryClient();

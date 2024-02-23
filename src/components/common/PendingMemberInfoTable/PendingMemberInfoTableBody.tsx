@@ -1,11 +1,11 @@
-import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
-import { PendingMemberInfoTableProps } from ".";
-import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
-import { pendingMemberTableWidthRatio } from "@/constants/table";
-import { formatNullableValue } from "@/utils/formatNullableValue";
-import { Box, Button, Checkbox, Grid } from "@mui/material";
-import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
+import styled from "@emotion/styled";
+import { Box, Button, Checkbox, Grid } from "@mui/material";
+import { PendingMemberInfoTableProps } from ".";
+import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
+import { pendingMemberTableWidthRatio } from "@/constants/table";
+import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
+import { formatNullableValue } from "@/utils/formatNullableValue";
 
 type PendingMemberInfoTableBodyProps = {
   dataList: PendingMemberInfoType[];

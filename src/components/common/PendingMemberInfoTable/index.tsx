@@ -1,10 +1,10 @@
-import PendingMemberInfoTableHeader from "./PendingMemberInfoTableHeader";
-import PendingMemberInfoTableBody from "./PendingMemberInfoTableBody";
-import { PendingMemberInfoType } from "@/types/entities/member";
-import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
-import { Grid, TablePagination } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import styled from "@emotion/styled";
+import { Grid, TablePagination } from "@mui/material";
+import PendingMemberInfoTableBody from "./PendingMemberInfoTableBody";
+import PendingMemberInfoTableHeader from "./PendingMemberInfoTableHeader";
+import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
+import { PendingMemberInfoType } from "@/types/entities/member";
 
 export type PendingMemberInfoTableProps = {
   setSelectedMemberList: Dispatch<SetStateAction<PendingMemberInfoType[]>>;

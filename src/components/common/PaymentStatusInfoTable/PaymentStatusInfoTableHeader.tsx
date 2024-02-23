@@ -1,6 +1,6 @@
-import { paymentStatusTableTitle, paymentStatusTableWidthRatio } from "@/constants/table";
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
+import { paymentStatusTableTitle, paymentStatusTableWidthRatio } from "@/constants/table";
 
 export default function PaymentStatusInfoTableHeader() {
   const getTitleWidthRatio = (title: string) => {

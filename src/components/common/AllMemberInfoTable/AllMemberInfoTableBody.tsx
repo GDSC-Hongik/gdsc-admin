@@ -1,11 +1,11 @@
+import { useState } from "react";
+import styled from "@emotion/styled";
+import { Grid, Box, Button } from "@mui/material";
 import EditInfoModal from "../InfoModal/EditInfoModal";
-import { AllMemberInfoType } from "@/types/entities/member";
 import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
+import { AllMemberInfoType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
-import { Grid, Box, Button } from "@mui/material";
-import styled from "@emotion/styled";
-import { useState } from "react";
 
 type MemberInfoTableBodyProps = {
   dataList: AllMemberInfoType[];
