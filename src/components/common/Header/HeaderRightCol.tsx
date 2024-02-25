@@ -69,10 +69,10 @@ const RightColContainer = styled(Stack)`
   flex-wrap: wrap;
 `;
 
-const DateText = styled(Box)({
-  color: `${theme.palette.gray5}`,
-  ...theme.typo.body2,
-});
+// const DateText = styled(Box)({
+//   color: `${theme.palette.gray5}`,
+//   ...theme.typo.body2,
+// });
 
 const SelectedMemberCountText = styled(Typography)({
   marginRight: "20px",
