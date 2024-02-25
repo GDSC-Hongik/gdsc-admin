@@ -53,28 +53,34 @@ export const allMemberTableWidthRatio = {
 
 export const pendingMemberTableTitle = [
   {
-    value: 1,
+    value: "1",
     name: "학번",
+    type: "studentId",
   },
   {
-    value: 2,
+    value: "2",
     name: "이름",
+    type: "name",
   },
   {
-    value: 3,
+    value: "3",
     name: "전화번호",
+    type: "phone",
   },
   {
-    value: 4,
+    value: "4",
     name: "디스코드 사용자명",
+    type: "discordUsername",
   },
   {
-    value: 5,
+    value: "5",
     name: "디스코드 닉네임",
+    type: "nickname",
   },
   {
-    value: 6,
+    value: "6",
     name: "회비 납부 여부",
+    type: "paymentStatus",
   },
 ];
 

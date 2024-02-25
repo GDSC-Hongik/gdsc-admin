@@ -9,16 +9,25 @@ import { PendingMemberInfoType } from "@/types/entities/member";
 export type PendingMemberInfoTableProps = {
   setSelectedMemberList: Dispatch<SetStateAction<PendingMemberInfoType[]>>;
   selectedMemberList: PendingMemberInfoType[];
+  pendingMemberSearchType: string;
+  pendingMemberSearchText: string;
 };
 
 export default function PendingMemberInfoTable({
   setSelectedMemberList,
   selectedMemberList,
+  pendingMemberSearchType,
+  pendingMemberSearchText,
 }: PendingMemberInfoTableProps) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { pendingMemberList } = useGetPendingMemberListQuery(page, rowsPerPage);
+  const { pendingMemberList } = useGetPendingMemberListQuery(
+    page,
+    rowsPerPage,
+    pendingMemberSearchType,
+    pendingMemberSearchText,
+  );
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
