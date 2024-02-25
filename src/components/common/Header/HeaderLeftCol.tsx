@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import styled from "@emotion/styled";
 import {
   FormControl,
@@ -10,7 +10,11 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { HeaderProps } from ".";
-import { allMemberTableTitle, paymentStatusTableSelectOptionList } from "@/constants/table";
+import {
+  allMemberTableTitle,
+  paymentStatusTableSelectOptionList,
+  pendingMemberTableTitle,
+} from "@/constants/table";
 import { ManagementVariant } from "@/types/entities/member";
 
 const FormContainer = styled(FormControl)({
@@ -21,17 +25,34 @@ type HeaderLeftColProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
   setAllMemberSearchType: HeaderProps<T>["setAllMemberSearchType"];
   setAllMemberSearchText: HeaderProps<T>["setAllMemberSearchText"];
+  setPendingMemberSearchType: HeaderProps<T>["setPendingMemberSearchType"];
+  setPendingMemberSearchText: HeaderProps<T>["setPendingMemberSearchText"];
 };
 
-const HeaderLeftElement = (setAllMemberSearchType: Dispatch<SetStateAction<string>>) => {
-  const handleChangeAllMemberSelect = (e: SelectChangeEvent<unknown>) =>
-    setAllMemberSearchType(allMemberTableTitle[(e.target.value as number) - 1]["type"]);
+const HeaderLeftElement = (
+  variant: ManagementVariant,
+  setAllMemberSearchType: Dispatch<SetStateAction<string>>,
+  setPendingMemberSearchType: Dispatch<SetStateAction<string>>,
+) => {
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
+    const targetIndex = (e.target.value as number) - 1;
+
+    if (variant === "allMember") {
+      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+      setAllMemberSearchType(allMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
+    } else if (variant === "pendingMember") {
+      setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
+      setPendingMemberSearchType(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
+    }
+  };
 
   return {
     allMember: (
       <FormContainer>
         <InputLabel>Type</InputLabel>
-        <Select onChange={handleChangeAllMemberSelect}>
+        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
           {allMemberTableTitle.map(title => (
             <MenuItem value={title.value} key={title.value}>
               {title.name}
@@ -40,7 +61,18 @@ const HeaderLeftElement = (setAllMemberSearchType: Dispatch<SetStateAction<strin
         </Select>
       </FormContainer>
     ),
-    pendingMember: null,
+    pendingMember: (
+      <FormContainer>
+        <InputLabel>Type</InputLabel>
+        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
+          {pendingMemberTableTitle.slice(0, 5).map(title => (
+            <MenuItem value={title.value} key={title.value}>
+              {title.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormContainer>
+    ),
     paymentStatus: (
       <FormContainer>
         <InputLabel>Type</InputLabel>
@@ -60,22 +92,25 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
   variant,
   setAllMemberSearchType,
   setAllMemberSearchText,
+  setPendingMemberSearchType,
+  setPendingMemberSearchText,
 }: HeaderLeftColProps<T>) {
-  const textFieldWidth = variant === "pendingMember" ? 300 : 200;
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
       setAllMemberSearchText?.(e.target.value);
+    } else if (variant === "pendingMember") {
+      setPendingMemberSearchText?.(e.target.value);
     }
   };
 
   return (
     <Container>
-      {HeaderLeftElement(setAllMemberSearchType!)[variant]}
+      {HeaderLeftElement(variant, setAllMemberSearchType!, setPendingMemberSearchType!)[variant]}
       <TextField
         label="search"
         variant="outlined"
         placeholder="name, email, etc.."
-        sx={{ width: textFieldWidth }}
+        sx={{ width: 200 }}
         onChange={handleChangeText}
       />
     </Container>

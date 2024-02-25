@@ -1,11 +1,10 @@
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import styled from "@emotion/styled";
-import { Button, Stack, Box, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { HeaderProps } from ".";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
-import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
-import { formatDate } from "@/utils/date/formatDate";
+// import { formatDate } from "@/utils/date/formatDate";
 
 const HeaderRightElement = <T extends ManagementVariant>(
   createdDate: HeaderRightColProps<T>["createdDate"],
@@ -15,13 +14,14 @@ const HeaderRightElement = <T extends ManagementVariant>(
   const handleClickAcceptMemberButton = () => setIsAcceptModalVisible(true);
 
   return {
-    allMember: createdDate ? (
-      <RightColContainer>
-        <DateText>생성 일시 : {formatDate(createdDate)}</DateText>
-        <Button variant="outlined">구글 시트 동기화</Button>
-        <Button variant="contained">구글 시트</Button>
-      </RightColContainer>
-    ) : null,
+    allMember: createdDate
+      ? // <RightColContainer>
+        //   <DateText>생성 일시 : {formatDate(createdDate)}</DateText>
+        //   <Button variant="outlined">구글 시트 동기화</Button>
+        //   <Button variant="contained">구글 시트</Button>
+        // </RightColContainer>
+        null
+      : null,
     pendingMember: (
       <RightColContainer>
         <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
@@ -68,10 +68,10 @@ const RightColContainer = styled(Stack)`
   flex-wrap: wrap;
 `;
 
-const DateText = styled(Box)({
-  color: `${theme.palette.gray5}`,
-  ...theme.typo.body2,
-});
+// const DateText = styled(Box)({
+//   color: `${theme.palette.gray5}`,
+//   ...theme.typo.body2,
+// });
 
 const SelectedMemberCountText = styled(Typography)({
   marginRight: "20px",
