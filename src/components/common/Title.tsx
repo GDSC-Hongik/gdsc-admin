@@ -12,7 +12,7 @@ type TitleProps = {
 export default function Title({ variant, descriptionText }: TitleProps) {
   return (
     <Container>
-      <HeaderTitle>{titleVariant[variant]}</HeaderTitle>
+      <HeaderTitle sx={{ marginBottom: "5px" }}>{titleVariant[variant]}</HeaderTitle>
       <HeaderSubTitle>{descriptionText}</HeaderSubTitle>
     </Container>
   );

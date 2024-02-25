@@ -66,7 +66,7 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
   return (
     <Modal open={isAcceptModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
-        <TitleContainer>가입 승인 명단 확인</TitleContainer>
+        <TitleContainer sx={{ marginBottom: "32px" }}>가입 승인 명단 확인</TitleContainer>
         {filteredSelectedMemberList?.length ? (
           <>
             <BodyContainer>
@@ -117,7 +117,6 @@ const ModalContentContainer = styled(Box)({
 
 const TitleContainer = styled(Box)({
   ...theme.typo.title1,
-  marginBottom: "32px",
 });
 
 const BodyContainer = styled.div({
@@ -153,7 +152,7 @@ const BodyCellRow = styled(Grid)({
 });
 
 const BodyCell = styled(Grid)({
-  ...theme.typo.title1
+  ...theme.typo.title1,
 });
 
 const StyledButton = styled(Button)({
