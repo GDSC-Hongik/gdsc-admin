@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import styled from "@emotion/styled";
 import {
   FormControl,
@@ -24,14 +24,20 @@ type HeaderLeftColProps<T extends ManagementVariant> = {
 };
 
 const HeaderLeftElement = (setAllMemberSearchType: Dispatch<SetStateAction<string>>) => {
-  const handleChangeAllMemberSelect = (e: SelectChangeEvent<unknown>) =>
-    setAllMemberSearchType(allMemberTableTitle[(e.target.value as number) - 1]["type"]);
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleChangeAllMemberSelect = (e: SelectChangeEvent<unknown>) => {
+    const targetIndex = (e.target.value as number) - 1;
+
+    setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+    setAllMemberSearchType(allMemberTableTitle[targetIndex]["type"]);
+  };
 
   return {
     allMember: (
       <FormContainer>
         <InputLabel>Type</InputLabel>
-        <Select onChange={handleChangeAllMemberSelect}>
+        <Select value={selectedValue} onChange={handleChangeAllMemberSelect}>
           {allMemberTableTitle.map(title => (
             <MenuItem value={title.value} key={title.value}>
               {title.name}
