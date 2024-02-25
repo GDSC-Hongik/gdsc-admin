@@ -5,7 +5,7 @@ import { HeaderProps } from ".";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
 import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
-import { formatDate } from "@/utils/date/formatDate";
+// import { formatDate } from "@/utils/date/formatDate";
 
 const HeaderRightElement = <T extends ManagementVariant>(
   createdDate: HeaderRightColProps<T>["createdDate"],
@@ -15,13 +15,14 @@ const HeaderRightElement = <T extends ManagementVariant>(
   const handleClickAcceptMemberButton = () => setIsAcceptModalVisible(true);
 
   return {
-    allMember: createdDate ? (
-      <RightColContainer>
-        <DateText>생성 일시 : {formatDate(createdDate)}</DateText>
-        <Button variant="outlined">구글 시트 동기화</Button>
-        <Button variant="contained">구글 시트</Button>
-      </RightColContainer>
-    ) : null,
+    allMember: createdDate
+      ? // <RightColContainer>
+        //   <DateText>생성 일시 : {formatDate(createdDate)}</DateText>
+        //   <Button variant="outlined">구글 시트 동기화</Button>
+        //   <Button variant="contained">구글 시트</Button>
+        // </RightColContainer>
+        null
+      : null,
     pendingMember: (
       <RightColContainer>
         <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
