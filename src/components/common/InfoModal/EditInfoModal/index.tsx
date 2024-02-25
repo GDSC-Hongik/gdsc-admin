@@ -42,7 +42,7 @@ export default function EditInfoModal({
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
-        <TitleContainer>멤버 정보 수정</TitleContainer>
+        <TitleContainer sx={{ marginBottom: "32px" }}>멤버 정보 수정</TitleContainer>
         <FirstRow
           name={name}
           studentId={studentId}
@@ -80,7 +80,6 @@ const ModalContentContainer = styled(Box)({
 
 const TitleContainer = styled(Box)({
   ...theme.typo.title1,
-  marginBottom: "32px",
 });
 
 const StyledButton = styled(Button)({
