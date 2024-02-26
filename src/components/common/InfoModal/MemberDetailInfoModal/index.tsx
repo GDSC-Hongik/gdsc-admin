@@ -37,7 +37,7 @@ export default function MemberDetailInfoModal({
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
-        <TitleContainer>멤버 상세 정보</TitleContainer>
+        <TitleContainer style={{ marginBottom: "32px" }}>멤버 상세 정보</TitleContainer>
         <DetailInfoContainer container direction={"column"}>
           {Object.entries(filterMemberDetailInfo()).map(([key, value], index) => (
             <Grid key={index} container gap={2}>
@@ -65,7 +65,6 @@ const ModalContentContainer = styled(Box)({
 
 const TitleContainer = styled(Box)({
   ...theme.typo.title1,
-  marginBottom: "32px",
 });
 
 const DetailInfoContainer = styled(Grid)({
@@ -76,9 +75,9 @@ const DetailInfoContainer = styled(Grid)({
 
 const DetailInfoTitle = styled(Box)({
   color: theme.palette.gray7,
-  ...theme.typo.title3
+  ...theme.typo.title3,
 });
 
 const DetailInfoField = styled(Box)({
-  ...theme.typo.body1
+  ...theme.typo.body1,
 });
