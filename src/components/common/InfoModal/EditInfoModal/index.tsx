@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Modal, Box, Button } from "@mui/material";
 import FirstRow from "./FirstRow";
@@ -19,14 +19,26 @@ export default function EditInfoModal({
   selectedMemberInfo,
 }: EditInfoModalProps) {
   const [memberInfo, setMemberInfo] = useState<AllMemberInfoStateType>({
-    name: selectedMemberInfo.name,
-    studentId: selectedMemberInfo.studentId,
-    phone: selectedMemberInfo.phone,
-    department: selectedMemberInfo.department,
-    email: selectedMemberInfo.email,
-    discordUsername: selectedMemberInfo.discordUsername,
-    nickname: selectedMemberInfo.nickname,
+    name: "",
+    studentId: "",
+    phone: "",
+    department: "",
+    email: "",
+    discordUsername: "",
+    nickname: "",
   });
+
+  useEffect(() => {
+    setMemberInfo({
+      name: selectedMemberInfo.name ?? "",
+      studentId: selectedMemberInfo.studentId ?? "",
+      phone: selectedMemberInfo.phone ?? "",
+      department: selectedMemberInfo.department ?? "",
+      email: selectedMemberInfo.email ?? "",
+      discordUsername: selectedMemberInfo.discordUsername ?? "",
+      nickname: selectedMemberInfo.nickname ?? "",
+    });
+  }, [selectedMemberInfo]);
 
   const handleChangeMemberInfo = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

@@ -27,8 +27,8 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
 
   const handleClickEditMemberInfoButton = (index: number) => {
-    handleModalVisible(true);
     setSelectedMemberInfo(dataList[index]);
+    handleModalVisible(true);
   };
 
   const handleClickDeleteMemberButton = (memberId: number) => {
