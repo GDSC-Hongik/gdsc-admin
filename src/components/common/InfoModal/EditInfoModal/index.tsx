@@ -6,6 +6,8 @@ import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
 import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
+import { memberInfoValidation } from "@/utils/validation";
+import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
 type EditInfoModalProps = {
   isModalVisible: boolean;
@@ -27,6 +29,7 @@ export default function EditInfoModal({
     discordUsername: "",
     nickname: "",
   });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     setMemberInfo({
@@ -39,6 +42,20 @@ export default function EditInfoModal({
       nickname: selectedMemberInfo.nickname ?? "",
     });
   }, [selectedMemberInfo]);
+
+  useEffect(() => {
+    const isNameValid = memberInfo.name.trim() !== "";
+    const isStudentIdValid = memberInfo.studentId.trim() !== "" && RegExp(memberInfoValidation.studentId.regExp).test(memberInfo.studentId);
+    const isPhoneValid = memberInfo.phone.trim() !== "" && RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(memberInfo.phone));
+    const isDepartmentValid = memberInfo.department.trim() !== "";
+    const isEmailValid = memberInfo.email.trim() !== "" && RegExp(memberInfoValidation.email.regExp).test(memberInfo.email);
+    const isDiscordUsernameValid = memberInfo.discordUsername.trim() !== "";
+    const isNicknameValid = memberInfo.nickname.trim() !== "" && RegExp(memberInfoValidation.nickname.regExp).test(memberInfo.nickname);
+
+    const isSaveButtonDisabled = !(isNameValid && isStudentIdValid && isPhoneValid && isDepartmentValid && isEmailValid && isDiscordUsernameValid && isNicknameValid);
+
+    setIsButtonDisabled(isSaveButtonDisabled);
+  }, [memberInfo]);
 
   const handleChangeMemberInfo = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -71,7 +88,7 @@ export default function EditInfoModal({
           nickname={nickname}
           handleChangeMemberInfo={handleChangeMemberInfo}
         />
-        <StyledButton variant={"contained"} size="large">
+        <StyledButton variant={"contained"} size="large" disabled={isButtonDisabled}>
           저장하기
         </StyledButton>
       </ModalContentContainer>
