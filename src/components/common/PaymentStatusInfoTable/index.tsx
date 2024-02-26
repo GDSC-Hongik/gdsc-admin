@@ -6,11 +6,16 @@ import PaymentStatusInfoTableHeader from "./PaymentStatusInfoTableHeader";
 import useGetPaymentStatusMemberListQuery from "@/hooks/queries/useGetPaymentStatusMemberListQuery";
 import { PaymentStatusInfoType } from "@/types/entities/member";
 
-export default function PaymentStatusInfoTable() {
+type PaymentStatusInfoTableProps = {
+  paymentStatusMemberSearchType: string;
+  paymentStatusMemberSearchText: string;
+}
+
+export default function PaymentStatusInfoTable({ paymentStatusMemberSearchType, paymentStatusMemberSearchText }: PaymentStatusInfoTableProps) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { paymentStatusMemberList } = useGetPaymentStatusMemberListQuery(page, rowsPerPage);
+  const { paymentStatusMemberList } = useGetPaymentStatusMemberListQuery(page, rowsPerPage, paymentStatusMemberSearchType, paymentStatusMemberSearchText);
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
