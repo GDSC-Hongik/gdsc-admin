@@ -4,7 +4,7 @@ import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@/const
 import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
 import { theme } from "@/styles/theme";
 import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
-import { formatNullableValue } from "@/utils/formatNullableValue";
+import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PaymentStatusInfoBodyProps = {
   dataList: PaymentStatusInfoType[];

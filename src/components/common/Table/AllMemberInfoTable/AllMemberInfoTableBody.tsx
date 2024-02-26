@@ -6,7 +6,7 @@ import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import { theme } from "@/styles/theme";
 import { AllMemberInfoType } from "@/types/entities/member";
-import { formatNullableValue } from "@/utils/formatNullableValue";
+import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type MemberInfoTableBodyProps = {
   dataList: AllMemberInfoType[];

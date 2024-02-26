@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType } from "@/types/entities/member";
+import { memberInfoValidation } from "@/utils/validation";
 
 type SecondRowProps = Pick<AllMemberInfoStateType, "department" | "email"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -30,6 +31,8 @@ export default function SecondRow({ department, email, handleChangeMemberInfo }:
           name="email"
           value={email}
           onChange={handleChangeMemberInfo}
+          error={email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email)}
+          helperText={email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email) ? memberInfoValidation.email.errorText : ''}
         />
       </ColContainer>
     </RowContainer>

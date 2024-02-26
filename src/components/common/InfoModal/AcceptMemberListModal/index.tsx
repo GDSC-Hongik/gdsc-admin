@@ -6,7 +6,7 @@ import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/t
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
-import { formatNullableValue } from "@/utils/formatNullableValue";
+import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type AcceptMemberListModalProps<T extends ManagementVariant> = {
   isAcceptModalVisible: boolean;

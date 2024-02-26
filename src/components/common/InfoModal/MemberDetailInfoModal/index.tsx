@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Grid, Modal } from "@mui/material";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType, ManagementVariant, PendingMemberInfoType, StatusType } from "@/types/entities/member";
-import { formatNullableValue } from "@/utils/formatNullableValue";
+import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type MemberDetailInfoModalProps = {
   variant: Extract<ManagementVariant, "pendingMember" | "grantableMember">

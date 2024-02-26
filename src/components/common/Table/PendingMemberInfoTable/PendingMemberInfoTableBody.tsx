@@ -6,7 +6,7 @@ import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
 import { pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
-import { formatNullableValue } from "@/utils/formatNullableValue";
+import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PendingMemberInfoTableBodyProps = {
   dataList: PendingMemberInfoType[];
