@@ -30,6 +30,14 @@ const HeaderRightElement = <T extends ManagementVariant>(
         </StyledButton>
       </RightColContainer>
     ),
+    grantableMember: (
+      <RightColContainer>
+        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
+        <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
+          승인
+        </StyledButton>
+      </RightColContainer>
+    ),
     paymentStatus: null,
   };
 };

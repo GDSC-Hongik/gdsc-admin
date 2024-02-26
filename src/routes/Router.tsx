@@ -2,6 +2,7 @@ import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "@/components/layout/common/Layout";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
+import GrantableMembersPage from "@/pages/GrantableMembersPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
 import PaymentStatusMembersPage from "@/pages/PaymentStatusMembersPage";
 import PendingMembersPage from "@/pages/PendingMembersPage";
@@ -22,6 +23,7 @@ const routes: RouteObject[] = [
         element: <AllMembersPage />,
       },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
+      { path: RoutePath.GrantableMembers, element: <GrantableMembersPage /> },
       { path: RoutePath.PaymentStatusMembers, element: <PaymentStatusMembersPage /> },
     ],
   },

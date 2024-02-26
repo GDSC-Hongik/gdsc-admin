@@ -1,38 +1,39 @@
-import { ChangeEvent, useState } from "react";
+import { useState, ChangeEvent } from "react";
 import styled from "@emotion/styled";
-import { Box, Button, Checkbox, Grid } from "@mui/material";
-import { PendingMemberInfoTableProps } from ".";
-import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
-import { pendingMemberTableWidthRatio } from "@/constants/table";
+import { Grid, Checkbox, Button, Box } from "@mui/material";
+import { GrantableMemberInfoTableProps } from ".";
+import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
+import { grantableMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
-import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
+import { GrantableMemberInfoType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
-type PendingMemberInfoTableBodyProps = {
-  dataList: PendingMemberInfoType[];
-  setSelectedMemberList: PendingMemberInfoTableProps["setSelectedMemberList"];
-  selectedMemberList: PendingMemberInfoTableProps["selectedMemberList"];
+type GrantableMemberInfoTableBodyProps = {
+  dataList: GrantableMemberInfoType[];
+  setSelectedMemberList: GrantableMemberInfoTableProps["setSelectedMemberList"];
+  selectedMemberList: GrantableMemberInfoTableProps["selectedMemberList"];
 };
 
-export default function PendingMemberInfoTableBody({
+export default function GrantableMemberInfoTableBody({
   dataList,
   setSelectedMemberList,
   selectedMemberList,
-}: PendingMemberInfoTableBodyProps) {
+}: GrantableMemberInfoTableBodyProps) {
   const [isMemberDetailInfoModalVisible, setIsMemberDetailInfoModalVisible] = useState(false);
-  const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] = useState<PendingMemberInfoType>();
+  const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] = useState<GrantableMemberInfoType>();
 
-  const filterTableInfo = (dataList: PendingMemberInfoType[]) => {
-    const newDataList: PendingMemberTableInfoType[] = [];
+  const filterTableInfo = (dataList: GrantableMemberInfoType[]) => {
+    const newDataList: Omit<GrantableMemberInfoType, "memberId">[] = [];
 
     dataList.forEach(data => {
       newDataList.push({
         studentId: data.studentId,
         name: data.name,
         phone: data.phone,
+        department: data.department,
+        email: data.email,
         discordUsername: data.discordUsername,
         nickname: data.nickname,
-        paymentStatus: data.requirement.paymentStatus === "PENDING" ? "미완료" : "완료",
       });
     });
 
@@ -41,8 +42,8 @@ export default function PendingMemberInfoTableBody({
 
   const getTitleWidthRatio = (title: string) => {
     return title === "studentId" || title === "name" || title === "phone"
-      ? pendingMemberTableWidthRatio["cell"][title]
-      : pendingMemberTableWidthRatio["cell"]["default"];
+      ? grantableMemberTableWidthRatio["cell"][title]
+      : grantableMemberTableWidthRatio["cell"]["default"];
   };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -87,6 +88,7 @@ export default function PendingMemberInfoTableBody({
       ))}
       {selectedMemberDetailInfo && (
         <MemberDetailInfoModal
+          variant={"grantableMember"}
           isModalVisible={isMemberDetailInfoModalVisible}
           handleCloseModal={handleCloseMemberDetailInfoModal}
           memberInfo={selectedMemberDetailInfo}

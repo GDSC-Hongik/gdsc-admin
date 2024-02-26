@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "@/components/common/Header";
-import PaymentStatusInfoTable from "@/components/common/PaymentStatusInfoTable";
+import PaymentStatusInfoTable from "@/components/common/Table/PaymentStatusInfoTable";
 import Title from "@/components/common/Title";
 
 export default function PaymentStatusMembersPage() {
