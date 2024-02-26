@@ -6,7 +6,7 @@ import GrantableMemberInfoTableHeader from "./GrantableMemberInfoTableHeader";
 import useGetGrantableMemberListQuery from "@/hooks/queries/useGetGrantableMemberListQuery";
 import { GrantableMemberInfoType } from "@/types/entities/member";
 
-type GrantableMemberInfoTableProps = {
+export type GrantableMemberInfoTableProps = {
   setSelectedMemberList: Dispatch<SetStateAction<GrantableMemberInfoType[]>>;
   selectedMemberList: GrantableMemberInfoType[];
   grantableMemberSearchType: string;

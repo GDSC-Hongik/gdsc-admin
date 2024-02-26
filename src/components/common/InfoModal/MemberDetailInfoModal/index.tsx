@@ -1,16 +1,18 @@
 import styled from "@emotion/styled";
 import { Box, Grid, Modal } from "@mui/material";
 import { theme } from "@/styles/theme";
-import { PendingMemberInfoType, StatusType } from "@/types/entities/member";
+import { GrantableMemberInfoType, ManagementVariant, PendingMemberInfoType, StatusType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/formatNullableValue";
 
 type MemberDetailInfoModalProps = {
+  variant: Extract<ManagementVariant, "pendingMember" | "grantableMember">
   isModalVisible: boolean;
   handleCloseModal: () => void;
-  memberInfo: PendingMemberInfoType;
+  memberInfo: PendingMemberInfoType | GrantableMemberInfoType;
 };
 
 export default function MemberDetailInfoModal({
+  variant = "pendingMember",
   isModalVisible,
   handleCloseModal,
   memberInfo,
@@ -20,18 +22,30 @@ export default function MemberDetailInfoModal({
   };
 
   const filterMemberDetailInfo = () => {
-    return {
-      ["이름"]: memberInfo.name,
-      ["학번"]: memberInfo.studentId,
-      ["전화번호"]: memberInfo.phone,
-      ["소속 학과"]: memberInfo.department,
-      ["이메일"]: memberInfo.email,
-      ["디스코드 사용자명"]: memberInfo.discordUsername,
-      ["디스코드 닉네임"]: memberInfo.nickname,
-      ["재학생 인증 여부"]: getStatus(memberInfo.requirement.univStatus),
-      ["디스코드 인증 여부"]: getStatus(memberInfo.requirement.discordStatus),
-      ["회비 납입 여부"]: getStatus(memberInfo.requirement.paymentStatus),
-    };
+    if (variant === 'pendingMember') {
+      return {
+        ["이름"]: memberInfo.name,
+        ["학번"]: memberInfo.studentId,
+        ["전화번호"]: memberInfo.phone,
+        ["소속 학과"]: memberInfo.department,
+        ["이메일"]: memberInfo.email,
+        ["디스코드 사용자명"]: memberInfo.discordUsername,
+        ["디스코드 닉네임"]: memberInfo.nickname,
+        ["재학생 인증 여부"]: getStatus((memberInfo as PendingMemberInfoType).requirement.univStatus),
+        ["디스코드 인증 여부"]: getStatus((memberInfo as PendingMemberInfoType).requirement.discordStatus),
+        ["회비 납입 여부"]: getStatus((memberInfo as PendingMemberInfoType).requirement.paymentStatus),
+      };
+    } else {
+      return {
+        ["이름"]: memberInfo.name,
+        ["학번"]: memberInfo.studentId,
+        ["전화번호"]: memberInfo.phone,
+        ["소속 학과"]: memberInfo.department,
+        ["이메일"]: memberInfo.email,
+        ["디스코드 사용자명"]: memberInfo.discordUsername,
+        ["디스코드 닉네임"]: memberInfo.nickname,
+      };
+    }
   };
 
   return (

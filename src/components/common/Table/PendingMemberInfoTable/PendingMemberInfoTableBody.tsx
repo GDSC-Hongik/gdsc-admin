@@ -87,6 +87,7 @@ export default function PendingMemberInfoTableBody({
       ))}
       {selectedMemberDetailInfo && (
         <MemberDetailInfoModal
+          variant={"pendingMember"}
           isModalVisible={isMemberDetailInfoModalVisible}
           handleCloseModal={handleCloseMemberDetailInfoModal}
           memberInfo={selectedMemberDetailInfo}

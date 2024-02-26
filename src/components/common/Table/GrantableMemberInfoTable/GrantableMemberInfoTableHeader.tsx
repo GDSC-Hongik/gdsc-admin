@@ -1,28 +1,52 @@
+import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Checkbox } from "@mui/material";
+import { GrantableMemberInfoTableProps } from ".";
 import { grantableMemberTableWidthRatio, grantableStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
+import { GrantableMemberInfoType } from "@/types/entities/member";
 
-export default function GrantableMemberInfoTableHeader() {
+type GrantableMemberInfoTableHeaderProps = {
+  dataList: GrantableMemberInfoType[];
+  selectedMemberList: GrantableMemberInfoTableProps["selectedMemberList"];
+  setSelectedMemberList: GrantableMemberInfoTableProps["setSelectedMemberList"];
+};
+
+export default function GrantableMemberInfoTableHeader({
+  dataList,
+  selectedMemberList,
+  setSelectedMemberList
+}: GrantableMemberInfoTableHeaderProps) {
   const getTitleWidthRatio = (title: string) => {
     return title === "학번" || title === "이름" || title === "전화번호"
       ? grantableMemberTableWidthRatio["title"][title]
       : grantableMemberTableWidthRatio["title"]["default"];
   };
 
+  const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setSelectedMemberList(dataList);
+    } else {
+      setSelectedMemberList([]);
+    }
+  };
+
+  const checked = selectedMemberList.length === dataList.length;
+
   return (
-    <Container container xs={12}>
-      {grantableStatusTableTitle.map(title => (
+    <Container container>
+      <Checkbox checked={checked} onChange={handleChangeCheckbox} />
+      {grantableStatusTableTitle.map((title, index) => (
         <Title
           item
           xs={getTitleWidthRatio(title.name)}
+          key={index}
           alignItems="center"
           justifyContent={"center"}
         >
           <Text>{title.name}</Text>
         </Title>
       ))}
-      <EmptyTitle />
     </Container>
   );
 }
