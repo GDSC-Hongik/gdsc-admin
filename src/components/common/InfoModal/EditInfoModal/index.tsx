@@ -41,7 +41,7 @@ export default function EditInfoModal({
       discordUsername: selectedMemberInfo.discordUsername ?? "",
       nickname: selectedMemberInfo.nickname ?? "",
     });
-  }, [selectedMemberInfo]);
+  }, [selectedMemberInfo, isModalVisible]);
 
   useEffect(() => {
     const isNameValid = memberInfo.name.trim() !== "";
