@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
+import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
 type FirstRowProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -36,10 +37,10 @@ export default function FirstRow({
         <StyledTextField
           size="small"
           name="phone"
-          value={phone}
+          value={formatPhoneNumber(phone)}
           onChange={handleChangeMemberInfo}
-          error={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(phone)}
-          helperText={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(phone) ? memberInfoValidation.phone.errorText : ''}
+          error={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))}
+          helperText={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone)) ? memberInfoValidation.phone.errorText : ''}
         />
       </ColContainer>
     </RowContainer>
