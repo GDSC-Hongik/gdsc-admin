@@ -12,7 +12,7 @@ import {
 import { HeaderProps } from ".";
 import {
   allMemberTableTitle,
-  paymentStatusTableSelectOptionList,
+  paymentStatusTableTitle,
   pendingMemberTableTitle,
 } from "@/constants/table";
 import { ManagementVariant } from "@/types/entities/member";
@@ -27,12 +27,15 @@ type HeaderLeftColProps<T extends ManagementVariant> = {
   setAllMemberSearchText: HeaderProps<T>["setAllMemberSearchText"];
   setPendingMemberSearchType: HeaderProps<T>["setPendingMemberSearchType"];
   setPendingMemberSearchText: HeaderProps<T>["setPendingMemberSearchText"];
+  setPaymentStatusMemberSearchType: HeaderProps<T>["setPaymentStatusMemberSearchType"];
+  setPaymentStatusMemberSearchText: HeaderProps<T>["setPaymentStatusMemberSearchText"];
 };
 
 const HeaderLeftElement = (
   variant: ManagementVariant,
-  setAllMemberSearchType: Dispatch<SetStateAction<string>>,
-  setPendingMemberSearchType: Dispatch<SetStateAction<string>>,
+  setAllMemberSearchType?: Dispatch<SetStateAction<string>>,
+  setPendingMemberSearchType?: Dispatch<SetStateAction<string>>,
+  setPaymentStatusMemberSearchType?: Dispatch<SetStateAction<string>>
 ) => {
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -41,10 +44,13 @@ const HeaderLeftElement = (
 
     if (variant === "allMember") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setAllMemberSearchType(allMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
+      setAllMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
     } else if (variant === "pendingMember") {
       setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
-      setPendingMemberSearchType(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
+      setPendingMemberSearchType?.(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
+    } else {
+      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+      setPaymentStatusMemberSearchType?.(paymentStatusTableTitle.slice(0, 5)[targetIndex]["type"]);
     }
   };
 
@@ -76,8 +82,8 @@ const HeaderLeftElement = (
     paymentStatus: (
       <FormContainer>
         <InputLabel>Type</InputLabel>
-        <Select>
-          {paymentStatusTableSelectOptionList.map(option => (
+        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
+          {pendingMemberTableTitle.slice(0, 5).map(option => (
             <MenuItem value={option.value} key={option.value}>
               {option.name}
             </MenuItem>
@@ -94,18 +100,22 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
   setAllMemberSearchText,
   setPendingMemberSearchType,
   setPendingMemberSearchText,
+  setPaymentStatusMemberSearchType,
+  setPaymentStatusMemberSearchText
 }: HeaderLeftColProps<T>) {
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
       setAllMemberSearchText?.(e.target.value);
     } else if (variant === "pendingMember") {
       setPendingMemberSearchText?.(e.target.value);
+    } else {
+      setPaymentStatusMemberSearchText?.(e.target.value);
     }
   };
 
   return (
     <Container>
-      {HeaderLeftElement(variant, setAllMemberSearchType!, setPendingMemberSearchType!)[variant]}
+      {HeaderLeftElement(variant, setAllMemberSearchType, setPendingMemberSearchType, setPaymentStatusMemberSearchType)[variant]}
       <TextField
         label="search"
         variant="outlined"
