@@ -12,7 +12,6 @@ import {
 import { HeaderProps } from ".";
 import {
   allMemberTableTitle,
-  paymentStatusTableSelectOptionList,
   paymentStatusTableTitle,
   pendingMemberTableTitle,
 } from "@/constants/table";
