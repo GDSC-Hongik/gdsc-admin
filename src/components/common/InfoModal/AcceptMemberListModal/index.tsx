@@ -152,7 +152,9 @@ const BodyCellRow = styled(Grid)({
 });
 
 const BodyCell = styled(Grid)({
-  ...theme.typo.title1,
+  fontSize: "12px",
+  fontWeight: "400",
+  lineHeight: "21px",
 });
 
 const StyledButton = styled(Button)({
