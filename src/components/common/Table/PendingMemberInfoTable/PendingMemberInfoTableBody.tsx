@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
 import { PendingMemberInfoTableProps } from ".";
-import MemberDetailInfoModal from "../InfoModal/MemberDetailInfoModal";
+import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
 import { pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";

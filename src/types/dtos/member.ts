@@ -1,5 +1,6 @@
 import {
   AllMemberInfoType,
+  GrantableMemberInfoType,
   PaymentStatusInfoType,
   PendingMemberInfoType,
   StatusType,
@@ -15,6 +16,8 @@ export type GrantPendingMemberDtoType = {
   grantedMembers: string[];
   notGrantedMembers: string[];
 };
+
+export type GrantableMemberDtoType = GrantableMemberInfoType[];
 
 export type PaymentStatusMemberListDtoType = PaymentStatusInfoType[];
 export type MemberPaymentStatusDtoType = StatusType;

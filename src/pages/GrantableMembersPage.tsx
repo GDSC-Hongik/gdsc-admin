@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "@/components/common/Header";
+import GrantableMemberInfoTable from "@/components/common/Table/GrantableMemberInfoTable";
 import Title from "@/components/common/Title";
 import { GrantableMemberInfoType } from "@/types/entities/member";
 
@@ -17,6 +18,12 @@ export default function GrantableMembersPage() {
         selectedMemberList={selectedMemberList}
         setGrantableMemberSearchType={setGrantableMemberSearchType}
         setGrantableMemberSearchText={setGrantableMemberSearchText}
+      />
+      <GrantableMemberInfoTable
+        setSelectedMemberList={setSelectedMemberList}
+        selectedMemberList={selectedMemberList}
+        grantableMemberSearchType={grantableMemberSearchType}
+        grantableMemberSearchText={grantableMemberSearchText}
       />
     </>
   )

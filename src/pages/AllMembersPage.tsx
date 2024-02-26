@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AllMemberInfoTable from "@/components/common/AllMemberInfoTable";
+import AllMemberInfoTable from "@/components/common/Table/AllMemberInfoTable";
 import Header from "@/components/common/Header";
 import Title from "@/components/common/Title";
 
