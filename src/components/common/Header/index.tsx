@@ -2,20 +2,26 @@ import { Dispatch, SetStateAction } from "react";
 import { Stack, styled } from "@mui/material";
 import HeaderLeftCol from "./HeaderLeftCol";
 import HeaderRightCol from "./HeaderRightCol";
-import { ManagementVariant, PendingMemberInfoType } from "@/types/entities/member";
+import { GrantableMemberInfoType, ManagementVariant, PendingMemberInfoType } from "@/types/entities/member";
 
 const mockCreatedDate = new Date();
 
 export type HeaderProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
-  selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" ? number : undefined;
-  selectedMemberList?: T extends "pendingMember" ? PendingMemberInfoType[] : undefined;
+  selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" | "grantableMember" ? number : undefined;
+  selectedMemberList?: T extends "pendingMember" ? PendingMemberInfoType[] : T extends "grantableMember" ? GrantableMemberInfoType[] : undefined;
   setAllMemberSearchType?: T extends "allMember" ? Dispatch<SetStateAction<string>> : undefined;
   setAllMemberSearchText?: T extends "allMember" ? Dispatch<SetStateAction<string>> : undefined;
   setPendingMemberSearchType?: T extends "pendingMember"
     ? Dispatch<SetStateAction<string>>
     : undefined;
   setPendingMemberSearchText?: T extends "pendingMember"
+    ? Dispatch<SetStateAction<string>>
+  : undefined;
+  setGrantableMemberSearchType?: T extends "grantableMember"
+    ? Dispatch<SetStateAction<string>>
+  : undefined;
+  setGrantableMemberSearchText?: T extends "grantableMember"
     ? Dispatch<SetStateAction<string>>
   : undefined;
   setPaymentStatusMemberSearchType?: T extends "paymentStatus"
@@ -34,6 +40,8 @@ export default function Header<T extends ManagementVariant>({
   setAllMemberSearchText,
   setPendingMemberSearchType,
   setPendingMemberSearchText,
+  setGrantableMemberSearchType,
+  setGrantableMemberSearchText,
   setPaymentStatusMemberSearchType,
   setPaymentStatusMemberSearchText
 }: HeaderProps<T>) {
@@ -45,6 +53,8 @@ export default function Header<T extends ManagementVariant>({
         setAllMemberSearchText={setAllMemberSearchText}
         setPendingMemberSearchType={setPendingMemberSearchType}
         setPendingMemberSearchText={setPendingMemberSearchText}
+        setGrantableMemberSearchType={setGrantableMemberSearchType}
+        setGrantableMemberSearchText={setGrantableMemberSearchText}
         setPaymentStatusMemberSearchType={setPaymentStatusMemberSearchType}
         setPaymentStatusMemberSearchText={setPaymentStatusMemberSearchText}
       />

@@ -1,5 +1,23 @@
+import { useState } from "react";
+import Header from "@/components/common/Header";
+import Title from "@/components/common/Title";
+import { GrantableMemberInfoType } from "@/types/entities/member";
+
 export default function GrantableMembersPage() {
+  const [selectedMemberList, setSelectedMemberList] = useState<GrantableMemberInfoType[]>([]);
+  const [grantableMemberSearchType, setGrantableMemberSearchType] = useState("");
+  const [grantableMemberSearchText, setGrantableMemberSearchText] = useState("");
+
   return (
-    <div>승인 가능 멤버 관리 페이지</div>
+    <>
+      <Title variant={"grantableMember"} descriptionText={"멤버 관리 설명"} />
+      <Header
+        variant={"grantableMember"}
+        selectedMemberCount={selectedMemberList.length}
+        selectedMemberList={selectedMemberList}
+        setGrantableMemberSearchType={setGrantableMemberSearchType}
+        setGrantableMemberSearchText={setGrantableMemberSearchText}
+      />
+    </>
   )
 }
