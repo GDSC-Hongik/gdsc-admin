@@ -112,6 +112,10 @@ export const pendingMemberModalWidthRatio = {
   },
 };
 
+export const grantableStatusTableTitle = allMemberTableTitle;
+
+export const grantableMemberTableWidthRatio = allMemberTableWidthRatio;
+
 export const paymentStatusTableSelectOptionList = [
   {
     value: 1,
