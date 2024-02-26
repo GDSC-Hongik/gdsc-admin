@@ -42,7 +42,7 @@ export default function SecondRow({ department, email, handleChangeMemberInfo }:
 const RowContainer = styled.div({
   display: "flex",
   gap: "19px",
-  marginBottom: "40px",
+  marginBottom: "60px",
 });
 
 const ColContainer = styled.div({
@@ -55,9 +55,8 @@ const ColContainer = styled.div({
 
 const Divider = styled.div({
   width: "100%",
-  height: "1px",
-  backgroundColor: theme.palette.gray6,
   marginBottom: "18px",
+  border: `1px solid ${theme.palette.gray6}`,
 });
 
 const StyledText = styled(Box)({
