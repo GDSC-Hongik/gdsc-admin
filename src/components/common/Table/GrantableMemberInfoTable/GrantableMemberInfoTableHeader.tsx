@@ -65,7 +65,3 @@ const Text = styled(Box)({
   maxHeight: "52px",
   color: theme.palette.gray2,
 });
-
-const EmptyTitle = styled.div({
-  flex: 1,
-});
