@@ -81,6 +81,7 @@ export default function EditInfoModal({
 
 const ModalContentContainer = styled(Box)({
   width: "60%",
+  height: "520px",
   backgroundColor: "white",
   position: "absolute",
   top: "50%",

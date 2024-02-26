@@ -42,7 +42,7 @@ export default function ThirdRow({
 const RowContainer = styled.div({
   display: "flex",
   gap: "19px",
-  marginBottom: "64px",
+  marginBottom: "40px",
 });
 
 const ColContainer = styled.div({
@@ -50,6 +50,7 @@ const ColContainer = styled.div({
   flexDirection: "column",
   flex: 1,
   alignItems: "flex-start",
+  height: "100px",
 });
 
 const StyledText = styled(Box)({
