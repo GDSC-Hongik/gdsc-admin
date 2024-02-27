@@ -1,13 +1,31 @@
-import useTokenStore from "@/store/token";
+import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
+
+const enum CookieKeys {
+  AccessToken = "accessToken",
+  RefreshToken = "refreshToken",
+}
 
 export default function useAuthStorage() {
-  const { token, setToken, clearToken } = useTokenStore();
+  const accessToken = getCookie(CookieKeys.AccessToken);
+  const refreshToken = getCookie(CookieKeys.RefreshToken);
 
-  const isEmptyToken = token?.length === 0;
-
-  function setAuthData({ accessToken }: { accessToken: string | null }) {
-    accessToken ? setToken(accessToken) : clearToken();
+  function clearAuthData() {
+    deleteCookie(CookieKeys.AccessToken);
+    deleteCookie(CookieKeys.RefreshToken);
   }
 
-  return { token, isEmptyToken, setAuthData, clearToken };
+  function setAuthData({
+    accessToken,
+    refreshToken,
+  }: {
+    accessToken: string | null;
+    refreshToken: string | null;
+  }) {
+    if (accessToken && refreshToken) {
+      setCookie({ key: CookieKeys.AccessToken, value: accessToken });
+      setCookie({ key: CookieKeys.RefreshToken, value: refreshToken });
+    }
+  }
+
+  return { accessToken, refreshToken, setAuthData, clearAuthData };
 }
