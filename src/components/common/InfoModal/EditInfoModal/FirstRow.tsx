@@ -50,7 +50,7 @@ export default function FirstRow({
 const RowContainer = styled.div({
   display: "flex",
   gap: "19px",
-  marginBottom: "40px",
+  marginBottom: "20px",
 });
 
 const ColContainer = styled.div({

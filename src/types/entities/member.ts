@@ -5,7 +5,10 @@ export type AllMemberInfoType = {
   studentId: string;
   name: string;
   phone: string;
-  department: string;
+  department: {
+    code: string;
+    name: string;
+  };
   email: string;
   discordUsername: string;
   nickname: string;

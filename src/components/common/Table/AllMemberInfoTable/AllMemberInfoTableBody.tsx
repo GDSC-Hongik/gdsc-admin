@@ -5,8 +5,24 @@ import EditInfoModal from "../../InfoModal/EditInfoModal";
 import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import { theme } from "@/styles/theme";
-import { AllMemberInfoType } from "@/types/entities/member";
+import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
+
+const mockData = [
+  {
+    memberId: 0,
+    studentId: "",
+    name: "",
+    phone: "",
+    department: {
+      code: "",
+      name: "",
+    },
+    email: "",
+    discordUsername: "",
+    nickname: "",
+  },
+];
 
 type MemberInfoTableBodyProps = {
   dataList: AllMemberInfoType[];
@@ -14,7 +30,8 @@ type MemberInfoTableBodyProps = {
 
 export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoType>();
+  const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoStateType>();
+  const [departmentSearchText, setDepartmentSearchText] = useState("");
 
   const deleteMemberMutation = useDeleteMemberMutation();
 
@@ -27,7 +44,7 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
 
   const handleClickEditMemberInfoButton = (index: number) => {
-    setSelectedMemberInfo(dataList[index]);
+    setSelectedMemberInfo(mockData[index]);
     handleModalVisible(true);
   };
 
@@ -37,13 +54,15 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
 
   return (
     <Container container direction={"column"}>
-      {dataList.map((row, rowIndex) => (
+      {mockData.map((row, rowIndex) => (
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
               key !== "memberId" && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
-                  <Text>{formatNullableValue(value)}</Text>
+                  <Text>
+                    {(value as { code: string; name: string }).name ?? formatNullableValue(value)}
+                  </Text>
                 </TextContainer>
               ),
           )}
@@ -66,6 +85,8 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
           isModalVisible={isEditModalVisible}
           handleCloseModal={() => handleModalVisible(false)}
           selectedMemberInfo={selectedMemberInfo}
+          setDepartmentSearchText={setDepartmentSearchText}
+          departmentSearchText={departmentSearchText}
         />
       )}
     </Container>

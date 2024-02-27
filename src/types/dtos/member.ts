@@ -7,6 +7,10 @@ import {
 } from "@/types/entities/member";
 
 export type AllMemberListDtoType = AllMemberInfoType[];
+export type DepartmentListDtoType = {
+  code: string;
+  name: string;
+};
 
 export type PendingMemberListDtoType = PendingMemberInfoType[];
 export type GrantPendingMemberRequestBodyDtoType = {

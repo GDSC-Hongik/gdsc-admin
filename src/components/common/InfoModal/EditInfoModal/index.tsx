@@ -1,30 +1,37 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Modal, Box, Button } from "@mui/material";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
 import { theme } from "@/styles/theme";
-import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
+import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
 type EditInfoModalProps = {
   isModalVisible: boolean;
   handleCloseModal: () => void;
-  selectedMemberInfo: AllMemberInfoType;
+  selectedMemberInfo: AllMemberInfoStateType;
+  setDepartmentSearchText: Dispatch<SetStateAction<string>>;
+  departmentSearchText: string;
 };
 
 export default function EditInfoModal({
   isModalVisible,
   handleCloseModal,
   selectedMemberInfo,
+  setDepartmentSearchText,
+  departmentSearchText,
 }: EditInfoModalProps) {
   const [memberInfo, setMemberInfo] = useState<AllMemberInfoStateType>({
     name: "",
     studentId: "",
     phone: "",
-    department: "",
+    department: {
+      code: "",
+      name: "",
+    },
     email: "",
     discordUsername: "",
     nickname: "",
@@ -36,7 +43,10 @@ export default function EditInfoModal({
       name: selectedMemberInfo.name ?? "",
       studentId: selectedMemberInfo.studentId ?? "",
       phone: selectedMemberInfo.phone ?? "",
-      department: selectedMemberInfo.department ?? "",
+      department: selectedMemberInfo.department ?? {
+        code: "",
+        name: "",
+      },
       email: selectedMemberInfo.email ?? "",
       discordUsername: selectedMemberInfo.discordUsername ?? "",
       nickname: selectedMemberInfo.nickname ?? "",
@@ -45,14 +55,30 @@ export default function EditInfoModal({
 
   useEffect(() => {
     const isNameValid = memberInfo.name.trim() !== "";
-    const isStudentIdValid = memberInfo.studentId.trim() !== "" && RegExp(memberInfoValidation.studentId.regExp).test(memberInfo.studentId);
-    const isPhoneValid = memberInfo.phone.trim() !== "" && RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(memberInfo.phone));
-    const isDepartmentValid = memberInfo.department.trim() !== "";
-    const isEmailValid = memberInfo.email.trim() !== "" && RegExp(memberInfoValidation.email.regExp).test(memberInfo.email);
+    const isStudentIdValid =
+      memberInfo.studentId.trim() !== "" &&
+      RegExp(memberInfoValidation.studentId.regExp).test(memberInfo.studentId);
+    const isPhoneValid =
+      memberInfo.phone.trim() !== "" &&
+      RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(memberInfo.phone));
+    const isDepartmentValid = memberInfo.department.code?.trim() !== "";
+    const isEmailValid =
+      memberInfo.email.trim() !== "" &&
+      RegExp(memberInfoValidation.email.regExp).test(memberInfo.email);
     const isDiscordUsernameValid = memberInfo.discordUsername.trim() !== "";
-    const isNicknameValid = memberInfo.nickname.trim() !== "" && RegExp(memberInfoValidation.nickname.regExp).test(memberInfo.nickname);
+    const isNicknameValid =
+      memberInfo.nickname.trim() !== "" &&
+      RegExp(memberInfoValidation.nickname.regExp).test(memberInfo.nickname);
 
-    const isSaveButtonDisabled = !(isNameValid && isStudentIdValid && isPhoneValid && isDepartmentValid && isEmailValid && isDiscordUsernameValid && isNicknameValid);
+    const isSaveButtonDisabled = !(
+      isNameValid &&
+      isStudentIdValid &&
+      isPhoneValid &&
+      isDepartmentValid &&
+      isEmailValid &&
+      isDiscordUsernameValid &&
+      isNicknameValid
+    );
 
     setIsButtonDisabled(isSaveButtonDisabled);
   }, [memberInfo]);
@@ -60,13 +86,17 @@ export default function EditInfoModal({
   const handleChangeMemberInfo = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    if (name === "department") {
+      setDepartmentSearchText(value);
+    }
+
     setMemberInfo(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const { name, studentId, phone, department, email, discordUsername, nickname } = memberInfo;
+  const { name, studentId, phone, email, discordUsername, nickname } = memberInfo;
 
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>
@@ -79,9 +109,11 @@ export default function EditInfoModal({
           handleChangeMemberInfo={handleChangeMemberInfo}
         />
         <SecondRow
-          department={department}
           email={email}
+          setMemberInfo={setMemberInfo}
           handleChangeMemberInfo={handleChangeMemberInfo}
+          departmentSearchText={departmentSearchText}
+          setDepartmentSearchText={setDepartmentSearchText}
         />
         <ThirdRow
           discordUsername={discordUsername}

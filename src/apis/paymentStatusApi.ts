@@ -10,13 +10,13 @@ export const paymentStatusApi = {
     searchText: string
   ): Promise<PaymentStatusMemberListDtoType> => {
     if (searchText) {
-      const searchUrl = `/members/payment?${searchType}=${searchText}&page=${page}&size=${size}`;
+      const searchUrl = `admin/members/payment?${searchType}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
       return response.data.content;
     }
 
-    const commonUrl = `/members/payment?page=${page}&size=${size}`
+    const commonUrl = `admin/members/payment?page=${page}&size=${size}`
 
     const response = await apiClient.get(commonUrl);
     return response.data.content;
@@ -26,7 +26,7 @@ export const paymentStatusApi = {
     memberId: number;
     paymentStatus: StatusType;
   }): Promise<MemberPaymentStatusDtoType> => {
-    const response = await apiClient.put(`/members/payment/${requestObj.memberId}`, {
+    const response = await apiClient.put(`admin/members/payment/${requestObj.memberId}`, {
       status: requestObj.paymentStatus,
     });
     return response.data.status;

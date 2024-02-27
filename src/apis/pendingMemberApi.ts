@@ -13,13 +13,13 @@ export const pendingMemberApi = {
     searchText: string,
   ): Promise<PendingMemberListDtoType> => {
     if (searchText) {
-      const searchUrl = `/members/pending?${searchType}=${searchText}&page=${page}&size=${size}`;
+      const searchUrl = `admin/members/pending?${searchType}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
       return response.data.content;
     }
 
-    const commonUrl = `/members/pending?page=${page}&size=${size}`;
+    const commonUrl = `admin/members/pending?page=${page}&size=${size}`;
 
     const response = await apiClient.get(commonUrl);
     return response.data.content;
@@ -28,7 +28,7 @@ export const pendingMemberApi = {
   grantPendingMember: async (
     memberIdList: GrantPendingMemberRequestBodyDtoType,
   ): Promise<GrantPendingMemberDtoType> => {
-    const response = await apiClient.put(`/members/grant`, memberIdList);
+    const response = await apiClient.put(`admin/members/grant`, memberIdList);
     return response.data;
   },
 };
