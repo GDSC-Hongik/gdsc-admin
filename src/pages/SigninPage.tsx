@@ -1,13 +1,13 @@
 import { Container, Stack } from "@mui/material";
 import LogoIcon from "@/assets/logo.svg?react";
 import { GitHubButton } from "@/components/GitHubButton";
-import { BASE_URL } from "@/environment";
+import RoutePath from "@/routes/routePath";
 
 /** 깃허브 로그인 및 가입하기 */
 export default function SigninPage() {
   const handleClick = () => {
     setTimeout(function () {
-      document.location.href = `${BASE_URL}/oauth2/authorization/github`;
+      document.location.href = `${RoutePath.GithubLoginRedirect}?redirect-uri=${window.location.origin}`;
     }, 250);
   };
 
