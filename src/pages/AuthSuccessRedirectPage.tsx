@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
-import useAuthSuccessPage from "@/hooks/useAuthSuccessRedirectPage";
+import useAuthSuccessRedirectPage from "@/hooks/useAuthSuccessRedirectPage";
 import RoutePath from "@/routes/routePath";
 
 export default function AuthSuccessRedirectPage() {
-  const { isSuccess } = useAuthSuccessPage();
+  const { isSuccess } = useAuthSuccessRedirectPage();
 
-  return <Navigate to={isSuccess ? RoutePath.Index : RoutePath.AuthorizedError} />;
+  return <Navigate to={isSuccess ? RoutePath.Index : RoutePath.Signin} />;
 }

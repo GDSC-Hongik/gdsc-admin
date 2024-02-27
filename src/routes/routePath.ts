@@ -7,8 +7,7 @@ const RoutePath = {
 
   Signin: "/sign-in",
 
-  AuthorizedSuccess: "/authorized-success",
-  AuthorizedError: "/authorized-error",
+  AuthorizedSuccess: "/social-login/redirect",
 
   Error: "/error",
 } as const;
