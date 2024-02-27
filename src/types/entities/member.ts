@@ -14,7 +14,7 @@ export type AllMemberInfoType = {
   nickname: string;
 };
 
-export type AllMemberInfoStateType = Omit<AllMemberInfoType, "memberId">;
+export type AllMemberInfoStateType = AllMemberInfoType;
 
 export type StatusType = "PENDING" | "VERIFIED";
 

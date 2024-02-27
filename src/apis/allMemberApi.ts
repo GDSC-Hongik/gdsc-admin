@@ -27,7 +27,25 @@ export const allMemberApi = {
   },
 
   searchDepartmentList: async (searchText: string): Promise<DepartmentListDtoType[]> => {
-    const response = await apiClient.get(`common/members/departments/search?department=${searchText}`);
+    const response = await apiClient.get(
+      `common/members/departments/search?department=${searchText}`,
+    );
     return response.data;
-  }
+  },
+
+  editMemberInfo: async (
+    memberId: number,
+    body: {
+      studentId: string;
+      name: string;
+      phone: string;
+      department: string;
+      email: string;
+      discordUsername: string;
+      nickname: string;
+    },
+  ) => {
+    const response = await apiClient.put(`admin/members/${memberId}`, body);
+    return response.data;
+  },
 };

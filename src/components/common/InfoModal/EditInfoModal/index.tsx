@@ -4,6 +4,7 @@ import { Modal, Box, Button } from "@mui/material";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
+import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
@@ -26,6 +27,7 @@ export default function EditInfoModal({
 }: EditInfoModalProps) {
   const [memberInfo, setMemberInfo] = useState<AllMemberInfoStateType>({
     name: "",
+    memberId: 0,
     studentId: "",
     phone: "",
     department: {
@@ -40,6 +42,7 @@ export default function EditInfoModal({
 
   useEffect(() => {
     setMemberInfo({
+      memberId: selectedMemberInfo.memberId ?? 0,
       name: selectedMemberInfo.name ?? "",
       studentId: selectedMemberInfo.studentId ?? "",
       phone: selectedMemberInfo.phone ?? "",
@@ -96,7 +99,18 @@ export default function EditInfoModal({
     }));
   };
 
-  const { name, studentId, phone, email, discordUsername, nickname } = memberInfo;
+  const { name, studentId, phone, email, discordUsername, nickname, memberId, department } =
+    memberInfo;
+
+  const editMemberMutation = useEditMemberInfoMutation(memberId, {
+    studentId,
+    name,
+    phone,
+    department: department.code,
+    email: email,
+    discordUsername: discordUsername,
+    nickname: nickname,
+  });
 
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>
@@ -120,7 +134,14 @@ export default function EditInfoModal({
           nickname={nickname}
           handleChangeMemberInfo={handleChangeMemberInfo}
         />
-        <StyledButton variant={"contained"} size="large" disabled={isButtonDisabled}>
+        <StyledButton
+          variant={"contained"}
+          size="large"
+          disabled={isButtonDisabled}
+          onClick={() => {
+            editMemberMutation.mutate();
+          }}
+        >
           저장하기
         </StyledButton>
       </ModalContentContainer>

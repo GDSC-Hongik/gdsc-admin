@@ -10,7 +10,7 @@ import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 const mockData = [
   {
-    memberId: 0,
+    memberId: 12,
     studentId: "",
     name: "",
     phone: "",
