@@ -67,6 +67,7 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
       {selectedMemberInfo && (
         <EditInfoModal
           isModalVisible={isEditModalVisible}
+          setIsModalVisible={setIsEditModalVisible}
           handleCloseModal={() => handleModalVisible(false)}
           selectedMemberInfo={selectedMemberInfo}
           setDepartmentSearchText={setDepartmentSearchText}

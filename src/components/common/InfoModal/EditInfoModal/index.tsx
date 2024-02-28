@@ -13,6 +13,7 @@ import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
 type EditInfoModalProps = {
   isModalVisible: boolean;
+  setIsModalVisible: Dispatch<SetStateAction<boolean>>;
   handleCloseModal: () => void;
   selectedMemberInfo: AllMemberInfoStateType;
   setDepartmentSearchText: Dispatch<SetStateAction<string>>;
@@ -21,6 +22,7 @@ type EditInfoModalProps = {
 
 export default function EditInfoModal({
   isModalVisible,
+  setIsModalVisible,
   handleCloseModal,
   selectedMemberInfo,
   setDepartmentSearchText,
@@ -115,12 +117,12 @@ export default function EditInfoModal({
   const editMemberMutation = useEditMemberInfoMutation(memberId, {
     studentId,
     name,
-    phone,
+    phone: formatPhoneNumber(phone),
     department: department.code,
     email: email,
     discordUsername: discordUsername,
     nickname: nickname,
-  });
+  }, () => setIsModalVisible(false));
 
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>
