@@ -16,7 +16,7 @@ export default function ThirdRow({
   return (
     <RowContainer>
       <ColContainer>
-        <StyledText>디스코드 핸들명</StyledText>
+        <StyledText>디스코드 사용자명</StyledText>
         <StyledTextField
           size="small"
           name="discordUsername"
