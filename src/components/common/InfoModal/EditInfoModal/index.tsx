@@ -55,7 +55,7 @@ export default function EditInfoModal({
       discordUsername: selectedMemberInfo.discordUsername ?? "",
       nickname: selectedMemberInfo.nickname ?? "",
     });
-    setDepartmentSearchText(selectedMemberInfo.department.name);
+    setDepartmentSearchText(selectedMemberInfo.department.name ?? "");
   }, [selectedMemberInfo, isModalVisible, setDepartmentSearchText]);
 
   useEffect(() => {
