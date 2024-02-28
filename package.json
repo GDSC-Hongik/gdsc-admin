@@ -29,7 +29,6 @@
     "react-router-dom": "^6.21.3",
     "react-toastify": "^10.0.4",
     "typescript": "^4.9.4",
-    "vite-plugin-mkcert": "^1.17.4",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
