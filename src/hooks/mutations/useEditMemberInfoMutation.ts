@@ -25,8 +25,8 @@ export default function useEditMemberInfoMutation(
       onSuccessCallback();
       toast.success("수정 완료되었습니다.")
     },
-    onError: () => {
-      toast.error("오류가 발생했습니다.");
+    onError: (error: any) => {
+      toast.error(error.response.data.errorMessage)
     },
   });
 }

@@ -20,8 +20,8 @@ export default function useGrantMemberMutation() {
         toast.error(`${formatNullableValue(member)}님의 승인이 실패하였습니다.`);
       });
     },
-    onError: () => {
-      toast.error("오류가 발생했습니다.");
+    onError: (error: any) => {
+      toast.error(error.response.data.errorMessage)
     },
   });
 }
