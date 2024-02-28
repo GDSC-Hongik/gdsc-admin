@@ -74,9 +74,9 @@ export default function GrantableMemberInfoTableBody({
       {filterTableInfo(dataList).map((row, rowIndex) => (
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
-          {Object.entries(row).map(([key, value], index) => (
+          {Object.entries(row).map(([key, value], index) => key !== 'requirement' && (
             <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
-              <Text>{formatNullableValue(value)}</Text>
+              <Text>{(value as { code: string; name: string })?.name ?? formatNullableValue(value)}</Text>
             </TextContainer>
           ))}
           <ButtonContainer>
