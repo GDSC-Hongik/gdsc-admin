@@ -149,7 +149,7 @@ export const paymentStatusTableTitle = [
   },
   {
     value: "4",
-    name: "디스코드 핸들명",
+    name: "디스코드 사용자명",
     type: "discordUsername"
   },
   {
