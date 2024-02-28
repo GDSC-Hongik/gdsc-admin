@@ -44,7 +44,16 @@ export type PendingMemberTableInfoType = {
   paymentStatus: "완료" | "미완료";
 };
 
-export type GrantableMemberInfoType = AllMemberInfoType;
+export type GrantableMemberInfoType = {
+  memberId: number;
+  studentId: string;
+  name: string;
+  phone: string;
+  department: string;
+  email: string;
+  discordUsername: string;
+  nickname: string;
+};;
 
 export type PaymentStatusInfoType = {
   memberId: number;
