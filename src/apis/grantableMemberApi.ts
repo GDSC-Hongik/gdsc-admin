@@ -9,12 +9,12 @@ export const grantableMemberApi = {
     searchText: string
   ): Promise<GrantableMemberDtoType> => {
     if (searchText) {
-      const searchUrl = `/members/grantable?${searchType}=${searchText}&page=${page}&size=${size}`;
+      const searchUrl = `admin/members/grantable?${searchType}=${searchText}&page=${page}&size=${size}`;
       const response = await apiClient.get(searchUrl);
       return response.data.content;
     }
 
-    const commonUrl = `/members/grantable?page=${page}&size=${size}`;
+    const commonUrl = `admin/members/grantable?page=${page}&size=${size}`;
     const response = await apiClient.get(commonUrl);
     return response.data.content;
   },

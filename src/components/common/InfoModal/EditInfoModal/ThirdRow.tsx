@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { AllMemberInfoStateType } from "@/types/entities/member";
+import { memberInfoValidation } from "@/utils/validation";
 
 type ThirdRowProps = Pick<AllMemberInfoStateType, "discordUsername" | "nickname"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -15,7 +16,7 @@ export default function ThirdRow({
   return (
     <RowContainer>
       <ColContainer>
-        <StyledText>디스코드 핸들명</StyledText>
+        <StyledText>디스코드 사용자명</StyledText>
         <StyledTextField
           size="small"
           name="discordUsername"
@@ -30,6 +31,8 @@ export default function ThirdRow({
           name="nickname"
           value={nickname}
           onChange={handleChangeMemberInfo}
+          error={nickname?.length > 0 && !RegExp(memberInfoValidation.nickname.regExp).test(nickname)}
+          helperText={nickname?.length > 0 && !RegExp(memberInfoValidation.nickname.regExp).test(nickname) ? memberInfoValidation.nickname.errorText : ''}
         />
       </ColContainer>
     </RowContainer>
@@ -39,7 +42,7 @@ export default function ThirdRow({
 const RowContainer = styled.div({
   display: "flex",
   gap: "19px",
-  marginBottom: "64px",
+  marginBottom: "20px",
 });
 
 const ColContainer = styled.div({
@@ -47,6 +50,7 @@ const ColContainer = styled.div({
   flexDirection: "column",
   flex: 1,
   alignItems: "flex-start",
+  height: "100px",
 });
 
 const StyledText = styled(Box)({

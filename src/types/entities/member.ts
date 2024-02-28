@@ -5,13 +5,16 @@ export type AllMemberInfoType = {
   studentId: string;
   name: string;
   phone: string;
-  department: string;
+  department: {
+    code: string;
+    name: string;
+  };
   email: string;
   discordUsername: string;
   nickname: string;
 };
 
-export type AllMemberInfoStateType = Omit<AllMemberInfoType, "memberId">;
+export type AllMemberInfoStateType = AllMemberInfoType;
 
 export type StatusType = "PENDING" | "VERIFIED";
 
@@ -20,7 +23,10 @@ export type PendingMemberInfoType = {
   studentId: string;
   name: string;
   phone: string;
-  department: string;
+  department: {
+    code: string;
+    name: string;
+  };
   email: string;
   discordUsername: string;
   nickname: string;
@@ -28,7 +34,7 @@ export type PendingMemberInfoType = {
     univStatus: StatusType;
     discordStatus: StatusType;
     paymentStatus: StatusType;
-    univPending: boolean;
+    bevyStatus: StatusType;
   };
 };
 
@@ -43,12 +49,4 @@ export type PendingMemberTableInfoType = {
 
 export type GrantableMemberInfoType = AllMemberInfoType;
 
-export type PaymentStatusInfoType = {
-  memberId: number;
-  studentId: string;
-  name: string;
-  phone: string;
-  discordUsername: string;
-  nickname: string;
-  paymentStatus: StatusType;
-};
+export type PaymentStatusInfoType = PendingMemberInfoType;

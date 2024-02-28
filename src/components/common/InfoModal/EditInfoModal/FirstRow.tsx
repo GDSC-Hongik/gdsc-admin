@@ -2,6 +2,8 @@ import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import { AllMemberInfoStateType } from "@/types/entities/member";
+import { memberInfoValidation } from "@/utils/validation";
+import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
 type FirstRowProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -26,6 +28,8 @@ export default function FirstRow({
           name="studentId"
           value={studentId}
           onChange={handleChangeMemberInfo}
+          error={studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)}
+          helperText={studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId) ? memberInfoValidation.studentId.errorText : ''}
         />
       </ColContainer>
       <ColContainer>
@@ -33,8 +37,10 @@ export default function FirstRow({
         <StyledTextField
           size="small"
           name="phone"
-          value={phone}
+          value={formatPhoneNumber(phone)}
           onChange={handleChangeMemberInfo}
+          error={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))}
+          helperText={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone)) ? memberInfoValidation.phone.errorText : ''}
         />
       </ColContainer>
     </RowContainer>
@@ -44,7 +50,7 @@ export default function FirstRow({
 const RowContainer = styled.div({
   display: "flex",
   gap: "19px",
-  marginBottom: "48px",
+  marginBottom: "20px",
 });
 
 const ColContainer = styled.div({
@@ -52,6 +58,7 @@ const ColContainer = styled.div({
   flexDirection: "column",
   flex: 1,
   alignItems: "flex-start",
+  height: "100px",
 });
 
 const StyledText = styled(Box)({

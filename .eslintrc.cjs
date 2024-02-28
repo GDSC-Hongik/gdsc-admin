@@ -63,6 +63,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { ignoreRestSiblings: true }],
+    "@typescript-eslint/no-explicit-any": "off",
     "cypress/no-unnecessary-waiting": "error",
     "cypress/assertion-before-screenshot": "warn",
     "cypress/no-force": "warn",

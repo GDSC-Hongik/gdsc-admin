@@ -4,7 +4,7 @@ import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@/const
 import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
 import { theme } from "@/styles/theme";
 import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
-import { formatNullableValue } from "@/utils/formatNullableValue";
+import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PaymentStatusInfoBodyProps = {
   dataList: PaymentStatusInfoType[];
@@ -23,13 +23,33 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
     updateMemberPaymentStatusMutation.mutate({ memberId, paymentStatus });
   };
 
+  const filterTableInfo = (dataList: PaymentStatusInfoType[]) => {
+    const newDataList: (Omit<PaymentStatusInfoType, "department" | "requirement" | "email"> & {
+      paymentStatus: StatusType
+    })[] = [];
+
+    dataList.forEach(data => {
+      newDataList.push({
+        memberId: data.memberId,
+        studentId: data.studentId,
+        name: data.name,
+        phone: data.phone,
+        discordUsername: data.discordUsername,
+        nickname: data.nickname,
+        paymentStatus: data.requirement.paymentStatus
+      });
+    });
+
+    return newDataList;
+  };
+
   return (
     <Container container direction={"column"}>
-      {dataList.map((row, rowIndex) => (
+      {filterTableInfo(dataList).map((row, rowIndex) => (
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
-              key !== "memberId" && (
+              (key !== "memberId") && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
                   <Text>
                     {key === "paymentStatus"
@@ -37,7 +57,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
                       : formatNullableValue(value)}
                   </Text>
                 </TextContainer>
-              ),
+              )
           )}
           <ButtonContainer>
             <Button

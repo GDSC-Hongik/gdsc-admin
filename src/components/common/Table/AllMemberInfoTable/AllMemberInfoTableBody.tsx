@@ -5,8 +5,8 @@ import EditInfoModal from "../../InfoModal/EditInfoModal";
 import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import { theme } from "@/styles/theme";
-import { AllMemberInfoType } from "@/types/entities/member";
-import { formatNullableValue } from "@/utils/formatNullableValue";
+import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
+import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type MemberInfoTableBodyProps = {
   dataList: AllMemberInfoType[];
@@ -14,7 +14,8 @@ type MemberInfoTableBodyProps = {
 
 export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBodyProps) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoType>();
+  const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoStateType>();
+  const [departmentSearchText, setDepartmentSearchText] = useState("");
 
   const deleteMemberMutation = useDeleteMemberMutation();
 
@@ -27,8 +28,8 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
 
   const handleClickEditMemberInfoButton = (index: number) => {
-    handleModalVisible(true);
     setSelectedMemberInfo(dataList[index]);
+    handleModalVisible(true);
   };
 
   const handleClickDeleteMemberButton = (memberId: number) => {
@@ -41,9 +42,11 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
-              key !== "memberId" && (
+              key !== "memberId" && key !== 'requirement' && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
-                  <Text>{formatNullableValue(value)}</Text>
+                  <Text>
+                    {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
+                  </Text>
                 </TextContainer>
               ),
           )}
@@ -64,8 +67,11 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
       {selectedMemberInfo && (
         <EditInfoModal
           isModalVisible={isEditModalVisible}
+          setIsModalVisible={setIsEditModalVisible}
           handleCloseModal={() => handleModalVisible(false)}
           selectedMemberInfo={selectedMemberInfo}
+          setDepartmentSearchText={setDepartmentSearchText}
+          departmentSearchText={departmentSearchText}
         />
       )}
     </Container>
