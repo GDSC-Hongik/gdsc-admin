@@ -82,7 +82,7 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
                   <BodyCellRow container key={index} alignItems="center" justifyContent="center">
                     {Object.entries(selectedMember).map(([key, value], index) => (
                       <BodyCell xs={getTableWidth(key, "cell")} key={index}>
-                        {formatNullableValue(value)}
+                        {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                       </BodyCell>
                     ))}
                   </BodyCellRow>
