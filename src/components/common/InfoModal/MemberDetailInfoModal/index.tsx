@@ -45,6 +45,9 @@ export default function MemberDetailInfoModal({
         ["회비 납입 여부"]: getStatus(
           (memberInfo as PendingMemberInfoType).requirement.paymentStatus,
         ),
+        ["bevy 인증 여부"]: getStatus(
+          (memberInfo as PendingMemberInfoType).requirement.bevyStatus,
+        ),
       };
     } else {
       return {
@@ -61,7 +64,7 @@ export default function MemberDetailInfoModal({
 
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>
-      <ModalContentContainer sx={{ height: variant === "grantableMember" ? "240px" : "340px" }}>
+      <ModalContentContainer sx={{ height: variant === "grantableMember" ? "240px" : "350px" }}>
         <TitleContainer style={{ marginBottom: "32px" }}>멤버 상세 정보</TitleContainer>
         <DetailInfoContainer container direction={"column"}>
           {Object.entries(filterMemberDetailInfo()).map(([key, value], index) => (

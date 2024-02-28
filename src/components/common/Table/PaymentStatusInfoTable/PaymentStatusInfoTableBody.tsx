@@ -29,7 +29,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
-              key !== "memberId" && (
+              (key !== "memberId" && key !== "requirement" && key !== 'email') && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
                   <Text>
                     {key === "paymentStatus"
@@ -37,7 +37,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
                       : formatNullableValue(value)}
                   </Text>
                 </TextContainer>
-              ),
+              )
           )}
           <ButtonContainer>
             <Button
