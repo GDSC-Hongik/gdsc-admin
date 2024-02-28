@@ -8,22 +8,6 @@ import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
-const mockData = [
-  {
-    memberId: 12,
-    studentId: "",
-    name: "",
-    phone: "",
-    department: {
-      code: "",
-      name: "",
-    },
-    email: "",
-    discordUsername: "",
-    nickname: "",
-  },
-];
-
 type MemberInfoTableBodyProps = {
   dataList: AllMemberInfoType[];
 };
@@ -44,7 +28,7 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
 
   const handleClickEditMemberInfoButton = (index: number) => {
-    setSelectedMemberInfo(mockData[index]);
+    setSelectedMemberInfo(dataList[index]);
     handleModalVisible(true);
   };
 
@@ -54,14 +38,14 @@ export default function AllMemberInfoTableBody({ dataList }: MemberInfoTableBody
 
   return (
     <Container container direction={"column"}>
-      {mockData.map((row, rowIndex) => (
+      {dataList.map((row, rowIndex) => (
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
-              key !== "memberId" && (
+              key !== "memberId" && key !== 'requirement' && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
                   <Text>
-                    {(value as { code: string; name: string }).name ?? formatNullableValue(value)}
+                    {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                   </Text>
                 </TextContainer>
               ),
