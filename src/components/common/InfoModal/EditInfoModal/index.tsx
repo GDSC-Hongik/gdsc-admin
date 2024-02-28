@@ -1,6 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Modal, Box, Button } from "@mui/material";
+import { toast } from "react-toastify";
 import FirstRow from "./FirstRow";
 import SecondRow from "./SecondRow";
 import ThirdRow from "./ThirdRow";
@@ -99,6 +100,14 @@ export default function EditInfoModal({
     }));
   };
 
+  const handleClickEditMemberInfoButton = () => {
+    if (department.name === departmentSearchText) {
+      editMemberMutation.mutate();
+    } else {
+      toast.error("학과를 선택해주세요.");
+    }
+  };
+
   const { name, studentId, phone, email, discordUsername, nickname, memberId, department } =
     memberInfo;
 
@@ -138,9 +147,7 @@ export default function EditInfoModal({
           variant={"contained"}
           size="large"
           disabled={isButtonDisabled}
-          onClick={() => {
-            editMemberMutation.mutate();
-          }}
+          onClick={handleClickEditMemberInfoButton}
         >
           저장하기
         </StyledButton>
