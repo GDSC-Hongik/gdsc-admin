@@ -14,6 +14,7 @@ export default function useEditMemberInfoMutation(
     discordUsername: string;
     nickname: string;
   },
+  onSuccessCallback: () => void,
 ) {
   const queryClient = useQueryClient();
 
@@ -21,6 +22,8 @@ export default function useEditMemberInfoMutation(
     mutationFn: () => allMemberApi.editMemberInfo(memberId, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKey.allMemberList] });
+      onSuccessCallback();
+      toast.success("수정 완료되었습니다.")
     },
     onError: () => {
       toast.error("오류가 발생했습니다.");

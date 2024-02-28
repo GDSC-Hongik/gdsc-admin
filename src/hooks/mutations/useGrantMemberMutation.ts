@@ -14,10 +14,10 @@ export default function useGrantMemberMutation() {
         queryKey: [QueryKey.pendingMemberList],
       });
       data.grantedMembers?.map(member => {
-        toast.success(`${formatNullableValue(member)}님의 승인이 완료되었습니다!`);
+        toast.success(`${formatNullableValue(member)}님의 승인이 완료되었습니다.`);
       });
       data.notGrantedMembers?.map(member => {
-        toast.error(`${formatNullableValue(member)}님의 승인이 실패하였습니다!`);
+        toast.error(`${formatNullableValue(member)}님의 승인이 실패하였습니다.`);
       });
     },
     onError: () => {

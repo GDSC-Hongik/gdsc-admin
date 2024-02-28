@@ -12,7 +12,7 @@ export default function useUpdateMemberPaymentStatusMutation() {
       queryClient.invalidateQueries({
         queryKey: [QueryKey.paymentStatusMemberList],
       });
-      toast.success("납부 상태를 변경 완료하였습니다!");
+      toast.success("납부 상태를 변경 완료하였습니다.");
     },
     onError: () => {
       toast.error("오류가 발생하였습니다.");
