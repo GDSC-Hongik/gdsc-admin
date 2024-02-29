@@ -11,7 +11,7 @@ export default function useGrantMemberMutation() {
     mutationFn: pendingMemberApi.grantPendingMember,
     onSuccess: data => {
       queryClient.invalidateQueries({
-        queryKey: [QueryKey.pendingMemberList],
+        queryKey: [QueryKey.grantableMemberList],
       });
       data.grantedMembers?.map(member => {
         toast.success(`${formatNullableValue(member)}님의 승인이 완료되었습니다.`);
