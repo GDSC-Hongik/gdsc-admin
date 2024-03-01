@@ -6,20 +6,12 @@ import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import RoutePath from "@/routes/routePath";
 
-type ErrorCodeType = {
-  errorCode: string;
-  status: number;
-  statusCode: string;
-};
-
 type ErrorResponseType = {
-  errorCode: ErrorCodeType;
-  message: string;
+  errorCodeName: string;
+  errorMessage: string;
 };
 
 export default function ApiErrorBoundary({ children }: PropsWithChildren) {
-  console.log("api error boundary");
-
   const queryClient = useQueryClient();
 
   queryClient.getQueryCache().config = {
@@ -32,17 +24,10 @@ export default function ApiErrorBoundary({ children }: PropsWithChildren) {
 
   function handleError(axiosError: AxiosError) {
     const errorResponse = axiosError.response?.data as ErrorResponseType;
-    console.error(
-      "errorResponse",
-      axiosError,
-      errorResponse,
-      errorResponse.errorCode,
-      errorResponse.message,
-    );
 
-    const message = errorResponse.message;
+    const message = errorResponse.errorMessage;
 
-    switch (errorResponse.errorCode?.status) {
+    switch (axiosError.response?.status) {
       case 401:
       case 403:
         toast(message);
