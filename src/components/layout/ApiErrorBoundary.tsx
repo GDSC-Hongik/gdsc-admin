@@ -32,9 +32,12 @@ export default function ApiErrorBoundary({ children }: PropsWithChildren) {
       case 403:
         toast.error(message);
         redirect(RoutePath.AuthorizedError);
+        console.error("error redirect", message);
+
         break;
       default:
         toast.error(message);
+        console.error("message", message);
         break;
     }
   }
