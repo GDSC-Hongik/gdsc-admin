@@ -18,6 +18,8 @@ type ErrorResponseType = {
 };
 
 export default function ApiErrorBoundary({ children }: PropsWithChildren) {
+  console.log("api error boundary");
+
   const queryClient = useQueryClient();
 
   queryClient.getQueryCache().config = {
@@ -30,6 +32,13 @@ export default function ApiErrorBoundary({ children }: PropsWithChildren) {
 
   function handleError(axiosError: AxiosError) {
     const errorResponse = axiosError.response?.data as ErrorResponseType;
+    console.error(
+      "errorResponse",
+      axiosError,
+      errorResponse,
+      errorResponse.errorCode,
+      errorResponse.message,
+    );
 
     const message = errorResponse.message;
 
