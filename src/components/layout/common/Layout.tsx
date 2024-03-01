@@ -7,7 +7,7 @@ import RoutePath from "@/routes/routePath";
 export default function Layout() {
   const { isEmptyToken } = useAuthStorage();
 
-  if (!isEmptyToken) {
+  if (isEmptyToken) {
     return <Navigate to={RoutePath.Signin} />;
   }
 
