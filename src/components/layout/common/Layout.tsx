@@ -1,5 +1,6 @@
 import { Stack, styled } from "@mui/material";
 import { Navigate, Outlet } from "react-router-dom";
+import ApiErrorBoundary from "@/components/layout/ApiErrorBoundary";
 import Sidebar from "@/components/layout/sidebar/Sidebar";
 import useAuthStorage from "@/hooks/useAuthStorage";
 import RoutePath from "@/routes/routePath";
@@ -12,12 +13,14 @@ export default function Layout() {
   }
 
   return (
-    <Container>
-      <Sidebar />
-      <BodyContainer>
-        <Outlet />
-      </BodyContainer>
-    </Container>
+    <ApiErrorBoundary>
+      <Container>
+        <Sidebar />
+        <BodyContainer>
+          <Outlet />
+        </BodyContainer>
+      </Container>
+    </ApiErrorBoundary>
   );
 }
 
