@@ -1,6 +1,7 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import Layout from "@/components/layout/common/Layout";
 import AllMembersPage from "@/pages/AllMembersPage";
+import AuthErrorPage from "@/pages/AuthErrorPage";
 import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
 import GrantableMembersPage from "@/pages/GrantableMembersPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
@@ -25,6 +26,10 @@ const routes: RouteObject[] = [
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
   { path: RoutePath.AuthorizedSuccess, element: <AuthSuccessRedirectPage /> },
+  {
+    path: RoutePath.AuthorizedError,
+    element: <AuthErrorPage />,
+  },
   { path: "*", element: <NotFoundErrorPage /> },
 ];
 
