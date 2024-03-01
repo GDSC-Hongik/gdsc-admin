@@ -26,15 +26,15 @@ export default function ApiErrorBoundary({ children }: PropsWithChildren) {
     const errorResponse = axiosError.response?.data as ErrorResponseType;
 
     const message = errorResponse.errorMessage;
-
+    console.log("status: ", axiosError.response?.status, axiosError.response);
     switch (axiosError.response?.status) {
       case 401:
       case 403:
-        toast(message);
+        toast.error(message);
         redirect(RoutePath.AuthorizedError);
         break;
       default:
-        toast(message);
+        toast.error(message);
         break;
     }
   }
