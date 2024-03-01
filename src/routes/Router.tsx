@@ -1,4 +1,4 @@
-import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
+import { RouteObject, createBrowserRouter } from "react-router-dom";
 import Layout from "@/components/layout/common/Layout";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
@@ -12,14 +12,10 @@ import RoutePath from "@/routes/routePath";
 const routes: RouteObject[] = [
   {
     path: RoutePath.Index,
-    element: <Navigate to={RoutePath.AllMembers} replace />,
-  },
-  {
-    path: RoutePath.Index,
     element: <Layout />,
     children: [
       {
-        path: RoutePath.AllMembers,
+        index: true,
         element: <AllMembersPage />,
       },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
