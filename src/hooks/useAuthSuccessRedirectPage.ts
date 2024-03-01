@@ -4,22 +4,24 @@ import { useSearchParams } from "react-router-dom";
 import useAuthStorage from "@/hooks/useAuthStorage";
 
 const enum Params {
-  AccessToken = "access_token",
+  AccessToken = "access",
+  RefreshToken = "refresh",
 }
 
-export default function useAuthSuccessPage() {
+export default function useAuthSuccessRedirectPage() {
   const { setAuthData } = useAuthStorage();
+
   const [searchParams] = useSearchParams();
+
   const accessToken = searchParams.get(Params.AccessToken);
+  const refreshToken = searchParams.get(Params.AccessToken);
 
   const isSuccess = !isEmpty(accessToken);
 
   useEffect(() => {
-    if (isSuccess) {
-      setAuthData({ accessToken });
-    }
+    setAuthData({ accessToken, refreshToken });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [accessToken, refreshToken]);
 
   return { isSuccess };
 }

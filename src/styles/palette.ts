@@ -8,6 +8,7 @@ export const palette = {
   gray6: "#BEC3CC",
   gray7: "#888B91",
   gray8: "#888888",
+  black: "#000000",
   black1: "#0000000A",
   black2: "#0000001E",
 } as const;

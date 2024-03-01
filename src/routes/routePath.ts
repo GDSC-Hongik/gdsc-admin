@@ -1,3 +1,5 @@
+import { BASE_URL } from "@/environment";
+
 const RoutePath = {
   Index: "/",
   AllMembers: "/member/all",
@@ -7,8 +9,8 @@ const RoutePath = {
 
   Signin: "/sign-in",
 
-  AuthorizedSuccess: "/authorized-success",
-  AuthorizedError: "/authorized-error",
+  AuthorizedSuccess: "/social-login/redirect",
+  GithubLoginRedirect: `${BASE_URL}/oauth2/authorization/github`,
 
   Error: "/error",
 } as const;
