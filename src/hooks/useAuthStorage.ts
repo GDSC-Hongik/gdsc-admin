@@ -9,6 +9,8 @@ export default function useAuthStorage() {
   const accessToken = getCookie(CookieKeys.AccessToken);
   const refreshToken = getCookie(CookieKeys.RefreshToken);
 
+  const isEmptyToken = accessToken.length === 0;
+
   function clearAuthData() {
     deleteCookie(CookieKeys.AccessToken);
     deleteCookie(CookieKeys.RefreshToken);
@@ -27,5 +29,5 @@ export default function useAuthStorage() {
     }
   }
 
-  return { accessToken, refreshToken, setAuthData, clearAuthData };
+  return { isEmptyToken, accessToken, refreshToken, setAuthData, clearAuthData };
 }
