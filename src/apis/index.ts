@@ -1,6 +1,6 @@
 import { BASE_URL } from "src/environment";
 import axios, { AxiosError, AxiosInstance } from "axios";
-import useAuthStorage from "@/hooks/useAuthStorage";
+// import useAuthStorage from "@/hooks/useAuthStorage";
 // import lStorage, { StorageKeys } from "@/utils/storage/index";
 
 const createApiClient = (): AxiosInstance => {
@@ -13,7 +13,7 @@ const createApiClient = (): AxiosInstance => {
   });
 
   apiClient.interceptors.request.use(config => {
-    const accessToken = useAuthStorage().accessToken;
+    const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;

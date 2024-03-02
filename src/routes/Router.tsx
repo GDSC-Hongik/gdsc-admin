@@ -2,7 +2,6 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 import Layout from "@/components/layout/common/Layout";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
-import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
 import GrantableMembersPage from "@/pages/GrantableMembersPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
 import PaymentStatusMembersPage from "@/pages/PaymentStatusMembersPage";
@@ -15,17 +14,13 @@ const routes: RouteObject[] = [
     path: RoutePath.Index,
     element: <Layout />,
     children: [
-      {
-        index: true,
-        element: <AllMembersPage />,
-      },
+      { path: RoutePath.AllMembers, element: <AllMembersPage /> },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
       { path: RoutePath.GrantableMembers, element: <GrantableMembersPage /> },
       { path: RoutePath.PaymentStatusMembers, element: <PaymentStatusMembersPage /> },
     ],
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
-  { path: RoutePath.AuthorizedSuccess, element: <AuthSuccessRedirectPage /> },
   {
     path: RoutePath.AuthorizedError,
     element: <AuthErrorPage />,
