@@ -1,8 +1,10 @@
 // import { useEffect } from "react";
 import { ChangeEvent, useState } from "react";
 import { Box, Button, Container, Grid, Stack, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import LogoIcon from "@/assets/logo.svg?react";
 import useLoginMutation from "@/hooks/mutations/useLoginMutation";
+// import RoutePath from "@/routes/routePath";
 // import { GitHubButton } from "@/components/GitHubButton";
 // import RoutePath from "@/routes/routePath";
 // import { setCookie } from "@/utils/cookie";
@@ -32,10 +34,6 @@ export default function SigninPage() {
   // }, []);
 
   const handleClick = () => {
-    if (!userInfo.email || !userInfo.password) {
-      return;
-    }
-
     loginMutation.mutate();
   }
 
@@ -81,7 +79,12 @@ export default function SigninPage() {
             />
           </Box>
         </Grid>
-        <Button onClick={handleClick} variant={'outlined'}>로그인하기</Button>
+        <Button
+          onClick={handleClick}
+          variant={'outlined'}
+          disabled={!userInfo.email || !userInfo.password}>
+          로그인하기
+        </Button>
       </Stack>
     </Container>
   );
