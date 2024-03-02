@@ -2,6 +2,7 @@
 import { ChangeEvent, useState } from "react";
 import { Box, Button, Container, Grid, Stack, TextField } from "@mui/material";
 import LogoIcon from "@/assets/logo.svg?react";
+import useLoginMutation from "@/hooks/mutations/useLoginMutation";
 // import { GitHubButton } from "@/components/GitHubButton";
 // import RoutePath from "@/routes/routePath";
 // import { setCookie } from "@/utils/cookie";
@@ -12,6 +13,8 @@ export default function SigninPage() {
     email: '',
     password: '',
   })
+
+  const loginMutation = useLoginMutation(userInfo.email, userInfo.password);
 
   // const handleClick = () => {
   //   setTimeout(function () {
@@ -29,7 +32,11 @@ export default function SigninPage() {
   // }, []);
 
   const handleClick = () => {
+    if (!userInfo.email || !userInfo.password) {
+      return;
+    }
 
+    loginMutation.mutate();
   }
 
   const handleChangeUserInfo = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,11 +64,21 @@ export default function SigninPage() {
         <Grid>
           <Box sx={{ marginBottom: '15px' }}>
             <Box>이메일</Box>
-            <TextField value={userInfo.email} name={'email'} onChange={handleChangeUserInfo} sx={{ width: '300px' }} />
+            <TextField
+              value={userInfo.email}
+              name={'email'}
+              onChange={handleChangeUserInfo}
+              sx={{ width: '300px' }}
+            />
           </Box>
           <Box>
             <Box>비밀번호</Box>
-            <TextField value={userInfo.password} name={'password'} onChange={handleChangeUserInfo} sx={{ width: '300px' }} />
+            <TextField
+              value={userInfo.password}
+              name={'password'}
+              onChange={handleChangeUserInfo}
+              sx={{ width: '300px' }}
+            />
           </Box>
         </Grid>
         <Button onClick={handleClick} variant={'outlined'}>로그인하기</Button>
