@@ -4,7 +4,6 @@ import { Grid, TablePagination } from "@mui/material";
 import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-import { AllMemberInfoType } from "@/types/entities/member";
 
 type AllMemberInfoTableProps = {
   allMemberSearchType: string;
@@ -18,7 +17,7 @@ export default function AllMemberInfoTable({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { allMemberList } = useGetAllMemberListQuery(
+  const { allMemberList = [], totalElements = 0 } = useGetAllMemberListQuery(
     page,
     rowsPerPage,
     allMemberSearchType,
@@ -39,20 +38,12 @@ export default function AllMemberInfoTable({
     setPage(0);
   };
 
-  const getAllMemberInfoDataList = (dataList: AllMemberInfoType[]) => {
-    return rowsPerPage > 0
-      ? dataList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      : dataList;
-  };
-
-  const allMemberInfoDataList = getAllMemberInfoDataList(allMemberList);
-
   return (
     <Grid container>
       <AllMemberInfoTableHeader />
-      <AllMemberInfoTableBody dataList={allMemberInfoDataList} />
+      <AllMemberInfoTableBody dataList={allMemberList} />
       <InfoTablePagination
-        count={allMemberList.length}
+        count={totalElements}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

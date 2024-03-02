@@ -8,10 +8,13 @@ export default function useGetAllMemberListQuery(
   searchType: string,
   searchText: string,
 ) {
-  const { data: allMemberList = [] } = useQuery({
+  const { data } = useQuery({
     queryKey: [QueryKey.allMemberList, page, size, searchType, searchText],
     queryFn: () => allMemberApi.getAllMemberList(page, size, searchType, searchText),
   });
 
-  return { allMemberList };
+  const allMemberList = data?.content;
+  const totalElements = data?.totalElements;
+
+  return { allMemberList, totalElements };
 }

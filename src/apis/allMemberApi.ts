@@ -12,13 +12,13 @@ export const allMemberApi = {
       const searchUrl = `admin/members?${searchType}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
-      return response.data.content;
+      return response.data;
     }
 
     const commonUrl = `admin/members?page=${page}&size=${size}`;
 
     const response = await apiClient.get(commonUrl);
-    return response.data.content;
+    return response.data;
   },
 
   deleteMember: async (memberId: number) => {
