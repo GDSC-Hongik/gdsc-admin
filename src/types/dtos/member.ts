@@ -43,7 +43,9 @@ export type DepartmentListDtoType = {
   name: string;
 };
 
-export type PendingMemberListDtoType = PendingMemberInfoType[];
+export type PendingMemberListDtoType = {
+  content: PendingMemberInfoType[];
+} & PaginationElementType;
 export type GrantPendingMemberRequestBodyDtoType = {
   memberIdList: number[];
 };
@@ -53,7 +55,7 @@ export type GrantPendingMemberDtoType = {
 };
 
 export type GrantableMemberDtoType = {
-  content: GrantableMemberInfoType[]
+  content: GrantableMemberInfoType[];
 } & PaginationElementType;
 
 export type PaymentStatusMemberListDtoType = PaymentStatusInfoType[];

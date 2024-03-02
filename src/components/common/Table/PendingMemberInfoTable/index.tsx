@@ -22,7 +22,7 @@ export default function PendingMemberInfoTable({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { pendingMemberList } = useGetPendingMemberListQuery(
+  const { pendingMemberList = [], totalElements = 0 } = useGetPendingMemberListQuery(
     page,
     rowsPerPage,
     pendingMemberSearchType,
@@ -43,28 +43,20 @@ export default function PendingMemberInfoTable({
     setPage(0);
   };
 
-  const getPendingMemberInfoDataList = (dataList: PendingMemberInfoType[]) => {
-    return rowsPerPage > 0
-      ? dataList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      : dataList;
-  };
-
-  const pendingMemberInfoDataList = getPendingMemberInfoDataList(pendingMemberList);
-
   return (
     <Grid container>
       <PendingMemberInfoTableHeader
-        dataList={pendingMemberInfoDataList}
+        dataList={pendingMemberList}
         selectedMemberList={selectedMemberList}
         setSelectedMemberList={setSelectedMemberList}
       />
       <PendingMemberInfoTableBody
-        dataList={pendingMemberInfoDataList}
+        dataList={pendingMemberList}
         setSelectedMemberList={setSelectedMemberList}
         selectedMemberList={selectedMemberList}
       />
       <InfoTablePagination
-        count={pendingMemberList.length}
+        count={totalElements}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
