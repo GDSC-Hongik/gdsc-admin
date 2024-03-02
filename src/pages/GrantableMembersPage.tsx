@@ -11,7 +11,7 @@ export default function GrantableMembersPage() {
 
   return (
     <>
-      <Title variant={"grantableMember"} descriptionText={"멤버 관리 설명"} />
+      <Title variant={"grantableMember"} descriptionText={"승인 가능한 멤버 정보를 관리합니다."} />
       <Header
         variant={"grantableMember"}
         selectedMemberCount={selectedMemberList.length}

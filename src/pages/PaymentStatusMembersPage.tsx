@@ -9,7 +9,7 @@ export default function PaymentStatusMembersPage() {
 
   return (
     <>
-      <Title variant={"paymentStatus"} descriptionText={"회비 납부 여부 관리 설명"} />
+      <Title variant={"paymentStatus"} descriptionText={"가입 신청서를 작성한 게스트 멤버의 납입 여부를 관리합니다."} />
       <Header variant={"paymentStatus"} setPaymentStatusMemberSearchType={setPaymentStatusMemberSearchType} setPaymentStatusMemberSearchText={setPaymentStatusMemberSearchText} />
       <PaymentStatusInfoTable
         paymentStatusMemberSearchType={paymentStatusMemberSearchType}

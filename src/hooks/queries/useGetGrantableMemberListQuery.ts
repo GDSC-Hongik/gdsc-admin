@@ -8,10 +8,13 @@ export default function useGetGrantableMemberListQuery(
   searchType: string,
   searchText: string
 ) {
-  const { data: grantableMemberList = [] } = useQuery({
+  const { data } = useQuery({
     queryKey: [QueryKey.grantableMemberList, page, size, searchType, searchText],
     queryFn: () => grantableMemberApi.getGrantableMemberList(page, size, searchType, searchText),
   });
 
-  return { grantableMemberList };
+  const grantableMemberList = data?.content;
+  const totalElements = data?.totalElements;
+
+  return { grantableMemberList, totalElements };
 }

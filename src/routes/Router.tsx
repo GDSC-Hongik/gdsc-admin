@@ -1,4 +1,4 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "@/components/layout/common/Layout";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
@@ -14,6 +14,7 @@ const routes: RouteObject[] = [
     path: RoutePath.Index,
     element: <Layout />,
     children: [
+      { path: '', element: <Navigate to={RoutePath.AllMembers} replace /> },
       { path: RoutePath.AllMembers, element: <AllMembersPage /> },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
       { path: RoutePath.GrantableMembers, element: <GrantableMembersPage /> },

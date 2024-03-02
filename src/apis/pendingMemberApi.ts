@@ -16,13 +16,13 @@ export const pendingMemberApi = {
       const searchUrl = `admin/members/pending?${searchType}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
-      return response.data.content;
+      return response.data;
     }
 
     const commonUrl = `admin/members/pending?page=${page}&size=${size}`;
 
     const response = await apiClient.get(commonUrl);
-    return response.data.content;
+    return response.data;
   },
 
   grantPendingMember: async (

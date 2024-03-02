@@ -9,7 +9,7 @@ export default function AllMembersPage() {
 
   return (
     <>
-      <Title variant={"allMember"} descriptionText={"멤버 관리 설명"} />
+      <Title variant={"allMember"} descriptionText={"전체 커뮤니티 멤버 정보를 관리합니다."} />
       <Header
         variant={"allMember"}
         setAllMemberSearchType={setAllMemberSearchType}

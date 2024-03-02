@@ -11,11 +11,11 @@ export const grantableMemberApi = {
     if (searchText) {
       const searchUrl = `admin/members/grantable?${searchType}=${searchText}&page=${page}&size=${size}`;
       const response = await apiClient.get(searchUrl);
-      return response.data.content;
+      return response.data;
     }
 
     const commonUrl = `admin/members/grantable?page=${page}&size=${size}`;
     const response = await apiClient.get(commonUrl);
-    return response.data.content;
+    return response.data;
   },
 };
