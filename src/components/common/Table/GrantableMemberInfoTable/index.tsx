@@ -22,7 +22,7 @@ export default function GrantableMemberInfoTable({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { grantableMemberList } = useGetGrantableMemberListQuery(
+  const { grantableMemberList = [], totalElements = 0 } = useGetGrantableMemberListQuery(
     page,
     rowsPerPage,
     grantableMemberSearchType,
@@ -42,28 +42,20 @@ export default function GrantableMemberInfoTable({
     setPage(0);
   };
 
-  const getGrantableMemberInfoDataList = (dataList: GrantableMemberInfoType[]) => {
-    return rowsPerPage > 0
-      ? dataList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      : dataList;
-  };
-
-  const grantableMemberInfoDataList = getGrantableMemberInfoDataList(grantableMemberList);
-
   return (
     <Grid container>
       <GrantableMemberInfoTableHeader
-        dataList={grantableMemberInfoDataList}
+        dataList={grantableMemberList}
         selectedMemberList={selectedMemberList}
         setSelectedMemberList={setSelectedMemberList}
       />
       <GrantableMemberInfoTableBody
-        dataList={grantableMemberInfoDataList}
+        dataList={grantableMemberList}
         setSelectedMemberList={setSelectedMemberList}
         selectedMemberList={selectedMemberList}
       />
       <InfoTablePagination
-        count={grantableMemberList.length}
+        count={totalElements}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

@@ -6,8 +6,7 @@ import {
   StatusType,
 } from "@/types/entities/member";
 
-export type AllMemberListDtoType = {
-  content: AllMemberInfoType[];
+type PaginationElementType = {
   pageable: {
     pageNumber: number;
     pageSize: number;
@@ -33,7 +32,11 @@ export type AllMemberListDtoType = {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
-};
+}
+
+export type AllMemberListDtoType = {
+  content: AllMemberInfoType[];
+} & PaginationElementType;
 
 export type DepartmentListDtoType = {
   code: string;
@@ -49,7 +52,9 @@ export type GrantPendingMemberDtoType = {
   notGrantedMembers: string[];
 };
 
-export type GrantableMemberDtoType = GrantableMemberInfoType[];
+export type GrantableMemberDtoType = {
+  content: GrantableMemberInfoType[]
+} & PaginationElementType;
 
 export type PaymentStatusMemberListDtoType = PaymentStatusInfoType[];
 export type MemberPaymentStatusDtoType = StatusType;
