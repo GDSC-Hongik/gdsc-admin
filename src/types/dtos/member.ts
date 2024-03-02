@@ -58,5 +58,7 @@ export type GrantableMemberDtoType = {
   content: GrantableMemberInfoType[];
 } & PaginationElementType;
 
-export type PaymentStatusMemberListDtoType = PaymentStatusInfoType[];
+export type PaymentStatusMemberListDtoType = {
+  content: PaymentStatusInfoType[];
+} & PaginationElementType;
 export type MemberPaymentStatusDtoType = StatusType;

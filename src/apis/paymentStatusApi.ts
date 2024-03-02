@@ -13,13 +13,13 @@ export const paymentStatusApi = {
       const searchUrl = `admin/members/payment?${searchType}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
-      return response.data.content;
+      return response.data;
     }
 
     const commonUrl = `admin/members/payment?page=${page}&size=${size}`
 
     const response = await apiClient.get(commonUrl);
-    return response.data.content;
+    return response.data;
   },
 
   updateMemberPaymentStatus: async (requestObj: {
