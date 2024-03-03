@@ -1,20 +1,20 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Grid, Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import EditInfoModal from "../../InfoModal/EditInfoModal";
 import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import { theme } from "@/styles/theme";
-import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
+import { GrantedMemberInfoStateType, GrantedMemberInfoType } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
-type AllMemberInfoTableBodyProps = {
-  dataList: AllMemberInfoType[];
+type GrantedMemberInfoTableBodyProps = {
+  dataList: GrantedMemberInfoType[];
 };
 
-export default function AllMemberInfoTableBody({ dataList }: AllMemberInfoTableBodyProps) {
+export default function GrantedMemberInfoTableBody({ dataList }: GrantedMemberInfoTableBodyProps) {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [selectedMemberInfo, setSelectedMemberInfo] = useState<AllMemberInfoStateType>();
+  const [selectedMemberInfo, setSelectedMemberInfo] = useState<GrantedMemberInfoStateType>();
   const [departmentSearchText, setDepartmentSearchText] = useState("");
 
   const deleteMemberMutation = useDeleteMemberMutation();
@@ -75,7 +75,7 @@ export default function AllMemberInfoTableBody({ dataList }: AllMemberInfoTableB
         />
       )}
     </Container>
-  );
+  )
 }
 
 const Container = styled(Grid)({});

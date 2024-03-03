@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Header from "@/components/common/Header";
+import GrantedMemberInfoTable from "@/components/common/Table/GrantedMemberInfoTable";
 import Title from "@/components/common/Title";
 
 export default function GrantedMembersPage() {
-    const [grantedMemberSearchType, setGrantedMemberSearchType] = useState("");
-    const [grantedMemberSearchText, setGrantedMemberSearchText] = useState("");
+  const [grantedMemberSearchType, setGrantedMemberSearchType] = useState("");
+  const [grantedMemberSearchText, setGrantedMemberSearchText] = useState("");
 
   return (
     <>
@@ -13,6 +14,10 @@ export default function GrantedMembersPage() {
         variant={"grantedMember"}
         setGrantedMemberSearchType={setGrantedMemberSearchType}
         setGrantedMemberSearchText={setGrantedMemberSearchText}
+      />
+      <GrantedMemberInfoTable
+        grantedMemberSearchType={grantedMemberSearchType}
+        grantedMemberSearchText={grantedMemberSearchText}
       />
     </>
   )

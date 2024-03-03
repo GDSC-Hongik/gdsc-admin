@@ -47,6 +47,9 @@ export type PendingMemberTableInfoType = {
   paymentStatus: "완료" | "미완료";
 };
 
+export type GrantedMemberInfoType = AllMemberInfoType;
+export type GrantedMemberInfoStateType = AllMemberInfoType;
+
 export type GrantableMemberInfoType = AllMemberInfoType;
 
 export type PaymentStatusInfoType = PendingMemberInfoType;
