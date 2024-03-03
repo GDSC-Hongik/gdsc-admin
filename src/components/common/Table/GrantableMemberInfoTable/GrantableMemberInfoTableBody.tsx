@@ -1,9 +1,8 @@
-import { useState, ChangeEvent, SetStateAction } from "react";
+import { useState, ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import { Grid, Checkbox, Button, Box } from "@mui/material";
 import { GrantableMemberInfoTableProps } from ".";
 import EditInfoModal from "../../InfoModal/EditInfoModal";
-import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
 import { grantableMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
