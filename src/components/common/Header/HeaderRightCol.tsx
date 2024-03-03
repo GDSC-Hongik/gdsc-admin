@@ -38,6 +38,7 @@ const HeaderRightElement = <T extends ManagementVariant>(
         </StyledButton>
       </RightColContainer>
     ),
+    grantedMember: null,
     paymentStatus: null,
   };
 };
