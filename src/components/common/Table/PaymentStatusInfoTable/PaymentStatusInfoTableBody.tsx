@@ -51,7 +51,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
             ([key, value], index) =>
               (key !== "memberId" && key !== "paymentStatus") && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
-                  <Text>
+                  <Text sx={{ wordBreak: "keep-all" }}>
                     {formatNullableValue(value)}
                   </Text>
                 </TextContainer>

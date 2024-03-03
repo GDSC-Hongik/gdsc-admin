@@ -75,7 +75,7 @@ export default function PendingMemberInfoTableBody({
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
           {Object.entries(row).map(([key, value], index) => (
             <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
-              <Text>{formatNullableValue(value)}</Text>
+              <Text sx={{ wordBreak: "keep-all" }}>{formatNullableValue(value)}</Text>
             </TextContainer>
           ))}
           <ButtonContainer>
