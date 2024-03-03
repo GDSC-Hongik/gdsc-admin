@@ -77,7 +77,7 @@ export default function GrantableMemberInfoTableBody({
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
           {Object.entries(row).map(([key, value], index) => key !== 'requirement' && (
             <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
-              <Text>{(value as { code: string; name: string })?.name ?? formatNullableValue(value)}</Text>
+              <Text sx={{ wordBreak: "keep-all" }}>{(value as { code: string; name: string })?.name ?? formatNullableValue(value)}</Text>
             </TextContainer>
           ))}
           <ButtonContainer>

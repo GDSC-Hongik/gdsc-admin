@@ -44,7 +44,7 @@ export default function GrantedMemberInfoTableBody({ dataList }: GrantedMemberIn
             ([key, value], index) =>
               key !== "memberId" && key !== 'requirement' && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
-                  <Text>
+                  <Text sx={{ wordBreak: "keep-all" }}>
                     {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                   </Text>
                 </TextContainer>
