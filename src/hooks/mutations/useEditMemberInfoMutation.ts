@@ -21,7 +21,7 @@ export default function useEditMemberInfoMutation(
   return useMutation({
     mutationFn: () => allMemberApi.editMemberInfo(memberId, body),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QueryKey.allMemberList] });
+      queryClient.invalidateQueries({ queryKey: [QueryKey.allMemberList, QueryKey.grantableMemberList] });
       onSuccessCallback();
       toast.success("수정 완료되었습니다.")
     },

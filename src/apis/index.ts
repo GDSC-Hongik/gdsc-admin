@@ -31,9 +31,3 @@ const createApiClient = (): AxiosInstance => {
 };
 
 export const apiClient = createApiClient();
-
-export const FormDataHeaders = {
-  headers: {
-    "Content-Type": "multipart/form-data",
-  },
-};
