@@ -7,7 +7,7 @@ import GrantedMembersPage from "@/pages/GrantedMembersPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
 import PaymentStatusMembersPage from "@/pages/PaymentStatusMembersPage";
 import PendingMembersPage from "@/pages/PendingMembersPage";
-import SigninPage from "@/pages/SigninPage";
+import SignInPage from "@/pages/SignInPage";
 import RoutePath from "@/routes/routePath";
 
 const routes: RouteObject[] = [
@@ -23,7 +23,7 @@ const routes: RouteObject[] = [
       { path: RoutePath.PaymentStatusMembers, element: <PaymentStatusMembersPage /> },
     ],
   },
-  { path: RoutePath.Signin, element: <SigninPage /> },
+  { path: RoutePath.Signin, element: <SignInPage /> },
   {
     path: RoutePath.AuthorizedError,
     element: <AuthErrorPage />,

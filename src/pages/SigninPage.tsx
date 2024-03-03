@@ -9,7 +9,7 @@ import useLoginMutation from "@/hooks/mutations/useLoginMutation";
 // import { setCookie } from "@/utils/cookie";
 
 /** 깃허브 로그인 및 가입하기 */
-export default function SigninPage() {
+export default function SignInPage() {
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
