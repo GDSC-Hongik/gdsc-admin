@@ -1,7 +1,8 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, SetStateAction } from "react";
 import styled from "@emotion/styled";
 import { Grid, Checkbox, Button, Box } from "@mui/material";
 import { GrantableMemberInfoTableProps } from ".";
+import EditInfoModal from "../../InfoModal/EditInfoModal";
 import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
 import { grantableMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
@@ -21,6 +22,7 @@ export default function GrantableMemberInfoTableBody({
 }: GrantableMemberInfoTableBodyProps) {
   const [isMemberDetailInfoModalVisible, setIsMemberDetailInfoModalVisible] = useState(false);
   const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] = useState<GrantableMemberInfoType>();
+  const [departmentSearchText, setDepartmentSearchText] = useState("");
 
   const filterTableInfo = (dataList: GrantableMemberInfoType[]) => {
     const newDataList: Omit<GrantableMemberInfoType, "memberId">[] = [];
@@ -63,8 +65,8 @@ export default function GrantableMemberInfoTableBody({
   };
 
   const handleClickDetailInfoButton = (index: number) => {
-    setIsMemberDetailInfoModalVisible(true);
     setSelectedMemberDetailInfo(dataList[index]);
+    setIsMemberDetailInfoModalVisible(true);
   };
 
   const handleCloseMemberDetailInfoModal = () => setIsMemberDetailInfoModalVisible(false);
@@ -81,17 +83,19 @@ export default function GrantableMemberInfoTableBody({
           ))}
           <ButtonContainer>
             <Button variant="outlined" onClick={() => handleClickDetailInfoButton(rowIndex)}>
-              상세
+              수정
             </Button>
           </ButtonContainer>
         </CellContainer>
       ))}
       {selectedMemberDetailInfo && (
-        <MemberDetailInfoModal
-          variant={"grantableMember"}
+        <EditInfoModal
           isModalVisible={isMemberDetailInfoModalVisible}
+          setIsModalVisible={setIsMemberDetailInfoModalVisible}
+          selectedMemberInfo={selectedMemberDetailInfo}
+          setDepartmentSearchText={setDepartmentSearchText}
+          departmentSearchText={departmentSearchText}
           handleCloseModal={handleCloseMemberDetailInfoModal}
-          memberInfo={selectedMemberDetailInfo}
         />
       )}
     </Grid>
