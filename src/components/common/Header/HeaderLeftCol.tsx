@@ -27,13 +27,15 @@ type HeaderLeftColProps<T extends ManagementVariant> = {
   "setAllMemberSearchType" | "setAllMemberSearchText" |
   "setPendingMemberSearchType" | "setPendingMemberSearchText" |
   "setGrantableMemberSearchType" | "setGrantableMemberSearchText" |
-  "setPaymentStatusMemberSearchType" | "setPaymentStatusMemberSearchText">;
+  "setPaymentStatusMemberSearchType" | "setPaymentStatusMemberSearchText" |
+  "setGrantedMemberSearchType" | "setGrantedMemberSearchText">;
 
 const HeaderLeftElement = (
   variant: ManagementVariant,
   setAllMemberSearchType?: Dispatch<SetStateAction<string>>,
   setPendingMemberSearchType?: Dispatch<SetStateAction<string>>,
   setGrantableMemberSearchType?: Dispatch<SetStateAction<string>>,
+  setGrantedMemberSearchType?: Dispatch<SetStateAction<string>>,
   setPaymentStatusMemberSearchType?: Dispatch<SetStateAction<string>>
 ) => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -50,9 +52,12 @@ const HeaderLeftElement = (
     } else if (variant === "paymentStatus") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
       setPaymentStatusMemberSearchType?.(paymentStatusTableTitle.slice(0, 5)[targetIndex]["type"]);
-    } else {
+    } else if (variant === "grantableMember") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
       setGrantableMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
+    } else {
+      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+      setGrantedMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
     }
   };
 
@@ -93,6 +98,18 @@ const HeaderLeftElement = (
         </Select>
       </FormContainer>
     ),
+    grantedMember: (
+      <FormContainer>
+        <InputLabel>Type</InputLabel>
+        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
+          {allMemberTableTitle.map(title => (
+            <MenuItem value={title.value} key={title.value}>
+              {title.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormContainer>
+    ),
     paymentStatus: (
       <FormContainer>
         <InputLabel>Type</InputLabel>
@@ -117,7 +134,9 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
   setGrantableMemberSearchType,
   setGrantableMemberSearchText,
   setPaymentStatusMemberSearchType,
-  setPaymentStatusMemberSearchText
+  setPaymentStatusMemberSearchText,
+  setGrantedMemberSearchType,
+  setGrantedMemberSearchText,
 }: HeaderLeftColProps<T>) {
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
@@ -126,8 +145,10 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
       setPendingMemberSearchText?.(e.target.value);
     } else if (variant === "paymentStatus") {
       setPaymentStatusMemberSearchText?.(e.target.value);
-    } else {
+    } else if (variant === "grantableMember") {
       setGrantableMemberSearchText?.(e.target.value);
+    } else {
+      setGrantedMemberSearchText?.(e.target.value);
     }
   };
 
@@ -138,6 +159,7 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
         setAllMemberSearchType,
         setPendingMemberSearchType,
         setGrantableMemberSearchType,
+        setGrantedMemberSearchType,
         setPaymentStatusMemberSearchType
       )[variant]}
       <TextField
