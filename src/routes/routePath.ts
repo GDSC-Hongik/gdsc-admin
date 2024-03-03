@@ -4,6 +4,7 @@ const RoutePath = {
   Index: "/",
   AllMembers: "/member/all",
   PendingMembers: "/member/pending",
+  GrantedMembers: "/member/granted",
   GrantableMembers: "/member/grantable",
   PaymentStatusMembers: "/member/payment-status",
 

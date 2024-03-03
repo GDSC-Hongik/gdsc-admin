@@ -1,7 +1,8 @@
 export const enum QueryKey {
   allMemberList = "allMemberList",
   pendingMemberList = "pendingMemberList",
-  grantableMemberList = 'grantableMemberList',
-  departmentList = 'departmentList',
+  grantableMemberList = "grantableMemberList",
+  grantedMemberList = "grantedMemberList",
+  departmentList = "departmentList",
   paymentStatusMemberList = "paymentStatusMemberList",
 }
