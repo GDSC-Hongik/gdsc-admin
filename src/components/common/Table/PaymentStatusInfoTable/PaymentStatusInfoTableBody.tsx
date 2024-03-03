@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
-import { paymentStatusFieldMapping, pendingMemberTableWidthRatio } from "@/constants/table";
+import { paymentStatusTableWidthRatio } from "@/constants/table";
 import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
 import { theme } from "@/styles/theme";
 import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
@@ -15,8 +15,8 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
 
   const getCellWidthRatio = (option: string) => {
     return option === "studentId" || option === "name" || option === "phone"
-      ? pendingMemberTableWidthRatio["cell"][option]
-      : pendingMemberTableWidthRatio["cell"]["default"];
+      ? paymentStatusTableWidthRatio["cell"][option]
+      : paymentStatusTableWidthRatio["cell"]["default"];
   };
 
   const handleChangePaymentStatus = (memberId: number, paymentStatus: StatusType) => {
@@ -49,12 +49,10 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
-              (key !== "memberId") && (
+              (key !== "memberId" && key !== "paymentStatus") && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
                   <Text>
-                    {key === "paymentStatus"
-                      ? paymentStatusFieldMapping[value as StatusType]
-                      : formatNullableValue(value)}
+                    {formatNullableValue(value)}
                   </Text>
                 </TextContainer>
               )
@@ -62,16 +60,16 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
           <ButtonContainer>
             <Button
               variant="outlined"
-              disabled={row.paymentStatus === "VERIFIED"}
-              onClick={() => handleChangePaymentStatus(row.memberId, "VERIFIED")}
+              disabled={row.paymentStatus === "PENDING"}
+              onClick={() => handleChangePaymentStatus(row.memberId, "PENDING")}
             >
               납입
             </Button>
             <Button
               variant="outlined"
               color="error"
-              disabled={row.paymentStatus === "PENDING"}
-              onClick={() => handleChangePaymentStatus(row.memberId, "PENDING")}
+              disabled={row.paymentStatus === "VERIFIED"}
+              onClick={() => handleChangePaymentStatus(row.memberId, "VERIFIED")}
             >
               미납
             </Button>
