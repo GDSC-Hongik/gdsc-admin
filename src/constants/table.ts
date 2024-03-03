@@ -157,25 +157,19 @@ export const paymentStatusTableTitle = [
     name: "디스코드 닉네임",
     type: "nickname"
   },
-  {
-    value: 6,
-    name: "납부 상태",
-    type: "paymentStatus"
-  },
 ];
 
 export const paymentStatusTableWidthRatio = {
   title: {
-    학번: 1.1,
-    이름: 1.1,
-    전화번호: 1.1,
-    ["납부 상태"]: 1.4,
+    학번: 1.5,
+    이름: 1.5,
+    전화번호: 1.5,
     default: 1.9,
   },
   cell: {
-    studentId: 0.8,
-    name: 0.8,
-    phone: 1.1,
+    studentId: 1.5,
+    name: 1.5,
+    phone: 1.5,
     default: 1.9,
   },
 };
