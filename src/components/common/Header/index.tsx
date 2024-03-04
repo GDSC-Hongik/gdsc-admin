@@ -4,8 +4,6 @@ import HeaderLeftCol from "./HeaderLeftCol";
 import HeaderRightCol from "./HeaderRightCol";
 import { GrantableMemberInfoType, ManagementVariant, PendingMemberInfoType } from "@/types/entities/member";
 
-const mockCreatedDate = new Date();
-
 export type HeaderProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
   selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" | "grantableMember" ? number : undefined;
@@ -70,7 +68,6 @@ export default function Header<T extends ManagementVariant>({
       />
       <HeaderRightCol
         variant={variant}
-        createdDate={mockCreatedDate}
         selectedMemberCount={selectedMemberCount}
         selectedMemberList={selectedMemberList}
       />

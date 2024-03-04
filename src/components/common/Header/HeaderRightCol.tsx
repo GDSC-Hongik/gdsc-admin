@@ -1,27 +1,40 @@
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack, Typography } from "@mui/material";
+import { saveAs } from "file-saver";
+import { toast } from "react-toastify";
 import { HeaderProps } from ".";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
+import { allMemberApi } from "@/apis/allMemberApi";
 import { ManagementVariant } from "@/types/entities/member";
-// import { formatDate } from "@/utils/date/formatDate";
 
 const HeaderRightElement = <T extends ManagementVariant>(
-  createdDate: HeaderRightColProps<T>["createdDate"],
   selectedMemberCount: HeaderRightColProps<T>["selectedMemberCount"],
   setIsAcceptModalVisible: Dispatch<SetStateAction<boolean>>,
 ): Record<ManagementVariant, ReactElement | null> => {
+  const handleClickExcelDownloadButton = async () => {
+    try {
+      const data = await allMemberApi.getMemberInfoExcel();
+      const blob = new Blob([data], { type: "application/vnd.ms-excel" });
+      saveAs(blob, "members.xls");
+    } catch (error) {
+      toast.error("오류가 발생했습니다.");
+    }
+  }
   const handleClickAcceptMemberButton = () => setIsAcceptModalVisible(true);
 
   return {
-    allMember: createdDate
-      ? // <RightColContainer>
-        //   <DateText>생성 일시 : {formatDate(createdDate)}</DateText>
-        //   <Button variant="outlined">구글 시트 동기화</Button>
-        //   <Button variant="contained">구글 시트</Button>
-        // </RightColContainer>
-        null
-      : null,
+    allMember: (
+      <RightColContainer>
+        <Button
+          variant="outlined"
+          onClick={handleClickExcelDownloadButton}
+          sx={{ marginRight: '20px' }}
+        >
+          엑셀 다운로드
+        </Button>
+      </RightColContainer>
+    ),
     pendingMember: (
       <RightColContainer>
         <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
@@ -45,14 +58,12 @@ const HeaderRightElement = <T extends ManagementVariant>(
 
 type HeaderRightColProps<T extends ManagementVariant> = {
   variant: T;
-  createdDate?: T extends "allMember" ? Date : undefined;
   selectedMemberCount: HeaderProps<T>["selectedMemberCount"];
   selectedMemberList: HeaderProps<T>["selectedMemberList"];
 };
 
 export default function HeaderRightCol<T extends ManagementVariant>({
   variant,
-  createdDate,
   selectedMemberCount,
   selectedMemberList,
 }: HeaderRightColProps<T>) {
@@ -60,7 +71,7 @@ export default function HeaderRightCol<T extends ManagementVariant>({
 
   return (
     <>
-      {HeaderRightElement(createdDate, selectedMemberCount, setIsAcceptModalVisible)[variant]}
+      {HeaderRightElement(selectedMemberCount, setIsAcceptModalVisible)[variant]}
       <AcceptMemberListModal
         isAcceptModalVisible={isAcceptModalVisible}
         setIsAcceptModalVisible={setIsAcceptModalVisible}
@@ -76,11 +87,6 @@ const RightColContainer = styled(Stack)`
   align-items: center;
   flex-wrap: wrap;
 `;
-
-// const DateText = styled(Box)({
-//   color: `${theme.palette.gray5}`,
-//   ...theme.typo.body2,
-// });
 
 const SelectedMemberCountText = styled(Typography)({
   marginRight: "20px",

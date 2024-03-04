@@ -48,4 +48,9 @@ export const allMemberApi = {
     const response = await apiClient.put(`admin/members/${memberId}`, body);
     return response.data;
   },
+
+  getMemberInfoExcel: async () => {
+    const response = await apiClient.get('admin/members/excel', { responseType: 'arraybuffer' });
+    return response.data;
+  },
 };
