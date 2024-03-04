@@ -4958,6 +4958,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/file-saver@npm:^2":
+  version: 2.0.7
+  resolution: "@types/file-saver@npm:2.0.7"
+  checksum: c3d1cd80eab1214767922cabac97681f3fb688e82b74890450d70deaca49537949bbc96d80d363d91e8f0a4752c7164909cc8902d9721c5c4809baafc42a3801
+  languageName: node
+  linkType: hard
+
 "@types/find-cache-dir@npm:^3.2.1":
   version: 3.2.1
   resolution: "@types/find-cache-dir@npm:3.2.1"
@@ -8947,6 +8954,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"file-saver@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "file-saver@npm:2.0.5"
+  checksum: fbba443d9b682fec0be6676c048a7ac688b9bd33b105c02e8e1a1cb3e354ed441198dc1f15dcbc137fa044bea73f8a7549f2617e3a952fa7d96390356d54a7c3
+  languageName: node
+  linkType: hard
+
 "file-system-cache@npm:2.3.0":
   version: 2.3.0
   resolution: "file-system-cache@npm:2.3.0"
@@ -9336,6 +9350,7 @@ __metadata:
     "@tanstack/react-query": "npm:^5.17.1"
     "@tanstack/react-query-devtools": "npm:^5.17.1"
     "@types/eslint": "npm:^8"
+    "@types/file-saver": "npm:^2"
     "@types/lodash": "npm:^4"
     "@types/node": "npm:^18.11.16"
     "@types/react": "npm:^18.2.46"
@@ -9359,6 +9374,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.5"
     eslint-plugin-storybook: "npm:^0.6.15"
+    file-saver: "npm:^2.0.5"
     husky: "npm:^8.0.3"
     lint-staged: "npm:^15.2.0"
     lodash: "npm:^4.17.21"

@@ -41,6 +41,7 @@ const RAW_RUNTIME_STATE =
           ["@tanstack/react-query", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:5.17.1"],\
           ["@tanstack/react-query-devtools", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:5.17.1"],\
           ["@types/eslint", "npm:8.56.1"],\
+          ["@types/file-saver", "npm:2.0.7"],\
           ["@types/lodash", "npm:4.14.202"],\
           ["@types/node", "npm:18.19.4"],\
           ["@types/react", "npm:18.2.46"],\
@@ -64,6 +65,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:0.4.5"],\
           ["eslint-plugin-storybook", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:0.6.15"],\
+          ["file-saver", "npm:2.0.5"],\
           ["husky", "npm:8.0.3"],\
           ["lint-staged", "npm:15.2.0"],\
           ["lodash", "npm:4.17.21"],\
@@ -7968,6 +7970,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/file-saver", [\
+      ["npm:2.0.7", {\
+        "packageLocation": "./.yarn/cache/@types-file-saver-npm-2.0.7-39f33a4b39-c3d1cd80ea.zip/node_modules/@types/file-saver/",\
+        "packageDependencies": [\
+          ["@types/file-saver", "npm:2.0.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/find-cache-dir", [\
       ["npm:3.2.1", {\
         "packageLocation": "./.yarn/cache/@types-find-cache-dir-npm-3.2.1-07fd2b6e78-bf5c4e96da.zip/node_modules/@types/find-cache-dir/",\
@@ -12746,6 +12757,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["file-saver", [\
+      ["npm:2.0.5", {\
+        "packageLocation": "./.yarn/cache/file-saver-npm-2.0.5-2c3bc40d53-fbba443d9b.zip/node_modules/file-saver/",\
+        "packageDependencies": [\
+          ["file-saver", "npm:2.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["file-system-cache", [\
       ["npm:2.3.0", {\
         "packageLocation": "./.yarn/cache/file-system-cache-npm-2.3.0-9edc562b29-8f0530aaa8.zip/node_modules/file-system-cache/",\
@@ -13179,6 +13199,7 @@ const RAW_RUNTIME_STATE =
           ["@tanstack/react-query", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:5.17.1"],\
           ["@tanstack/react-query-devtools", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:5.17.1"],\
           ["@types/eslint", "npm:8.56.1"],\
+          ["@types/file-saver", "npm:2.0.7"],\
           ["@types/lodash", "npm:4.14.202"],\
           ["@types/node", "npm:18.19.4"],\
           ["@types/react", "npm:18.2.46"],\
@@ -13202,6 +13223,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:0.4.5"],\
           ["eslint-plugin-storybook", "virtual:3d54418dc1345bf2715d2d0d1359959c5178cbdf6d6a2157d053afdae254746024a331bf0c261c3bdb4431a3c73d46bd622ee2a0909a0e8aab4b4fde943604af#npm:0.6.15"],\
+          ["file-saver", "npm:2.0.5"],\
           ["husky", "npm:8.0.3"],\
           ["lint-staged", "npm:15.2.0"],\
           ["lodash", "npm:4.17.21"],\
