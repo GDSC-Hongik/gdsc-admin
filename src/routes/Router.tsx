@@ -2,6 +2,7 @@ import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "@/components/layout/common/Layout";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
+import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
 import GrantableMembersPage from "@/pages/GrantableMembersPage";
 import GrantedMembersPage from "@/pages/GrantedMembersPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
@@ -28,6 +29,7 @@ const routes: RouteObject[] = [
     path: RoutePath.AuthorizedError,
     element: <AuthErrorPage />,
   },
+  { path: RoutePath.AuthorizedSuccess, element: <AuthSuccessRedirectPage /> },
   { path: "*", element: <NotFoundErrorPage /> },
 ];
 
