@@ -61,29 +61,19 @@ export default function EditInfoModal({
   }, [selectedMemberInfo, isModalVisible, setDepartmentSearchText]);
 
   useEffect(() => {
-    const isNameValid = memberInfo.name.trim() !== "";
     const isStudentIdValid =
-      memberInfo.studentId.trim() !== "" &&
-      RegExp(memberInfoValidation.studentId.regExp).test(memberInfo.studentId);
+      !memberInfo.studentId || RegExp(memberInfoValidation.studentId.regExp).test(memberInfo.studentId);
     const isPhoneValid =
-      memberInfo.phone.trim() !== "" &&
-      RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(memberInfo.phone));
-    const isDepartmentValid = memberInfo.department.code?.trim() !== "";
+      !memberInfo.phone || RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(memberInfo.phone));
     const isEmailValid =
-      memberInfo.email.trim() !== "" &&
-      RegExp(memberInfoValidation.email.regExp).test(memberInfo.email);
-    const isDiscordUsernameValid = memberInfo.discordUsername.trim() !== "";
+      !memberInfo.email || RegExp(memberInfoValidation.email.regExp).test(memberInfo.email);
     const isNicknameValid =
-      memberInfo.nickname.trim() !== "" &&
-      RegExp(memberInfoValidation.nickname.regExp).test(memberInfo.nickname);
+      !memberInfo.nickname || RegExp(memberInfoValidation.nickname.regExp).test(memberInfo.nickname);
 
     const isSaveButtonDisabled = !(
-      isNameValid &&
       isStudentIdValid &&
       isPhoneValid &&
-      isDepartmentValid &&
       isEmailValid &&
-      isDiscordUsernameValid &&
       isNicknameValid
     );
 
