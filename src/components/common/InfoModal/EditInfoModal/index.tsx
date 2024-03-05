@@ -45,19 +45,19 @@ export default function EditInfoModal({
 
   useEffect(() => {
     setMemberInfo({
-      memberId: selectedMemberInfo.memberId ?? 0,
-      name: selectedMemberInfo.name ?? "",
-      studentId: selectedMemberInfo.studentId ?? "",
-      phone: selectedMemberInfo.phone ?? "",
-      department: selectedMemberInfo.department ?? {
+      memberId: selectedMemberInfo.memberId || 0,
+      name: selectedMemberInfo.name || "",
+      studentId: selectedMemberInfo.studentId || "",
+      phone: selectedMemberInfo.phone || "",
+      department: selectedMemberInfo.department || {
         code: "",
         name: "",
       },
-      email: selectedMemberInfo.email ?? "",
-      discordUsername: selectedMemberInfo.discordUsername ?? null,
-      nickname: selectedMemberInfo.nickname ?? null,
+      email: selectedMemberInfo.email || "",
+      discordUsername: selectedMemberInfo.discordUsername || null,
+      nickname: selectedMemberInfo.nickname || null,
     });
-    setDepartmentSearchText(selectedMemberInfo.department.name ?? "");
+    setDepartmentSearchText(selectedMemberInfo.department.name || "");
   }, [selectedMemberInfo, isModalVisible, setDepartmentSearchText]);
 
   useEffect(() => {
