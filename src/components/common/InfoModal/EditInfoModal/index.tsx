@@ -54,8 +54,8 @@ export default function EditInfoModal({
         name: "",
       },
       email: selectedMemberInfo.email ?? "",
-      discordUsername: selectedMemberInfo.discordUsername ?? "",
-      nickname: selectedMemberInfo.nickname ?? "",
+      discordUsername: selectedMemberInfo.discordUsername ?? null,
+      nickname: selectedMemberInfo.nickname ?? null,
     });
     setDepartmentSearchText(selectedMemberInfo.department.name ?? "");
   }, [selectedMemberInfo, isModalVisible, setDepartmentSearchText]);

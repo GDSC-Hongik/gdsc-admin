@@ -11,8 +11,8 @@ export default function useEditMemberInfoMutation(
     phone: string;
     department: string;
     email: string;
-    discordUsername: string;
-    nickname: string;
+    discordUsername: string | null;
+    nickname: string | null;
   },
   onSuccessCallback: () => void,
 ) {
