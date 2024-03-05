@@ -110,8 +110,8 @@ export default function EditInfoModal({
     phone: formatPhoneNumber(phone),
     department: department.code,
     email: email,
-    discordUsername: discordUsername,
-    nickname: nickname,
+    discordUsername: discordUsername || null,
+    nickname: nickname || null,
   }, () => setIsModalVisible(false));
 
   return (

@@ -28,12 +28,12 @@ export default function useEditMemberInfoMutation(
         queryClient.invalidateQueries({
           queryKey: [QueryKey.grantableMemberList],
         })
-      ])
-      toast.success("수정 완료되었습니다.")
+      ]);
+      toast.success("수정 완료되었습니다.");
       onSuccessCallback();
     },
     onError: (error: any) => {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
     },
   });
 }
