@@ -23,7 +23,7 @@ export default function useEditMemberInfoMutation(
     onSuccess: async () => {
       Promise.all([
         queryClient.invalidateQueries({
-          queryKey: [QueryKey.allMemberList, QueryKey.grantableMemberList],
+          queryKey: [QueryKey.allMemberList],
         }),
         queryClient.invalidateQueries({
           queryKey: [QueryKey.allMemberList],
