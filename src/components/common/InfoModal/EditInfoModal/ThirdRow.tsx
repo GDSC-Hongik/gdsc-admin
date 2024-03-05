@@ -29,7 +29,7 @@ export default function ThirdRow({
         <StyledTextField
           size="small"
           name="nickname"
-          value={nickname?.length ? nickname : null}
+          value={nickname}
           onChange={handleChangeMemberInfo}
           error={nickname ? !RegExp(memberInfoValidation.nickname.regExp).test(nickname) : undefined}
           helperText={nickname && !RegExp(memberInfoValidation.nickname.regExp).test(nickname) ? memberInfoValidation.nickname.errorText : ''}

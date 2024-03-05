@@ -38,8 +38,8 @@ export default function EditInfoModal({
       name: "",
     },
     email: "",
-    discordUsername: "",
-    nickname: "",
+    discordUsername: null,
+    nickname: null,
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
