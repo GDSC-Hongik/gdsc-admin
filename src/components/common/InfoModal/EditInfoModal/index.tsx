@@ -38,26 +38,26 @@ export default function EditInfoModal({
       name: "",
     },
     email: "",
-    discordUsername: "",
-    nickname: "",
+    discordUsername: null,
+    nickname: null,
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     setMemberInfo({
-      memberId: selectedMemberInfo.memberId ?? 0,
-      name: selectedMemberInfo.name ?? "",
-      studentId: selectedMemberInfo.studentId ?? "",
-      phone: selectedMemberInfo.phone ?? "",
-      department: selectedMemberInfo.department ?? {
+      memberId: selectedMemberInfo.memberId || 0,
+      name: selectedMemberInfo.name || "",
+      studentId: selectedMemberInfo.studentId || "",
+      phone: selectedMemberInfo.phone || "",
+      department: selectedMemberInfo.department || {
         code: "",
         name: "",
       },
-      email: selectedMemberInfo.email ?? "",
-      discordUsername: selectedMemberInfo.discordUsername ?? "",
-      nickname: selectedMemberInfo.nickname ?? "",
+      email: selectedMemberInfo.email || "",
+      discordUsername: selectedMemberInfo.discordUsername || null,
+      nickname: selectedMemberInfo.nickname || null,
     });
-    setDepartmentSearchText(selectedMemberInfo.department.name ?? "");
+    setDepartmentSearchText(selectedMemberInfo.department.name || "");
   }, [selectedMemberInfo, isModalVisible, setDepartmentSearchText]);
 
   useEffect(() => {
@@ -110,8 +110,8 @@ export default function EditInfoModal({
     phone: formatPhoneNumber(phone),
     department: department.code,
     email: email,
-    discordUsername: discordUsername,
-    nickname: nickname,
+    discordUsername: discordUsername || null,
+    nickname: nickname || null,
   }, () => setIsModalVisible(false));
 
   return (

@@ -10,8 +10,8 @@ export type AllMemberInfoType = {
     name: string;
   };
   email: string;
-  discordUsername: string;
-  nickname: string;
+  discordUsername: string | null;
+  nickname: string | null;
 };
 
 export type AllMemberInfoStateType = AllMemberInfoType;

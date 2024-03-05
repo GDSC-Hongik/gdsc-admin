@@ -11,8 +11,8 @@ export default function useEditMemberInfoMutation(
     phone: string;
     department: string;
     email: string;
-    discordUsername: string;
-    nickname: string;
+    discordUsername: string | null;
+    nickname: string | null;
   },
   onSuccessCallback: () => void,
 ) {
@@ -20,13 +20,20 @@ export default function useEditMemberInfoMutation(
 
   return useMutation({
     mutationFn: () => allMemberApi.editMemberInfo(memberId, body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QueryKey.allMemberList, QueryKey.grantableMemberList] });
+    onSuccess: async () => {
+      Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [QueryKey.allMemberList],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [QueryKey.grantableMemberList],
+        })
+      ]);
+      toast.success("수정 완료되었습니다.");
       onSuccessCallback();
-      toast.success("수정 완료되었습니다.")
     },
     onError: (error: any) => {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
     },
   });
 }
