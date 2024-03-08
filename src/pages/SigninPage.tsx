@@ -22,7 +22,7 @@ export default function SigninPage() {
   }, []);
 
   return (
-    <Container component="main" sx={{ width: "100vw", height: "100vh" }}>
+    <Container component="main" sx={{ width: "100%", height: "100vh" }}>
       <Stack
         gap="48px"
         sx={{
