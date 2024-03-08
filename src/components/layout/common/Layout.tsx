@@ -28,7 +28,10 @@ export default function Layout() {
           <Button
             variant={'outlined'}
             onClick={handleClickLogoutButton}
-            sx={{ marginLeft: 'auto' }}
+            sx={{
+              marginLeft: 'auto',
+              marginRight: '20px'
+            }}
           >
             로그아웃
           </Button>
