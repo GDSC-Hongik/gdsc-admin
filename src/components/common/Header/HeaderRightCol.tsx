@@ -21,36 +21,34 @@ const HeaderRightElement = (
       toast.error("오류가 발생했습니다.");
     }
   };
+
   const handleClickAcceptMemberButton = () => setIsAcceptModalVisible(true);
 
+  const renderCommonRightElement = () => (
+    <RightColContainer>
+      <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
+      <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
+        승인
+      </StyledButton>
+    </RightColContainer>
+  );
+
+  const renderAllMemberRightElement = () => (
+    <RightColContainer>
+      <Button
+        variant="outlined"
+        onClick={handleClickExcelDownloadButton}
+        sx={{ marginRight: "20px" }}
+      >
+        엑셀 다운로드
+      </Button>
+    </RightColContainer>
+  );
+
   return {
-    allMember: (
-      <RightColContainer>
-        <Button
-          variant="outlined"
-          onClick={handleClickExcelDownloadButton}
-          sx={{ marginRight: "20px" }}
-        >
-          엑셀 다운로드
-        </Button>
-      </RightColContainer>
-    ),
-    pendingMember: (
-      <RightColContainer>
-        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
-        <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
-          승인
-        </StyledButton>
-      </RightColContainer>
-    ),
-    grantableMember: (
-      <RightColContainer>
-        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
-        <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
-          승인
-        </StyledButton>
-      </RightColContainer>
-    ),
+    allMember: renderAllMemberRightElement(),
+    pendingMember: renderCommonRightElement(),
+    grantableMember: renderCommonRightElement(),
     grantedMember: null,
     paymentStatus: null,
   };
@@ -75,12 +73,12 @@ export default function HeaderRightCol({ variant }: HeaderRightColProps) {
   );
 }
 
-const RightColContainer = styled(Stack)`
-  gap: 10px;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-`;
+const RightColContainer = styled(Stack)({
+  gap: "10px",
+  flexDirection: "row",
+  alignItems: "center",
+  flexWrap: "wrap",
+});
 
 const SelectedMemberCountText = styled(Typography)({
   marginRight: "20px",
