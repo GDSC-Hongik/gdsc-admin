@@ -1,8 +1,8 @@
 import { apiClient } from ".";
 import {
-  GrantPendingMemberDtoType,
-  GrantPendingMemberRequestBodyDtoType,
-  PendingMemberListDtoType,
+  GrantPendingMemberResponseDtoType,
+  GrantPendingMemberRequestDtoType,
+  PendingMemberListResponseDtoType,
 } from "@/types/dtos/member";
 import { SearchVariantType } from "@/types/entities/store";
 
@@ -12,7 +12,7 @@ export const pendingMemberApi = {
     size: number,
     searchVariant: SearchVariantType<"pendingMember">,
     searchText: string,
-  ): Promise<PendingMemberListDtoType> => {
+  ): Promise<PendingMemberListResponseDtoType> => {
     if (searchText && searchVariant) {
       const searchUrl = `admin/members/pending?${searchVariant}=${searchText}&page=${page}&size=${size}`;
 
@@ -27,8 +27,8 @@ export const pendingMemberApi = {
   },
 
   grantPendingMember: async (
-    memberIdList: GrantPendingMemberRequestBodyDtoType,
-  ): Promise<GrantPendingMemberDtoType> => {
+    memberIdList: GrantPendingMemberRequestDtoType,
+  ): Promise<GrantPendingMemberResponseDtoType> => {
     const response = await apiClient.put(`admin/members/grant`, memberIdList);
     return response.data;
   },

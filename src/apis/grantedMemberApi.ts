@@ -1,4 +1,5 @@
 import { apiClient } from ".";
+import { GrantedMemberListResponseDtoType } from "@/types/dtos/member";
 import { SearchVariantType } from "@/types/entities/store";
 
 export const grantedMemberApi = {
@@ -7,7 +8,7 @@ export const grantedMemberApi = {
     size: number,
     searchVariant: SearchVariantType<"grantedMember">,
     searchText: string,
-  ) => {
+  ): Promise<GrantedMemberListResponseDtoType> => {
     if (searchText && searchVariant) {
       const searchUrl = `admin/members/granted?${searchVariant}=${searchText}&page=${page}&size=${size}`;
       const response = await apiClient.get(searchUrl);

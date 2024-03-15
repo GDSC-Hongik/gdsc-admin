@@ -1,7 +1,6 @@
 import { BASE_URL } from "src/environment";
 import axios, { AxiosError, AxiosInstance } from "axios";
 import useAuthStorage from "@/hooks/useAuthStorage";
-// import lStorage, { StorageKeys } from "@/utils/storage/index";
 
 const createApiClient = (): AxiosInstance => {
   const apiClient = axios.create({
