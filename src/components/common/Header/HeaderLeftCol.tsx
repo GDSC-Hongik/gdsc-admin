@@ -9,19 +9,20 @@ import {
   Stack,
   SelectChangeEvent,
 } from "@mui/material";
-import { StoreApi, UseBoundStore, useStore } from "zustand";
+import { useStore } from "zustand";
 import {
   commonMemberTableTitle,
   paymentStatusTableTitle,
   pendingMemberTableTitle,
 } from "@/constants/table";
+import useGetSearchTextSetters from "@/hooks/useGetSearchTextFunction";
 import { allMembersStore } from "@/store/allMembers";
 import { grantableMembersStore } from "@/store/grantableMembers";
 import { grantedMembersStore } from "@/store/grantedMembers";
 import { paymentStatusMembersStore } from "@/store/paymentStatusMembers";
 import { pendingMembersStore } from "@/store/pendingMembers";
 import { ManagementVariant } from "@/types/entities/member";
-import { MemberStoreType, SearchVariantType } from "@/types/entities/store";
+import { SearchVariantType } from "@/types/entities/store";
 
 const FormContainer = styled(FormControl)({
   width: "180px",
@@ -140,19 +141,7 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
 };
 
 export default function HeaderLeftCol({ variant }: HeaderLeftColProps) {
-  const useGetSetSearchTextFunction = (store: UseBoundStore<StoreApi<MemberStoreType>>) => {
-    const { setSearchText } = useStore(store);
-
-    return setSearchText;
-  };
-
-  const setSearchTextFunctions = {
-    allMember: useGetSetSearchTextFunction(allMembersStore),
-    grantedMember: useGetSetSearchTextFunction(grantedMembersStore),
-    grantableMember: useGetSetSearchTextFunction(grantableMembersStore),
-    pendingMember: useGetSetSearchTextFunction(pendingMembersStore),
-    paymentStatus: useGetSetSearchTextFunction(paymentStatusMembersStore),
-  };
+  const setSearchTextFunctions = useGetSearchTextSetters();
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const setSearchText = setSearchTextFunctions[variant];
