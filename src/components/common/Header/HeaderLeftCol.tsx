@@ -9,21 +9,12 @@ import {
   Stack,
   SelectChangeEvent,
 } from "@mui/material";
-import { useStore } from "zustand";
-import {
-  commonMemberTableTitle,
-  paymentStatusTableTitle,
-  pendingMemberTableTitle,
-} from "@/constants/table";
-import useGetSearchTextSetters from "@/hooks/useGetSearchTextFunction";
-import { allMembersStore } from "@/store/allMembers";
-import { grantableMembersStore } from "@/store/grantableMembers";
-import { grantedMembersStore } from "@/store/grantedMembers";
-import { paymentStatusMembersStore } from "@/store/paymentStatusMembers";
-import { pendingMembersStore } from "@/store/pendingMembers";
+import { commonMemberTableTitle, pendingMemberTableTitle } from "@/constants/table";
+import useGetSearchTextSetters from "@/hooks/useGetSearchTextSetters";
+import useGetSearchVariantSetters from "@/hooks/useGetSearchVariantSetters";
 import { ManagementVariant } from "@/types/entities/member";
-import { SearchVariantType } from "@/types/entities/store";
 import { MemberTableTitleType } from "@/types/entities/table";
+import { setSearchInfo } from "@/utils/setSearchInfoFunction";
 
 const FormContainer = styled(FormControl)({
   width: "180px",
@@ -36,45 +27,13 @@ type HeaderLeftColProps = {
 const HeaderLeftElement = (variant: ManagementVariant) => {
   const [selectedValue, setSelectedValue] = useState("");
 
-  const { setSearchVariant: setAllMemberSearchVariant } = useStore(allMembersStore);
-  const { setSearchVariant: setGrantedMemberSearchVariant } = useStore(grantedMembersStore);
-  const { setSearchVariant: setGrantableMemberSearchVariant } = useStore(grantableMembersStore);
-  const { setSearchVariant: setPendingMemberSearchVariant } = useStore(pendingMembersStore);
-  const { setSearchVariant: setPaymentMemberSearchVariant } = useStore(paymentStatusMembersStore);
+  const searchVariantSetters = useGetSearchVariantSetters();
 
   const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
+    const setSearchVariant = searchVariantSetters[variant];
 
-    if (variant === "allMember") {
-      setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
-      setAllMemberSearchVariant?.(
-        commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"allMember">,
-      );
-    } else if (variant === "pendingMember") {
-      setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
-      setPendingMemberSearchVariant?.(
-        pendingMemberTableTitle.slice(0, 5)[targetIndex][
-          "type"
-        ] as SearchVariantType<"pendingMember">,
-      );
-    } else if (variant === "paymentStatus") {
-      setSelectedValue(paymentStatusTableTitle[targetIndex]["value"]);
-      setPaymentMemberSearchVariant?.(
-        paymentStatusTableTitle.slice(0, 5)[targetIndex][
-          "type"
-        ] as SearchVariantType<"paymentStatus">,
-      );
-    } else if (variant === "grantableMember") {
-      setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
-      setGrantableMemberSearchVariant?.(
-        commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantableMember">,
-      );
-    } else {
-      setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
-      setGrantedMemberSearchVariant?.(
-        commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantedMember">,
-      );
-    }
+    setSearchInfo[variant](setSelectedValue, setSearchVariant, targetIndex);
   };
 
   const renderFormElement = (memberTableTitle: MemberTableTitleType) => (

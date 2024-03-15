@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import {
-  allMemberTableTitle,
+  commonMemberTableTitle,
   paymentStatusTableTitle,
   pendingMemberTableTitle,
 } from "@/constants/table";
@@ -13,11 +13,11 @@ type SetSearchInfoFunctionType = <T extends ManagementVariant>(
   targetIndex: number,
 ) => void;
 
-export const setSearchInfoFunctions: Record<ManagementVariant, SetSearchInfoFunctionType> = {
+export const setSearchInfo: Record<ManagementVariant, SetSearchInfoFunctionType> = {
   allMember: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+    setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
     setSearchVariant?.(
-      allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"allMember">,
+      commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"allMember">,
     );
   },
   pendingMember: (setSelectedValue, setSearchVariant, targetIndex) => {
@@ -29,7 +29,7 @@ export const setSearchInfoFunctions: Record<ManagementVariant, SetSearchInfoFunc
     );
   },
   paymentStatus: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+    setSelectedValue(paymentStatusTableTitle[targetIndex]["value"]);
     setSearchVariant?.(
       paymentStatusTableTitle.slice(0, 5)[targetIndex][
         "type"
@@ -37,15 +37,15 @@ export const setSearchInfoFunctions: Record<ManagementVariant, SetSearchInfoFunc
     );
   },
   grantableMember: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+    setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
     setSearchVariant?.(
-      allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantableMember">,
+      commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantableMember">,
     );
   },
   grantedMember: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+    setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
     setSearchVariant?.(
-      allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantedMember">,
+      commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantedMember">,
     );
   },
 };
