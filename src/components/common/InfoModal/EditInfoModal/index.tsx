@@ -62,13 +62,16 @@ export default function EditInfoModal({
 
   useEffect(() => {
     const isStudentIdValid =
-      !memberInfo.studentId || RegExp(memberInfoValidation.studentId.regExp).test(memberInfo.studentId);
+      !memberInfo.studentId ||
+      RegExp(memberInfoValidation.studentId.regExp).test(memberInfo.studentId);
     const isPhoneValid =
-      !memberInfo.phone || RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(memberInfo.phone));
+      !memberInfo.phone ||
+      RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(memberInfo.phone));
     const isEmailValid =
       !memberInfo.email || RegExp(memberInfoValidation.email.regExp).test(memberInfo.email);
     const isNicknameValid =
-      !memberInfo.nickname || RegExp(memberInfoValidation.nickname.regExp).test(memberInfo.nickname);
+      !memberInfo.nickname ||
+      RegExp(memberInfoValidation.nickname.regExp).test(memberInfo.nickname);
 
     const isSaveButtonDisabled = !(
       isStudentIdValid &&
@@ -104,15 +107,19 @@ export default function EditInfoModal({
   const { name, studentId, phone, email, discordUsername, nickname, memberId, department } =
     memberInfo;
 
-  const editMemberMutation = useEditMemberInfoMutation(memberId, {
-    studentId,
-    name,
-    phone: formatPhoneNumber(phone),
-    department: department.code,
-    email: email,
-    discordUsername: discordUsername || null,
-    nickname: nickname || null,
-  }, () => setIsModalVisible(false));
+  const editMemberMutation = useEditMemberInfoMutation(
+    memberId,
+    {
+      studentId,
+      name,
+      phone: formatPhoneNumber(phone),
+      department: department.code,
+      email: email,
+      discordUsername: discordUsername || null,
+      nickname: nickname || null,
+    },
+    () => setIsModalVisible(false),
+  );
 
   return (
     <Modal open={isModalVisible} onClose={handleCloseModal}>

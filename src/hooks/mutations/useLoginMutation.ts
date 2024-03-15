@@ -9,12 +9,12 @@ export default function useLoginMutation(email: string, password: string) {
 
   return useMutation({
     mutationFn: () => authApi.commonLogin(email, password),
-    onSuccess: (data) => {
+    onSuccess: data => {
       navigate(RoutePath.AllMembers);
       toast.success("로그인 성공");
 
-      localStorage.setItem('accessToken', data.accessToken);
-      localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
     },
-  })
+  });
 }

@@ -18,7 +18,7 @@ export default function Layout() {
     clearAuthData();
     toast.success("로그아웃 성공");
     navigate(RoutePath.Signin);
-  }
+  };
 
   return (
     <ApiErrorBoundary>
@@ -26,11 +26,11 @@ export default function Layout() {
         <Sidebar />
         <BodyContainer>
           <Button
-            variant={'outlined'}
+            variant={"outlined"}
             onClick={handleClickLogoutButton}
             sx={{
-              marginLeft: 'auto',
-              marginRight: '20px'
+              marginLeft: "auto",
+              marginRight: "20px",
             }}
           >
             로그아웃

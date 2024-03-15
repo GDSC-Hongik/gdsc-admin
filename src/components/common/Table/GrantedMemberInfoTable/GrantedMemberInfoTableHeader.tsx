@@ -25,7 +25,7 @@ export default function GrantedMemberInfoTableHeader() {
       ))}
       <EmptyTitle />
     </Container>
-  )
+  );
 }
 
 const Container = styled(Grid)({

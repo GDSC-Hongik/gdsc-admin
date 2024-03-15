@@ -15,7 +15,7 @@ export default function useUpdateMemberPaymentStatusMutation() {
       toast.success("납부 상태를 변경 완료하였습니다.");
     },
     onError: (error: any) => {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
     },
   });
 }

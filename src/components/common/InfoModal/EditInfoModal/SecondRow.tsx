@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { theme } from "@/styles/theme";
-import { DepartmentListDtoType } from "@/types/dtos/member";
+import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 
@@ -23,7 +23,7 @@ export default function SecondRow({
 }: SecondRowProps) {
   const { departmentList } = useGetDepartmentListQuery(departmentSearchText);
 
-  const handleClickDepartmentItem = (departmentItem: DepartmentListDtoType) => {
+  const handleClickDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
     setDepartmentSearchText(departmentItem.name);
     setMemberInfo(prevInfo => ({
       ...prevInfo,

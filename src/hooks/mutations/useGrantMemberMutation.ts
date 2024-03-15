@@ -21,7 +21,7 @@ export default function useGrantMemberMutation() {
       });
     },
     onError: (error: any) => {
-      toast.error(error.response.data.errorMessage)
+      toast.error(error.response.data.errorMessage);
     },
   });
 }

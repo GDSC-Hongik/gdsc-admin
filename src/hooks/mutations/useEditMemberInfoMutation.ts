@@ -27,7 +27,7 @@ export default function useEditMemberInfoMutation(
         }),
         queryClient.invalidateQueries({
           queryKey: [QueryKey.grantableMemberList],
-        })
+        }),
       ]);
       toast.success("수정 완료되었습니다.");
       onSuccessCallback();
