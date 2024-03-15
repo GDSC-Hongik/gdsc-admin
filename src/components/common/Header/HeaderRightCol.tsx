@@ -1,12 +1,12 @@
 import { Dispatch, ReactElement, SetStateAction, useContext, useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack, Typography } from "@mui/material";
-import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { SelectedMemberListContext } from "@/components/context/SelectedMemberContextProvider";
 import { ManagementVariant } from "@/types/entities/member";
+import { downloadExcelFile } from "@/utils/excel";
 
 const HeaderRightElement = (
   selectedMemberCount: number,
@@ -15,42 +15,39 @@ const HeaderRightElement = (
   const handleClickExcelDownloadButton = async () => {
     try {
       const data = await allMemberApi.getMemberInfoExcel();
-      const blob = new Blob([data], { type: "application/vnd.ms-excel" });
-      saveAs(blob, "members.xls");
+      downloadExcelFile(data, "members");
     } catch (error) {
       toast.error("오류가 발생했습니다.");
     }
   };
+
   const handleClickAcceptMemberButton = () => setIsAcceptModalVisible(true);
 
+  const renderCommonRightElement = () => (
+    <RightColContainer>
+      <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
+      <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
+        승인
+      </StyledButton>
+    </RightColContainer>
+  );
+
+  const renderAllMemberRightElement = () => (
+    <RightColContainer>
+      <Button
+        variant="outlined"
+        onClick={handleClickExcelDownloadButton}
+        sx={{ marginRight: "20px" }}
+      >
+        엑셀 다운로드
+      </Button>
+    </RightColContainer>
+  );
+
   return {
-    allMember: (
-      <RightColContainer>
-        <Button
-          variant="outlined"
-          onClick={handleClickExcelDownloadButton}
-          sx={{ marginRight: "20px" }}
-        >
-          엑셀 다운로드
-        </Button>
-      </RightColContainer>
-    ),
-    pendingMember: (
-      <RightColContainer>
-        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
-        <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
-          승인
-        </StyledButton>
-      </RightColContainer>
-    ),
-    grantableMember: (
-      <RightColContainer>
-        <SelectedMemberCountText>{selectedMemberCount}명 선택</SelectedMemberCountText>
-        <StyledButton variant="outlined" onClick={handleClickAcceptMemberButton}>
-          승인
-        </StyledButton>
-      </RightColContainer>
-    ),
+    allMember: renderAllMemberRightElement(),
+    pendingMember: renderCommonRightElement(),
+    grantableMember: renderCommonRightElement(),
     grantedMember: null,
     paymentStatus: null,
   };
@@ -75,12 +72,12 @@ export default function HeaderRightCol({ variant }: HeaderRightColProps) {
   );
 }
 
-const RightColContainer = styled(Stack)`
-  gap: 10px;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-`;
+const RightColContainer = styled(Stack)({
+  gap: "10px",
+  flexDirection: "row",
+  alignItems: "center",
+  flexWrap: "wrap",
+});
 
 const SelectedMemberCountText = styled(Typography)({
   marginRight: "20px",

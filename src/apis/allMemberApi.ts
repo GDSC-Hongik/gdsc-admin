@@ -50,7 +50,7 @@ export const allMemberApi = {
     return response.data;
   },
 
-  getMemberInfoExcel: async () => {
+  getMemberInfoExcel: async (): Promise<string> => {
     const response = await apiClient.get("admin/members/excel", { responseType: "arraybuffer" });
     return response.data;
   },
