@@ -1,27 +1,28 @@
 import { create } from "zustand";
-import { AllMembersSearchVariantType } from "@/types/entities/store";
+import { SearchInfoType, SearchVariantType } from "@/types/entities/store";
 
-type SearchInfoType = {
-  text: string;
-  variant: AllMembersSearchVariantType[number] | null;
+type AllMembersStoreType = {
+  searchInfo: SearchInfoType;
 };
 
-export const allMembersStore = create(set => ({
+export const allMembersStore = create<AllMembersStoreType>(set => ({
   searchInfo: {
     text: "",
     variant: null,
   },
   setSearchText: (text: string) =>
-    set((prevSearchInfo: SearchInfoType) => ({
+    set(prevSearchInfo => ({
+      ...prevSearchInfo,
       searchInfo: {
-        ...prevSearchInfo,
+        ...prevSearchInfo.searchInfo,
         text,
       },
     })),
-  setSearchVariant: (variant: string) =>
-    set((prevSearchInfo: SearchInfoType) => ({
+  setSearchVariant: (variant: SearchVariantType) =>
+    set(prevSearchInfo => ({
+      ...prevSearchInfo,
       searchInfo: {
-        ...prevSearchInfo,
+        ...prevSearchInfo.searchInfo,
         variant,
       },
     })),

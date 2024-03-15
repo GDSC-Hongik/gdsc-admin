@@ -4,8 +4,8 @@ import AllMemberInfoTable from "@/components/common/Table/AllMemberInfoTable";
 import Title from "@/components/common/Title";
 
 export default function AllMembersPage() {
-  const [allMemberSearchType, setAllMemberSearchType] = useState("");
-  const [allMemberSearchText, setAllMemberSearchText] = useState("");
+  const [, setAllMemberSearchType] = useState("");
+  const [, setAllMemberSearchText] = useState("");
 
   return (
     <>
@@ -15,10 +15,7 @@ export default function AllMembersPage() {
         setAllMemberSearchType={setAllMemberSearchType}
         setAllMemberSearchText={setAllMemberSearchText}
       />
-      <AllMemberInfoTable
-        allMemberSearchType={allMemberSearchType}
-        allMemberSearchText={allMemberSearchText}
-      />
+      <AllMemberInfoTable />
     </>
   );
 }

@@ -1,4 +1,4 @@
-export type AllMembersSearchVariantType = [
+type AllMembersSearchVariantType = [
   "studentId",
   "name",
   "phone",
@@ -7,3 +7,10 @@ export type AllMembersSearchVariantType = [
   "discordUsername",
   "nickname",
 ];
+
+export type SearchVariantType = AllMembersSearchVariantType[number] | null;
+
+export type SearchInfoType = {
+  text: string;
+  variant: SearchVariantType;
+};

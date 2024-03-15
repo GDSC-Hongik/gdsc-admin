@@ -1,27 +1,25 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Grid, TablePagination } from "@mui/material";
+import { useStore } from "zustand";
 import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
+import { allMembersStore } from "@/store/allMembers";
 
-type AllMemberInfoTableProps = {
-  allMemberSearchType: string;
-  allMemberSearchText: string;
-};
-
-export default function AllMemberInfoTable({
-  allMemberSearchType,
-  allMemberSearchText,
-}: AllMemberInfoTableProps) {
+export default function AllMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const {
+    searchInfo: { variant: searchVariant, text: searchText },
+  } = useStore(allMembersStore);
 
   const { allMemberList = [], totalElements = 0 } = useGetAllMemberListQuery(
     page,
     rowsPerPage,
-    allMemberSearchType,
-    allMemberSearchText,
+    searchVariant,
+    searchText,
   );
 
   const handleChangePage = (
