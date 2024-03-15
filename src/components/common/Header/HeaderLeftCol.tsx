@@ -52,7 +52,9 @@ const HeaderLeftElement = (
 
     if (variant === "allMember") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setAllMemberSearchVariant?.(allMemberTableTitle[targetIndex]["type"] as SearchVariantType);
+      setAllMemberSearchVariant?.(
+        allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"allMember">,
+      );
     } else if (variant === "pendingMember") {
       setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
       setPendingMemberSearchType?.(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
@@ -61,11 +63,13 @@ const HeaderLeftElement = (
       setPaymentStatusMemberSearchType?.(paymentStatusTableTitle.slice(0, 5)[targetIndex]["type"]);
     } else if (variant === "grantableMember") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setGrantableMemberSearchVariant?.(allMemberTableTitle[targetIndex]["type"] as SearchVariantType);
+      setGrantableMemberSearchVariant?.(
+        allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantableMember">,
+      );
     } else {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
       setGrantedMemberSearchVariant?.(
-        allMemberTableTitle[targetIndex]["type"] as SearchVariantType,
+        allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantedMember">,
       );
     }
   };

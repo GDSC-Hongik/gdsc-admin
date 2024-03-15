@@ -6,7 +6,7 @@ export const grantableMemberApi = {
   getGrantableMemberList: async (
     page: number,
     size: number,
-    searchVariant: SearchVariantType,
+    searchVariant: SearchVariantType<"grantableMember">,
     searchText: string,
   ): Promise<GrantableMemberDtoType> => {
     if (searchText) {

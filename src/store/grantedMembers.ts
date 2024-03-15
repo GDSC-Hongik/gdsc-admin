@@ -2,9 +2,9 @@ import { create } from "zustand";
 import { SearchInfoType, SearchVariantType } from "@/types/entities/store";
 
 type GrantedMembersStoreType = {
-  searchInfo: SearchInfoType;
+  searchInfo: SearchInfoType<"grantedMember">;
   setSearchText: (text: string) => void;
-  setSearchVariant: (variant: SearchVariantType) => void;
+  setSearchVariant: (variant: SearchVariantType<"grantedMember">) => void;
 };
 
 export const grantedMembersStore = create<GrantedMembersStoreType>(set => ({
@@ -20,7 +20,7 @@ export const grantedMembersStore = create<GrantedMembersStoreType>(set => ({
         text,
       },
     })),
-  setSearchVariant: (variant: SearchVariantType) =>
+  setSearchVariant: (variant: SearchVariantType<"grantedMember">) =>
     set(prevSearchInfo => ({
       ...prevSearchInfo,
       searchInfo: {

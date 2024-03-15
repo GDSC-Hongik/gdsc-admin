@@ -5,7 +5,7 @@ export const grantedMemberApi = {
   getGrantedMemberList: async (
     page: number,
     size: number,
-    searchVariant: SearchVariantType,
+    searchVariant: SearchVariantType<"grantedMember">,
     searchText: string,
   ) => {
     if (searchText && searchVariant) {

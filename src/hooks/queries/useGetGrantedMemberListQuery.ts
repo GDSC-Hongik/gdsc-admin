@@ -6,7 +6,7 @@ import { SearchVariantType } from "@/types/entities/store";
 export default function useGetGrantedMemberListQuery(
   page: number,
   size: number,
-  searchVariant: SearchVariantType,
+  searchVariant: SearchVariantType<"grantedMember">,
   searchText: string,
 ) {
   const { data } = useQuery({
