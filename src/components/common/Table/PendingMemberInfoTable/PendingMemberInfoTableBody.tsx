@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
-import { PendingMemberInfoTableProps } from ".";
 import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
+import { SelectedMemberListContext, SelectedMemberDispatchContext } from "@/components/context/SelectedMemberContextProvider";
 import { pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
@@ -10,17 +10,16 @@ import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PendingMemberInfoTableBodyProps = {
   dataList: PendingMemberInfoType[];
-  setSelectedMemberList: PendingMemberInfoTableProps["setSelectedMemberList"];
-  selectedMemberList: PendingMemberInfoTableProps["selectedMemberList"];
 };
 
 export default function PendingMemberInfoTableBody({
   dataList,
-  setSelectedMemberList,
-  selectedMemberList,
 }: PendingMemberInfoTableBodyProps) {
   const [isMemberDetailInfoModalVisible, setIsMemberDetailInfoModalVisible] = useState(false);
   const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] = useState<PendingMemberInfoType>();
+
+  const selectedMemberList = useContext(SelectedMemberListContext);
+  const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
 
   const filterTableInfo = (dataList: PendingMemberInfoType[]) => {
     const newDataList: PendingMemberTableInfoType[] = [];

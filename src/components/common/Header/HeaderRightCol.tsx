@@ -1,15 +1,15 @@
-import { Dispatch, ReactElement, SetStateAction, useState } from "react";
+import { Dispatch, ReactElement, SetStateAction, useContext, useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack, Typography } from "@mui/material";
 import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
-import { HeaderProps } from ".";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
 import { allMemberApi } from "@/apis/allMemberApi";
+import { SelectedMemberListContext } from "@/components/context/SelectedMemberContextProvider";
 import { ManagementVariant } from "@/types/entities/member";
 
-const HeaderRightElement = <T extends ManagementVariant>(
-  selectedMemberCount: HeaderRightColProps<T>["selectedMemberCount"],
+const HeaderRightElement = (
+  selectedMemberCount: number,
   setIsAcceptModalVisible: Dispatch<SetStateAction<boolean>>,
 ): Record<ManagementVariant, ReactElement | null> => {
   const handleClickExcelDownloadButton = async () => {
@@ -20,7 +20,7 @@ const HeaderRightElement = <T extends ManagementVariant>(
     } catch (error) {
       toast.error("오류가 발생했습니다.");
     }
-  }
+  };
   const handleClickAcceptMemberButton = () => setIsAcceptModalVisible(true);
 
   return {
@@ -29,7 +29,7 @@ const HeaderRightElement = <T extends ManagementVariant>(
         <Button
           variant="outlined"
           onClick={handleClickExcelDownloadButton}
-          sx={{ marginRight: '20px' }}
+          sx={{ marginRight: "20px" }}
         >
           엑셀 다운로드
         </Button>
@@ -56,22 +56,17 @@ const HeaderRightElement = <T extends ManagementVariant>(
   };
 };
 
-type HeaderRightColProps<T extends ManagementVariant> = {
-  variant: T;
-  selectedMemberCount: HeaderProps<T>["selectedMemberCount"];
-  selectedMemberList: HeaderProps<T>["selectedMemberList"];
+type HeaderRightColProps = {
+  variant: ManagementVariant;
 };
 
-export default function HeaderRightCol<T extends ManagementVariant>({
-  variant,
-  selectedMemberCount,
-  selectedMemberList,
-}: HeaderRightColProps<T>) {
+export default function HeaderRightCol({ variant }: HeaderRightColProps) {
   const [isAcceptModalVisible, setIsAcceptModalVisible] = useState(false);
+  const selectedMemberList = useContext(SelectedMemberListContext);
 
   return (
     <>
-      {HeaderRightElement(selectedMemberCount, setIsAcceptModalVisible)[variant]}
+      {HeaderRightElement(selectedMemberList.length, setIsAcceptModalVisible)[variant]}
       <AcceptMemberListModal
         isAcceptModalVisible={isAcceptModalVisible}
         setIsAcceptModalVisible={setIsAcceptModalVisible}

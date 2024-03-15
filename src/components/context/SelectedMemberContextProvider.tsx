@@ -1,8 +1,8 @@
 import { createContext, ReactNode, SetStateAction, useState, Dispatch } from "react";
 import { PendingMemberInfoType } from "@/types/entities/member";
 
-const SelectedMemberListContext = createContext<PendingMemberInfoType[]>([]);
-const SelectedMemberDispatchContext = createContext<
+export const SelectedMemberListContext = createContext<PendingMemberInfoType[]>([]);
+export const SelectedMemberDispatchContext = createContext<
   Dispatch<SetStateAction<PendingMemberInfoType[]>>
 >(() => {});
 
