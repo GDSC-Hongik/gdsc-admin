@@ -1,24 +1,23 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import styled from "@emotion/styled";
 import { Modal, Grid, Box, Button } from "@mui/material";
-import { HeaderProps } from "@/components/common/Header";
+import { SelectedMemberListContext } from "@/components/context/SelectedMemberContextProvider";
 import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
-import { ManagementVariant } from "@/types/entities/member";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
-type AcceptMemberListModalProps<T extends ManagementVariant> = {
+type AcceptMemberListModalProps = {
   isAcceptModalVisible: boolean;
   setIsAcceptModalVisible: Dispatch<SetStateAction<boolean>>;
-  selectedMemberList: HeaderProps<T>["selectedMemberList"];
 };
 
-export default function AcceptMemberListModal<T extends ManagementVariant>({
+export default function AcceptMemberListModal({
   isAcceptModalVisible,
   setIsAcceptModalVisible,
-  selectedMemberList,
-}: AcceptMemberListModalProps<T>) {
+}: AcceptMemberListModalProps) {
+  const selectedMemberList = useContext(SelectedMemberListContext);
+
   const grantMemberMutation = useGrantMemberMutation();
 
   const getTableWidth = (option: string, variant: "title" | "cell") => {
