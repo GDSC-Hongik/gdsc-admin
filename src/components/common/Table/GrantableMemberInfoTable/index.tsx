@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { Grid, TablePagination } from "@mui/material";
 import { useStore } from "zustand";
@@ -6,17 +6,8 @@ import GrantableMemberInfoTableBody from "./GrantableMemberInfoTableBody";
 import GrantableMemberInfoTableHeader from "./GrantableMemberInfoTableHeader";
 import useGetGrantableMemberListQuery from "@/hooks/queries/useGetGrantableMemberListQuery";
 import { grantableMembersStore } from "@/store/grantableMembers";
-import { GrantableMemberInfoType } from "@/types/entities/member";
 
-export type GrantableMemberInfoTableProps = {
-  setSelectedMemberList: Dispatch<SetStateAction<GrantableMemberInfoType[]>>;
-  selectedMemberList: GrantableMemberInfoType[];
-};
-
-export default function GrantableMemberInfoTable({
-  setSelectedMemberList,
-  selectedMemberList,
-}: GrantableMemberInfoTableProps) {
+export default function GrantableMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -46,16 +37,8 @@ export default function GrantableMemberInfoTable({
 
   return (
     <Grid container>
-      <GrantableMemberInfoTableHeader
-        dataList={grantableMemberList}
-        selectedMemberList={selectedMemberList}
-        setSelectedMemberList={setSelectedMemberList}
-      />
-      <GrantableMemberInfoTableBody
-        dataList={grantableMemberList}
-        setSelectedMemberList={setSelectedMemberList}
-        selectedMemberList={selectedMemberList}
-      />
+      <GrantableMemberInfoTableHeader dataList={grantableMemberList} />
+      <GrantableMemberInfoTableBody dataList={grantableMemberList} />
       <InfoTablePagination
         count={totalElements}
         page={page}

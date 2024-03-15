@@ -1,8 +1,11 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useContext } from "react";
 import styled from "@emotion/styled";
 import { Grid, Checkbox, Button, Box } from "@mui/material";
-import { GrantableMemberInfoTableProps } from ".";
 import EditInfoModal from "../../InfoModal/EditInfoModal";
+import {
+  SelectedMemberListContext,
+  SelectedMemberDispatchContext,
+} from "@/components/context/SelectedMemberContextProvider";
 import { grantableMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
@@ -10,18 +13,18 @@ import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type GrantableMemberInfoTableBodyProps = {
   dataList: GrantableMemberInfoType[];
-  setSelectedMemberList: GrantableMemberInfoTableProps["setSelectedMemberList"];
-  selectedMemberList: GrantableMemberInfoTableProps["selectedMemberList"];
 };
 
 export default function GrantableMemberInfoTableBody({
   dataList,
-  setSelectedMemberList,
-  selectedMemberList,
 }: GrantableMemberInfoTableBodyProps) {
   const [isMemberDetailInfoModalVisible, setIsMemberDetailInfoModalVisible] = useState(false);
-  const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] = useState<GrantableMemberInfoType>();
+  const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] =
+    useState<GrantableMemberInfoType>();
   const [departmentSearchText, setDepartmentSearchText] = useState("");
+
+  const selectedMemberList = useContext(SelectedMemberListContext);
+  const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
 
   const filterTableInfo = (dataList: GrantableMemberInfoType[]) => {
     const newDataList: Omit<GrantableMemberInfoType, "memberId">[] = [];
@@ -75,11 +78,16 @@ export default function GrantableMemberInfoTableBody({
       {filterTableInfo(dataList).map((row, rowIndex) => (
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
-          {Object.entries(row).map(([key, value], index) => key !== 'requirement' && (
-            <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
-              <Text sx={{ wordBreak: "keep-all" }}>{(value as { code: string; name: string })?.name ?? formatNullableValue(value)}</Text>
-            </TextContainer>
-          ))}
+          {Object.entries(row).map(
+            ([key, value], index) =>
+              key !== "requirement" && (
+                <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
+                  <Text sx={{ wordBreak: "keep-all" }}>
+                    {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
+                  </Text>
+                </TextContainer>
+              ),
+          )}
           <ButtonContainer>
             <Button variant="outlined" onClick={() => handleClickDetailInfoButton(rowIndex)}>
               수정

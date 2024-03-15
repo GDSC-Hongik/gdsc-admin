@@ -1,9 +1,9 @@
 import { createContext, ReactNode, SetStateAction, useState, Dispatch } from "react";
-import { PendingMemberInfoType } from "@/types/entities/member";
+import { AllMemberInfoType, PendingMemberInfoType } from "@/types/entities/member";
 
-export const SelectedMemberListContext = createContext<PendingMemberInfoType[]>([]);
+export const SelectedMemberListContext = createContext<PendingMemberInfoType[] | AllMemberInfoType[]>([]);
 export const SelectedMemberDispatchContext = createContext<
-  Dispatch<SetStateAction<PendingMemberInfoType[]>>
+  Dispatch<SetStateAction<PendingMemberInfoType[] | AllMemberInfoType[]>>
 >(() => {});
 
 type SelectedMemberContextProviderProps = {
@@ -13,7 +13,7 @@ type SelectedMemberContextProviderProps = {
 export default function SelectedMemberContextProvider({
   children,
 }: SelectedMemberContextProviderProps) {
-  const [selectedMemberList, setSelectedMemberList] = useState<PendingMemberInfoType[]>([]);
+  const [selectedMemberList, setSelectedMemberList] = useState<PendingMemberInfoType[] | AllMemberInfoType[]>([]);
 
   return (
     <SelectedMemberDispatchContext.Provider value={setSelectedMemberList}>
