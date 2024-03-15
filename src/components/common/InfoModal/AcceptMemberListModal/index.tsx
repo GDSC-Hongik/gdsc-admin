@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import styled from "@emotion/styled";
 import { Modal, Grid, Box, Button } from "@mui/material";
 import { HeaderProps } from "@/components/common/Header";
-import { allMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
+import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
 import { ManagementVariant } from "@/types/entities/member";
@@ -71,7 +71,7 @@ export default function AcceptMemberListModal<T extends ManagementVariant>({
           <>
             <BodyContainer>
               <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
-                {allMemberTableTitle.map((tableTitle, index) => (
+                {commonMemberTableTitle.map((tableTitle, index) => (
                   <ColumnTitle key={index} xs={getTableWidth(tableTitle.name, "title")}>
                     {tableTitle.name}
                   </ColumnTitle>

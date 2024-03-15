@@ -9,7 +9,7 @@ import {
 
 export type HeaderProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
-  selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" | "grantableMember"
+  selectedMemberCount?: T extends "pendingMember" | "paymentStatus" | "grantableMember"
     ? number
     : undefined;
   selectedMemberList?: T extends "pendingMember"
