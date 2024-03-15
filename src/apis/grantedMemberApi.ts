@@ -1,14 +1,15 @@
-import { apiClient } from "."
+import { apiClient } from ".";
+import { SearchVariantType } from "@/types/entities/store";
 
 export const grantedMemberApi = {
   getGrantedMemberList: async (
     page: number,
     size: number,
-    searchType: string,
-    searchText: string
+    searchVariant: SearchVariantType<"grantedMember">,
+    searchText: string,
   ) => {
-    if (searchText) {
-      const searchUrl = `admin/members/granted?${searchType}=${searchText}&page=${page}&size=${size}`;
+    if (searchText && searchVariant) {
+      const searchUrl = `admin/members/granted?${searchVariant}=${searchText}&page=${page}&size=${size}`;
       const response = await apiClient.get(searchUrl);
       return response.data;
     }
@@ -16,5 +17,5 @@ export const grantedMemberApi = {
     const commonUrl = `admin/members/granted?page=${page}&size=${size}`;
     const response = await apiClient.get(commonUrl);
     return response.data;
-  }
-}
+  },
+};

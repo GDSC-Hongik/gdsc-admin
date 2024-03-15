@@ -1,22 +1,24 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
 import styled from "@emotion/styled";
 import { Grid, Box, Checkbox } from "@mui/material";
-import { GrantableMemberInfoTableProps } from ".";
+import {
+  SelectedMemberListContext,
+  SelectedMemberDispatchContext,
+} from "@/components/context/SelectedMemberContextProvider";
 import { grantableMemberTableWidthRatio, grantableStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
 
 type GrantableMemberInfoTableHeaderProps = {
   dataList: GrantableMemberInfoType[];
-  selectedMemberList: GrantableMemberInfoTableProps["selectedMemberList"];
-  setSelectedMemberList: GrantableMemberInfoTableProps["setSelectedMemberList"];
 };
 
 export default function GrantableMemberInfoTableHeader({
   dataList,
-  selectedMemberList,
-  setSelectedMemberList
 }: GrantableMemberInfoTableHeaderProps) {
+  const selectedMemberList = useContext(SelectedMemberListContext);
+  const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
+
   const getTitleWidthRatio = (title: string) => {
     return title === "학번" || title === "이름" || title === "전화번호"
       ? grantableMemberTableWidthRatio["title"][title]

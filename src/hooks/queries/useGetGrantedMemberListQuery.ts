@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { grantedMemberApi } from "@/apis/grantedMemberApi";
 import { QueryKey } from "@/constants/queryKey";
+import { SearchVariantType } from "@/types/entities/store";
 
 export default function useGetGrantedMemberListQuery(
   page: number,
   size: number,
-  searchType: string,
+  searchVariant: SearchVariantType<"grantedMember">,
   searchText: string,
 ) {
   const { data } = useQuery({
-    queryKey: [QueryKey.grantedMemberList, page, size, searchType, searchText],
-    queryFn: () => grantedMemberApi.getGrantedMemberList(page, size, searchType, searchText),
+    queryKey: [QueryKey.grantedMemberList, page, size, searchVariant, searchText],
+    queryFn: () => grantedMemberApi.getGrantedMemberList(page, size, searchVariant, searchText),
   });
 
   const grantedMemberList = data?.content;

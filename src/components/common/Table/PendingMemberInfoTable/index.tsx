@@ -1,31 +1,24 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { Grid, TablePagination } from "@mui/material";
+import { useStore } from "zustand";
 import PendingMemberInfoTableBody from "./PendingMemberInfoTableBody";
 import PendingMemberInfoTableHeader from "./PendingMemberInfoTableHeader";
 import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
-import { PendingMemberInfoType } from "@/types/entities/member";
+import { pendingMembersStore } from "@/store/pendingMembers";
 
-export type PendingMemberInfoTableProps = {
-  setSelectedMemberList: Dispatch<SetStateAction<PendingMemberInfoType[]>>;
-  selectedMemberList: PendingMemberInfoType[];
-  pendingMemberSearchType: string;
-  pendingMemberSearchText: string;
-};
-
-export default function PendingMemberInfoTable({
-  setSelectedMemberList,
-  selectedMemberList,
-  pendingMemberSearchType,
-  pendingMemberSearchText,
-}: PendingMemberInfoTableProps) {
+export default function PendingMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const {
+    searchInfo: { text: pendingMemberSearchText, variant: pendingMemberSearchVariant },
+  } = useStore(pendingMembersStore);
 
   const { pendingMemberList = [], totalElements = 0 } = useGetPendingMemberListQuery(
     page,
     rowsPerPage,
-    pendingMemberSearchType,
+    pendingMemberSearchVariant,
     pendingMemberSearchText,
   );
 
@@ -45,16 +38,8 @@ export default function PendingMemberInfoTable({
 
   return (
     <Grid container>
-      <PendingMemberInfoTableHeader
-        dataList={pendingMemberList}
-        selectedMemberList={selectedMemberList}
-        setSelectedMemberList={setSelectedMemberList}
-      />
-      <PendingMemberInfoTableBody
-        dataList={pendingMemberList}
-        setSelectedMemberList={setSelectedMemberList}
-        selectedMemberList={selectedMemberList}
-      />
+      <PendingMemberInfoTableHeader dataList={pendingMemberList} />
+      <PendingMemberInfoTableBody dataList={pendingMemberList} />
       <InfoTablePagination
         count={totalElements}
         page={page}

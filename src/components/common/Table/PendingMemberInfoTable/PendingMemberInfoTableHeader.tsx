@@ -1,22 +1,24 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
 import styled from "@emotion/styled";
 import { Box, Checkbox, Grid } from "@mui/material";
-import { PendingMemberInfoTableProps } from ".";
+import {
+  SelectedMemberListContext,
+  SelectedMemberDispatchContext,
+} from "@/components/context/SelectedMemberContextProvider";
 import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType } from "@/types/entities/member";
 
 type PendingMemberInfoTableHeaderProps = {
   dataList: PendingMemberInfoType[];
-  selectedMemberList: PendingMemberInfoTableProps["selectedMemberList"];
-  setSelectedMemberList: PendingMemberInfoTableProps["setSelectedMemberList"];
 };
 
 export default function PendingMemberInfoTableHeader({
   dataList,
-  selectedMemberList,
-  setSelectedMemberList,
 }: PendingMemberInfoTableHeaderProps) {
+  const selectedMemberList = useContext(SelectedMemberListContext);
+  const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
+
   const getTitleWidthRatio = (title: string) => {
     return title === "학번" || title === "이름" || title === "전화번호"
       ? pendingMemberTableWidthRatio["title"][title]

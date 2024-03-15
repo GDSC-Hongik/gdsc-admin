@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
-import { allMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
+import { commonMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 
 export default function AllMemberInfoTableHeader() {
@@ -12,7 +12,7 @@ export default function AllMemberInfoTableHeader() {
 
   return (
     <Container container>
-      {allMemberTableTitle.map(title => (
+      {commonMemberTableTitle.map(title => (
         <Title
           item
           key={title.value}

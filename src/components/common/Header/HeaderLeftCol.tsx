@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import {
   FormControl,
@@ -9,159 +9,67 @@ import {
   Stack,
   SelectChangeEvent,
 } from "@mui/material";
-import { HeaderProps } from ".";
-import {
-  allMemberTableTitle,
-  paymentStatusTableTitle,
-  pendingMemberTableTitle,
-} from "@/constants/table";
+import { commonMemberTableTitle, pendingMemberTableTitle } from "@/constants/table";
+import useGetSearchTextSetters from "@/hooks/useGetSearchTextSetters";
+import useGetSearchVariantSetters from "@/hooks/useGetSearchVariantSetters";
 import { ManagementVariant } from "@/types/entities/member";
+import { MemberTableTitleType } from "@/types/entities/table";
+import { setSearchInfo } from "@/utils/setSearchInfoFunction";
 
 const FormContainer = styled(FormControl)({
   width: "180px",
 });
 
-type HeaderLeftColProps<T extends ManagementVariant> = {
+type HeaderLeftColProps = {
   variant: ManagementVariant;
-} & Pick<HeaderProps<T>,
-  "setAllMemberSearchType" | "setAllMemberSearchText" |
-  "setPendingMemberSearchType" | "setPendingMemberSearchText" |
-  "setGrantableMemberSearchType" | "setGrantableMemberSearchText" |
-  "setPaymentStatusMemberSearchType" | "setPaymentStatusMemberSearchText" |
-  "setGrantedMemberSearchType" | "setGrantedMemberSearchText">;
+};
 
-const HeaderLeftElement = (
-  variant: ManagementVariant,
-  setAllMemberSearchType?: Dispatch<SetStateAction<string>>,
-  setPendingMemberSearchType?: Dispatch<SetStateAction<string>>,
-  setGrantableMemberSearchType?: Dispatch<SetStateAction<string>>,
-  setGrantedMemberSearchType?: Dispatch<SetStateAction<string>>,
-  setPaymentStatusMemberSearchType?: Dispatch<SetStateAction<string>>
-) => {
+const HeaderLeftElement = (variant: ManagementVariant) => {
   const [selectedValue, setSelectedValue] = useState("");
+
+  const searchVariantSetters = useGetSearchVariantSetters();
 
   const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
+    const setSearchVariant = searchVariantSetters[variant];
 
-    if (variant === "allMember") {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setAllMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
-    } else if (variant === "pendingMember") {
-      setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
-      setPendingMemberSearchType?.(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
-    } else if (variant === "paymentStatus") {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setPaymentStatusMemberSearchType?.(paymentStatusTableTitle.slice(0, 5)[targetIndex]["type"]);
-    } else if (variant === "grantableMember") {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setGrantableMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
-    } else {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setGrantedMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
-    }
+    setSearchInfo[variant](setSelectedValue, setSearchVariant, targetIndex);
   };
 
+  const renderFormElement = (memberTableTitle: MemberTableTitleType) => (
+    <FormContainer>
+      <InputLabel>Type</InputLabel>
+      <Select value={selectedValue} onChange={handleChangeMemberSelect}>
+        {memberTableTitle.map(title => (
+          <MenuItem value={title.value} key={title.value}>
+            {title.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormContainer>
+  );
+
   return {
-    allMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {allMemberTableTitle.map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    pendingMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {pendingMemberTableTitle.slice(0, 5).map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    grantableMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {allMemberTableTitle.map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    grantedMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {allMemberTableTitle.map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    paymentStatus: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {pendingMemberTableTitle.slice(0, 5).map(option => (
-            <MenuItem value={option.value} key={option.value}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
+    allMember: renderFormElement(commonMemberTableTitle),
+    pendingMember: renderFormElement(pendingMemberTableTitle.slice(0, 5)),
+    grantableMember: renderFormElement(commonMemberTableTitle),
+    grantedMember: renderFormElement(commonMemberTableTitle),
+    paymentStatus: renderFormElement(pendingMemberTableTitle.slice(0, 5)),
   };
 };
 
-export default function HeaderLeftCol<T extends ManagementVariant>({
-  variant,
-  setAllMemberSearchType,
-  setAllMemberSearchText,
-  setPendingMemberSearchType,
-  setPendingMemberSearchText,
-  setGrantableMemberSearchType,
-  setGrantableMemberSearchText,
-  setPaymentStatusMemberSearchType,
-  setPaymentStatusMemberSearchText,
-  setGrantedMemberSearchType,
-  setGrantedMemberSearchText,
-}: HeaderLeftColProps<T>) {
+export default function HeaderLeftCol({ variant }: HeaderLeftColProps) {
+  const setSearchTextFunctions = useGetSearchTextSetters();
+
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (variant === "allMember") {
-      setAllMemberSearchText?.(e.target.value);
-    } else if (variant === "pendingMember") {
-      setPendingMemberSearchText?.(e.target.value);
-    } else if (variant === "paymentStatus") {
-      setPaymentStatusMemberSearchText?.(e.target.value);
-    } else if (variant === "grantableMember") {
-      setGrantableMemberSearchText?.(e.target.value);
-    } else {
-      setGrantedMemberSearchText?.(e.target.value);
-    }
+    const setSearchText = setSearchTextFunctions[variant];
+
+    setSearchText?.(e.target.value);
   };
 
   return (
     <Container>
-      {HeaderLeftElement(
-        variant,
-        setAllMemberSearchType,
-        setPendingMemberSearchType,
-        setGrantableMemberSearchType,
-        setGrantedMemberSearchType,
-        setPaymentStatusMemberSearchType
-      )[variant]}
+      {HeaderLeftElement(variant)[variant]}
       <TextField
         label="search"
         variant="outlined"

@@ -1,15 +1,16 @@
 import { apiClient } from ".";
 import { AllMemberListDtoType, DepartmentListDtoType } from "@/types/dtos/member";
+import { SearchVariantType } from "@/types/entities/store";
 
 export const allMemberApi = {
   getAllMemberList: async (
     page: number,
     size: number,
-    searchType: string,
+    searchVariant: SearchVariantType<"allMember">,
     searchText: string,
   ): Promise<AllMemberListDtoType> => {
-    if (searchText) {
-      const searchUrl = `admin/members?${searchType}=${searchText}&page=${page}&size=${size}`;
+    if (searchText && searchVariant) {
+      const searchUrl = `admin/members?${searchVariant}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
       return response.data;
@@ -50,7 +51,7 @@ export const allMemberApi = {
   },
 
   getMemberInfoExcel: async () => {
-    const response = await apiClient.get('admin/members/excel', { responseType: 'arraybuffer' });
+    const response = await apiClient.get("admin/members/excel", { responseType: "arraybuffer" });
     return response.data;
   },
 };

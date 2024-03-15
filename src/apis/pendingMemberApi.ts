@@ -4,16 +4,17 @@ import {
   GrantPendingMemberRequestBodyDtoType,
   PendingMemberListDtoType,
 } from "@/types/dtos/member";
+import { SearchVariantType } from "@/types/entities/store";
 
 export const pendingMemberApi = {
   getPendingMemberList: async (
     page: number,
     size: number,
-    searchType: string,
+    searchVariant: SearchVariantType<"pendingMember">,
     searchText: string,
   ): Promise<PendingMemberListDtoType> => {
-    if (searchText) {
-      const searchUrl = `admin/members/pending?${searchType}=${searchText}&page=${page}&size=${size}`;
+    if (searchText && searchVariant) {
+      const searchUrl = `admin/members/pending?${searchVariant}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
       return response.data;

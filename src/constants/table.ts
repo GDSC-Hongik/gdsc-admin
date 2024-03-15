@@ -1,4 +1,6 @@
-export const allMemberTableTitle = [
+import { MemberTableTitleType } from "@/types/entities/table";
+
+export const commonMemberTableTitle: MemberTableTitleType = [
   {
     value: "1",
     name: "학번",
@@ -51,7 +53,7 @@ export const allMemberTableWidthRatio = {
   },
 };
 
-export const pendingMemberTableTitle = [
+export const pendingMemberTableTitle: MemberTableTitleType = [
   {
     value: "1",
     name: "학번",
@@ -112,7 +114,7 @@ export const pendingMemberModalWidthRatio = {
   },
 };
 
-export const grantableStatusTableTitle = allMemberTableTitle;
+export const grantableStatusTableTitle = commonMemberTableTitle;
 
 export const grantableMemberTableWidthRatio = allMemberTableWidthRatio;
 
@@ -135,27 +137,27 @@ export const paymentStatusTableTitle = [
   {
     value: "1",
     name: "학번",
-    type: "studentId"
+    type: "studentId",
   },
   {
     value: "2",
     name: "이름",
-    type: "name"
+    type: "name",
   },
   {
     value: "3",
     name: "전화번호",
-    type: "phone"
+    type: "phone",
   },
   {
     value: "4",
     name: "디스코드 사용자명",
-    type: "discordUsername"
+    type: "discordUsername",
   },
   {
     value: "5",
     name: "디스코드 닉네임",
-    type: "nickname"
+    type: "nickname",
   },
 ];
 
