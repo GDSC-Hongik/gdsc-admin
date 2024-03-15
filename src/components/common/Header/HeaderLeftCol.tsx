@@ -17,6 +17,7 @@ import {
   pendingMemberTableTitle,
 } from "@/constants/table";
 import { allMembersStore } from "@/store/allMembers";
+import { grantedMembersStore } from "@/store/grantedMember";
 import { ManagementVariant } from "@/types/entities/member";
 import { SearchVariantType } from "@/types/entities/store";
 
@@ -34,20 +35,17 @@ type HeaderLeftColProps<T extends ManagementVariant> = {
   | "setGrantableMemberSearchText"
   | "setPaymentStatusMemberSearchType"
   | "setPaymentStatusMemberSearchText"
-  | "setGrantedMemberSearchType"
-  | "setGrantedMemberSearchText"
 >;
 
 const HeaderLeftElement = (
   variant: ManagementVariant,
   setPendingMemberSearchType?: Dispatch<SetStateAction<string>>,
   setGrantableMemberSearchType?: Dispatch<SetStateAction<string>>,
-  setGrantedMemberSearchType?: Dispatch<SetStateAction<string>>,
   setPaymentStatusMemberSearchType?: Dispatch<SetStateAction<string>>,
 ) => {
   const [selectedValue, setSelectedValue] = useState("");
-  const { setSearchVariant: setAllMemberSearchVariant } =
-    useStore(allMembersStore);
+  const { setSearchVariant: setAllMemberSearchVariant } = useStore(allMembersStore);
+  const { setSearchVariant: setGrantedMemberSearchVariant } = useStore(grantedMembersStore);
 
   const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
@@ -66,7 +64,9 @@ const HeaderLeftElement = (
       setGrantableMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
     } else {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setGrantedMemberSearchType?.(allMemberTableTitle[targetIndex]["type"]);
+      setGrantedMemberSearchVariant?.(
+        allMemberTableTitle[targetIndex]["type"] as SearchVariantType,
+      );
     }
   };
 
@@ -142,11 +142,9 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
   setGrantableMemberSearchText,
   setPaymentStatusMemberSearchType,
   setPaymentStatusMemberSearchText,
-  setGrantedMemberSearchType,
-  setGrantedMemberSearchText,
 }: HeaderLeftColProps<T>) {
-  const { setSearchText: setAllMemberSearchText } =
-    useStore(allMembersStore);
+  const { setSearchText: setAllMemberSearchText } = useStore(allMembersStore);
+  const { setSearchText: setGrantedMemberSearchText } = useStore(grantedMembersStore);
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
@@ -169,7 +167,6 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
           variant,
           setPendingMemberSearchType,
           setGrantableMemberSearchType,
-          setGrantedMemberSearchType,
           setPaymentStatusMemberSearchType,
         )[variant]
       }

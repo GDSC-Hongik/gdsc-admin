@@ -1,4 +1,4 @@
-type AllMembersSearchVariantType = [
+type CommonMembersSearchVariantType = [
   "studentId",
   "name",
   "phone",
@@ -8,7 +8,7 @@ type AllMembersSearchVariantType = [
   "nickname",
 ];
 
-export type SearchVariantType = AllMembersSearchVariantType[number] | null;
+export type SearchVariantType = CommonMembersSearchVariantType[number] | null;
 
 export type SearchInfoType = {
   text: string;
