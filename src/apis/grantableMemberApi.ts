@@ -9,7 +9,7 @@ export const grantableMemberApi = {
     searchVariant: SearchVariantType<"grantableMember">,
     searchText: string,
   ): Promise<GrantableMemberDtoType> => {
-    if (searchText) {
+    if (searchText && searchVariant) {
       const searchUrl = `admin/members/grantable?${searchVariant}=${searchText}&page=${page}&size=${size}`;
       const response = await apiClient.get(searchUrl);
       return response.data;

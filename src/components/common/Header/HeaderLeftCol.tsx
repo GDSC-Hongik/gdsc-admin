@@ -19,6 +19,7 @@ import {
 import { allMembersStore } from "@/store/allMembers";
 import { grantableMembersStore } from "@/store/grantableMembers";
 import { grantedMembersStore } from "@/store/grantedMembers";
+import { pendingMembersStore } from "@/store/pendingMembers";
 import { ManagementVariant } from "@/types/entities/member";
 import { SearchVariantType } from "@/types/entities/store";
 
@@ -30,15 +31,12 @@ type HeaderLeftColProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
 } & Pick<
   HeaderProps<T>,
-  | "setPendingMemberSearchType"
-  | "setPendingMemberSearchText"
   | "setPaymentStatusMemberSearchType"
   | "setPaymentStatusMemberSearchText"
 >;
 
 const HeaderLeftElement = (
   variant: ManagementVariant,
-  setPendingMemberSearchType?: Dispatch<SetStateAction<string>>,
   setPaymentStatusMemberSearchType?: Dispatch<SetStateAction<string>>,
 ) => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -46,6 +44,7 @@ const HeaderLeftElement = (
   const { setSearchVariant: setAllMemberSearchVariant } = useStore(allMembersStore);
   const { setSearchVariant: setGrantedMemberSearchVariant } = useStore(grantedMembersStore);
   const { setSearchVariant: setGrantableMemberSearchVariant } = useStore(grantableMembersStore);
+  const { setSearchVariant: setPendingMemberSearchVariant } = useStore(pendingMembersStore);
 
   const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
@@ -57,7 +56,7 @@ const HeaderLeftElement = (
       );
     } else if (variant === "pendingMember") {
       setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
-      setPendingMemberSearchType?.(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"]);
+      setPendingMemberSearchVariant?.(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"] as SearchVariantType<"pendingMember">);
     } else if (variant === "paymentStatus") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
       setPaymentStatusMemberSearchType?.(paymentStatusTableTitle.slice(0, 5)[targetIndex]["type"]);
@@ -140,14 +139,13 @@ const HeaderLeftElement = (
 
 export default function HeaderLeftCol<T extends ManagementVariant>({
   variant,
-  setPendingMemberSearchType,
-  setPendingMemberSearchText,
   setPaymentStatusMemberSearchType,
   setPaymentStatusMemberSearchText,
 }: HeaderLeftColProps<T>) {
   const { setSearchText: setAllMemberSearchText } = useStore(allMembersStore);
   const { setSearchText: setGrantedMemberSearchText } = useStore(grantedMembersStore);
   const { setSearchText: setGrantableMemberSearchText } = useStore(grantableMembersStore);
+  const { setSearchText: setPendingMemberSearchText } = useStore(pendingMembersStore);
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
@@ -166,7 +164,7 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
   return (
     <Container>
       {
-        HeaderLeftElement(variant, setPendingMemberSearchType, setPaymentStatusMemberSearchType)[
+        HeaderLeftElement(variant, setPaymentStatusMemberSearchType)[
           variant
         ]
       }

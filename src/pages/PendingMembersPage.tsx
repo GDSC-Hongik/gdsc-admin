@@ -6,8 +6,6 @@ import { PendingMemberInfoType } from "@/types/entities/member";
 
 export default function PendingMembersPage() {
   const [selectedMemberList, setSelectedMemberList] = useState<PendingMemberInfoType[]>([]);
-  const [pendingMemberSearchType, setPendingMemberSearchType] = useState("");
-  const [pendingMemberSearchText, setPendingMemberSearchText] = useState("");
 
   return (
     <>
@@ -16,14 +14,10 @@ export default function PendingMembersPage() {
         variant={"pendingMember"}
         selectedMemberCount={selectedMemberList.length}
         selectedMemberList={selectedMemberList}
-        setPendingMemberSearchType={setPendingMemberSearchType}
-        setPendingMemberSearchText={setPendingMemberSearchText}
       />
       <PendingMemberInfoTable
         setSelectedMemberList={setSelectedMemberList}
         selectedMemberList={selectedMemberList}
-        pendingMemberSearchType={pendingMemberSearchType}
-        pendingMemberSearchText={pendingMemberSearchText}
       />
     </>
   );
