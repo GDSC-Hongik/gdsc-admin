@@ -3,6 +3,8 @@ import { SearchInfoType, SearchVariantType } from "@/types/entities/store";
 
 type AllMembersStoreType = {
   searchInfo: SearchInfoType;
+  setSearchText: (text: string) => void;
+  setSearchVariant: (variant: SearchVariantType) => void;
 };
 
 export const allMembersStore = create<AllMembersStoreType>(set => ({

@@ -8,8 +8,6 @@ export type HeaderProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
   selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" | "grantableMember" ? number : undefined;
   selectedMemberList?: T extends "pendingMember" ? PendingMemberInfoType[] : T extends "grantableMember" ? GrantableMemberInfoType[] : undefined;
-  setAllMemberSearchType?: T extends "allMember" ? Dispatch<SetStateAction<string>> : undefined;
-  setAllMemberSearchText?: T extends "allMember" ? Dispatch<SetStateAction<string>> : undefined;
   setPendingMemberSearchType?: T extends "pendingMember"
     ? Dispatch<SetStateAction<string>>
     : undefined;
@@ -40,8 +38,6 @@ export default function Header<T extends ManagementVariant>({
   variant,
   selectedMemberCount,
   selectedMemberList,
-  setAllMemberSearchType,
-  setAllMemberSearchText,
   setPendingMemberSearchType,
   setPendingMemberSearchText,
   setGrantableMemberSearchType,
@@ -55,8 +51,6 @@ export default function Header<T extends ManagementVariant>({
     <Container>
       <HeaderLeftCol
         variant={variant}
-        setAllMemberSearchType={setAllMemberSearchType}
-        setAllMemberSearchText={setAllMemberSearchText}
         setPendingMemberSearchType={setPendingMemberSearchType}
         setPendingMemberSearchText={setPendingMemberSearchText}
         setGrantableMemberSearchType={setGrantableMemberSearchType}
