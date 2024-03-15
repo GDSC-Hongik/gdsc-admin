@@ -1,5 +1,5 @@
 import { apiClient } from ".";
-import { GrantableMemberDtoType } from "@/types/dtos/member";
+import { GrantableMemberResponseDtoType } from "@/types/dtos/member";
 import { SearchVariantType } from "@/types/entities/store";
 
 export const grantableMemberApi = {
@@ -8,7 +8,7 @@ export const grantableMemberApi = {
     size: number,
     searchVariant: SearchVariantType<"grantableMember">,
     searchText: string,
-  ): Promise<GrantableMemberDtoType> => {
+  ): Promise<GrantableMemberResponseDtoType> => {
     if (searchText && searchVariant) {
       const searchUrl = `admin/members/grantable?${searchVariant}=${searchText}&page=${page}&size=${size}`;
       const response = await apiClient.get(searchUrl);

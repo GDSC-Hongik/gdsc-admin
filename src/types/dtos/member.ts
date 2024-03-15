@@ -1,6 +1,7 @@
 import {
   AllMemberInfoType,
   GrantableMemberInfoType,
+  GrantedMemberInfoType,
   PaymentStatusInfoType,
   PendingMemberInfoType,
   StatusType,
@@ -32,33 +33,40 @@ type PaginationElementType = {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
-}
+};
 
-export type AllMemberListDtoType = {
+export type AllMemberListResponseDtoType = {
   content: AllMemberInfoType[];
 } & PaginationElementType;
 
-export type DepartmentListDtoType = {
+export type DepartmentListResponseDtoType = {
   code: string;
   name: string;
 };
 
-export type PendingMemberListDtoType = {
+export type PendingMemberListResponseDtoType = {
   content: PendingMemberInfoType[];
 } & PaginationElementType;
-export type GrantPendingMemberRequestBodyDtoType = {
+
+export type GrantPendingMemberRequestDtoType = {
   memberIdList: number[];
 };
-export type GrantPendingMemberDtoType = {
+
+export type GrantPendingMemberResponseDtoType = {
   grantedMembers: string[];
   notGrantedMembers: string[];
 };
 
-export type GrantableMemberDtoType = {
+export type GrantableMemberResponseDtoType = {
   content: GrantableMemberInfoType[];
 } & PaginationElementType;
 
-export type PaymentStatusMemberListDtoType = {
+export type PaymentStatusMemberListResponseDtoType = {
   content: PaymentStatusInfoType[];
 } & PaginationElementType;
-export type MemberPaymentStatusDtoType = StatusType;
+
+export type MemberPaymentStatusResponseDtoType = StatusType;
+
+export type GrantedMemberListResponseDtoType = {
+  content: GrantedMemberInfoType[];
+} & PaginationElementType;

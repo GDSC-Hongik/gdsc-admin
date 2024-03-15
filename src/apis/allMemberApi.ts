@@ -1,5 +1,5 @@
 import { apiClient } from ".";
-import { AllMemberListDtoType, DepartmentListDtoType } from "@/types/dtos/member";
+import { AllMemberListResponseDtoType, DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { SearchVariantType } from "@/types/entities/store";
 
 export const allMemberApi = {
@@ -8,7 +8,7 @@ export const allMemberApi = {
     size: number,
     searchVariant: SearchVariantType<"allMember">,
     searchText: string,
-  ): Promise<AllMemberListDtoType> => {
+  ): Promise<AllMemberListResponseDtoType> => {
     if (searchText && searchVariant) {
       const searchUrl = `admin/members?${searchVariant}=${searchText}&page=${page}&size=${size}`;
 
@@ -27,7 +27,7 @@ export const allMemberApi = {
     return response.data;
   },
 
-  searchDepartmentList: async (searchText: string): Promise<DepartmentListDtoType[]> => {
+  searchDepartmentList: async (searchText: string): Promise<DepartmentListResponseDtoType[]> => {
     const response = await apiClient.get(
       `common/members/departments/search?department=${searchText}`,
     );

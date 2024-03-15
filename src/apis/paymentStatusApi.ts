@@ -1,5 +1,8 @@
 import { apiClient } from ".";
-import { MemberPaymentStatusDtoType, PaymentStatusMemberListDtoType } from "@/types/dtos/member";
+import {
+  MemberPaymentStatusResponseDtoType,
+  PaymentStatusMemberListResponseDtoType,
+} from "@/types/dtos/member";
 import { StatusType } from "@/types/entities/member";
 import { SearchVariantType } from "@/types/entities/store";
 
@@ -9,7 +12,7 @@ export const paymentStatusApi = {
     size: number,
     searchVariant: SearchVariantType<"paymentStatus">,
     searchText: string,
-  ): Promise<PaymentStatusMemberListDtoType> => {
+  ): Promise<PaymentStatusMemberListResponseDtoType> => {
     if (searchText) {
       const searchUrl = `admin/members/payment?${searchVariant}=${searchText}&page=${page}&size=${size}`;
 
@@ -26,7 +29,7 @@ export const paymentStatusApi = {
   updateMemberPaymentStatus: async (requestObj: {
     memberId: number;
     paymentStatus: StatusType;
-  }): Promise<MemberPaymentStatusDtoType> => {
+  }): Promise<MemberPaymentStatusResponseDtoType> => {
     const response = await apiClient.put(`admin/members/payment/${requestObj.memberId}`, {
       status: requestObj.paymentStatus,
     });
