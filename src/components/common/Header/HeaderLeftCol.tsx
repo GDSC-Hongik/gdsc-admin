@@ -23,6 +23,7 @@ import { paymentStatusMembersStore } from "@/store/paymentStatusMembers";
 import { pendingMembersStore } from "@/store/pendingMembers";
 import { ManagementVariant } from "@/types/entities/member";
 import { SearchVariantType } from "@/types/entities/store";
+import { MemberTableTitleType } from "@/types/entities/table";
 
 const FormContainer = styled(FormControl)({
   width: "180px",
@@ -76,67 +77,25 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
     }
   };
 
+  const renderFormElement = (memberTableTitle: MemberTableTitleType) => (
+    <FormContainer>
+      <InputLabel>Type</InputLabel>
+      <Select value={selectedValue} onChange={handleChangeMemberSelect}>
+        {memberTableTitle.map(title => (
+          <MenuItem value={title.value} key={title.value}>
+            {title.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormContainer>
+  );
+
   return {
-    allMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {commonMemberTableTitle.map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    pendingMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {pendingMemberTableTitle.slice(0, 5).map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    grantableMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {commonMemberTableTitle.map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    grantedMember: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {commonMemberTableTitle.map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
-    paymentStatus: (
-      <FormContainer>
-        <InputLabel>Type</InputLabel>
-        <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {pendingMemberTableTitle.slice(0, 5).map(option => (
-            <MenuItem value={option.value} key={option.value}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormContainer>
-    ),
+    allMember: renderFormElement(commonMemberTableTitle),
+    pendingMember: renderFormElement(pendingMemberTableTitle.slice(0, 5)),
+    grantableMember: renderFormElement(commonMemberTableTitle),
+    grantedMember: renderFormElement(commonMemberTableTitle),
+    paymentStatus: renderFormElement(pendingMemberTableTitle.slice(0, 5)),
   };
 };
 
