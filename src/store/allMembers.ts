@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { SearchInfoType, SearchVariantType } from "@/types/entities/store";
 
-type AllMembersStoreType = {
+export type AllMembersStoreType = {
   searchInfo: SearchInfoType<"allMember">;
   setSearchText: (text: string) => void;
   setSearchVariant: (variant: SearchVariantType<"allMember">) => void;

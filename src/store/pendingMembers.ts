@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { SearchInfoType, SearchVariantType } from "@/types/entities/store";
 
-type PendingMembersStoreType = {
+export type PendingMembersStoreType = {
   searchInfo: SearchInfoType<"pendingMember">;
   setSearchText: (text: string) => void;
   setSearchVariant: (variant: SearchVariantType<"pendingMember">) => void;

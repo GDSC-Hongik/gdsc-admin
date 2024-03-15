@@ -1,4 +1,4 @@
-export const allMemberTableTitle = [
+export const commonMemberTableTitle = [
   {
     value: "1",
     name: "학번",

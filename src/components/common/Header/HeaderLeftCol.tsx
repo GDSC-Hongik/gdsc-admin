@@ -9,9 +9,9 @@ import {
   Stack,
   SelectChangeEvent,
 } from "@mui/material";
-import { useStore } from "zustand";
+import { StoreApi, UseBoundStore, useStore } from "zustand";
 import {
-  allMemberTableTitle,
+  commonMemberTableTitle,
   paymentStatusTableTitle,
   pendingMemberTableTitle,
 } from "@/constants/table";
@@ -21,7 +21,7 @@ import { grantedMembersStore } from "@/store/grantedMembers";
 import { paymentStatusMembersStore } from "@/store/paymentStatusMembers";
 import { pendingMembersStore } from "@/store/pendingMembers";
 import { ManagementVariant } from "@/types/entities/member";
-import { SearchVariantType } from "@/types/entities/store";
+import { MemberStoreType, SearchVariantType } from "@/types/entities/store";
 
 const FormContainer = styled(FormControl)({
   width: "180px",
@@ -44,9 +44,9 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
     const targetIndex = (e.target.value as number) - 1;
 
     if (variant === "allMember") {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+      setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
       setAllMemberSearchVariant?.(
-        allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"allMember">,
+        commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"allMember">,
       );
     } else if (variant === "pendingMember") {
       setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
@@ -56,21 +56,21 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
         ] as SearchVariantType<"pendingMember">,
       );
     } else if (variant === "paymentStatus") {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+      setSelectedValue(paymentStatusTableTitle[targetIndex]["value"]);
       setPaymentMemberSearchVariant?.(
         paymentStatusTableTitle.slice(0, 5)[targetIndex][
           "type"
         ] as SearchVariantType<"paymentStatus">,
       );
     } else if (variant === "grantableMember") {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+      setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
       setGrantableMemberSearchVariant?.(
-        allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantableMember">,
+        commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantableMember">,
       );
     } else {
-      setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
+      setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
       setGrantedMemberSearchVariant?.(
-        allMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantedMember">,
+        commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantedMember">,
       );
     }
   };
@@ -80,7 +80,7 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
       <FormContainer>
         <InputLabel>Type</InputLabel>
         <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {allMemberTableTitle.map(title => (
+          {commonMemberTableTitle.map(title => (
             <MenuItem value={title.value} key={title.value}>
               {title.name}
             </MenuItem>
@@ -104,7 +104,7 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
       <FormContainer>
         <InputLabel>Type</InputLabel>
         <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {allMemberTableTitle.map(title => (
+          {commonMemberTableTitle.map(title => (
             <MenuItem value={title.value} key={title.value}>
               {title.name}
             </MenuItem>
@@ -116,7 +116,7 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
       <FormContainer>
         <InputLabel>Type</InputLabel>
         <Select value={selectedValue} onChange={handleChangeMemberSelect}>
-          {allMemberTableTitle.map(title => (
+          {commonMemberTableTitle.map(title => (
             <MenuItem value={title.value} key={title.value}>
               {title.name}
             </MenuItem>
@@ -140,24 +140,24 @@ const HeaderLeftElement = (variant: ManagementVariant) => {
 };
 
 export default function HeaderLeftCol({ variant }: HeaderLeftColProps) {
-  const { setSearchText: setAllMemberSearchText } = useStore(allMembersStore);
-  const { setSearchText: setGrantedMemberSearchText } = useStore(grantedMembersStore);
-  const { setSearchText: setGrantableMemberSearchText } = useStore(grantableMembersStore);
-  const { setSearchText: setPendingMemberSearchText } = useStore(pendingMembersStore);
-  const { setSearchText: setPaymentStatusMemberSearchText } = useStore(paymentStatusMembersStore);
+  const useGetSetSearchTextFunction = (store: UseBoundStore<StoreApi<MemberStoreType>>) => {
+    const { setSearchText } = useStore(store);
+
+    return setSearchText;
+  };
+
+  const setSearchTextFunctions = {
+    allMember: useGetSetSearchTextFunction(allMembersStore),
+    grantedMember: useGetSetSearchTextFunction(grantedMembersStore),
+    grantableMember: useGetSetSearchTextFunction(grantableMembersStore),
+    pendingMember: useGetSetSearchTextFunction(pendingMembersStore),
+    paymentStatus: useGetSetSearchTextFunction(paymentStatusMembersStore),
+  };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (variant === "allMember") {
-      setAllMemberSearchText?.(e.target.value);
-    } else if (variant === "pendingMember") {
-      setPendingMemberSearchText?.(e.target.value);
-    } else if (variant === "paymentStatus") {
-      setPaymentStatusMemberSearchText?.(e.target.value);
-    } else if (variant === "grantableMember") {
-      setGrantableMemberSearchText?.(e.target.value);
-    } else {
-      setGrantedMemberSearchText?.(e.target.value);
-    }
+    const setSearchText = setSearchTextFunctions[variant];
+
+    setSearchText?.(e.target.value);
   };
 
   return (
