@@ -1,12 +1,12 @@
 import { Dispatch, ReactElement, SetStateAction, useContext, useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack, Typography } from "@mui/material";
-import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
 import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { SelectedMemberListContext } from "@/components/context/SelectedMemberContextProvider";
 import { ManagementVariant } from "@/types/entities/member";
+import { downloadExcelFile } from "@/utils/excel";
 
 const HeaderRightElement = (
   selectedMemberCount: number,
@@ -15,8 +15,7 @@ const HeaderRightElement = (
   const handleClickExcelDownloadButton = async () => {
     try {
       const data = await allMemberApi.getMemberInfoExcel();
-      const blob = new Blob([data], { type: "application/vnd.ms-excel" });
-      saveAs(blob, "members.xls");
+      downloadExcelFile(data, "members");
     } catch (error) {
       toast.error("오류가 발생했습니다.");
     }
