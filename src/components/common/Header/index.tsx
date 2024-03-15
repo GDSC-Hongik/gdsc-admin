@@ -14,12 +14,6 @@ export type HeaderProps<T extends ManagementVariant> = {
   setPendingMemberSearchText?: T extends "pendingMember"
     ? Dispatch<SetStateAction<string>>
   : undefined;
-  setGrantableMemberSearchType?: T extends "grantableMember"
-    ? Dispatch<SetStateAction<string>>
-  : undefined;
-  setGrantableMemberSearchText?: T extends "grantableMember"
-    ? Dispatch<SetStateAction<string>>
-  : undefined;
   setPaymentStatusMemberSearchType?: T extends "paymentStatus"
     ? Dispatch<SetStateAction<string>>
   : undefined;
@@ -34,8 +28,6 @@ export default function Header<T extends ManagementVariant>({
   selectedMemberList,
   setPendingMemberSearchType,
   setPendingMemberSearchText,
-  setGrantableMemberSearchType,
-  setGrantableMemberSearchText,
   setPaymentStatusMemberSearchType,
   setPaymentStatusMemberSearchText,
 }: HeaderProps<T>) {
@@ -45,8 +37,6 @@ export default function Header<T extends ManagementVariant>({
         variant={variant}
         setPendingMemberSearchType={setPendingMemberSearchType}
         setPendingMemberSearchText={setPendingMemberSearchText}
-        setGrantableMemberSearchType={setGrantableMemberSearchType}
-        setGrantableMemberSearchText={setGrantableMemberSearchText}
         setPaymentStatusMemberSearchType={setPaymentStatusMemberSearchType}
         setPaymentStatusMemberSearchText={setPaymentStatusMemberSearchText}
       />

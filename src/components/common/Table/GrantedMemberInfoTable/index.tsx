@@ -5,7 +5,7 @@ import { useStore } from "zustand";
 import GrantedMemberInfoTableBody from "./GrantedMemberInfoTableBody";
 import GrantedMemberInfoTableHeader from "./GrantedMemberInfoTableHeader";
 import useGetGrantedMemberListQuery from "@/hooks/queries/useGetGrantedMemberListQuery";
-import { grantedMembersStore } from "@/store/grantedMember";
+import { grantedMembersStore } from "@/store/grantedMembers";
 
 export default function GrantedMemberInfoTable() {
   const [page, setPage] = useState(0);

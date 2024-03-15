@@ -6,8 +6,6 @@ import { GrantableMemberInfoType } from "@/types/entities/member";
 
 export default function GrantableMembersPage() {
   const [selectedMemberList, setSelectedMemberList] = useState<GrantableMemberInfoType[]>([]);
-  const [grantableMemberSearchType, setGrantableMemberSearchType] = useState("");
-  const [grantableMemberSearchText, setGrantableMemberSearchText] = useState("");
 
   return (
     <>
@@ -16,14 +14,10 @@ export default function GrantableMembersPage() {
         variant={"grantableMember"}
         selectedMemberCount={selectedMemberList.length}
         selectedMemberList={selectedMemberList}
-        setGrantableMemberSearchType={setGrantableMemberSearchType}
-        setGrantableMemberSearchText={setGrantableMemberSearchText}
       />
       <GrantableMemberInfoTable
         setSelectedMemberList={setSelectedMemberList}
         selectedMemberList={selectedMemberList}
-        grantableMemberSearchType={grantableMemberSearchType}
-        grantableMemberSearchText={grantableMemberSearchText}
       />
     </>
   )
