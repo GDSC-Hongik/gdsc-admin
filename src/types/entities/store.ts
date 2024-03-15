@@ -10,7 +10,9 @@ type CommonMembersSearchVariantType = [
   "nickname",
 ];
 
-export type SearchVariantType<T extends ManagementVariant> = T extends "pendingMember"
+export type SearchVariantType<T extends ManagementVariant> = T extends
+  | "pendingMember"
+  | "paymentStatus"
   ? Exclude<CommonMembersSearchVariantType, "department" | "email">[number] | null
   : CommonMembersSearchVariantType[number] | null;
 

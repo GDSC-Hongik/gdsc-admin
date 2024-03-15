@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import {
   FormControl,
@@ -10,7 +10,6 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useStore } from "zustand";
-import { HeaderProps } from ".";
 import {
   allMemberTableTitle,
   paymentStatusTableTitle,
@@ -19,6 +18,7 @@ import {
 import { allMembersStore } from "@/store/allMembers";
 import { grantableMembersStore } from "@/store/grantableMembers";
 import { grantedMembersStore } from "@/store/grantedMembers";
+import { paymentStatusMembersStore } from "@/store/paymentStatusMembers";
 import { pendingMembersStore } from "@/store/pendingMembers";
 import { ManagementVariant } from "@/types/entities/member";
 import { SearchVariantType } from "@/types/entities/store";
@@ -27,24 +27,18 @@ const FormContainer = styled(FormControl)({
   width: "180px",
 });
 
-type HeaderLeftColProps<T extends ManagementVariant> = {
+type HeaderLeftColProps = {
   variant: ManagementVariant;
-} & Pick<
-  HeaderProps<T>,
-  | "setPaymentStatusMemberSearchType"
-  | "setPaymentStatusMemberSearchText"
->;
+};
 
-const HeaderLeftElement = (
-  variant: ManagementVariant,
-  setPaymentStatusMemberSearchType?: Dispatch<SetStateAction<string>>,
-) => {
+const HeaderLeftElement = (variant: ManagementVariant) => {
   const [selectedValue, setSelectedValue] = useState("");
 
   const { setSearchVariant: setAllMemberSearchVariant } = useStore(allMembersStore);
   const { setSearchVariant: setGrantedMemberSearchVariant } = useStore(grantedMembersStore);
   const { setSearchVariant: setGrantableMemberSearchVariant } = useStore(grantableMembersStore);
   const { setSearchVariant: setPendingMemberSearchVariant } = useStore(pendingMembersStore);
+  const { setSearchVariant: setPaymentMemberSearchVariant } = useStore(paymentStatusMembersStore);
 
   const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
@@ -56,10 +50,18 @@ const HeaderLeftElement = (
       );
     } else if (variant === "pendingMember") {
       setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
-      setPendingMemberSearchVariant?.(pendingMemberTableTitle.slice(0, 5)[targetIndex]["type"] as SearchVariantType<"pendingMember">);
+      setPendingMemberSearchVariant?.(
+        pendingMemberTableTitle.slice(0, 5)[targetIndex][
+          "type"
+        ] as SearchVariantType<"pendingMember">,
+      );
     } else if (variant === "paymentStatus") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
-      setPaymentStatusMemberSearchType?.(paymentStatusTableTitle.slice(0, 5)[targetIndex]["type"]);
+      setPaymentMemberSearchVariant?.(
+        paymentStatusTableTitle.slice(0, 5)[targetIndex][
+          "type"
+        ] as SearchVariantType<"paymentStatus">,
+      );
     } else if (variant === "grantableMember") {
       setSelectedValue(allMemberTableTitle[targetIndex]["value"]);
       setGrantableMemberSearchVariant?.(
@@ -137,15 +139,12 @@ const HeaderLeftElement = (
   };
 };
 
-export default function HeaderLeftCol<T extends ManagementVariant>({
-  variant,
-  setPaymentStatusMemberSearchType,
-  setPaymentStatusMemberSearchText,
-}: HeaderLeftColProps<T>) {
+export default function HeaderLeftCol({ variant }: HeaderLeftColProps) {
   const { setSearchText: setAllMemberSearchText } = useStore(allMembersStore);
   const { setSearchText: setGrantedMemberSearchText } = useStore(grantedMembersStore);
   const { setSearchText: setGrantableMemberSearchText } = useStore(grantableMembersStore);
   const { setSearchText: setPendingMemberSearchText } = useStore(pendingMembersStore);
+  const { setSearchText: setPaymentStatusMemberSearchText } = useStore(paymentStatusMembersStore);
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
@@ -163,11 +162,7 @@ export default function HeaderLeftCol<T extends ManagementVariant>({
 
   return (
     <Container>
-      {
-        HeaderLeftElement(variant, setPaymentStatusMemberSearchType)[
-          variant
-        ]
-      }
+      {HeaderLeftElement(variant)[variant]}
       <TextField
         label="search"
         variant="outlined"

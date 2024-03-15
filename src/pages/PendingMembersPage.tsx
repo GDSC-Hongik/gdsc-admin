@@ -9,7 +9,10 @@ export default function PendingMembersPage() {
 
   return (
     <>
-      <Title variant={"pendingMember"} descriptionText={"가입 신청서를 작성한 게스트 멤버의 정보를 관리합니다. "} />
+      <Title
+        variant={"pendingMember"}
+        descriptionText={"가입 신청서를 작성한 게스트 멤버의 정보를 관리합니다. "}
+      />
       <Header
         variant={"pendingMember"}
         selectedMemberCount={selectedMemberList.length}

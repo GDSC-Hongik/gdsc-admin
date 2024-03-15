@@ -1,35 +1,32 @@
-import { Dispatch, SetStateAction } from "react";
 import { Stack, styled } from "@mui/material";
 import HeaderLeftCol from "./HeaderLeftCol";
 import HeaderRightCol from "./HeaderRightCol";
-import { GrantableMemberInfoType, ManagementVariant, PendingMemberInfoType } from "@/types/entities/member";
+import {
+  GrantableMemberInfoType,
+  ManagementVariant,
+  PendingMemberInfoType,
+} from "@/types/entities/member";
 
 export type HeaderProps<T extends ManagementVariant> = {
   variant: ManagementVariant;
-  selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" | "grantableMember" ? number : undefined;
-  selectedMemberList?: T extends "pendingMember" ? PendingMemberInfoType[] : T extends "grantableMember" ? GrantableMemberInfoType[] : undefined;
-  setPaymentStatusMemberSearchType?: T extends "paymentStatus"
-    ? Dispatch<SetStateAction<string>>
-  : undefined;
-  setPaymentStatusMemberSearchText?: T extends "paymentStatus"
-    ? Dispatch<SetStateAction<string>>
-  : undefined;
+  selectedMemberCount?: T extends "pendingMember" | "feePaymentStatus" | "grantableMember"
+    ? number
+    : undefined;
+  selectedMemberList?: T extends "pendingMember"
+    ? PendingMemberInfoType[]
+    : T extends "grantableMember"
+      ? GrantableMemberInfoType[]
+      : undefined;
 };
 
 export default function Header<T extends ManagementVariant>({
   variant,
   selectedMemberCount,
   selectedMemberList,
-  setPaymentStatusMemberSearchType,
-  setPaymentStatusMemberSearchText,
 }: HeaderProps<T>) {
   return (
     <Container>
-      <HeaderLeftCol
-        variant={variant}
-        setPaymentStatusMemberSearchType={setPaymentStatusMemberSearchType}
-        setPaymentStatusMemberSearchText={setPaymentStatusMemberSearchText}
-      />
+      <HeaderLeftCol variant={variant} />
       <HeaderRightCol
         variant={variant}
         selectedMemberCount={selectedMemberCount}

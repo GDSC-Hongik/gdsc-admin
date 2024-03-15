@@ -20,5 +20,5 @@ export default function GrantableMembersPage() {
         selectedMemberList={selectedMemberList}
       />
     </>
-  )
+  );
 }
