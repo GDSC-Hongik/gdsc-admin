@@ -28,8 +28,14 @@ export default function FirstRow({
           name="studentId"
           value={studentId}
           onChange={handleChangeMemberInfo}
-          error={studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)}
-          helperText={studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId) ? memberInfoValidation.studentId.errorText : ''}
+          error={
+            studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)
+          }
+          helperText={
+            studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)
+              ? memberInfoValidation.studentId.errorText
+              : ""
+          }
         />
       </ColContainer>
       <ColContainer>
@@ -39,8 +45,16 @@ export default function FirstRow({
           name="phone"
           value={formatPhoneNumber(phone)}
           onChange={handleChangeMemberInfo}
-          error={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))}
-          helperText={phone?.length > 0 && !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone)) ? memberInfoValidation.phone.errorText : ''}
+          error={
+            phone?.length > 0 &&
+            !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))
+          }
+          helperText={
+            phone?.length > 0 &&
+            !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))
+              ? memberInfoValidation.phone.errorText
+              : ""
+          }
         />
       </ColContainer>
     </RowContainer>

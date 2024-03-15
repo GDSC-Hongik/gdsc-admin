@@ -6,8 +6,8 @@ export default function useGetDepartmentListQuery(searchText: string) {
   const { data: departmentList = [] } = useQuery({
     queryKey: [QueryKey.departmentList, searchText],
     queryFn: () => allMemberApi.searchDepartmentList(searchText),
-    enabled: !!searchText?.length
-  })
+    enabled: !!searchText?.length,
+  });
 
-  return { departmentList }
+  return { departmentList };
 }

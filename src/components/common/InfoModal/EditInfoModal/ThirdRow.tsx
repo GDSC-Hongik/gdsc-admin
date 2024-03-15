@@ -31,8 +31,14 @@ export default function ThirdRow({
           name="nickname"
           value={nickname}
           onChange={handleChangeMemberInfo}
-          error={nickname ? !RegExp(memberInfoValidation.nickname.regExp).test(nickname) : undefined}
-          helperText={nickname && !RegExp(memberInfoValidation.nickname.regExp).test(nickname) ? memberInfoValidation.nickname.errorText : ''}
+          error={
+            nickname ? !RegExp(memberInfoValidation.nickname.regExp).test(nickname) : undefined
+          }
+          helperText={
+            nickname && !RegExp(memberInfoValidation.nickname.regExp).test(nickname)
+              ? memberInfoValidation.nickname.errorText
+              : ""
+          }
         />
       </ColContainer>
     </RowContainer>

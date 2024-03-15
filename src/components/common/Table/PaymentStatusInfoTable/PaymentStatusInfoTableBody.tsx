@@ -25,7 +25,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
 
   const filterTableInfo = (dataList: PaymentStatusInfoType[]) => {
     const newDataList: (Omit<PaymentStatusInfoType, "department" | "requirement" | "email"> & {
-      paymentStatus: StatusType
+      paymentStatus: StatusType;
     })[] = [];
 
     dataList.forEach(data => {
@@ -36,7 +36,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
         phone: data.phone,
         discordUsername: data.discordUsername,
         nickname: data.nickname,
-        paymentStatus: data.requirement.paymentStatus
+        paymentStatus: data.requirement.paymentStatus,
       });
     });
 
@@ -49,13 +49,12 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
-              (key !== "memberId" && key !== "paymentStatus") && (
+              key !== "memberId" &&
+              key !== "paymentStatus" && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
-                  <Text sx={{ wordBreak: "keep-all" }}>
-                    {formatNullableValue(value)}
-                  </Text>
+                  <Text sx={{ wordBreak: "keep-all" }}>{formatNullableValue(value)}</Text>
                 </TextContainer>
-              )
+              ),
           )}
           <ButtonContainer>
             <Button

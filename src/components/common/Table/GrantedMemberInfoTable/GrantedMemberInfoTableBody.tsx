@@ -42,7 +42,8 @@ export default function GrantedMemberInfoTableBody({ dataList }: GrantedMemberIn
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           {Object.entries(row).map(
             ([key, value], index) =>
-              key !== "memberId" && key !== 'requirement' && (
+              key !== "memberId" &&
+              key !== "requirement" && (
                 <TextContainer item key={index} xs={getCellWidthRatio(key)}>
                   <Text sx={{ wordBreak: "keep-all" }}>
                     {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
@@ -75,7 +76,7 @@ export default function GrantedMemberInfoTableBody({ dataList }: GrantedMemberIn
         />
       )}
     </Container>
-  )
+  );
 }
 
 const Container = styled(Grid)({});

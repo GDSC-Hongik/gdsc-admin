@@ -45,9 +45,7 @@ export default function MemberDetailInfoModal({
         ["회비 납입 여부"]: getStatus(
           (memberInfo as PendingMemberInfoType).requirement.paymentStatus,
         ),
-        ["bevy 인증 여부"]: getStatus(
-          (memberInfo as PendingMemberInfoType).requirement.bevyStatus,
-        ),
+        ["bevy 인증 여부"]: getStatus((memberInfo as PendingMemberInfoType).requirement.bevyStatus),
       };
     } else {
       return {

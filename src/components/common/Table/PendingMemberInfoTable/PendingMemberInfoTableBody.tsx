@@ -2,7 +2,10 @@ import { ChangeEvent, useContext, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
 import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
-import { SelectedMemberListContext, SelectedMemberDispatchContext } from "@/components/context/SelectedMemberContextProvider";
+import {
+  SelectedMemberListContext,
+  SelectedMemberDispatchContext,
+} from "@/components/context/SelectedMemberContextProvider";
 import { pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
@@ -12,9 +15,7 @@ type PendingMemberInfoTableBodyProps = {
   dataList: PendingMemberInfoType[];
 };
 
-export default function PendingMemberInfoTableBody({
-  dataList,
-}: PendingMemberInfoTableBodyProps) {
+export default function PendingMemberInfoTableBody({ dataList }: PendingMemberInfoTableBodyProps) {
   const [isMemberDetailInfoModalVisible, setIsMemberDetailInfoModalVisible] = useState(false);
   const [selectedMemberDetailInfo, setSelectedMemberDetailInfo] = useState<PendingMemberInfoType>();
 
