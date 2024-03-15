@@ -70,7 +70,6 @@ export default function HeaderRightCol({ variant }: HeaderRightColProps) {
       <AcceptMemberListModal
         isAcceptModalVisible={isAcceptModalVisible}
         setIsAcceptModalVisible={setIsAcceptModalVisible}
-        selectedMemberList={selectedMemberList}
       />
     </>
   );
