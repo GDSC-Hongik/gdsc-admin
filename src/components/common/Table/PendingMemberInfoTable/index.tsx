@@ -1,19 +1,17 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Grid, TablePagination } from "@mui/material";
-import { useStore } from "zustand";
 import PendingMemberInfoTableBody from "./PendingMemberInfoTableBody";
 import PendingMemberInfoTableHeader from "./PendingMemberInfoTableHeader";
 import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
-import { pendingMembersStore } from "@/store/pendingMembers";
+import { usePendingMembersStore } from "@/store/pendingMembers";
 
 export default function PendingMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const {
-    searchInfo: { text: pendingMemberSearchText, variant: pendingMemberSearchVariant },
-  } = useStore(pendingMembersStore);
+  const pendingMemberSearchText = usePendingMembersStore(state => state.searchInfo.text);
+  const pendingMemberSearchVariant = usePendingMembersStore(state => state.searchInfo.variant);
 
   const { pendingMemberList = [], totalElements = 0 } = useGetPendingMemberListQuery(
     page,
