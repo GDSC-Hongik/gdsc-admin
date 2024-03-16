@@ -1,19 +1,17 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Grid, TablePagination } from "@mui/material";
-import { useStore } from "zustand";
 import GrantedMemberInfoTableBody from "./GrantedMemberInfoTableBody";
 import GrantedMemberInfoTableHeader from "./GrantedMemberInfoTableHeader";
 import useGetGrantedMemberListQuery from "@/hooks/queries/useGetGrantedMemberListQuery";
-import { grantedMembersStore } from "@/store/grantedMembers";
+import { useGrantedMembersStore } from "@/store/grantedMembers";
 
 export default function GrantedMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const {
-    searchInfo: { variant: grantedMemberSearchVariant, text: grantedMemberSearchText },
-  } = useStore(grantedMembersStore);
+  const grantedMemberSearchText = useGrantedMembersStore(state => state.searchInfo.text);
+  const grantedMemberSearchVariant = useGrantedMembersStore(state => state.searchInfo.variant);
 
   const { grantedMemberList = [], totalElements = 0 } = useGetGrantedMemberListQuery(
     page,

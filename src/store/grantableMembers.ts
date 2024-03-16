@@ -7,7 +7,7 @@ export type GrantableMembersStoreType = {
   setSearchVariant: (variant: SearchVariantType<"grantableMember">) => void;
 };
 
-export const grantableMembersStore = create<GrantableMembersStoreType>(set => ({
+export const useGrantableMembersStore = create<GrantableMembersStoreType>(set => ({
   searchInfo: {
     text: "",
     variant: null,

@@ -7,7 +7,7 @@ export type PendingMembersStoreType = {
   setSearchVariant: (variant: SearchVariantType<"pendingMember">) => void;
 };
 
-export const pendingMembersStore = create<PendingMembersStoreType>(set => ({
+export const usePendingMembersStore = create<PendingMembersStoreType>(set => ({
   searchInfo: {
     text: "",
     variant: null,

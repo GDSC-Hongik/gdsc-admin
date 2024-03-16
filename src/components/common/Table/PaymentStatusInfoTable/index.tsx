@@ -1,19 +1,21 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Grid, TablePagination } from "@mui/material";
-import { useStore } from "zustand";
 import PaymentStatusInfoTableBody from "./PaymentStatusInfoTableBody";
 import PaymentStatusInfoTableHeader from "./PaymentStatusInfoTableHeader";
 import useGetPaymentStatusMemberListQuery from "@/hooks/queries/useGetPaymentStatusMemberListQuery";
-import { paymentStatusMembersStore } from "@/store/paymentStatusMembers";
+import { usePaymentStatusMembersStore } from "@/store/paymentStatusMembers";
 
 export default function PaymentStatusInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const {
-    searchInfo: { text: paymentStatusMemberSearchText, variant: paymentStatusMemberSearchVariant },
-  } = useStore(paymentStatusMembersStore);
+  const paymentStatusMemberSearchText = usePaymentStatusMembersStore(
+    state => state.searchInfo.text,
+  );
+  const paymentStatusMemberSearchVariant = usePaymentStatusMembersStore(
+    state => state.searchInfo.variant,
+  );
 
   const { paymentStatusMemberList = [], totalElements = 0 } = useGetPaymentStatusMemberListQuery(
     page,

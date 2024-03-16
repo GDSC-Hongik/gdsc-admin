@@ -7,7 +7,7 @@ export type PaymentStatusMembersStoreType = {
   setSearchVariant: (variant: SearchVariantType<"paymentStatus">) => void;
 };
 
-export const paymentStatusMembersStore = create<PaymentStatusMembersStoreType>(set => ({
+export const usePaymentStatusMembersStore = create<PaymentStatusMembersStoreType>(set => ({
   searchInfo: {
     text: "",
     variant: null,

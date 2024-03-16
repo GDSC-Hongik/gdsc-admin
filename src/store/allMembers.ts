@@ -7,7 +7,7 @@ export type AllMembersStoreType = {
   setSearchVariant: (variant: SearchVariantType<"allMember">) => void;
 };
 
-export const allMembersStore = create<AllMembersStoreType>(set => ({
+export const useAllMembersStore = create<AllMembersStoreType>(set => ({
   searchInfo: {
     text: "",
     variant: null,
