@@ -86,7 +86,7 @@ export const pendingMemberTableTitle: MemberTableTitleType = [
   },
 ];
 
-export const pendingMemberTableWidthRatio = {
+export const pendingMemberTableWidthRatio: Record<TableRatioType, Record<string, number>> = {
   title: {
     학번: 1.1,
     이름: 1.1,

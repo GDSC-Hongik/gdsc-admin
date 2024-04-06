@@ -8,6 +8,7 @@ import {
 import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType } from "@/types/entities/member";
+import { TableRatioType } from "@/types/entities/table";
 
 type PendingMemberInfoTableHeaderProps = {
   dataList: PendingMemberInfoType[];
@@ -19,10 +20,11 @@ export default function PendingMemberInfoTableHeader({
   const selectedMemberList = useContext(SelectedMemberListContext);
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
 
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? pendingMemberTableWidthRatio["title"][title]
-      : pendingMemberTableWidthRatio["title"]["default"];
+  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
+    return (
+      pendingMemberTableWidthRatio[variant][option] ??
+      pendingMemberTableWidthRatio[variant]["default"]
+    );
   };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +43,7 @@ export default function PendingMemberInfoTableHeader({
       {pendingMemberTableTitle.map((title, index) => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTitleWidthRatio(title.name, "title")}
           key={index}
           alignItems="center"
           justifyContent={"center"}
