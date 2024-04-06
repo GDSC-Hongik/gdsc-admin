@@ -44,8 +44,6 @@ export default function AcceptMemberListModal({
       })),
     );
 
-    console.log("filteredMemberList", filteredMemberList);
-
     return filteredMemberList;
   };
 
@@ -55,11 +53,9 @@ export default function AcceptMemberListModal({
 
   const handleClickGrantMemberButton = () => {
     const memberIdList = go(
-      selectedMemberList,
+      selectedMemberList || [],
       map(({ memberId }) => memberId),
     );
-
-    console.log("memberIdList", memberIdList);
 
     !!memberIdList.length && grantMemberMutation.mutate({ memberIdList });
 
