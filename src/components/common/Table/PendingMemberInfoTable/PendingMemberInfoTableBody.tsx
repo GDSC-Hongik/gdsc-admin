@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Checkbox, Grid } from "@mui/material";
-import MemberDetailInfoModal from "../../InfoModal/MemberDetailInfoModal";
+import MemberDetailInfoModal from "../../Modal/MemberDetailInfoModal";
 import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,

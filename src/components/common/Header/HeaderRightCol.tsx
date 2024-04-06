@@ -2,7 +2,7 @@ import { Dispatch, ReactElement, SetStateAction, useContext, useState } from "re
 import styled from "@emotion/styled";
 import { Button, Stack, Typography } from "@mui/material";
 import { toast } from "react-toastify";
-import AcceptMemberListModal from "../InfoModal/AcceptMemberListModal";
+import AcceptMemberListModal from "../Modal/AcceptMemberListModal";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { SelectedMemberListContext } from "@/components/context/SelectedMemberContextProvider";
 import { ManagementVariant } from "@/types/entities/member";
