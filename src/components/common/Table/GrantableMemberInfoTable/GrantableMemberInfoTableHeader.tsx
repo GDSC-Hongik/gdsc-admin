@@ -8,6 +8,7 @@ import {
 import { grantableMemberTableWidthRatio, grantableStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
+import { TableRatioType } from "@/types/entities/table";
 
 type GrantableMemberInfoTableHeaderProps = {
   dataList: GrantableMemberInfoType[];
@@ -19,10 +20,11 @@ export default function GrantableMemberInfoTableHeader({
   const selectedMemberList = useContext(SelectedMemberListContext);
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
 
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? grantableMemberTableWidthRatio["title"][title]
-      : grantableMemberTableWidthRatio["title"]["default"];
+  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
+    return (
+      grantableMemberTableWidthRatio[variant][option] ??
+      grantableMemberTableWidthRatio[variant]["default"]
+    );
   };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +43,7 @@ export default function GrantableMemberInfoTableHeader({
       {grantableStatusTableTitle.map((title, index) => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTitleWidthRatio(title.name, "title")}
           key={index}
           alignItems="center"
           justifyContent={"center"}
