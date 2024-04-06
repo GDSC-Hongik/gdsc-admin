@@ -5,6 +5,7 @@ import { SelectedMemberListContext } from "@/components/context/SelectedMemberCo
 import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
+import { PendingMemberInfoType, AllMemberInfoType } from "@/types/entities/member";
 import { go, map } from "@/utils/fx";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
@@ -33,7 +34,7 @@ export default function AcceptMemberListModal({
     }
   };
 
-  const filterSelectedMemberList = () => {
+  const filterSelectedMemberList = (): PendingMemberInfoType[] | AllMemberInfoType[] => {
     return go(
       selectedMemberList,
       map(({ studentId, name, phone, department, email, discordUsername, nickname }) => ({
@@ -80,7 +81,7 @@ export default function AcceptMemberListModal({
                 ))}
               </BodyCellTitle>
               <BodyCellRowContainer>
-                {filteredSelectedMemberList?.map((selectedMember, index) => (
+                {filteredSelectedMemberList?.map((selectedMember, index: number) => (
                   <BodyCellRow container key={index} alignItems="center" justifyContent="center">
                     {Object.entries(selectedMember).map(([key, value], index) => (
                       <BodyCell xs={getTableWidth(key, "cell")} key={index}>
