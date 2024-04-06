@@ -5,16 +5,16 @@ import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
-type FirstRowProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
+type BasicInfoProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function FirstRow({
+export default function BasicInfo({
   name,
   studentId,
   phone,
   handleChangeMemberInfo,
-}: FirstRowProps) {
+}: BasicInfoProps) {
   return (
     <RowContainer>
       <ColContainer>

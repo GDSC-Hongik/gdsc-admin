@@ -7,20 +7,20 @@ import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 
-type SecondRowProps = Pick<AllMemberInfoStateType, "email"> & {
+type AdditionalInfoProps = Pick<AllMemberInfoStateType, "email"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
   setMemberInfo: Dispatch<SetStateAction<AllMemberInfoStateType>>;
   departmentSearchText: string;
   setDepartmentSearchText: Dispatch<SetStateAction<string>>;
 };
 
-export default function SecondRow({
+export default function AdditionalInfo({
   email,
   handleChangeMemberInfo,
   setMemberInfo,
   departmentSearchText,
   setDepartmentSearchText,
-}: SecondRowProps) {
+}: AdditionalInfoProps) {
   const { departmentList } = useGetDepartmentListQuery(departmentSearchText);
 
   const handleClickDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {

@@ -4,15 +4,15 @@ import { Box, TextField } from "@mui/material";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 
-type ThirdRowProps = Pick<AllMemberInfoStateType, "discordUsername" | "nickname"> & {
+type DiscordInfoProps = Pick<AllMemberInfoStateType, "discordUsername" | "nickname"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function ThirdRow({
+export default function DiscordInfo({
   discordUsername,
   nickname,
   handleChangeMemberInfo,
-}: ThirdRowProps) {
+}: DiscordInfoProps) {
   return (
     <RowContainer>
       <ColContainer>

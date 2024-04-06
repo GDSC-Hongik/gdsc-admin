@@ -2,9 +2,9 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 import styled from "@emotion/styled";
 import { Modal, Box, Button } from "@mui/material";
 import { toast } from "react-toastify";
-import FirstRow from "./FirstRow";
-import SecondRow from "./SecondRow";
-import ThirdRow from "./ThirdRow";
+import AdditionalInfo from "./AdditionalInfo";
+import BasicInfo from "./BasicInfo";
+import DiscordInfo from "./DiscordInfo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType } from "@/types/entities/member";
@@ -125,20 +125,20 @@ export default function EditInfoModal({
     <Modal open={isModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
         <TitleContainer sx={{ marginBottom: "32px" }}>멤버 정보 수정</TitleContainer>
-        <FirstRow
+        <BasicInfo
           name={name}
           studentId={studentId}
           phone={phone}
           handleChangeMemberInfo={handleChangeMemberInfo}
         />
-        <SecondRow
+        <AdditionalInfo
           email={email}
           setMemberInfo={setMemberInfo}
           handleChangeMemberInfo={handleChangeMemberInfo}
           departmentSearchText={departmentSearchText}
           setDepartmentSearchText={setDepartmentSearchText}
         />
-        <ThirdRow
+        <DiscordInfo
           discordUsername={discordUsername}
           nickname={nickname}
           handleChangeMemberInfo={handleChangeMemberInfo}
