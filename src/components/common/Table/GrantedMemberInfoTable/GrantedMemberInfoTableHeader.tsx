@@ -2,12 +2,13 @@ import styled from "@emotion/styled";
 import { Box, Grid } from "@mui/material";
 import { commonMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
+import { TableRatioType } from "@/types/entities/table";
 
 export default function GrantedMemberInfoTableHeader() {
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? allMemberTableWidthRatio["title"][title]
-      : allMemberTableWidthRatio["title"]["default"];
+  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
+    return (
+      allMemberTableWidthRatio[variant][option] ?? allMemberTableWidthRatio[variant]["default"]
+    );
   };
 
   return (
@@ -16,7 +17,7 @@ export default function GrantedMemberInfoTableHeader() {
         <Title
           item
           key={title.value}
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTitleWidthRatio(title.name, "title")}
           alignItems="center"
           justifyContent={"center"}
         >
