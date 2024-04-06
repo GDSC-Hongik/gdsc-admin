@@ -5,9 +5,10 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@/constants/table";
+import { pendingMemberTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType } from "@/types/entities/member";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 type PendingMemberInfoTableHeaderProps = {
   dataList: PendingMemberInfoType[];
@@ -18,12 +19,6 @@ export default function PendingMemberInfoTableHeader({
 }: PendingMemberInfoTableHeaderProps) {
   const selectedMemberList = useContext(SelectedMemberListContext);
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
-
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? pendingMemberTableWidthRatio["title"][title]
-      : pendingMemberTableWidthRatio["title"]["default"];
-  };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -41,7 +36,7 @@ export default function PendingMemberInfoTableHeader({
       {pendingMemberTableTitle.map((title, index) => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTableRatio(title.name, "title", "pendingMember")}
           key={index}
           alignItems="center"
           justifyContent={"center"}

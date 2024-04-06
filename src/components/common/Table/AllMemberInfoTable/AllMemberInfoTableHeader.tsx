@@ -1,22 +1,17 @@
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
-import { commonMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
+import { commonMemberTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 export default function AllMemberInfoTableHeader() {
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? allMemberTableWidthRatio["title"][title]
-      : allMemberTableWidthRatio["title"]["default"];
-  };
-
   return (
     <Container container>
       {commonMemberTableTitle.map(title => (
         <Title
           item
           key={title.value}
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTableRatio(title.name, "title", "allMember")}
           alignItems="center"
           justifyContent={"center"}
         >

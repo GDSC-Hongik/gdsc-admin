@@ -1,21 +1,16 @@
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
-import { paymentStatusTableTitle, paymentStatusTableWidthRatio } from "@/constants/table";
+import { paymentStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 export default function PaymentStatusInfoTableHeader() {
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? paymentStatusTableWidthRatio["title"][title]
-      : paymentStatusTableWidthRatio["title"]["default"];
-  };
-
   return (
     <Container container xs={12}>
       {paymentStatusTableTitle.map(title => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTableRatio(title.name, "title", "paymentStatus")}
           alignItems="center"
           justifyContent={"center"}
         >

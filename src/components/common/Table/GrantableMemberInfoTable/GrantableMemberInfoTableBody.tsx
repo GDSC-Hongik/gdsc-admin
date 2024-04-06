@@ -6,9 +6,11 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { grantableMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
+import { go } from "@/utils/fx/go";
+import { map } from "@/utils/fx/map";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type GrantableMemberInfoTableBodyProps = {
@@ -27,27 +29,20 @@ export default function GrantableMemberInfoTableBody({
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
 
   const filterTableInfo = (dataList: GrantableMemberInfoType[]) => {
-    const newDataList: Omit<GrantableMemberInfoType, "memberId">[] = [];
-
-    dataList.forEach(data => {
-      newDataList.push({
-        studentId: data.studentId,
-        name: data.name,
-        phone: data.phone,
-        department: data.department,
-        email: data.email,
-        discordUsername: data.discordUsername,
-        nickname: data.nickname,
-      });
-    });
+    const newDataList: Omit<GrantableMemberInfoType, "memberId">[] = go(
+      dataList,
+      map(({ studentId, name, phone, department, email, discordUsername, nickname }) => ({
+        studentId,
+        name,
+        phone,
+        department,
+        email,
+        discordUsername,
+        nickname,
+      })),
+    );
 
     return newDataList;
-  };
-
-  const getTitleWidthRatio = (title: string) => {
-    return title === "studentId" || title === "name" || title === "phone"
-      ? grantableMemberTableWidthRatio["cell"][title]
-      : grantableMemberTableWidthRatio["cell"]["default"];
   };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -81,7 +76,7 @@ export default function GrantableMemberInfoTableBody({
           {Object.entries(row).map(
             ([key, value], index) =>
               key !== "requirement" && (
-                <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
+                <TextContainer item key={index} xs={getTableRatio(key, "title", "grantableMember")}>
                   <Text sx={{ wordBreak: "keep-all" }}>
                     {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                   </Text>

@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
-import { paymentStatusTableWidthRatio } from "@/constants/table";
 import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
 import { theme } from "@/styles/theme";
 import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
+import { go } from "@/utils/fx/go";
+import { map } from "@/utils/fx/map";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PaymentStatusInfoBodyProps = {
@@ -13,12 +15,6 @@ type PaymentStatusInfoBodyProps = {
 export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusInfoBodyProps) {
   const updateMemberPaymentStatusMutation = useUpdateMemberPaymentStatusMutation();
 
-  const getCellWidthRatio = (option: string) => {
-    return option === "studentId" || option === "name" || option === "phone"
-      ? paymentStatusTableWidthRatio["cell"][option]
-      : paymentStatusTableWidthRatio["cell"]["default"];
-  };
-
   const handleChangePaymentStatus = (memberId: number, paymentStatus: StatusType) => {
     updateMemberPaymentStatusMutation.mutate({ memberId, paymentStatus });
   };
@@ -26,19 +22,28 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
   const filterTableInfo = (dataList: PaymentStatusInfoType[]) => {
     const newDataList: (Omit<PaymentStatusInfoType, "department" | "requirement" | "email"> & {
       paymentStatus: StatusType;
-    })[] = [];
-
-    dataList.forEach(data => {
-      newDataList.push({
-        memberId: data.memberId,
-        studentId: data.studentId,
-        name: data.name,
-        phone: data.phone,
-        discordUsername: data.discordUsername,
-        nickname: data.nickname,
-        paymentStatus: data.requirement.paymentStatus,
-      });
-    });
+    })[] = go(
+      dataList,
+      map(
+        ({
+          memberId,
+          studentId,
+          name,
+          phone,
+          discorUsername,
+          nickname,
+          requirement: { paymentStatus },
+        }) => ({
+          memberId,
+          studentId,
+          name,
+          phone,
+          discorUsername,
+          nickname,
+          paymentStatus,
+        }),
+      ),
+    );
 
     return newDataList;
   };
@@ -51,7 +56,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
             ([key, value], index) =>
               key !== "memberId" &&
               key !== "paymentStatus" && (
-                <TextContainer item key={index} xs={getCellWidthRatio(key)}>
+                <TextContainer item key={index} xs={getTableRatio(key, "cell", "paymentStatus")}>
                   <Text sx={{ wordBreak: "keep-all" }}>{formatNullableValue(value)}</Text>
                 </TextContainer>
               ),

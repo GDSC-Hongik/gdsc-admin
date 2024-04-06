@@ -1,6 +1,5 @@
 import { ManagementVariant } from "./member";
 import { SearchVariantType } from "./store";
-import { pendingMemberModalWidthRatio } from "@/constants/table";
 
 export type MemberTableTitleType = {
   value: string;
@@ -10,4 +9,4 @@ export type MemberTableTitleType = {
 
 export type DepartmentType = { code: string; name: string };
 
-export type PendingMemberModalWidthRatioKeyType = keyof typeof pendingMemberModalWidthRatio;
+export type TableRatioType = "title" | "cell";

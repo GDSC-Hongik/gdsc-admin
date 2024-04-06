@@ -2,10 +2,10 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Grid } from "@mui/material";
 import EditInfoModal from "../../Modal/EditInfoModal";
-import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import { theme } from "@/styles/theme";
 import { GrantedMemberInfoStateType, GrantedMemberInfoType } from "@/types/entities/member";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type GrantedMemberInfoTableBodyProps = {
@@ -18,12 +18,6 @@ export default function GrantedMemberInfoTableBody({ dataList }: GrantedMemberIn
   const [departmentSearchText, setDepartmentSearchText] = useState("");
 
   const deleteMemberMutation = useDeleteMemberMutation();
-
-  const getCellWidthRatio = (option: string) => {
-    return option === "studentId" || option === "name" || option === "phone"
-      ? allMemberTableWidthRatio["cell"][option]
-      : allMemberTableWidthRatio["cell"]["default"];
-  };
 
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
 
@@ -44,7 +38,7 @@ export default function GrantedMemberInfoTableBody({ dataList }: GrantedMemberIn
             ([key, value], index) =>
               key !== "memberId" &&
               key !== "requirement" && (
-                <TextContainer item key={index} xs={getCellWidthRatio(key)}>
+                <TextContainer item key={index} xs={getTableRatio(key, "cell", "grantedMember")}>
                   <Text sx={{ wordBreak: "keep-all" }}>
                     {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                   </Text>

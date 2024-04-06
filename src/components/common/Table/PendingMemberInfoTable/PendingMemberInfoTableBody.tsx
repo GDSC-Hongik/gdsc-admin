@@ -6,9 +6,11 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
+import { go } from "@/utils/fx/go";
+import { map } from "@/utils/fx/map";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PendingMemberInfoTableBodyProps = {
@@ -23,26 +25,28 @@ export default function PendingMemberInfoTableBody({ dataList }: PendingMemberIn
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
 
   const filterTableInfo = (dataList: PendingMemberInfoType[]) => {
-    const newDataList: PendingMemberTableInfoType[] = [];
-
-    dataList.forEach(data => {
-      newDataList.push({
-        studentId: data.studentId,
-        name: data.name,
-        phone: data.phone,
-        discordUsername: data.discordUsername,
-        nickname: data.nickname,
-        paymentStatus: data.requirement.paymentStatus === "PENDING" ? "미완료" : "완료",
-      });
-    });
+    const newDataList: PendingMemberTableInfoType[] = go(
+      dataList,
+      map(
+        ({
+          studentId,
+          name,
+          phone,
+          discordUsername,
+          nickname,
+          requirement: { paymentStatus },
+        }) => ({
+          studentId,
+          name,
+          phone,
+          discordUsername,
+          nickname,
+          paymentStatus: paymentStatus === "PENDING" ? "미완료" : "완료",
+        }),
+      ),
+    );
 
     return newDataList;
-  };
-
-  const getTitleWidthRatio = (title: string) => {
-    return title === "studentId" || title === "name" || title === "phone"
-      ? pendingMemberTableWidthRatio["cell"][title]
-      : pendingMemberTableWidthRatio["cell"]["default"];
   };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -74,7 +78,7 @@ export default function PendingMemberInfoTableBody({ dataList }: PendingMemberIn
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
           {Object.entries(row).map(([key, value], index) => (
-            <TextContainer item key={index} xs={getTitleWidthRatio(key)}>
+            <TextContainer item key={index} xs={getTableRatio(key, "cell", "pendingMember")}>
               <Text sx={{ wordBreak: "keep-all" }}>{formatNullableValue(value)}</Text>
             </TextContainer>
           ))}

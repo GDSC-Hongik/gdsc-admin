@@ -5,9 +5,10 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { grantableMemberTableWidthRatio, grantableStatusTableTitle } from "@/constants/table";
+import { grantableStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 type GrantableMemberInfoTableHeaderProps = {
   dataList: GrantableMemberInfoType[];
@@ -18,12 +19,6 @@ export default function GrantableMemberInfoTableHeader({
 }: GrantableMemberInfoTableHeaderProps) {
   const selectedMemberList = useContext(SelectedMemberListContext);
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
-
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? grantableMemberTableWidthRatio["title"][title]
-      : grantableMemberTableWidthRatio["title"]["default"];
-  };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -41,7 +36,7 @@ export default function GrantableMemberInfoTableHeader({
       {grantableStatusTableTitle.map((title, index) => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTableRatio(title.name, "title", "grantableMember")}
           key={index}
           alignItems="center"
           justifyContent={"center"}
