@@ -76,7 +76,7 @@ export default function GrantableMemberInfoTableBody({
           {Object.entries(row).map(
             ([key, value], index) =>
               key !== "requirement" && (
-                <TextContainer item key={index} xs={getTableRatio(key, "title", "grantableMember")}>
+                <TextContainer item key={index} xs={getTableRatio(key, "cell", "grantableMember")}>
                   <Text sx={{ wordBreak: "keep-all" }}>
                     {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                   </Text>
