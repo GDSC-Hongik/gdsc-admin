@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, Fragment, SetStateAction, useContext } from "react";
 import styled from "@emotion/styled";
 import { Modal, Grid, Box, Button } from "@mui/material";
 import { SelectedMemberListContext } from "@/components/context/SelectedMemberContextProvider";
@@ -6,6 +6,7 @@ import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constant
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, AllMemberInfoType } from "@/types/entities/member";
+import { DepartmentType } from "@/types/entities/table";
 import { go, map } from "@/utils/fx";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
@@ -66,42 +67,48 @@ export default function AcceptMemberListModal({
     setIsAcceptModalVisible(false);
   };
 
+  if (!filteredSelectedMemberList?.length) {
+    return (
+      <Modal open={isAcceptModalVisible} onClose={handleCloseModal}>
+        <ModalContentContainer>
+          <TitleContainer sx={{ marginBottom: "32px" }}>가입 승인 명단 확인</TitleContainer>
+          <EmptyTextContainer container alignItems="center" justifyContent="center">
+            <Box>선택된 멤버가 없습니다. 멤버 선택 후 다시 확인해주세요.</Box>
+          </EmptyTextContainer>
+        </ModalContentContainer>
+      </Modal>
+    );
+  }
+
   return (
     <Modal open={isAcceptModalVisible} onClose={handleCloseModal}>
       <ModalContentContainer>
         <TitleContainer sx={{ marginBottom: "32px" }}>가입 승인 명단 확인</TitleContainer>
-        {filteredSelectedMemberList?.length ? (
-          <>
-            <BodyContainer>
-              <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
-                {commonMemberTableTitle.map((tableTitle, index) => (
-                  <ColumnTitle key={index} xs={getTableWidth(tableTitle.name, "title")}>
-                    {tableTitle.name}
-                  </ColumnTitle>
-                ))}
-              </BodyCellTitle>
-              <BodyCellRowContainer>
-                {filteredSelectedMemberList?.map((selectedMember, index: number) => (
-                  <BodyCellRow container key={index} alignItems="center" justifyContent="center">
-                    {Object.entries(selectedMember).map(([key, value], index) => (
-                      <BodyCell xs={getTableWidth(key, "cell")} key={index}>
-                        {(value as { code: string; name: string })?.name ??
-                          formatNullableValue(value)}
-                      </BodyCell>
-                    ))}
-                  </BodyCellRow>
-                ))}
-              </BodyCellRowContainer>
-            </BodyContainer>
-            <StyledButton variant={"contained"} size="large" onClick={handleClickGrantMemberButton}>
-              승인하기
-            </StyledButton>
-          </>
-        ) : (
-          <EmptyTextContainer container alignItems="center" justifyContent="center">
-            <Box>선택된 멤버가 없습니다. 멤버 선택 후 다시 확인해주세요.</Box>
-          </EmptyTextContainer>
-        )}
+        <Fragment>
+          <BodyContainer>
+            <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
+              {commonMemberTableTitle.map((tableTitle, index) => (
+                <ColumnTitle key={index} xs={getTableWidth(tableTitle.name, "title")}>
+                  {tableTitle.name}
+                </ColumnTitle>
+              ))}
+            </BodyCellTitle>
+            <BodyCellRowContainer>
+              {filteredSelectedMemberList?.map((selectedMember, index: number) => (
+                <BodyCellRow container key={index} alignItems="center" justifyContent="center">
+                  {Object.entries(selectedMember).map(([key, value], index) => (
+                    <BodyCell xs={getTableWidth(key, "cell")} key={index}>
+                      {(value as DepartmentType)?.name ?? formatNullableValue(value)}
+                    </BodyCell>
+                  ))}
+                </BodyCellRow>
+              ))}
+            </BodyCellRowContainer>
+          </BodyContainer>
+          <StyledButton variant={"contained"} size="large" onClick={handleClickGrantMemberButton}>
+            승인하기
+          </StyledButton>
+        </Fragment>
       </ModalContentContainer>
     </Modal>
   );

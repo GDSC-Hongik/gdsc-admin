@@ -6,3 +6,5 @@ export type MemberTableTitleType = {
   name: string;
   type: SearchVariantType<ManagementVariant>;
 }[];
+
+export type DepartmentType = { code: string; name: string };
