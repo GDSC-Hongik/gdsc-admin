@@ -7,20 +7,20 @@ import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 
-type SecondRowProps = Pick<AllMemberInfoStateType, "email"> & {
+type AdditionalInfoProps = Pick<AllMemberInfoStateType, "email"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
   setMemberInfo: Dispatch<SetStateAction<AllMemberInfoStateType>>;
   departmentSearchText: string;
   setDepartmentSearchText: Dispatch<SetStateAction<string>>;
 };
 
-export default function SecondRow({
+export default function AdditionalInfo({
   email,
   handleChangeMemberInfo,
   setMemberInfo,
   departmentSearchText,
   setDepartmentSearchText,
-}: SecondRowProps) {
+}: AdditionalInfoProps) {
   const { departmentList } = useGetDepartmentListQuery(departmentSearchText);
 
   const handleClickDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
@@ -29,6 +29,12 @@ export default function SecondRow({
       ...prevInfo,
       department: departmentItem,
     }));
+  };
+
+  const handleChangeDepartmentSearchText = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setDepartmentSearchText(e.target.value);
   };
 
   return (
@@ -40,9 +46,7 @@ export default function SecondRow({
           sx={{ marginBottom: "18px" }}
           name="department"
           value={departmentSearchText}
-          onChange={e => {
-            setDepartmentSearchText(e.target.value);
-          }}
+          onChange={handleChangeDepartmentSearchText}
         />
         <Divider />
         <DepartmentListContainer>
@@ -60,12 +64,8 @@ export default function SecondRow({
           name="email"
           value={email}
           onChange={handleChangeMemberInfo}
-          error={email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email)}
-          helperText={
-            email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email)
-              ? memberInfoValidation.email.errorText
-              : ""
-          }
+          error={memberInfoValidation.email.isError(email)}
+          helperText={memberInfoValidation.email.helperText(email)}
         />
       </ColContainer>
     </RowContainer>

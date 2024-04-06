@@ -5,16 +5,16 @@ import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
-type FirstRowProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
+type BasicInfoProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function FirstRow({
+export default function BasicInfo({
   name,
   studentId,
   phone,
   handleChangeMemberInfo,
-}: FirstRowProps) {
+}: BasicInfoProps) {
   return (
     <RowContainer>
       <ColContainer>
@@ -28,14 +28,8 @@ export default function FirstRow({
           name="studentId"
           value={studentId}
           onChange={handleChangeMemberInfo}
-          error={
-            studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)
-          }
-          helperText={
-            studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)
-              ? memberInfoValidation.studentId.errorText
-              : ""
-          }
+          error={memberInfoValidation.studentId.isError(studentId)}
+          helperText={memberInfoValidation.studentId.helperText(studentId)}
         />
       </ColContainer>
       <ColContainer>
@@ -45,16 +39,8 @@ export default function FirstRow({
           name="phone"
           value={formatPhoneNumber(phone)}
           onChange={handleChangeMemberInfo}
-          error={
-            phone?.length > 0 &&
-            !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))
-          }
-          helperText={
-            phone?.length > 0 &&
-            !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))
-              ? memberInfoValidation.phone.errorText
-              : ""
-          }
+          error={memberInfoValidation.phone.isError(phone)}
+          helperText={memberInfoValidation.phone.helperText(phone)}
         />
       </ColContainer>
     </RowContainer>

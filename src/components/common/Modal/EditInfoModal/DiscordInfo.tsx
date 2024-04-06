@@ -4,15 +4,15 @@ import { Box, TextField } from "@mui/material";
 import { AllMemberInfoStateType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 
-type ThirdRowProps = Pick<AllMemberInfoStateType, "discordUsername" | "nickname"> & {
+type DiscordInfoProps = Pick<AllMemberInfoStateType, "discordUsername" | "nickname"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function ThirdRow({
+export default function DiscordInfo({
   discordUsername,
   nickname,
   handleChangeMemberInfo,
-}: ThirdRowProps) {
+}: DiscordInfoProps) {
   return (
     <RowContainer>
       <ColContainer>
@@ -31,14 +31,8 @@ export default function ThirdRow({
           name="nickname"
           value={nickname}
           onChange={handleChangeMemberInfo}
-          error={
-            nickname ? !RegExp(memberInfoValidation.nickname.regExp).test(nickname) : undefined
-          }
-          helperText={
-            nickname && !RegExp(memberInfoValidation.nickname.regExp).test(nickname)
-              ? memberInfoValidation.nickname.errorText
-              : ""
-          }
+          error={memberInfoValidation.nickname.isError(nickname)}
+          helperText={memberInfoValidation.nickname.helperText(nickname)}
         />
       </ColContainer>
     </RowContainer>
