@@ -6,7 +6,7 @@ import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constant
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, AllMemberInfoType } from "@/types/entities/member";
-import { DepartmentType } from "@/types/entities/table";
+import { DepartmentType, PendingMemberModalWidthRatioKeyType } from "@/types/entities/table";
 import { go, map } from "@/utils/fx";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
@@ -23,16 +23,11 @@ export default function AcceptMemberListModal({
 
   const grantMemberMutation = useGrantMemberMutation();
 
-  const getTableWidth = (option: string, variant: "title" | "cell") => {
-    if (variant === "title") {
-      return option === "학번" || option === "이름"
-        ? pendingMemberModalWidthRatio["title"][option]
-        : pendingMemberModalWidthRatio["title"]["default"];
-    } else {
-      return option === "studentId" || option === "name"
-        ? pendingMemberModalWidthRatio["cell"][option]
-        : pendingMemberModalWidthRatio["cell"]["default"];
-    }
+  const getTableWidth = (option: string, variant: PendingMemberModalWidthRatioKeyType) => {
+    return (
+      pendingMemberModalWidthRatio[variant][option] ??
+      pendingMemberModalWidthRatio[variant]["default"]
+    );
   };
 
   const filterSelectedMemberList = (): PendingMemberInfoType[] | AllMemberInfoType[] => {
@@ -88,7 +83,13 @@ export default function AcceptMemberListModal({
           <BodyContainer>
             <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
               {commonMemberTableTitle.map((tableTitle, index) => (
-                <ColumnTitle key={index} xs={getTableWidth(tableTitle.name, "title")}>
+                <ColumnTitle
+                  key={index}
+                  xs={getTableWidth(
+                    tableTitle.name,
+                    "title" as PendingMemberModalWidthRatioKeyType,
+                  )}
+                >
                   {tableTitle.name}
                 </ColumnTitle>
               ))}
@@ -97,7 +98,10 @@ export default function AcceptMemberListModal({
               {filteredSelectedMemberList?.map((selectedMember, index: number) => (
                 <BodyCellRow container key={index} alignItems="center" justifyContent="center">
                   {Object.entries(selectedMember).map(([key, value], index) => (
-                    <BodyCell xs={getTableWidth(key, "cell")} key={index}>
+                    <BodyCell
+                      xs={getTableWidth(key, "cell" as PendingMemberModalWidthRatioKeyType)}
+                      key={index}
+                    >
                       {(value as DepartmentType)?.name ?? formatNullableValue(value)}
                     </BodyCell>
                   ))}
