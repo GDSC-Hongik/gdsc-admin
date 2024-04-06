@@ -34,8 +34,9 @@ export default function AcceptMemberListModal({
   };
 
   const filterSelectedMemberList = () => {
-    return selectedMemberList?.map(
-      ({ studentId, name, phone, department, email, discordUsername, nickname }) => ({
+    return go(
+      selectedMemberList,
+      map(({ studentId, name, phone, department, email, discordUsername, nickname }) => ({
         studentId,
         name,
         phone,
@@ -43,7 +44,7 @@ export default function AcceptMemberListModal({
         email,
         discordUsername,
         nickname,
-      }),
+      })),
     );
   };
 
