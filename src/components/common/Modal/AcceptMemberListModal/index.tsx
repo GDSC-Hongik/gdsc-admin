@@ -33,17 +33,17 @@ export default function AcceptMemberListModal({
   };
 
   const filterSelectedMemberList = () => {
-    const filteredSelectedMemberList = selectedMemberList?.map(selectedMember => ({
-      studentId: selectedMember.studentId,
-      name: selectedMember.name,
-      phone: selectedMember.phone,
-      department: selectedMember.department,
-      email: selectedMember.email,
-      discordUsername: selectedMember.discordUsername,
-      nickname: selectedMember.nickname,
-    }));
-
-    return filteredSelectedMemberList;
+    return selectedMemberList?.map(
+      ({ studentId, name, phone, department, email, discordUsername, nickname }) => ({
+        studentId,
+        name,
+        phone,
+        department,
+        email,
+        discordUsername,
+        nickname,
+      }),
+    );
   };
 
   const handleCloseModal = () => setIsAcceptModalVisible(false);
