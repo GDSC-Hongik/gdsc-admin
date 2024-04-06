@@ -35,5 +35,10 @@ export const memberInfoValidation = {
   nickname: {
     regExp: "[ㄱ-ㅣ가-힣]{1,6}$",
     errorText: "올바르지 않은 디스코드 닉네임입니다.",
+    isError: (nickname: string | null) =>
+      nickname ? !RegExp(memberInfoValidation.nickname.regExp).test(nickname) : undefined,
+    helperText: (nickname: string | null) => nickname && !RegExp(memberInfoValidation.nickname.regExp).test(nickname)
+    ? memberInfoValidation.nickname.errorText
+    : ""
   },
 };

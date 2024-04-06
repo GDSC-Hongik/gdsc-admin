@@ -31,14 +31,8 @@ export default function DiscordInfo({
           name="nickname"
           value={nickname}
           onChange={handleChangeMemberInfo}
-          error={
-            nickname ? !RegExp(memberInfoValidation.nickname.regExp).test(nickname) : undefined
-          }
-          helperText={
-            nickname && !RegExp(memberInfoValidation.nickname.regExp).test(nickname)
-              ? memberInfoValidation.nickname.errorText
-              : ""
-          }
+          error={memberInfoValidation.nickname.isError(nickname)}
+          helperText={memberInfoValidation.nickname.helperText(nickname)}
         />
       </ColContainer>
     </RowContainer>
