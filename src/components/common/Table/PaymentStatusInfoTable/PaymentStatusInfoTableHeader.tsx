@@ -2,12 +2,14 @@ import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 import { paymentStatusTableTitle, paymentStatusTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
+import { TableRatioType } from "@/types/entities/table";
 
 export default function PaymentStatusInfoTableHeader() {
-  const getTitleWidthRatio = (title: string) => {
-    return title === "학번" || title === "이름" || title === "전화번호"
-      ? paymentStatusTableWidthRatio["title"][title]
-      : paymentStatusTableWidthRatio["title"]["default"];
+  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
+    return (
+      paymentStatusTableWidthRatio[variant][option] ??
+      paymentStatusTableWidthRatio[variant]["default"]
+    );
   };
 
   return (
@@ -15,7 +17,7 @@ export default function PaymentStatusInfoTableHeader() {
       {paymentStatusTableTitle.map(title => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name)}
+          xs={getTitleWidthRatio(title.name, "title")}
           alignItems="center"
           justifyContent={"center"}
         >

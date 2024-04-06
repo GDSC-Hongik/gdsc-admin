@@ -161,7 +161,7 @@ export const paymentStatusTableTitle = [
   },
 ];
 
-export const paymentStatusTableWidthRatio = {
+export const paymentStatusTableWidthRatio: Record<TableRatioType, Record<string, number>> = {
   title: {
     학번: 1.5,
     이름: 1.5,
