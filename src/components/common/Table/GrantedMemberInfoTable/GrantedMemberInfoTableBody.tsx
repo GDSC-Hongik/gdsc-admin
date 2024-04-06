@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Grid } from "@mui/material";
-import EditInfoModal from "../../InfoModal/EditInfoModal";
+import EditInfoModal from "../../Modal/EditInfoModal";
 import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import { theme } from "@/styles/theme";

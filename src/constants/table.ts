@@ -101,7 +101,9 @@ export const pendingMemberTableWidthRatio = {
   },
 };
 
-export const pendingMemberModalWidthRatio = {
+export const pendingMemberModalWidthRatio:
+  | Record<"title", { 학번: number; 이름: number; default: number }>
+  | Record<"cell", { studentId: number; name: number; default: number }> = {
   title: {
     학번: 1,
     이름: 1,
