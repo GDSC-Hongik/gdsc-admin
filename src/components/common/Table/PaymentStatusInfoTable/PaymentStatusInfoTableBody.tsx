@@ -1,12 +1,11 @@
 import styled from "@emotion/styled";
 import { Button, Grid, Box } from "@mui/material";
-import { paymentStatusTableWidthRatio } from "@/constants/table";
 import useUpdateMemberPaymentStatusMutation from "@/hooks/mutations/useUpdateMemberPaymentStatusMutation";
 import { theme } from "@/styles/theme";
 import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
-import { TableRatioType } from "@/types/entities/table";
 import { go } from "@/utils/fx/go";
 import { map } from "@/utils/fx/map";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PaymentStatusInfoBodyProps = {
@@ -15,13 +14,6 @@ type PaymentStatusInfoBodyProps = {
 
 export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusInfoBodyProps) {
   const updateMemberPaymentStatusMutation = useUpdateMemberPaymentStatusMutation();
-
-  const getCellWidthRatio = (option: string, variant: TableRatioType) => {
-    return (
-      paymentStatusTableWidthRatio[variant][option] ??
-      paymentStatusTableWidthRatio[variant]["default"]
-    );
-  };
 
   const handleChangePaymentStatus = (memberId: number, paymentStatus: StatusType) => {
     updateMemberPaymentStatusMutation.mutate({ memberId, paymentStatus });
@@ -64,7 +56,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
             ([key, value], index) =>
               key !== "memberId" &&
               key !== "paymentStatus" && (
-                <TextContainer item key={index} xs={getCellWidthRatio(key, "cell")}>
+                <TextContainer item key={index} xs={getTableRatio(key, "cell", "paymentStatus")}>
                   <Text sx={{ wordBreak: "keep-all" }}>{formatNullableValue(value)}</Text>
                 </TextContainer>
               ),

@@ -2,13 +2,14 @@ import { Dispatch, Fragment, SetStateAction, useContext } from "react";
 import styled from "@emotion/styled";
 import { Modal, Grid, Box, Button } from "@mui/material";
 import { SelectedMemberListContext } from "@/components/context/SelectedMemberContextProvider";
-import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
+import { commonMemberTableTitle } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, AllMemberInfoType } from "@/types/entities/member";
-import { DepartmentType, TableRatioType } from "@/types/entities/table";
+import { DepartmentType } from "@/types/entities/table";
 import { go } from "@/utils/fx/go";
 import { map } from "@/utils/fx/map";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type AcceptMemberListModalProps = {
@@ -23,13 +24,6 @@ export default function AcceptMemberListModal({
   const selectedMemberList = useContext(SelectedMemberListContext);
 
   const grantMemberMutation = useGrantMemberMutation();
-
-  const getTableWidth = (option: string, variant: TableRatioType) => {
-    return (
-      pendingMemberModalWidthRatio[variant][option] ??
-      pendingMemberModalWidthRatio[variant]["default"]
-    );
-  };
 
   const filterSelectedMemberList = (): PendingMemberInfoType[] | AllMemberInfoType[] => {
     const filteredMemberList = go(
@@ -84,7 +78,10 @@ export default function AcceptMemberListModal({
           <BodyContainer>
             <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
               {commonMemberTableTitle.map((tableTitle, index) => (
-                <ColumnTitle key={index} xs={getTableWidth(tableTitle.name, "title")}>
+                <ColumnTitle
+                  key={index}
+                  xs={getTableRatio(tableTitle.name, "title", "pendingMember", true)}
+                >
                   {tableTitle.name}
                 </ColumnTitle>
               ))}
@@ -93,7 +90,7 @@ export default function AcceptMemberListModal({
               {filteredSelectedMemberList?.map((selectedMember, index: number) => (
                 <BodyCellRow container key={index} alignItems="center" justifyContent="center">
                   {Object.entries(selectedMember).map(([key, value], index) => (
-                    <BodyCell xs={getTableWidth(key, "cell")} key={index}>
+                    <BodyCell xs={getTableRatio(key, "cell", "pendingMember", true)} key={index}>
                       {(value as DepartmentType)?.name ?? formatNullableValue(value)}
                     </BodyCell>
                   ))}

@@ -6,12 +6,11 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { pendingMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, PendingMemberTableInfoType } from "@/types/entities/member";
-import { TableRatioType } from "@/types/entities/table";
 import { go } from "@/utils/fx/go";
 import { map } from "@/utils/fx/map";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PendingMemberInfoTableBodyProps = {
@@ -50,13 +49,6 @@ export default function PendingMemberInfoTableBody({ dataList }: PendingMemberIn
     return newDataList;
   };
 
-  const getCellWidthRatio = (option: string, variant: TableRatioType) => {
-    return (
-      pendingMemberTableWidthRatio[variant][option] ??
-      pendingMemberTableWidthRatio[variant]["default"]
-    );
-  };
-
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     if (e.target.checked) {
       setSelectedMemberList(prevMemberList => [...prevMemberList, dataList[index]]);
@@ -86,7 +78,7 @@ export default function PendingMemberInfoTableBody({ dataList }: PendingMemberIn
         <CellContainer container key={rowIndex} alignItems={"center"} height={64}>
           <Checkbox checked={checked(rowIndex)} onChange={e => handleChangeCheckbox(e, rowIndex)} />
           {Object.entries(row).map(([key, value], index) => (
-            <TextContainer item key={index} xs={getCellWidthRatio(key, "cell")}>
+            <TextContainer item key={index} xs={getTableRatio(key, "cell", "pendingMember")}>
               <Text sx={{ wordBreak: "keep-all" }}>{formatNullableValue(value)}</Text>
             </TextContainer>
           ))}

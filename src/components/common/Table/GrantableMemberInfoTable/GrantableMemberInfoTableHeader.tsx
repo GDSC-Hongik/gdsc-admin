@@ -5,10 +5,10 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { grantableMemberTableWidthRatio, grantableStatusTableTitle } from "@/constants/table";
+import { grantableStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
-import { TableRatioType } from "@/types/entities/table";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 type GrantableMemberInfoTableHeaderProps = {
   dataList: GrantableMemberInfoType[];
@@ -19,13 +19,6 @@ export default function GrantableMemberInfoTableHeader({
 }: GrantableMemberInfoTableHeaderProps) {
   const selectedMemberList = useContext(SelectedMemberListContext);
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
-
-  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
-    return (
-      grantableMemberTableWidthRatio[variant][option] ??
-      grantableMemberTableWidthRatio[variant]["default"]
-    );
-  };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -43,7 +36,7 @@ export default function GrantableMemberInfoTableHeader({
       {grantableStatusTableTitle.map((title, index) => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name, "title")}
+          xs={getTableRatio(title.name, "title", "grantableMember")}
           key={index}
           alignItems="center"
           justifyContent={"center"}

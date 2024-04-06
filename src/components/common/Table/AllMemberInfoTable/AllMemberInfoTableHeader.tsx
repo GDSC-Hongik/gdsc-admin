@@ -1,23 +1,17 @@
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
-import { commonMemberTableTitle, allMemberTableWidthRatio } from "@/constants/table";
+import { commonMemberTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
-import { TableRatioType } from "@/types/entities/table";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 export default function AllMemberInfoTableHeader() {
-  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
-    return (
-      allMemberTableWidthRatio[variant][option] ?? allMemberTableWidthRatio[variant]["default"]
-    );
-  };
-
   return (
     <Container container>
       {commonMemberTableTitle.map(title => (
         <Title
           item
           key={title.value}
-          xs={getTitleWidthRatio(title.name, "title")}
+          xs={getTableRatio(title.name, "title", "allMember")}
           alignItems="center"
           justifyContent={"center"}
         >

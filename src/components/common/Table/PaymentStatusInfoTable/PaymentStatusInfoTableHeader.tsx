@@ -1,23 +1,16 @@
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
-import { paymentStatusTableTitle, paymentStatusTableWidthRatio } from "@/constants/table";
+import { paymentStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
-import { TableRatioType } from "@/types/entities/table";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 export default function PaymentStatusInfoTableHeader() {
-  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
-    return (
-      paymentStatusTableWidthRatio[variant][option] ??
-      paymentStatusTableWidthRatio[variant]["default"]
-    );
-  };
-
   return (
     <Container container xs={12}>
       {paymentStatusTableTitle.map(title => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name, "title")}
+          xs={getTableRatio(title.name, "title", "paymentStatus")}
           alignItems="center"
           justifyContent={"center"}
         >

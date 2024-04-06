@@ -5,10 +5,10 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { pendingMemberTableTitle, pendingMemberTableWidthRatio } from "@/constants/table";
+import { pendingMemberTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType } from "@/types/entities/member";
-import { TableRatioType } from "@/types/entities/table";
+import { getTableRatio } from "@/utils/getTableRatio";
 
 type PendingMemberInfoTableHeaderProps = {
   dataList: PendingMemberInfoType[];
@@ -19,13 +19,6 @@ export default function PendingMemberInfoTableHeader({
 }: PendingMemberInfoTableHeaderProps) {
   const selectedMemberList = useContext(SelectedMemberListContext);
   const setSelectedMemberList = useContext(SelectedMemberDispatchContext);
-
-  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
-    return (
-      pendingMemberTableWidthRatio[variant][option] ??
-      pendingMemberTableWidthRatio[variant]["default"]
-    );
-  };
 
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -43,7 +36,7 @@ export default function PendingMemberInfoTableHeader({
       {pendingMemberTableTitle.map((title, index) => (
         <Title
           item
-          xs={getTitleWidthRatio(title.name, "title")}
+          xs={getTableRatio(title.name, "title", "pendingMember")}
           key={index}
           alignItems="center"
           justifyContent={"center"}

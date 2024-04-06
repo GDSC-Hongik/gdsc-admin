@@ -6,12 +6,11 @@ import {
   SelectedMemberListContext,
   SelectedMemberDispatchContext,
 } from "@/components/context/SelectedMemberContextProvider";
-import { grantableMemberTableWidthRatio } from "@/constants/table";
 import { theme } from "@/styles/theme";
 import { GrantableMemberInfoType } from "@/types/entities/member";
-import { TableRatioType } from "@/types/entities/table";
 import { go } from "@/utils/fx/go";
 import { map } from "@/utils/fx/map";
+import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type GrantableMemberInfoTableBodyProps = {
@@ -46,13 +45,6 @@ export default function GrantableMemberInfoTableBody({
     return newDataList;
   };
 
-  const getTitleWidthRatio = (option: string, variant: TableRatioType) => {
-    return (
-      grantableMemberTableWidthRatio[variant][option] ??
-      grantableMemberTableWidthRatio[variant]["default"]
-    );
-  };
-
   const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     if (e.target.checked) {
       setSelectedMemberList(prevMemberList => [...prevMemberList, dataList[index]]);
@@ -84,7 +76,7 @@ export default function GrantableMemberInfoTableBody({
           {Object.entries(row).map(
             ([key, value], index) =>
               key !== "requirement" && (
-                <TextContainer item key={index} xs={getTitleWidthRatio(key, "title")}>
+                <TextContainer item key={index} xs={getTableRatio(key, "title", "grantableMember")}>
                   <Text sx={{ wordBreak: "keep-all" }}>
                     {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                   </Text>
