@@ -171,6 +171,7 @@ const BodyCell = styled(Grid)({
   fontSize: "12px",
   fontWeight: "400",
   lineHeight: "21px",
+  wordBreak: "keep-all",
 });
 
 const StyledButton = styled(Button)({
