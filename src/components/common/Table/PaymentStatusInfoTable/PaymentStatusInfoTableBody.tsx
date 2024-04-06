@@ -30,7 +30,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
           studentId,
           name,
           phone,
-          discorUsername,
+          discordUsername,
           nickname,
           requirement: { paymentStatus },
         }) => ({
@@ -38,7 +38,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
           studentId,
           name,
           phone,
-          discorUsername,
+          discordUsername,
           nickname,
           paymentStatus,
         }),
