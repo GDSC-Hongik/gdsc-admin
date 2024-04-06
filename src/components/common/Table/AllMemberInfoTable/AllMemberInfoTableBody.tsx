@@ -6,6 +6,7 @@ import { allMemberTableWidthRatio } from "@/constants/table";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import { theme } from "@/styles/theme";
 import { AllMemberInfoStateType, AllMemberInfoType } from "@/types/entities/member";
+import { TableRatioType } from "@/types/entities/table";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type AllMemberInfoTableBodyProps = {
@@ -19,10 +20,10 @@ export default function AllMemberInfoTableBody({ dataList }: AllMemberInfoTableB
 
   const deleteMemberMutation = useDeleteMemberMutation();
 
-  const getCellWidthRatio = (option: string) => {
-    return option === "studentId" || option === "name" || option === "phone"
-      ? allMemberTableWidthRatio["cell"][option]
-      : allMemberTableWidthRatio["cell"]["default"];
+  const getCellWidthRatio = (option: string, variant: TableRatioType) => {
+    return (
+      allMemberTableWidthRatio[variant][option] ?? allMemberTableWidthRatio[variant]["default"]
+    );
   };
 
   const handleModalVisible = (isModalVisible: boolean) => setIsEditModalVisible(isModalVisible);
@@ -44,7 +45,7 @@ export default function AllMemberInfoTableBody({ dataList }: AllMemberInfoTableB
             ([key, value], index) =>
               key !== "memberId" &&
               key !== "requirement" && (
-                <TextContainer item key={index} xs={getCellWidthRatio(key)}>
+                <TextContainer item key={index} xs={getCellWidthRatio(key, "cell")}>
                   <Text sx={{ wordBreak: "keep-all" }}>
                     {(value as { code: string; name: string })?.name ?? formatNullableValue(value)}
                   </Text>

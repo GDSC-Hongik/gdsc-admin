@@ -1,4 +1,4 @@
-import { MemberTableTitleType } from "@/types/entities/table";
+import { MemberTableTitleType, TableRatioType } from "@/types/entities/table";
 
 export const commonMemberTableTitle: MemberTableTitleType = [
   {
@@ -38,7 +38,7 @@ export const commonMemberTableTitle: MemberTableTitleType = [
   },
 ];
 
-export const allMemberTableWidthRatio = {
+export const allMemberTableWidthRatio: Record<TableRatioType, Record<string, number>> = {
   title: {
     학번: 0.8,
     이름: 0.8,
@@ -101,9 +101,7 @@ export const pendingMemberTableWidthRatio = {
   },
 };
 
-export const pendingMemberModalWidthRatio:
-  | Record<"title", { 학번: number; 이름: number; default: number }>
-  | Record<"cell", { studentId: number; name: number; default: number }> = {
+export const pendingMemberModalWidthRatio: Record<TableRatioType, Record<string, number>> = {
   title: {
     학번: 1,
     이름: 1,

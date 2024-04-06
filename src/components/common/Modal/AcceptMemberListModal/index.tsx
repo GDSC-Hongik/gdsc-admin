@@ -6,7 +6,7 @@ import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constant
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, AllMemberInfoType } from "@/types/entities/member";
-import { DepartmentType, PendingMemberModalWidthRatioKeyType } from "@/types/entities/table";
+import { DepartmentType, TableRatioType } from "@/types/entities/table";
 import { go } from "@/utils/fx/go";
 import { map } from "@/utils/fx/map";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
@@ -24,7 +24,7 @@ export default function AcceptMemberListModal({
 
   const grantMemberMutation = useGrantMemberMutation();
 
-  const getTableWidth = (option: string, variant: PendingMemberModalWidthRatioKeyType) => {
+  const getTableWidth = (option: string, variant: TableRatioType) => {
     return (
       pendingMemberModalWidthRatio[variant][option] ??
       pendingMemberModalWidthRatio[variant]["default"]
@@ -84,13 +84,7 @@ export default function AcceptMemberListModal({
           <BodyContainer>
             <BodyCellTitle container justifyContent={"center"} alignItems={"center"}>
               {commonMemberTableTitle.map((tableTitle, index) => (
-                <ColumnTitle
-                  key={index}
-                  xs={getTableWidth(
-                    tableTitle.name,
-                    "title" as PendingMemberModalWidthRatioKeyType,
-                  )}
-                >
+                <ColumnTitle key={index} xs={getTableWidth(tableTitle.name, "title")}>
                   {tableTitle.name}
                 </ColumnTitle>
               ))}
@@ -99,10 +93,7 @@ export default function AcceptMemberListModal({
               {filteredSelectedMemberList?.map((selectedMember, index: number) => (
                 <BodyCellRow container key={index} alignItems="center" justifyContent="center">
                   {Object.entries(selectedMember).map(([key, value], index) => (
-                    <BodyCell
-                      xs={getTableWidth(key, "cell" as PendingMemberModalWidthRatioKeyType)}
-                      key={index}
-                    >
+                    <BodyCell xs={getTableWidth(key, "cell")} key={index}>
                       {(value as DepartmentType)?.name ?? formatNullableValue(value)}
                     </BodyCell>
                   ))}
