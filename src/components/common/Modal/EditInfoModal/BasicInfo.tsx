@@ -28,14 +28,14 @@ export default function BasicInfo({
           name="studentId"
           value={studentId}
           onChange={handleChangeMemberInfo}
-          error={
-            studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)
-          }
-          helperText={
-            studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)
-              ? memberInfoValidation.studentId.errorText
-              : ""
-          }
+          error={memberInfoValidation.studentId.isError(
+            studentId,
+            memberInfoValidation.studentId.regExp,
+          )}
+          helperText={memberInfoValidation.studentId.helperText(
+            studentId,
+            memberInfoValidation.studentId.regExp,
+          )}
         />
       </ColContainer>
       <ColContainer>
@@ -45,16 +45,8 @@ export default function BasicInfo({
           name="phone"
           value={formatPhoneNumber(phone)}
           onChange={handleChangeMemberInfo}
-          error={
-            phone?.length > 0 &&
-            !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))
-          }
-          helperText={
-            phone?.length > 0 &&
-            !RegExp(memberInfoValidation.phone.regExp).test(formatPhoneNumber(phone))
-              ? memberInfoValidation.phone.errorText
-              : ""
-          }
+          error={memberInfoValidation.phone.isError(phone)}
+          helperText={memberInfoValidation.phone.helperText(phone)}
         />
       </ColContainer>
     </RowContainer>
