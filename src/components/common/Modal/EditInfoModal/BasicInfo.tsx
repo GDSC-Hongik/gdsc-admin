@@ -28,14 +28,8 @@ export default function BasicInfo({
           name="studentId"
           value={studentId}
           onChange={handleChangeMemberInfo}
-          error={memberInfoValidation.studentId.isError(
-            studentId,
-            memberInfoValidation.studentId.regExp,
-          )}
-          helperText={memberInfoValidation.studentId.helperText(
-            studentId,
-            memberInfoValidation.studentId.regExp,
-          )}
+          error={memberInfoValidation.studentId.isError(studentId)}
+          helperText={memberInfoValidation.studentId.helperText(studentId)}
         />
       </ColContainer>
       <ColContainer>

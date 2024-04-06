@@ -31,6 +31,12 @@ export default function AdditionalInfo({
     }));
   };
 
+  const handleChangeDepartmentSearchText = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setDepartmentSearchText(e.target.value);
+  };
+
   return (
     <RowContainer>
       <ColContainer>
@@ -40,9 +46,7 @@ export default function AdditionalInfo({
           sx={{ marginBottom: "18px" }}
           name="department"
           value={departmentSearchText}
-          onChange={e => {
-            setDepartmentSearchText(e.target.value);
-          }}
+          onChange={handleChangeDepartmentSearchText}
         />
         <Divider />
         <DepartmentListContainer>
@@ -60,12 +64,8 @@ export default function AdditionalInfo({
           name="email"
           value={email}
           onChange={handleChangeMemberInfo}
-          error={email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email)}
-          helperText={
-            email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email)
-              ? memberInfoValidation.email.errorText
-              : ""
-          }
+          error={memberInfoValidation.email.isError(email)}
+          helperText={memberInfoValidation.email.helperText(email)}
         />
       </ColContainer>
     </RowContainer>

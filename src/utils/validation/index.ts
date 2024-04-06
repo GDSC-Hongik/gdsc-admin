@@ -4,16 +4,22 @@ export const memberInfoValidation = {
   studentId: {
     regExp: "^[A-C]{1}[0-9]{6}$",
     errorText: "올바르지 않은 학번입니다.",
-    isError: (studentId: string, regExp: string) =>
-      studentId?.length > 0 && !RegExp(regExp).test(studentId),
-    helperText: (studentId: string, regExp: string) =>
-      studentId?.length > 0 && !RegExp(regExp).test(studentId)
+    isError: (studentId: string) =>
+      studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId),
+    helperText: (studentId: string) =>
+      studentId?.length > 0 && !RegExp(memberInfoValidation.studentId.regExp).test(studentId)
         ? memberInfoValidation.studentId.errorText
         : "",
   },
   email: {
     regExp: "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$",
     errorText: "올바르지 않은 이메일입니다.",
+    isError: (email: string) =>
+      email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email),
+    helperText: (email: string) =>
+      email?.length > 0 && !RegExp(memberInfoValidation.email.regExp).test(email)
+        ? memberInfoValidation.email.errorText
+        : "",
   },
   phone: {
     regExp: "^010[0-9]{8}$",
