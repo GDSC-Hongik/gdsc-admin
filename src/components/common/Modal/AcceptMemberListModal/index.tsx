@@ -51,7 +51,7 @@ export default function AcceptMemberListModal({
   const filteredSelectedMemberList = filterSelectedMemberList();
 
   const handleClickGrantMemberButton = () => {
-    const memberIdList = selectedMemberList?.map(selectedMember => selectedMember.memberId);
+    const memberIdList = selectedMemberList?.map(({ memberId }) => memberId);
 
     if (memberIdList) {
       grantMemberMutation.mutate({
