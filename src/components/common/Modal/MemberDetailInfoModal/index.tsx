@@ -27,37 +27,39 @@ export default function MemberDetailInfoModal({
   };
 
   const filterMemberDetailInfo = () => {
-    if (variant === "pendingMember") {
-      return {
-        ["이름"]: memberInfo.name,
-        ["학번"]: memberInfo.studentId,
-        ["전화번호"]: memberInfo.phone,
-        ["소속 학과"]: memberInfo.department.name,
-        ["이메일"]: memberInfo.email,
-        ["디스코드 사용자명"]: memberInfo.discordUsername,
-        ["디스코드 닉네임"]: memberInfo.nickname,
-        ["재학생 인증 여부"]: getStatus(
-          (memberInfo as PendingMemberInfoType).requirement.univStatus,
-        ),
-        ["디스코드 인증 여부"]: getStatus(
-          (memberInfo as PendingMemberInfoType).requirement.discordStatus,
-        ),
-        ["회비 납입 여부"]: getStatus(
-          (memberInfo as PendingMemberInfoType).requirement.paymentStatus,
-        ),
-        ["bevy 인증 여부"]: getStatus((memberInfo as PendingMemberInfoType).requirement.bevyStatus),
-      };
-    } else {
-      return {
-        ["이름"]: memberInfo.name,
-        ["학번"]: memberInfo.studentId,
-        ["전화번호"]: memberInfo.phone,
-        ["소속 학과"]: memberInfo.department.name,
-        ["이메일"]: memberInfo.email,
-        ["디스코드 사용자명"]: memberInfo.discordUsername,
-        ["디스코드 닉네임"]: memberInfo.nickname,
-      };
-    }
+    const {
+      name,
+      studentId,
+      phone,
+      department: { name: departmentName },
+      email,
+      discordUsername,
+      nickname,
+    } = memberInfo;
+
+    const {
+      requirement: { univStatus, discordStatus, paymentStatus, bevyStatus },
+    } = memberInfo as PendingMemberInfoType;
+
+    const commonInfo = {
+      ["이름"]: name,
+      ["학번"]: studentId,
+      ["전화번호"]: phone,
+      ["소속 학과"]: departmentName,
+      ["이메일"]: email,
+      ["디스코드 사용자명"]: discordUsername,
+      ["디스코드 닉네임"]: nickname,
+    };
+
+    const pendingMemberInfo = {
+      ...commonInfo,
+      ["재학생 인증 여부"]: getStatus(univStatus),
+      ["디스코드 인증 여부"]: getStatus(discordStatus),
+      ["회비 납입 여부"]: getStatus(paymentStatus),
+      ["bevy 인증 여부"]: getStatus(bevyStatus),
+    };
+
+    return variant === "pendingMember" ? pendingMemberInfo : commonInfo;
   };
 
   return (

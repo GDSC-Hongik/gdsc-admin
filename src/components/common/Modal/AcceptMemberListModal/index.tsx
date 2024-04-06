@@ -7,7 +7,8 @@ import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
 import { PendingMemberInfoType, AllMemberInfoType } from "@/types/entities/member";
 import { DepartmentType, PendingMemberModalWidthRatioKeyType } from "@/types/entities/table";
-import { go, map } from "@/utils/fx";
+import { go } from "@/utils/fx/go";
+import { map } from "@/utils/fx/map";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type AcceptMemberListModalProps = {
@@ -170,6 +171,7 @@ const BodyCell = styled(Grid)({
   fontSize: "12px",
   fontWeight: "400",
   lineHeight: "21px",
+  wordBreak: "keep-all",
 });
 
 const StyledButton = styled(Button)({
