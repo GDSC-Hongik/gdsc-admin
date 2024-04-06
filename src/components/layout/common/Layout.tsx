@@ -10,9 +10,9 @@ export default function Layout() {
   const { isEmptyToken, clearAuthData } = useAuthStorage();
   const navigate = useNavigate();
 
-  if (isEmptyToken) {
-    return <Navigate to={RoutePath.Signin} />;
-  }
+  // if (isEmptyToken) {
+  //   return <Navigate to={RoutePath.Signin} />;
+  // }
 
   const handleClickLogoutButton = () => {
     clearAuthData();
