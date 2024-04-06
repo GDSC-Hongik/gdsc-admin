@@ -50,14 +50,12 @@ export default function AcceptMemberListModal({
   const filteredSelectedMemberList = filterSelectedMemberList();
 
   const handleClickGrantMemberButton = () => {
-    go(
+    const memberIdList = go(
       selectedMemberList,
       map(({ memberId }) => memberId),
-      memberIdList => {
-        grantMemberMutation.mutate({ memberIdList });
-        return memberIdList;
-      },
     );
+
+    !!memberIdList.length && grantMemberMutation.mutate({ memberIdList });
 
     setIsAcceptModalVisible(false);
   };
