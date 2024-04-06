@@ -7,7 +7,7 @@ export const curry: Curry =
   (a, ...rest) =>
     rest.length ? f(a, ...rest) : (...rest) => f(a, ...rest);
 
-export const reduce = curry(<T, U>(f: (acc: U, value: T) => U, acc: U, iter: Iterable<T>): U => {
+export const reduce = curry(<T, U>(f: (acc: U, value: T) => U, acc: U, iter: Iterable<T> = []): U => {
   for (const a of iter) {
     acc = f(acc, a);
   }
@@ -17,7 +17,7 @@ export const reduce = curry(<T, U>(f: (acc: U, value: T) => U, acc: U, iter: Ite
 
 export const go = <T>(...args: T[]) => reduce((a: any, f: (value: T) => any) => f(a), args);
 
-export const map = curry(<T>(f: (...args: any[]) => any, iter: Iterable<T>) => {
+export const map = curry(<T>(f: (...args: any[]) => any, iter: Iterable<T> = []) => {
   const res = [];
 
   for (const a of iter) {
@@ -27,7 +27,7 @@ export const map = curry(<T>(f: (...args: any[]) => any, iter: Iterable<T>) => {
   return res;
 });
 
-export const filter = curry(<T>(f: (...args: any[]) => any, iter: Iterable<T>) => {
+export const filter = curry(<T>(f: (...args: any[]) => any, iter: Iterable<T> = []) => {
   const res = [];
 
   for (const a of iter) {
