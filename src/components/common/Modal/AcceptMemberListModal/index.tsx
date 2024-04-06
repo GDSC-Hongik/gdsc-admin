@@ -5,6 +5,7 @@ import { SelectedMemberListContext } from "@/components/context/SelectedMemberCo
 import { commonMemberTableTitle, pendingMemberModalWidthRatio } from "@/constants/table";
 import useGrantMemberMutation from "@/hooks/mutations/useGrantMemberMutation";
 import { theme } from "@/styles/theme";
+import { go, map } from "@/utils/fx";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type AcceptMemberListModalProps = {
@@ -51,13 +52,14 @@ export default function AcceptMemberListModal({
   const filteredSelectedMemberList = filterSelectedMemberList();
 
   const handleClickGrantMemberButton = () => {
-    const memberIdList = selectedMemberList?.map(({ memberId }) => memberId);
-
-    if (memberIdList) {
-      grantMemberMutation.mutate({
-        memberIdList,
-      });
-    }
+    go(
+      selectedMemberList,
+      map(({ memberId }) => memberId),
+      memberIdList => {
+        grantMemberMutation.mutate({ memberIdList });
+        return memberIdList;
+      },
+    );
 
     setIsAcceptModalVisible(false);
   };
