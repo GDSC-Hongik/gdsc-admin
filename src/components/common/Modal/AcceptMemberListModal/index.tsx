@@ -31,8 +31,8 @@ export default function AcceptMemberListModal({
   };
 
   const filterSelectedMemberList = (): PendingMemberInfoType[] | AllMemberInfoType[] => {
-    return go(
-      selectedMemberList,
+    const filteredMemberList = go(
+      selectedMemberList || [],
       map(({ studentId, name, phone, department, email, discordUsername, nickname }) => ({
         studentId,
         name,
@@ -43,6 +43,10 @@ export default function AcceptMemberListModal({
         nickname,
       })),
     );
+
+    console.log("filteredMemberList", filteredMemberList);
+
+    return filteredMemberList;
   };
 
   const handleCloseModal = () => setIsAcceptModalVisible(false);
@@ -54,6 +58,8 @@ export default function AcceptMemberListModal({
       selectedMemberList,
       map(({ memberId }) => memberId),
     );
+
+    console.log("memberIdList", memberIdList);
 
     !!memberIdList.length && grantMemberMutation.mutate({ memberIdList });
 
