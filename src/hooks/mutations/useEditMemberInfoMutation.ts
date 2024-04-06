@@ -14,7 +14,7 @@ export default function useEditMemberInfoMutation(
     discordUsername: string | null;
     nickname: string | null;
   },
-  onSuccessCallback: () => void,
+  onSuccess: () => void,
 ) {
   const queryClient = useQueryClient();
 
@@ -30,7 +30,7 @@ export default function useEditMemberInfoMutation(
         }),
       ]);
       toast.success("수정 완료되었습니다.");
-      onSuccessCallback();
+      onSuccess();
     },
     onError: (error: any) => {
       toast.error(error.response.data.errorMessage);

@@ -43,6 +43,17 @@ export default function EditInfoModal({
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+  const {
+    name,
+    studentId,
+    phone,
+    email,
+    discordUsername,
+    nickname,
+    memberId,
+    department: { code: departmentCode, name: departmentName },
+  } = memberInfo;
+
   useEffect(() => {
     setMemberInfo({
       memberId: selectedMemberInfo.memberId || 0,
@@ -97,15 +108,12 @@ export default function EditInfoModal({
   };
 
   const handleClickEditMemberInfoButton = () => {
-    if (department.name === departmentSearchText) {
+    if (departmentName === departmentSearchText) {
       editMemberMutation.mutate();
     } else {
       toast.error("학과를 선택해주세요.");
     }
   };
-
-  const { name, studentId, phone, email, discordUsername, nickname, memberId, department } =
-    memberInfo;
 
   const editMemberMutation = useEditMemberInfoMutation(
     memberId,
@@ -113,8 +121,8 @@ export default function EditInfoModal({
       studentId,
       name,
       phone: formatPhoneNumber(phone),
-      department: department.code,
-      email: email,
+      department: departmentCode,
+      email,
       discordUsername: discordUsername || null,
       nickname: nickname || null,
     },
