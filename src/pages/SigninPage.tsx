@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Container, Stack } from "@mui/material";
 import LogoIcon from "@/assets/logo.svg?react";
-import { GitHubButton } from "@/components/GitHubButton";
+import { GitHubButton } from "@/components/common/GitHubButton";
 import RoutePath from "@/routes/routePath";
 import { setCookie } from "@/utils/cookie";
 
