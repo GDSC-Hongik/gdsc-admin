@@ -10,10 +10,7 @@
     "preview": "vite preview",
     "postinstall": "husky install",
     "cypress": "cypress open",
-    "test": "vitest",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_7ac651aae20efee"
+    "test": "vitest"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -34,14 +31,6 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
-    "@storybook/addon-essentials": "7.6.7",
-    "@storybook/addon-interactions": "7.6.7",
-    "@storybook/addon-links": "7.6.7",
-    "@storybook/addon-onboarding": "1.0.10",
-    "@storybook/blocks": "7.6.7",
-    "@storybook/react": "7.6.7",
-    "@storybook/react-webpack5": "7.6.7",
-    "@storybook/test": "7.6.7",
     "@types/eslint": "^8",
     "@types/file-saver": "^2",
     "@types/lodash": "^4",
@@ -65,30 +54,21 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "react-docgen-typescript-loader": "^3.7.2",
-    "storybook": "7.6.7",
     "vite": "^5.0.8",
     "vite-plugin-mkcert": "^1.17.4",
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.3.1",
     "vitest": "^1.1.2"
   },
-  "packageManager": "yarn@4.0.2",
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ]
-  },
-  "resolutions": {
-    "webpack": "5",
-    "@storybook/core-common/webpack": "^5",
-    "@storybook/core-server/webpack": "^5",
-    "@storybook/react/webpack": "^5"
   },
   "readme": "ERROR: No README data found!",
   "_id": "gdsc-client@0.0.0"
