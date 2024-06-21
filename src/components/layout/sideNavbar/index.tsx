@@ -22,7 +22,7 @@ export default function SideNavbar() {
 }
 
 const StyledSideNavbarWrapper = styled(Stack)({
-  width: "256px",
+  minWidth: "256px",
   gap: "32px",
   paddingTop: "32px",
   boxShadow: `0 2px 3px #00000033, 0 1px 1px #00000033, 0 1px 2px #0000001E`,
