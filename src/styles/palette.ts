@@ -11,5 +11,5 @@ export const palette = {
   black: "#000000",
   black1: "#0000000A",
   black2: "#0000001E",
-  primary: "#000000",
+  primary: "#2196F3",
 } as const;

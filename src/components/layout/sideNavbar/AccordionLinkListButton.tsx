@@ -35,7 +35,7 @@ export default function AccordionLinkListButton<T extends LinkButtonLabelType>({
 
   return (
     <StyledAccordionLinkListButtonWrapper>
-      <StyledLink to={path ?? ""} onClick={handleClickLinkButton}>
+      <StyledLink to={path ?? ""} onClick={handleClickLinkButton} isActive={pathname === path}>
         <StarIcon />
         <StyledRightElement>
           <Typography css={typo.body1}>{label}</Typography>
@@ -61,7 +61,7 @@ const StyledAccordionLinkListButtonWrapper = styled("li")({
   cursor: "pointer",
 });
 
-const StyledLink = styled(Link)({
+const StyledLink = styled(Link)(({ isActive }: { isActive: boolean }) => ({
   padding: "8px 16px",
   display: "flex",
   gap: "32px",
@@ -70,8 +70,9 @@ const StyledLink = styled(Link)({
   justifyContent: "center",
   alignItems: "center",
   textDecoration: "none",
-  color: `${palette.primary}`,
-});
+  color: `${palette.black}`,
+  backgroundColor: isActive ? "rgba(33, 150, 243, 0.04)" : "transparent",
+}));
 
 const StyledRightElement = styled("div")({
   display: "flex",
@@ -87,21 +88,18 @@ const StyledDownArrowIcon = styled(DownArrowIcon)(({ expanded }: { expanded: boo
 const StyledLinkButtonInfoListWrapper = styled("ul")({ cursor: "pointer", padding: "0" });
 
 const StyledLinkButtonInfoListItem = styled("li")(({ isActive }: { isActive: boolean }) => ({
-  "listStyle": "none",
-  "height": "36px",
-  "width": "100%",
-  "borderRadius": "4px",
-  "display": "flex",
-  "alignItems": "center",
-  "backgroundColor": isActive ? "rgba(0, 0, 0, 0.04)" : "transparent",
-  "&:hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.04)",
-  },
+  listStyle: "none",
+  height: "36px",
+  width: "100%",
+  borderRadius: "4px",
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: isActive ? "rgba(0, 0, 0, 0.04)" : "transparent",
 }));
 
 const StyledLinkButton = styled(Link)({
   textDecoration: "none",
-  color: `${palette.primary}`,
+  color: `${palette.black}`,
 });
 
 const StyledLinkLabel = styled(Typography)({
