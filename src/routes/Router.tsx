@@ -34,11 +34,6 @@ const routes: RouteObject[] = [
     element: <Layout isAllMember />,
     children: [{ path: RoutePath.AllMembers, element: <AllMembersPage /> }],
   },
-  {
-    path: RoutePath.AllMembers,
-    element: <Layout />,
-    children: [{ path: RoutePath.AllMembers, element: <AllMembersPage /> }],
-  },
   { path: RoutePath.Signin, element: <SigninPage /> },
   {
     path: RoutePath.AuthorizedError,
