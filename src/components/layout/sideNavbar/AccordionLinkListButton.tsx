@@ -4,7 +4,6 @@ import { Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import DownArrowIcon from "@/assets/down-arrow.svg?react";
 import StarIcon from "@/assets/star.svg?react";
-import RoutePath from "@/routes/routePath";
 import { palette } from "@/styles/palette";
 import { typo } from "@/styles/typo";
 
@@ -14,7 +13,7 @@ type LinkButtonLabelType = "정회원 관리" | "지난 학기 관리" | "회비
 type AccordionLinkListButtonPropsType<T extends LinkButtonLabelType> = {
   label: T;
   linkButtonInfoList?: T extends "정회원 관리" | "회비 관리" ? LinkButtonPropsType[] : undefined;
-  path?: T extends "지난 학기 관리" | "활동기간 관리" ? keyof typeof RoutePath : undefined;
+  path?: T extends "지난 학기 관리" | "활동기간 관리" ? string : undefined;
 };
 
 export default function AccordionLinkListButton<T extends LinkButtonLabelType>({
@@ -65,8 +64,7 @@ const StyledLink = styled(Link)(({ isActive }: { isActive: boolean }) => ({
   padding: "8px 16px",
   display: "flex",
   gap: "32px",
-  boxSizing: "border-box",
-  height: "50px",
+  height: "34px",
   justifyContent: "center",
   alignItems: "center",
   textDecoration: "none",
