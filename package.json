@@ -84,12 +84,6 @@
       "prettier --write"
     ]
   },
-  "resolutions": {
-    "webpack": "5",
-    "@storybook/core-common/webpack": "^5",
-    "@storybook/core-server/webpack": "^5",
-    "@storybook/react/webpack": "^5"
-  },
   "readme": "ERROR: No README data found!",
   "_id": "gdsc-client@0.0.0"
 }
