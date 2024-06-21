@@ -21,7 +21,7 @@ export default function Title({ variant, descriptionText }: TitleProps) {
 
 const StyledTitleWrapper = styled(Stack)({
   padding: "16px",
-  marginBottom: "88px",
+  marginBottom: "72px",
 });
 
 const StyledHeaderTitle = styled(Typography)({
