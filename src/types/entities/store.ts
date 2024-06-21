@@ -1,5 +1,4 @@
 import { ManagementVariant } from "./member";
-import { AllMembersStoreType } from "@/store/allMembers";
 import { PaymentStatusMembersStoreType } from "@/store/paymentStatusMembers";
 import { PendingMembersStoreType } from "@/store/pendingMembers";
 
@@ -25,7 +24,4 @@ export type SearchInfoType<T extends ManagementVariant> = {
   variant: SearchVariantType<T>;
 };
 
-export type MemberStoreType =
-  | AllMembersStoreType
-  | PendingMembersStoreType
-  | PaymentStatusMembersStoreType;
+export type MemberStoreType = PendingMembersStoreType | PaymentStatusMembersStoreType;

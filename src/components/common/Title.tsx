@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { Stack, Typography } from "@mui/material";
 import { titleVariant } from "@/constants/common";
-import { ManagementVariant } from "@/types/entities/member";
 import { palette } from "@/styles/palette";
 import { typo } from "@/styles/typo";
+import { ManagementVariant } from "@/types/entities/member";
 
 type TitleProps = {
   variant: ManagementVariant;

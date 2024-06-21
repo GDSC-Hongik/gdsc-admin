@@ -3,15 +3,14 @@ import styled from "@emotion/styled";
 import { Grid, TablePagination } from "@mui/material";
 import AllMemberInfoTableBody from "./AllMemberInfoTableBody";
 import AllMemberInfoTableHeader from "./AllMemberInfoTableHeader";
+import { useAllMembersSearchInfoState } from "@/hooks/contexts/useAllMemberSearchInfoContext";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-import { useAllMembersStore } from "@/store/allMembers";
 
 export default function AllMemberInfoTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const searchVariant = useAllMembersStore(state => state.searchInfo.variant);
-  const searchText = useAllMembersStore(state => state.searchInfo.text);
+  const { searchText, searchVariant } = useAllMembersSearchInfoState();
 
   const { allMemberList = [], totalElements = 0 } = useGetAllMemberListQuery(
     page,

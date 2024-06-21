@@ -1,5 +1,4 @@
 import { useState, ChangeEvent } from "react";
-import { toast } from "react-toastify";
 import {
   Button,
   FormControl,
@@ -11,23 +10,20 @@ import {
   styled,
   TextField,
 } from "@mui/material";
-import { ManagementVariant } from "@/types/entities/member";
+import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { commonMemberTableTitle, pendingMemberTableTitle } from "@/constants/table";
-import useGetSearchTextSetters from "@/hooks/useGetSearchTextSetters";
-import useGetSearchVariantSetters from "@/hooks/useGetSearchVariantSetters";
+import { useAllMembersSearchInfoDispatch } from "@/hooks/contexts/useAllMemberSearchInfoContext";
+import { ManagementVariant } from "@/types/entities/member";
 import { downloadExcelFile } from "@/utils/excel";
-import { setSearchInfo } from "@/utils/setSearchInfoFunction";
 
 export type HeaderProps = {
   variant: ManagementVariant;
 };
 
 export default function Header({ variant }: HeaderProps) {
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const setSearchTextFunctions = useGetSearchTextSetters();
-  const searchVariantSetters = useGetSearchVariantSetters();
+  const [selectedValue, setSelectedValue] = useState<number>(1);
+  const { setSearchText, setSearchVariant } = useAllMembersSearchInfoDispatch();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -40,15 +36,16 @@ export default function Header({ variant }: HeaderProps) {
 
   const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
-    const setSearchVariant = searchVariantSetters[variant];
-
-    setSearchInfo[variant](setSelectedValue, setSearchVariant, targetIndex);
+    if (variant === "allMember") {
+      setSearchVariant?.(commonMemberTableTitle[targetIndex]["type"]);
+      setSelectedValue(targetIndex + 1);
+    }
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const setSearchText = setSearchTextFunctions[variant];
-
-    setSearchText?.(e.target.value);
+    if (variant === "allMember") {
+setSearchText?.(e.target.value);
+}
   };
 
   const getSelectMenuList = (variant: ManagementVariant) => {
