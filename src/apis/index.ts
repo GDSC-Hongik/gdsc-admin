@@ -12,9 +12,10 @@ const createApiClient = (): AxiosInstance => {
   });
 
   apiClient.interceptors.request.use(config => {
-    const authStorage = useAuthStorage();
+    // const authStorage = useAuthStorage();
 
-    const accessToken = authStorage.accessToken;
+    const accessToken =
+      "eyJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJnZHNjLWhvbmdpayIsInN1YiI6IjEiLCJpYXQiOjE3MDgwNTY0MzAsImV4cCI6MTc4ODA2MzYzMCwicm9sZSI6IkFETUlOIn0.XxkGvV2duEc7WhDAfjfOqZKs4NlrJNYHGTCP3lr6XXgA2e46uI4f_0Rcmx3TqnXH";
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;

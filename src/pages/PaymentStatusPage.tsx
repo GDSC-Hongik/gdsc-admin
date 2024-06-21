@@ -2,7 +2,7 @@ import Header from "@/components/common/Header";
 import PaymentStatusInfoTable from "@/components/common/Table/PaymentStatusInfoTable";
 import Title from "@/components/common/Title";
 
-export default function PaymentStatusMembersPage() {
+export default function PaymentStatusPage() {
   return (
     <>
       <Title
