@@ -114,10 +114,6 @@ export const pendingMemberModalWidthRatio: Record<TableRatioType, Record<string,
   },
 };
 
-export const grantableStatusTableTitle = commonMemberTableTitle;
-
-export const grantableMemberTableWidthRatio = allMemberTableWidthRatio;
-
 export const paymentStatusTableSelectOptionList = [
   {
     value: 1,

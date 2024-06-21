@@ -36,16 +36,4 @@ export const setSearchInfo: Record<ManagementVariant, SetSearchInfoFunctionType>
       ] as SearchVariantType<"paymentStatus">,
     );
   },
-  grantableMember: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
-    setSearchVariant?.(
-      commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantableMember">,
-    );
-  },
-  grantedMember: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
-    setSearchVariant?.(
-      commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"grantedMember">,
-    );
-  },
 };

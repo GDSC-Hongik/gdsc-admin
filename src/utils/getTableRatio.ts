@@ -1,6 +1,5 @@
 import {
   allMemberTableWidthRatio,
-  grantableMemberTableWidthRatio,
   paymentStatusTableWidthRatio,
   pendingMemberModalWidthRatio,
   pendingMemberTableWidthRatio,
@@ -10,8 +9,6 @@ import { TableRatioType } from "@/types/entities/table";
 
 const tableRatioMapping = {
   allMember: allMemberTableWidthRatio,
-  grantedMember: allMemberTableWidthRatio,
-  grantableMember: grantableMemberTableWidthRatio,
   paymentStatus: paymentStatusTableWidthRatio,
   pendingMember: pendingMemberTableWidthRatio,
 };

@@ -8,9 +8,6 @@ const RoutePath = {
 
   PastSemester: "/past-semester",
 
-  GrantedMembers: "/member/granted",
-  GrantableMembers: "/member/grantable",
-
   PaymentStatus: "/payment/payment-status",
   Coupon: "/payment/coupon",
   CouponProvisionMembers: "/payment/coupon-provision-members",

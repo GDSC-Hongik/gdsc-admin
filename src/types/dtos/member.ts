@@ -1,7 +1,5 @@
 import {
   AllMemberInfoType,
-  GrantableMemberInfoType,
-  GrantedMemberInfoType,
   PaymentStatusInfoType,
   PendingMemberInfoType,
   StatusType,
@@ -57,16 +55,8 @@ export type GrantPendingMemberResponseDtoType = {
   notGrantedMembers: string[];
 };
 
-export type GrantableMemberResponseDtoType = {
-  content: GrantableMemberInfoType[];
-} & PaginationElementType;
-
 export type PaymentStatusMemberListResponseDtoType = {
   content: PaymentStatusInfoType[];
 } & PaginationElementType;
 
 export type MemberPaymentStatusResponseDtoType = StatusType;
-
-export type GrantedMemberListResponseDtoType = {
-  content: GrantedMemberInfoType[];
-} & PaginationElementType;
