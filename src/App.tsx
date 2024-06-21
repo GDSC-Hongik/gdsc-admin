@@ -11,6 +11,11 @@ const theme = createTheme({
   typography: {
     fontFamily: "Roboto",
   },
+  palette: {
+    primary: {
+      main: "#2196F3",
+    },
+  },
 });
 
 const queryClient = new QueryClient();
