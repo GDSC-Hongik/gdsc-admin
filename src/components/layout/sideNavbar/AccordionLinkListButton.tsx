@@ -1,12 +1,12 @@
 import { MouseEvent, useState } from "react";
-import { Typography } from "@mui/material";
-import StarIcon from "@/assets/star.svg?react";
-import DownArrowIcon from "@/assets/down-arrow.svg?react";
 import styled from "@emotion/styled";
+import { Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
+import DownArrowIcon from "@/assets/down-arrow.svg?react";
+import StarIcon from "@/assets/star.svg?react";
 import RoutePath from "@/routes/routePath";
-import { typo } from "@/styles/typo";
 import { palette } from "@/styles/palette";
+import { typo } from "@/styles/typo";
 
 export type LinkButtonPropsType = { label: string; path: string };
 type LinkButtonLabelType = "정회원 관리" | "지난 학기 관리" | "회비 관리" | "활동기간 관리";

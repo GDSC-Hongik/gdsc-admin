@@ -1,18 +1,18 @@
 import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "@/components/layout/common/Layout";
+import ActivityPeriodPage from "@/pages/ActivityPeriodPage";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
 import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
-import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
-import SigninPage from "@/pages/SigninPage";
-import RoutePath from "@/routes/routePath";
-import PendingMembersPage from "@/pages/PendingMembersPage";
-import PastSemesterPage from "@/pages/PastSemesterPage";
-import PaymentStatusPage from "@/pages/PaymentStatusPage";
 import CouponPage from "@/pages/CouponPage";
 import CouponProvisionMembersPage from "@/pages/CouponProvisionMembersPage";
 import CouponProvisionPage from "@/pages/CouponProvisionPage";
-import ActivityPeriodPage from "@/pages/ActivityPeriodPage";
+import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
+import PastSemesterPage from "@/pages/PastSemesterPage";
+import PaymentStatusPage from "@/pages/PaymentStatusPage";
+import PendingMembersPage from "@/pages/PendingMembersPage";
+import SigninPage from "@/pages/SigninPage";
+import RoutePath from "@/routes/routePath";
 
 const routes: RouteObject[] = [
   {

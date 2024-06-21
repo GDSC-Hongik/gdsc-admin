@@ -1,18 +1,18 @@
 import { Button, Stack, styled } from "@mui/material";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ApiErrorBoundary from "@/components/layout/ApiErrorBoundary";
-import Sidebar from "@/components/layout/sidebar/Sidebar";
+import SideNavbar from "@/components/layout/SideNavbar";
 import useAuthStorage from "@/hooks/useAuthStorage";
 import RoutePath from "@/routes/routePath";
 
 export default function Layout() {
-  const { isEmptyToken, clearAuthData } = useAuthStorage();
+  const { clearAuthData } = useAuthStorage();
   const navigate = useNavigate();
 
-  if (isEmptyToken) {
-    return <Navigate to={RoutePath.Signin} />;
-  }
+  // if (isEmptyToken) {
+  //   return <Navigate to={RoutePath.Signin} />;
+  // }
 
   const handleClickLogoutButton = () => {
     clearAuthData();
@@ -23,7 +23,7 @@ export default function Layout() {
   return (
     <ApiErrorBoundary>
       <Container>
-        <Sidebar />
+        <SideNavbar />
         <BodyContainer>
           <Button
             variant={"outlined"}
