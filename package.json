@@ -1,5 +1,5 @@
 {
-  "name": "gdsc-client",
+  "name": "gdsc-admin",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -69,7 +69,5 @@
       "eslint --fix",
       "prettier --write"
     ]
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "gdsc-client@0.0.0"
+  }
 }
