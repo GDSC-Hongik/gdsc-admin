@@ -1,9 +1,9 @@
 import { Box, Stack, styled } from "@mui/material";
 import StarIcon from "@/assets/star.svg?react";
-import NavigateButton from "@/components/layout/sidebar/NavigateButton";
+import NavigateButton from "@/components/layout/sideNavbar/NavigateButton";
 import PageListToggleButton, {
   NavigatePage,
-} from "@/components/layout/sidebar/PageListToggleButton";
+} from "@/components/layout/sideNavbar/PageListToggleButton";
 import { theme } from "@/styles/theme";
 
 type SidebarListButtonProps = {

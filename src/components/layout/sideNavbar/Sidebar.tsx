@@ -1,6 +1,6 @@
 import { styled, Stack } from "@mui/material";
 import LogoIcon from "@/assets/logo.svg?react";
-import SidebarListButton from "@/components/layout/sidebar/SidebarListButton";
+import SidebarListButton from "@/components/layout/sideNavbar/SidebarListButton";
 import { memberPageList, paymentPageList } from "@/constants/common";
 
 export default function Sidebar() {
