@@ -8,7 +8,6 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
     "plugin:cypress/recommended",
-    "plugin:storybook/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts", "__mocks__"],
   parser: "@typescript-eslint/parser",
