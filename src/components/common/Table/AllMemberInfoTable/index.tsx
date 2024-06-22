@@ -6,6 +6,63 @@ import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { AllMemberInfoType } from "@/types/entities/member";
 import styled from "@emotion/styled";
 
+export default function AllMemberInfoTable() {
+  const [paginationModel, setPaginationModel] = useState({
+    pageSize: 5,
+    page: 0,
+  });
+
+  const { searchText, searchVariant } = useAllMembersSearchInfoState();
+
+  const { allMemberList = [] } = useGetAllMemberListQuery(
+    paginationModel.page,
+    paginationModel.pageSize,
+    searchVariant,
+    searchText,
+  );
+
+  const getFilteredRows = (allMemberList: AllMemberInfoType[]) => {
+    return allMemberList.map(member => {
+      const {
+        memberId,
+        studentId,
+        name,
+        phone,
+        department: { name: departmentName },
+        email,
+        discordUsername,
+        nickname,
+      } = member;
+
+      return {
+        id: memberId,
+        studentId: studentId,
+        name: name,
+        phone: phone,
+        department: departmentName,
+        email: email,
+        discordUsername: discordUsername,
+        nickname: nickname,
+      };
+    });
+  };
+
+  return (
+    <Grid container>
+      <StyledDataGrid
+        rows={getFilteredRows(allMemberList)}
+        columns={columns}
+        pageSizeOptions={[5, 25, 100]}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        disableRowSelectionOnClick
+        autoHeight
+        disableColumnFilter
+      />
+    </Grid>
+  );
+}
+
 const columns: GridColDef[] = [
   {
     field: "studentId",
@@ -70,75 +127,29 @@ const columns: GridColDef[] = [
     width: 156,
     renderCell: () => {
       const onClick = () => {};
+
       return (
-        <div style={{ display: "flex", gap: 8, paddingTop: 9 }}>
-          <Button variant="outlined" color="primary" onClick={onClick} sx={{ height: "32px" }}>
+        <StyledButtonWrapper>
+          <StyledButton variant="outlined" color="primary" onClick={onClick}>
             수정
-          </Button>
-          <Button variant="outlined" color="error" onClick={onClick} sx={{ height: "32px" }}>
+          </StyledButton>
+          <StyledButton variant="outlined" color="error" onClick={onClick}>
             탈퇴
-          </Button>
-        </div>
+          </StyledButton>
+        </StyledButtonWrapper>
       );
     },
   },
 ];
 
-export default function AllMemberInfoTable() {
-  const [paginationModel, setPaginationModel] = useState({
-    pageSize: 5,
-    page: 0,
-  });
-
-  const { searchText, searchVariant } = useAllMembersSearchInfoState();
-
-  const { allMemberList = [] } = useGetAllMemberListQuery(
-    paginationModel.page,
-    paginationModel.pageSize,
-    searchVariant,
-    searchText,
-  );
-
-  const getFilteredRows = (allMemberList: AllMemberInfoType[]) => {
-    return allMemberList.map(member => {
-      const {
-        memberId,
-        studentId,
-        name,
-        phone,
-        department: { name: departmentName },
-        email,
-        discordUsername,
-        nickname,
-      } = member;
-
-      return {
-        id: memberId,
-        studentId: studentId,
-        name: name,
-        phone: phone,
-        department: departmentName,
-        email: email,
-        discordUsername: discordUsername,
-        nickname: nickname,
-      };
-    });
-  };
-
-  return (
-    <Grid container>
-      <StyledDataGrid
-        rows={getFilteredRows(allMemberList)}
-        columns={columns}
-        pageSizeOptions={[5, 25, 100]}
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        disableRowSelectionOnClick
-        autoHeight
-        disableColumnFilter
-      />
-    </Grid>
-  );
-}
-
 const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 400 });
+
+const StyledButtonWrapper = styled("div")({
+  display: "flex",
+  gap: 8,
+  paddingTop: 9,
+});
+
+const StyledButton = styled(Button)({
+  height: "32px",
+});
