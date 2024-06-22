@@ -46,13 +46,12 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
 }
 
 const StyledModalContentWrapper = styled(Box)({
-  width: "988px",
-  height: "684px",
+  width: "680px",
+  height: "450px",
   backgroundColor: "white",
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   textAlign: "center",
-  padding: "58px 64px 44px 64px",
 });

@@ -120,5 +120,6 @@ const StyledTextField = styled(TextField)({
 });
 
 const StyledExcelDownloadButton = styled(Button)({
-  marginRight: "20px",
+  padding: "8px 22px",
+  height: "32px",
 });

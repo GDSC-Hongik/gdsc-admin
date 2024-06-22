@@ -109,6 +109,7 @@ export default function AllMemberInfoTable() {
         autoHeight
         disableColumnFilter
         disableColumnMenu
+        disableColumnSorting
       />
       {editModalOpen && (
         <EditInfoModal
@@ -219,5 +220,6 @@ const StyledButtonWrapper = styled("div")({
 });
 
 const StyledButton = styled(Button)({
+  padding: "8px 22px",
   height: "32px",
 });

@@ -60,6 +60,7 @@ const StyledBodyWrapper = styled(Stack)({
 
 const StyledButton = styled(Button)({
   height: "42px",
+  padding: "8px 22px",
   marginTop: "57px",
   marginRight: 0,
   position: "absolute",
