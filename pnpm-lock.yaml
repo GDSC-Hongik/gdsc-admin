@@ -14,6 +14,9 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.6
     version: 5.15.20(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+  '@mui/x-data-grid':
+    specifier: ^7.7.1
+    version: 7.7.1(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@mui/material@5.15.20)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@tanstack/react-query':
     specifier: ^5.17.1
     version: 5.45.1(react@18.3.1)
@@ -1019,6 +1022,29 @@ packages:
       prop-types: 15.8.1
       react: 18.3.1
       react-is: 18.3.1
+    dev: false
+
+  /@mui/x-data-grid@7.7.1(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@mui/material@5.15.20)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-5XsvuVpJfjV2ERtNiVRWL+0UUq5rh2Tq8aLZdJ8Ca5PnweEfNzOesQMlf0lpjXqnzuoq7uTwvICqoAMjsTTglg==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      '@mui/material': ^5.15.14
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.24.7
+      '@mui/material': 5.15.20(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@mui/system': 5.15.20(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.3.3)(react@18.3.1)
+      '@mui/utils': 5.15.20(@types/react@18.3.3)(react@18.3.1)
+      clsx: 2.1.1
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      reselect: 4.1.8
+    transitivePeerDependencies:
+      - '@emotion/react'
+      - '@emotion/styled'
+      - '@types/react'
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
@@ -6210,6 +6236,10 @@ packages:
   /requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
     dev: true
+
+  /reselect@4.1.8:
+    resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}
+    dev: false
 
   /resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
