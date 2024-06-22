@@ -92,7 +92,7 @@ const StyledLinkButtonInfoListItem = styled("li")(({ isActive }: { isActive: boo
   borderRadius: "4px",
   display: "flex",
   alignItems: "center",
-  backgroundColor: isActive ? "rgba(0, 0, 0, 0.04)" : "transparent",
+  backgroundColor: isActive ? "rgba(33, 150, 243, 0.04)" : "transparent",
 }));
 
 const StyledLinkButton = styled(Link)({
