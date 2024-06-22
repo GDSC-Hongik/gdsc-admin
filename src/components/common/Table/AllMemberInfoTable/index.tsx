@@ -92,7 +92,7 @@ const columns: GridColDef[] = [
     field: "department",
     headerName: "소속 학과",
     headerAlign: "center",
-    width: 140,
+    width: 170,
     resizable: false,
     editable: false,
   },

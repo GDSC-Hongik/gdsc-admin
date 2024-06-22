@@ -28,36 +28,41 @@ export default function Layout({ isAllMember = false }: LayoutPropsType) {
         <SideNavbar />
         <StyledBodyWrapper>
           <Outlet />
+          {isAllMember && (
+            <StyledButton
+              variant={"outlined"}
+              size={"large"}
+              color={"primary"}
+              onClick={handleClickLogout}
+            >
+              로그아웃
+            </StyledButton>
+          )}
         </StyledBodyWrapper>
-        {isAllMember && (
-          <StyledButton
-            variant={"outlined"}
-            size={"large"}
-            color={"primary"}
-            onClick={handleClickLogout}
-          >
-            로그아웃
-          </StyledButton>
-        )}
       </StyledLayoutWrapper>
     </ApiErrorBoundary>
   );
 }
 
 const StyledLayoutWrapper = styled(Stack)({
-  height: "100%",
   minHeight: "100vh",
-  width: "100vw",
   flexDirection: "row",
   margin: "-8px",
+  position: "relative",
+  minWidth: "100%",
 });
 
 const StyledBodyWrapper = styled(Stack)({
-  width: "956px",
+  width: "fit-content",
+  overflow: "auto",
   padding: "78px 80px",
 });
 
 const StyledButton = styled(Button)({
   height: "42px",
   marginTop: "57px",
+  marginRight: 0,
+  position: "absolute",
+  top: 0,
+  right: "80px",
 });
