@@ -19,6 +19,10 @@ import {
 } from "@/hooks/contexts/useAllMemberSearchInfoContext";
 import { ManagementVariant } from "@/types/entities/member";
 import { downloadExcelFile } from "@/utils/excel";
+import {
+  usePendingMembersSearchInfoDispatch,
+  usePendingMembersSearchInfoState,
+} from "@/hooks/contexts/usePendingMemberSearchInfoContext";
 
 export type HeaderProps = {
   variant: ManagementVariant;
@@ -26,8 +30,18 @@ export type HeaderProps = {
 
 export default function Header({ variant }: HeaderProps) {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
-  const { setSearchText, setSearchVariant } = useAllMembersSearchInfoDispatch();
-  const { searchText } = useAllMembersSearchInfoState();
+  const [selectedMemberVariant, setSelectedMemberVariant] = useState<number>(1);
+
+  const { setSearchText: setAllMemberSearchText, setSearchVariant: setAllMemberSearchVariant } =
+    useAllMembersSearchInfoDispatch();
+  const { searchText: allMemberSearchText } = useAllMembersSearchInfoState();
+
+  const {
+    setSearchText: setPendingMemberSearchText,
+    setSearchVariant: setPendingMemberSearchVariant,
+    setMemberVariant: setPendingMemberVariant,
+  } = usePendingMembersSearchInfoDispatch();
+  const { searchText: pendingMemberSearchText } = usePendingMembersSearchInfoState();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -38,18 +52,33 @@ export default function Header({ variant }: HeaderProps) {
     }
   };
 
-  const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
+  const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
     if (variant === "allMember") {
-      setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+      setAllMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
       setSelectedMemberInfoVariant(targetIndex + 1);
-      setSearchText?.("");
+      setAllMemberSearchText?.("");
+    } else if (variant === "pendingMember") {
+      setPendingMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+      setSelectedMemberInfoVariant(targetIndex + 1);
+      setPendingMemberSearchText?.("");
     }
+  };
+
+  const handleChangeSelectMemberVariant = (e: SelectChangeEvent<unknown>) => {
+    const targetIndex = (e.target.value as number) - 1;
+
+    console.log(memberTypeSelectMenu[targetIndex]["type"]);
+
+    setPendingMemberVariant?.(memberTypeSelectMenu[targetIndex]["type"]);
+    setSelectedMemberVariant(targetIndex + 1);
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
-      setSearchText?.(e.target.value);
+      setAllMemberSearchText?.(e.target.value);
+    } else if (variant === "pendingMember") {
+      setPendingMemberSearchText?.(e.target.value);
     }
   };
 
@@ -61,7 +90,7 @@ export default function Header({ variant }: HeaderProps) {
           <Select
             label="Type"
             value={selectedMemberInfoVariant}
-            onChange={handleChangeMemberSelect}
+            onChange={handleChangeSelectMemberInfoVariant}
           >
             {memberInfoSelectMenu.map(title => (
               <MenuItem value={title.value} key={title.value}>
@@ -74,7 +103,7 @@ export default function Header({ variant }: HeaderProps) {
           label="search"
           variant="outlined"
           placeholder="name, email, etc.."
-          value={searchText}
+          value={variant === "allMember" ? allMemberSearchText : pendingMemberSearchText}
           onChange={handleChangeText}
         />
       </StyledHeaderLeftColWrapper>
@@ -87,7 +116,11 @@ export default function Header({ variant }: HeaderProps) {
         {variant === "pendingMember" && (
           <StyledFormWrapper>
             <InputLabel>Type</InputLabel>
-            <Select label="Type" value={null} onChange={() => {}}>
+            <Select
+              label="Type"
+              value={selectedMemberVariant}
+              onChange={handleChangeSelectMemberVariant}
+            >
               {memberTypeSelectMenu.map(title => (
                 <MenuItem value={title.value} key={title.value}>
                   {title.name}
