@@ -10,13 +10,13 @@ export const allMemberApi = {
     searchText: string,
   ): Promise<AllMemberListResponseDtoType> => {
     if (searchText && searchVariant) {
-      const searchUrl = `admin/members?${searchVariant}=${searchText}&page=${page}&size=${size}`;
+      const searchUrl = `admin/members?role=REGULAR&${searchVariant}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
       return response.data;
     }
 
-    const commonUrl = `admin/members?page=${page}&size=${size}`;
+    const commonUrl = `admin/members?role=REGULAR&page=${page}&size=${size}`;
 
     const response = await apiClient.get(commonUrl);
     return response.data;

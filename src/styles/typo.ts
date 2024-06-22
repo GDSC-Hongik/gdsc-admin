@@ -16,6 +16,12 @@ export const typo = {
     font-weight: 700;
     line-height: 16px;
   `,
+  h5: css`
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+  `,
   body1: css`
     font-family: Roboto;
     font-size: 16px;

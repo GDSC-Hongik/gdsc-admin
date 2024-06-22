@@ -15,7 +15,6 @@ export default function useGetAllMemberListQuery(
   });
 
   const allMemberList = data?.content;
-  const totalElements = data?.totalElements;
 
-  return { allMemberList, totalElements };
+  return { allMemberList };
 }

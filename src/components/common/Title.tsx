@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import { Stack, Box } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { titleVariant } from "@/constants/common";
-import { theme } from "@/styles/theme";
+import { palette } from "@/styles/palette";
+import { typo } from "@/styles/typo";
 import { ManagementVariant } from "@/types/entities/member";
 
 type TitleProps = {
@@ -11,27 +12,23 @@ type TitleProps = {
 
 export default function Title({ variant, descriptionText }: TitleProps) {
   return (
-    <Container>
-      <HeaderTitle sx={{ marginBottom: "5px" }}>{titleVariant[variant]}</HeaderTitle>
-      <HeaderSubTitle>{descriptionText}</HeaderSubTitle>
-    </Container>
+    <StyledTitleWrapper>
+      <StyledHeaderTitle css={typo.h5}>{titleVariant[variant]}</StyledHeaderTitle>
+      <StyledHeaderSubTitle css={typo.body2}>{descriptionText}</StyledHeaderSubTitle>
+    </StyledTitleWrapper>
   );
 }
 
-const Container = styled(Stack)({
-  padding: "16px 0",
-  marginBottom: "22px",
+const StyledTitleWrapper = styled(Stack)({
+  padding: "16px",
+  marginBottom: "72px",
 });
 
-const HeaderTitle = styled(Box)({
-  ...theme.typo.title2,
-  color: theme.palette.gray4,
-  typography: "h6",
+const StyledHeaderTitle = styled(Typography)({
+  color: `${palette.black}`,
 });
 
-const HeaderSubTitle = styled(Box)({
-  color: theme.palette.gray3,
-  fontWeight: "regular",
-  fontSize: "14px",
-  typography: "subtitle1",
+const StyledHeaderSubTitle = styled(Typography)({
+  color: "rgba(0, 0, 0, 0.60)",
 });
+

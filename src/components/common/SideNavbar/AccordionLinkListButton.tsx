@@ -96,6 +96,10 @@ const StyledLinkButtonInfoListItem = styled("li")(({ isActive }: { isActive: boo
 }));
 
 const StyledLinkButton = styled(Link)({
+  flex: 1,
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
   textDecoration: "none",
   color: `${palette.black}`,
 });

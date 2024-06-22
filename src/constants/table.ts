@@ -1,4 +1,4 @@
-import { MemberTableTitleType, TableRatioType } from "@/types/entities/table";
+import { MemberTableTitleType } from "@/types/entities/table";
 
 export const commonMemberTableTitle: MemberTableTitleType = [
   {
@@ -38,21 +38,6 @@ export const commonMemberTableTitle: MemberTableTitleType = [
   },
 ];
 
-export const allMemberTableWidthRatio: Record<TableRatioType, Record<string, number>> = {
-  title: {
-    학번: 0.8,
-    이름: 0.8,
-    전화번호: 1.1,
-    default: 1.9,
-  },
-  cell: {
-    studentId: 0.8,
-    name: 0.8,
-    phone: 1.1,
-    default: 1.9,
-  },
-};
-
 export const pendingMemberTableTitle: MemberTableTitleType = [
   {
     value: "1",
@@ -85,38 +70,6 @@ export const pendingMemberTableTitle: MemberTableTitleType = [
     type: "paymentStatus",
   },
 ];
-
-export const pendingMemberTableWidthRatio: Record<TableRatioType, Record<string, number>> = {
-  title: {
-    학번: 1.1,
-    이름: 1.1,
-    전화번호: 1.1,
-    default: 1.9,
-  },
-  cell: {
-    studentId: 1.1,
-    name: 1.1,
-    phone: 1.1,
-    default: 1.9,
-  },
-};
-
-export const pendingMemberModalWidthRatio: Record<TableRatioType, Record<string, number>> = {
-  title: {
-    학번: 1,
-    이름: 1,
-    default: 2,
-  },
-  cell: {
-    studentId: 1,
-    name: 1,
-    default: 2,
-  },
-};
-
-export const grantableStatusTableTitle = commonMemberTableTitle;
-
-export const grantableMemberTableWidthRatio = allMemberTableWidthRatio;
 
 export const paymentStatusTableSelectOptionList = [
   {
@@ -160,21 +113,6 @@ export const paymentStatusTableTitle = [
     type: "nickname",
   },
 ];
-
-export const paymentStatusTableWidthRatio: Record<TableRatioType, Record<string, number>> = {
-  title: {
-    학번: 1.5,
-    이름: 1.5,
-    전화번호: 1.5,
-    default: 1.9,
-  },
-  cell: {
-    studentId: 1.5,
-    name: 1.5,
-    phone: 1.5,
-    default: 1.9,
-  },
-};
 
 export const paymentStatusFieldMapping = {
   VERIFIED: "완료",

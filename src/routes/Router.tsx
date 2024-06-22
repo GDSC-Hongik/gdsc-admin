@@ -1,5 +1,5 @@
 import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
-import Layout from "@/components/layout/common/Layout";
+import Layout from "@/components/layout/Layout";
 import ActivityPeriodPage from "@/pages/ActivityPeriodPage";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
@@ -19,8 +19,7 @@ const routes: RouteObject[] = [
     path: RoutePath.Index,
     element: <Layout />,
     children: [
-      { path: RoutePath.Index, element: <Navigate to={RoutePath.AllMembers} replace /> },
-      { path: RoutePath.AllMembers, element: <AllMembersPage /> },
+      { path: "", element: <Navigate to={RoutePath.AllMembers} replace /> },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
       { path: RoutePath.PastSemester, element: <PastSemesterPage /> },
       { path: RoutePath.PaymentStatus, element: <PaymentStatusPage /> },
@@ -29,6 +28,11 @@ const routes: RouteObject[] = [
       { path: RoutePath.CouponProvision, element: <CouponProvisionPage /> },
       { path: RoutePath.ActivityPeriod, element: <ActivityPeriodPage /> },
     ],
+  },
+  {
+    path: RoutePath.AllMembers,
+    element: <Layout isAllMember />,
+    children: [{ path: RoutePath.AllMembers, element: <AllMembersPage /> }],
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
   {
