@@ -45,7 +45,7 @@ export default function Layout({ isAllMember = false }: LayoutPropsType) {
 }
 
 const StyledLayoutWrapper = styled(Stack)({
-  height: "100vh",
+  height: "100%",
   width: "100vw",
   flexDirection: "row",
   margin: "-8px",
@@ -53,7 +53,6 @@ const StyledLayoutWrapper = styled(Stack)({
 
 const StyledBodyWrapper = styled(Stack)({
   width: "956px",
-  overflow: "auto",
   padding: "78px 80px",
 });
 
