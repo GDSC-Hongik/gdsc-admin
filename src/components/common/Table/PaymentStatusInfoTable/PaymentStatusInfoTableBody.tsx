@@ -5,7 +5,6 @@ import { theme } from "@/styles/theme";
 import { PaymentStatusInfoType, StatusType } from "@/types/entities/member";
 import { go } from "@/utils/fx/go";
 import { map } from "@/utils/fx/map";
-import { getTableRatio } from "@/utils/getTableRatio";
 import { formatNullableValue } from "@/utils/validation/formatNullableValue";
 
 type PaymentStatusInfoBodyProps = {
@@ -56,7 +55,7 @@ export default function PaymentStatusInfoTableBody({ dataList }: PaymentStatusIn
             ([key, value], index) =>
               key !== "memberId" &&
               key !== "paymentStatus" && (
-                <TextContainer item key={index} xs={getTableRatio(key, "cell", "paymentStatus")}>
+                <TextContainer item key={index}>
                   <Text sx={{ wordBreak: "keep-all" }}>{formatNullableValue(value)}</Text>
                 </TextContainer>
               ),

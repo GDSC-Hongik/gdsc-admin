@@ -2,18 +2,12 @@ import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 import { paymentStatusTableTitle } from "@/constants/table";
 import { theme } from "@/styles/theme";
-import { getTableRatio } from "@/utils/getTableRatio";
 
 export default function PaymentStatusInfoTableHeader() {
   return (
     <Container container xs={12}>
       {paymentStatusTableTitle.map(title => (
-        <Title
-          item
-          xs={getTableRatio(title.name, "title", "paymentStatus")}
-          alignItems="center"
-          justifyContent={"center"}
-        >
+        <Title item alignItems="center" justifyContent={"center"}>
           <Text>{title.name}</Text>
         </Title>
       ))}

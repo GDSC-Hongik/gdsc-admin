@@ -8,5 +8,3 @@ export type MemberTableTitleType = {
 }[];
 
 export type DepartmentType = { code: string; name: string };
-
-export type TableRatioType = "title" | "cell";
