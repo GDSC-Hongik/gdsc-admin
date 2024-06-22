@@ -4,8 +4,8 @@ import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
 import { useAllMembersSearchInfoState } from "@/hooks/contexts/useAllMemberSearchInfoContext";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-import { AllMemberInfoType } from "@/types/entities/member";
-import EditInfoModal from "../../Modal/EditInfoModal";
+import { MemberInfoType } from "@/types/entities/member";
+import EditInfoModal from "../Modal/EditInfoModal";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 
 export default function AllMemberInfoTable() {
@@ -39,7 +39,7 @@ export default function AllMemberInfoTable() {
     searchText,
   );
 
-  const getFilteredRows = (allMemberList: AllMemberInfoType[]) => {
+  const getFilteredRows = (allMemberList: MemberInfoType[]) => {
     return allMemberList.map(member => {
       const {
         memberId,

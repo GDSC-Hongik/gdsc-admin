@@ -1,5 +1,5 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { SearchVariantType } from "@/types/entities/store";
+import { SearchVariantType } from "@/types/entities/context";
 
 type AllMembersSearchInfoContextProviderPropsType = {
   children: ReactNode;

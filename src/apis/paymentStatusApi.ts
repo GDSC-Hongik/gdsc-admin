@@ -4,7 +4,7 @@ import {
   PaymentStatusMemberListResponseDtoType,
 } from "@/types/dtos/member";
 import { StatusType } from "@/types/entities/member";
-import { SearchVariantType } from "@/types/entities/store";
+import { SearchVariantType } from "@/types/entities/context";
 
 export const paymentStatusApi = {
   getPaymentStatusMemberList: async (
