@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
-import { commonMemberTableTitle, pendingMemberTableTitle } from "@/constants/table";
+import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/table";
 import {
   useAllMembersSearchInfoDispatch,
   useAllMembersSearchInfoState,
@@ -25,7 +25,7 @@ export type HeaderProps = {
 };
 
 export default function Header({ variant }: HeaderProps) {
-  const [selectedValue, setSelectedValue] = useState<number>(1);
+  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
   const { setSearchText, setSearchVariant } = useAllMembersSearchInfoDispatch();
   const { searchText } = useAllMembersSearchInfoState();
 
@@ -41,8 +41,8 @@ export default function Header({ variant }: HeaderProps) {
   const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
     if (variant === "allMember") {
-      setSearchVariant?.(commonMemberTableTitle[targetIndex]["type"]);
-      setSelectedValue(targetIndex + 1);
+      setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+      setSelectedMemberInfoVariant(targetIndex + 1);
       setSearchText?.("");
     }
   };
@@ -53,21 +53,17 @@ export default function Header({ variant }: HeaderProps) {
     }
   };
 
-  const getSelectMenuList = (variant: ManagementVariant) => {
-    if (variant === "allMember") {
-      return commonMemberTableTitle;
-    } else {
-      return pendingMemberTableTitle.slice(0, 5);
-    }
-  };
-
   return (
     <StyledHeaderWrapper>
       <StyledHeaderLeftColWrapper>
         <StyledFormWrapper>
           <InputLabel>Type</InputLabel>
-          <Select label="Type" value={selectedValue} onChange={handleChangeMemberSelect}>
-            {getSelectMenuList(variant).map(title => (
+          <Select
+            label="Type"
+            value={selectedMemberInfoVariant}
+            onChange={handleChangeMemberSelect}
+          >
+            {memberInfoSelectMenu.map(title => (
               <MenuItem value={title.value} key={title.value}>
                 {title.name}
               </MenuItem>
@@ -87,6 +83,18 @@ export default function Header({ variant }: HeaderProps) {
           <StyledExcelDownloadButton variant="outlined" onClick={handleClickExcelDownloadButton}>
             엑셀 다운로드
           </StyledExcelDownloadButton>
+        )}
+        {variant === "pendingMember" && (
+          <StyledFormWrapper>
+            <InputLabel>Type</InputLabel>
+            <Select label="Type" value={null} onChange={() => {}}>
+              {memberTypeSelectMenu.map(title => (
+                <MenuItem value={title.value} key={title.value}>
+                  {title.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </StyledFormWrapper>
         )}
       </StyledHeaderRightColWrapper>
     </StyledHeaderWrapper>
@@ -109,7 +117,9 @@ const StyledHeaderLeftColWrapper = styled(Stack)({
   flexWrap: "wrap",
 });
 
-const StyledHeaderRightColWrapper = styled(Stack)({});
+const StyledHeaderRightColWrapper = styled(Stack)({
+  justifyContent: "space-between",
+});
 
 const StyledFormWrapper = styled(FormControl)({
   width: "180px",
