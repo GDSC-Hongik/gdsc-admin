@@ -13,7 +13,10 @@ import {
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { commonMemberTableTitle, pendingMemberTableTitle } from "@/constants/table";
-import { useAllMembersSearchInfoDispatch } from "@/hooks/contexts/useAllMemberSearchInfoContext";
+import {
+  useAllMembersSearchInfoDispatch,
+  useAllMembersSearchInfoState,
+} from "@/hooks/contexts/useAllMemberSearchInfoContext";
 import { ManagementVariant } from "@/types/entities/member";
 import { downloadExcelFile } from "@/utils/excel";
 
@@ -24,6 +27,7 @@ export type HeaderProps = {
 export default function Header({ variant }: HeaderProps) {
   const [selectedValue, setSelectedValue] = useState<number>(1);
   const { setSearchText, setSearchVariant } = useAllMembersSearchInfoDispatch();
+  const { searchText } = useAllMembersSearchInfoState();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -39,13 +43,14 @@ export default function Header({ variant }: HeaderProps) {
     if (variant === "allMember") {
       setSearchVariant?.(commonMemberTableTitle[targetIndex]["type"]);
       setSelectedValue(targetIndex + 1);
+      setSearchText?.("");
     }
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (variant === "allMember") {
-setSearchText?.(e.target.value);
-}
+      setSearchText?.(e.target.value);
+    }
   };
 
   const getSelectMenuList = (variant: ManagementVariant) => {
@@ -73,6 +78,7 @@ setSearchText?.(e.target.value);
           label="search"
           variant="outlined"
           placeholder="name, email, etc.."
+          value={searchText}
           onChange={handleChangeText}
         />
       </StyledHeaderLeftColWrapper>
