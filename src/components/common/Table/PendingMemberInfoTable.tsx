@@ -13,7 +13,7 @@ export default function PendingMemberInfoTable() {
 
   const { searchVariant, searchText, memberVariant } = usePendingMembersSearchInfoState();
 
-  const { pendingMemberList = [] } = useGetPendingMemberListQuery(
+  const { pendingMemberList = [], totalElements } = useGetPendingMemberListQuery(
     paginationModel.page,
     paginationModel.pageSize,
     searchVariant,
@@ -51,6 +51,8 @@ export default function PendingMemberInfoTable() {
     <StyledDataGrid
       rows={getFilteredRows(pendingMemberList)}
       columns={columns}
+      paginationMode="server"
+      rowCount={totalElements}
       pageSizeOptions={[5, 25, 100]}
       paginationModel={paginationModel}
       onPaginationModelChange={setPaginationModel}

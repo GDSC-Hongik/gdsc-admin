@@ -32,7 +32,7 @@ export default function AllMemberInfoTable() {
 
   const { searchText, searchVariant } = useAllMembersSearchInfoState();
 
-  const { allMemberList = [] } = useGetAllMemberListQuery(
+  const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,
     paginationModel.pageSize,
     searchVariant,
@@ -103,6 +103,8 @@ export default function AllMemberInfoTable() {
         rows={getFilteredRows(allMemberList)}
         columns={getColumns(handleClickEditMemberInfo, handleClickDeleteMember)}
         pageSizeOptions={[5, 25, 100]}
+        paginationMode="server"
+        rowCount={totalElements}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
         disableRowSelectionOnClick
