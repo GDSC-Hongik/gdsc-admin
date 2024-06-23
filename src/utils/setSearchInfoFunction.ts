@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { paymentStatusTableTitle } from "@/constants/table";
 import { ManagementVariant } from "@/types/entities/member";
-import { SearchVariantType } from "@/types/entities/context";
+import { SearchVariantType } from "@/types/entities/search";
 
 type SetSearchInfoFunctionType = <T extends ManagementVariant>(
   setSelectedValue: Dispatch<SetStateAction<string>>,

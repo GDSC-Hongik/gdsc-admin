@@ -4,7 +4,7 @@ import {
   GrantPendingMemberRequestDtoType,
   PendingMemberListResponseDtoType,
 } from "@/types/dtos/member";
-import { MemberVariantType, SearchVariantType } from "@/types/entities/context";
+import { MemberVariantType, SearchVariantType } from "@/types/entities/search";
 
 export const pendingMemberApi = {
   getPendingMemberList: async (

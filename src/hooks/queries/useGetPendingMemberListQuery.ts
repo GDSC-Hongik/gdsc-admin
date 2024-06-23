@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { pendingMemberApi } from "@/apis/pendingMemberApi";
 import { QueryKey } from "@/constants/queryKey";
-import { MemberVariantType, SearchVariantType } from "@/types/entities/context";
+import { MemberVariantType, SearchVariantType } from "@/types/entities/search";
 
 export default function useGetPendingMemberListQuery(
   page: number,

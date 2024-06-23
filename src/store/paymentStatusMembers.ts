@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { SearchInfoType, SearchVariantType } from "@/types/entities/context";
+import { SearchInfoType, SearchVariantType } from "@/types/entities/search";
 
 export type PaymentStatusMembersStoreType = {
   searchInfo: SearchInfoType<"paymentStatus">;

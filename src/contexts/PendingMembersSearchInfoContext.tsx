@@ -1,4 +1,4 @@
-import { MemberVariantType, SearchVariantType } from "@/types/entities/context";
+import { MemberVariantType, SearchVariantType } from "@/types/entities/search";
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 type SearchStateType = {
