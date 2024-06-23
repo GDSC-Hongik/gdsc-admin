@@ -34,17 +34,21 @@ export default function AccordionLinkListButton<T extends LinkButtonLabelType>({
 
   return (
     <StyledAccordionLinkListButtonWrapper>
-      <StyledLink to={path ?? ""} onClick={handleClickLinkButton} isActive={pathname === path}>
+      <StyledLink
+        to={path ?? ""}
+        onClick={handleClickLinkButton}
+        active={pathname === path ? 1 : 0}
+      >
         <StarIcon />
         <StyledRightElement>
           <Typography css={typo.body1}>{label}</Typography>
-          {!!linkButtonInfoList && <StyledDownArrowIcon expanded={expanded} />}
+          {!!linkButtonInfoList && <StyledDownArrowIcon expanded={expanded ? 1 : 0} />}
         </StyledRightElement>
       </StyledLink>
       {expanded && (
         <StyledLinkButtonInfoListWrapper>
           {linkButtonInfoList?.map(info => (
-            <StyledLinkButtonInfoListItem key={info.label} isActive={pathname === info.path}>
+            <StyledLinkButtonInfoListItem key={info.label} active={pathname === info.path ? 1 : 0}>
               <StyledLinkButton to={info.path}>
                 <StyledLinkLabel css={typo.body2}>{info.label}</StyledLinkLabel>
               </StyledLinkButton>
@@ -60,7 +64,7 @@ const StyledAccordionLinkListButtonWrapper = styled("li")({
   cursor: "pointer",
 });
 
-const StyledLink = styled(Link)(({ isActive }: { isActive: boolean }) => ({
+const StyledLink = styled(Link)(({ active }: { active: number }) => ({
   padding: "8px 16px",
   display: "flex",
   gap: "32px",
@@ -69,7 +73,7 @@ const StyledLink = styled(Link)(({ isActive }: { isActive: boolean }) => ({
   alignItems: "center",
   textDecoration: "none",
   color: `${palette.black}`,
-  backgroundColor: isActive ? "rgba(33, 150, 243, 0.04)" : "transparent",
+  backgroundColor: active ? "rgba(33, 150, 243, 0.04)" : "transparent",
 }));
 
 const StyledRightElement = styled("div")({
@@ -79,20 +83,20 @@ const StyledRightElement = styled("div")({
   cursor: "pointer",
 });
 
-const StyledDownArrowIcon = styled(DownArrowIcon)(({ expanded }: { expanded: boolean }) => ({
+const StyledDownArrowIcon = styled(DownArrowIcon)(({ expanded }: { expanded: number }) => ({
   transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
 }));
 
 const StyledLinkButtonInfoListWrapper = styled("ul")({ cursor: "pointer", padding: "0" });
 
-const StyledLinkButtonInfoListItem = styled("li")(({ isActive }: { isActive: boolean }) => ({
+const StyledLinkButtonInfoListItem = styled("li")(({ active }: { active: number }) => ({
   listStyle: "none",
   height: "36px",
   width: "100%",
   borderRadius: "4px",
   display: "flex",
   alignItems: "center",
-  backgroundColor: isActive ? "rgba(33, 150, 243, 0.04)" : "transparent",
+  backgroundColor: active ? "rgba(33, 150, 243, 0.04)" : "transparent",
 }));
 
 const StyledLinkButton = styled(Link)({

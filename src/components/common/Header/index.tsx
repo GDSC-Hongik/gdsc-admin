@@ -68,8 +68,6 @@ export default function Header({ variant }: HeaderProps) {
   const handleChangeSelectMemberVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    console.log(memberTypeSelectMenu[targetIndex]["type"]);
-
     setPendingMemberVariant?.(memberTypeSelectMenu[targetIndex]["type"]);
     setSelectedMemberVariant(targetIndex + 1);
   };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
@@ -38,6 +38,16 @@ export default function AllMemberInfoTable() {
     searchVariant,
     searchText,
   );
+
+  const rowCountRef = useRef(totalElements || 0);
+
+  const rowCount = useMemo(() => {
+    if (totalElements !== undefined) {
+      rowCountRef.current = totalElements;
+    }
+
+    return rowCountRef.current;
+  }, [totalElements]);
 
   const getFilteredRows = (allMemberList: MemberInfoType[]) => {
     return allMemberList.map(member => {
@@ -103,8 +113,8 @@ export default function AllMemberInfoTable() {
         rows={getFilteredRows(allMemberList)}
         columns={getColumns(handleClickEditMemberInfo, handleClickDeleteMember)}
         pageSizeOptions={[5, 25, 100]}
+        rowCount={rowCount}
         paginationMode="server"
-        rowCount={totalElements}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
         disableRowSelectionOnClick
@@ -213,7 +223,7 @@ const getColumns = (
   },
 ];
 
-const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 400 });
+const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
 
 const StyledButtonWrapper = styled("div")({
   display: "flex",

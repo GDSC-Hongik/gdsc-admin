@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { MemberInfoType } from "@/types/entities/member";
@@ -20,6 +20,16 @@ export default function PendingMemberInfoTable() {
     searchText,
     memberVariant,
   );
+
+  const rowCountRef = useRef(totalElements || 0);
+
+  const rowCount = useMemo(() => {
+    if (totalElements !== undefined) {
+      rowCountRef.current = totalElements;
+    }
+
+    return rowCountRef.current;
+  }, [totalElements]);
 
   const getFilteredRows = (pendingMemberList: MemberInfoType[]) => {
     return pendingMemberList.map(member => {
@@ -51,8 +61,8 @@ export default function PendingMemberInfoTable() {
     <StyledDataGrid
       rows={getFilteredRows(pendingMemberList)}
       columns={columns}
+      rowCount={rowCount}
       paginationMode="server"
-      rowCount={totalElements}
       pageSizeOptions={[5, 25, 100]}
       paginationModel={paginationModel}
       onPaginationModelChange={setPaginationModel}
@@ -124,4 +134,4 @@ const columns: GridColDef[] = [
   },
 ];
 
-const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 400 });
+const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
