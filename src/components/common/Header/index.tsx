@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, Dispatch, SetStateAction } from "react";
 import {
   Button,
   FormControl,
@@ -13,28 +13,29 @@ import {
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/table";
-import {
-  useAllMembersSearchInfoDispatch,
-  useAllMembersSearchInfoState,
-} from "@/hooks/contexts/useAllMemberSearchInfoContext";
 import { ManagementVariant } from "@/types/entities/member";
 import { downloadExcelFile } from "@/utils/excel";
 import {
   usePendingMembersSearchInfoDispatch,
   usePendingMembersSearchInfoState,
 } from "@/hooks/contexts/usePendingMemberSearchInfoContext";
+import { SearchVariantType } from "@/types/entities/search";
 
 export type HeaderProps = {
   variant: ManagementVariant;
+  setAllMemberSearchText: Dispatch<SetStateAction<string>>;
+  setAllMemberSearchVariant: Dispatch<SetStateAction<SearchVariantType<"allMember">>>;
+  allMemberSearchText: string;
 };
 
-export default function Header({ variant }: HeaderProps) {
+export default function Header({
+  variant,
+  setAllMemberSearchText,
+  setAllMemberSearchVariant,
+  allMemberSearchText,
+}: HeaderProps) {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
   const [selectedMemberVariant, setSelectedMemberVariant] = useState<number>(1);
-
-  const { setSearchText: setAllMemberSearchText, setSearchVariant: setAllMemberSearchVariant } =
-    useAllMembersSearchInfoDispatch();
-  const { searchText: allMemberSearchText } = useAllMembersSearchInfoState();
 
   const {
     setSearchText: setPendingMemberSearchText,

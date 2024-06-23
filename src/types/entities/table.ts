@@ -1,5 +1,5 @@
 import { ManagementVariant } from "./member";
-import { SearchVariantType } from "./context";
+import { SearchVariantType } from "./search";
 
 export type MemberInfoSelectMenuType = {
   value: string;

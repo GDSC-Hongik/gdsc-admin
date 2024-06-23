@@ -4,13 +4,14 @@ import { titleVariant } from "@/constants/common";
 import { palette } from "@/styles/palette";
 import { typo } from "@/styles/typo";
 import { ManagementVariant } from "@/types/entities/member";
+import { memo } from "react";
 
 type TitleProps = {
   variant: ManagementVariant;
   descriptionText: string;
 };
 
-export default function Title({ variant, descriptionText }: TitleProps) {
+function Title({ variant, descriptionText }: TitleProps) {
   return (
     <StyledTitleWrapper>
       <StyledHeaderTitle css={typo.h5}>{titleVariant[variant]}</StyledHeaderTitle>
@@ -18,6 +19,8 @@ export default function Title({ variant, descriptionText }: TitleProps) {
     </StyledTitleWrapper>
   );
 }
+
+export default memo(Title);
 
 const StyledTitleWrapper = styled(Stack)({
   padding: "16px",
@@ -31,4 +34,3 @@ const StyledHeaderTitle = styled(Typography)({
 const StyledHeaderSubTitle = styled(Typography)({
   color: "rgba(0, 0, 0, 0.60)",
 });
-

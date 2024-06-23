@@ -25,3 +25,7 @@ export type MemberStoreType = PaymentStatusMembersStoreType;
 
 export type MemberVariantType = "associate" | "guest";
 
+export type PaginationModelType = {
+  pageSize: number;
+  page: number;
+};

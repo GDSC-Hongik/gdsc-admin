@@ -2,17 +2,21 @@ import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
-import { useAllMembersSearchInfoState } from "@/hooks/contexts/useAllMemberSearchInfoContext";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
 import EditInfoModal from "../Modal/EditInfoModal";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
+import { SearchVariantType } from "@/types/entities/search";
 
-export default function AllMemberInfoTable() {
-  const [paginationModel, setPaginationModel] = useState({
-    pageSize: 5,
-    page: 0,
-  });
+type AllMemberInfoTablePropsType = {
+  searchText: string;
+  searchVariant: SearchVariantType<"allMember">;
+};
+
+export default function AllMemberInfoTable({
+  searchText,
+  searchVariant,
+}: AllMemberInfoTablePropsType) {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editMemberInfo, setEditMemberInfo] = useState({
     memberId: 0,
@@ -27,10 +31,9 @@ export default function AllMemberInfoTable() {
     discordUsername: "",
     nickname: "",
   });
+  const [paginationModel, setPaginationModel] = useState({ pageSize: 5, page: 0 });
 
   const { mutate } = useDeleteMemberMutation();
-
-  const { searchText, searchVariant } = useAllMembersSearchInfoState();
 
   const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,
