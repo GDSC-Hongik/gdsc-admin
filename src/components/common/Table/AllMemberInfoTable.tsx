@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
@@ -6,16 +6,20 @@ import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
 import EditInfoModal from "../Modal/EditInfoModal";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
-import { SearchVariantType } from "@/types/entities/search";
+import { PaginationModelType, SearchVariantType } from "@/types/entities/search";
 
 type AllMemberInfoTablePropsType = {
   searchText: string;
   searchVariant: SearchVariantType<"allMember">;
+  paginationModel: PaginationModelType;
+  onPaginationModelChange: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
 export default function AllMemberInfoTable({
   searchText,
   searchVariant,
+  paginationModel,
+  onPaginationModelChange,
 }: AllMemberInfoTablePropsType) {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editMemberInfo, setEditMemberInfo] = useState({
@@ -31,7 +35,6 @@ export default function AllMemberInfoTable({
     discordUsername: "",
     nickname: "",
   });
-  const [paginationModel, setPaginationModel] = useState({ pageSize: 5, page: 0 });
 
   const { mutate } = useDeleteMemberMutation();
 
@@ -119,7 +122,7 @@ export default function AllMemberInfoTable({
         rowCount={rowCount}
         paginationMode="server"
         paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
+        onPaginationModelChange={onPaginationModelChange}
         disableRowSelectionOnClick
         autoHeight
         disableColumnFilter

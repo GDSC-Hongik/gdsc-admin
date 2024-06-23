@@ -13,36 +13,30 @@ import {
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/table";
-import { ManagementVariant } from "@/types/entities/member";
 import { downloadExcelFile } from "@/utils/excel";
-import {
-  usePendingMembersSearchInfoDispatch,
-  usePendingMembersSearchInfoState,
-} from "@/hooks/contexts/usePendingMemberSearchInfoContext";
-import { SearchVariantType } from "@/types/entities/search";
+import { MemberVariantType, SearchVariantType } from "@/types/entities/search";
 
-export type HeaderProps = {
-  variant: ManagementVariant;
-  setAllMemberSearchText: Dispatch<SetStateAction<string>>;
-  setAllMemberSearchVariant: Dispatch<SetStateAction<SearchVariantType<"allMember">>>;
-  allMemberSearchText: string;
+export type HeaderProps<T extends "allMember" | "pendingMember"> = {
+  variant: T;
+  setSearchText: Dispatch<SetStateAction<string>>;
+  setSearchVariant: Dispatch<SetStateAction<SearchVariantType<"allMember" | "pendingMember">>>;
+  setMemberVariant?: T extends "pendingMember"
+    ? Dispatch<SetStateAction<MemberVariantType>>
+    : never;
+  searchText: string;
+  onResetPage: () => void;
 };
 
-export default function Header({
+export default function Header<T extends "allMember" | "pendingMember">({
   variant,
-  setAllMemberSearchText,
-  setAllMemberSearchVariant,
-  allMemberSearchText,
-}: HeaderProps) {
+  setSearchText,
+  setSearchVariant,
+  setMemberVariant,
+  searchText,
+  onResetPage,
+}: HeaderProps<T>) {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
   const [selectedMemberVariant, setSelectedMemberVariant] = useState<number>(1);
-
-  const {
-    setSearchText: setPendingMemberSearchText,
-    setSearchVariant: setPendingMemberSearchVariant,
-    setMemberVariant: setPendingMemberVariant,
-  } = usePendingMembersSearchInfoDispatch();
-  const { searchText: pendingMemberSearchText } = usePendingMembersSearchInfoState();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -55,30 +49,24 @@ export default function Header({
 
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
-    if (variant === "allMember") {
-      setAllMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
-      setSelectedMemberInfoVariant(targetIndex + 1);
-      setAllMemberSearchText?.("");
-    } else if (variant === "pendingMember") {
-      setPendingMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
-      setSelectedMemberInfoVariant(targetIndex + 1);
-      setPendingMemberSearchText?.("");
-    }
+
+    setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+    setSelectedMemberInfoVariant(targetIndex + 1);
+    setSearchText?.("");
+    onResetPage();
   };
 
   const handleChangeSelectMemberVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setPendingMemberVariant?.(memberTypeSelectMenu[targetIndex]["type"]);
+    setMemberVariant?.(memberTypeSelectMenu[targetIndex]["type"]);
     setSelectedMemberVariant(targetIndex + 1);
+    onResetPage();
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (variant === "allMember") {
-      setAllMemberSearchText?.(e.target.value);
-    } else if (variant === "pendingMember") {
-      setPendingMemberSearchText?.(e.target.value);
-    }
+    e.target.value.length === 1 && onResetPage();
+    setSearchText?.(e.target.value);
   };
 
   return (
@@ -102,7 +90,7 @@ export default function Header({
           label="search"
           variant="outlined"
           placeholder="name, email, etc.."
-          value={variant === "allMember" ? allMemberSearchText : pendingMemberSearchText}
+          value={searchText}
           onChange={handleChangeText}
         />
       </StyledHeaderLeftColWrapper>

@@ -1,5 +1,4 @@
 import { ManagementVariant } from "./member";
-import { PaymentStatusMembersStoreType } from "@/store/paymentStatusMembers";
 
 type MembersSearchVariantType = [
   "studentId",
@@ -20,8 +19,6 @@ export type SearchInfoType<T extends ManagementVariant> = {
   text: string;
   variant: SearchVariantType<T>;
 };
-
-export type MemberStoreType = PaymentStatusMembersStoreType;
 
 export type MemberVariantType = "associate" | "guest";
 
