@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, Dispatch, SetStateAction } from "react";
+import { useState, ChangeEvent } from "react";
 import {
   Button,
   FormControl,
@@ -14,29 +14,39 @@ import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/table";
 import { downloadExcelFile } from "@/utils/excel";
-import { MemberVariantType, SearchVariantType } from "@/types/entities/search";
+import {
+  useAllMembersSearchInfoDispatch,
+  useAllMembersSearchInfoState,
+} from "@/hooks/contexts/useAllMembersSearchInfoContext";
+import {
+  usePendingMembersSearchInfoDispatch,
+  usePendingMembersSearchInfoState,
+} from "@/hooks/contexts/usePendingMembersSearchInfoContext";
 
 export type HeaderProps<T extends "allMember" | "pendingMember"> = {
   variant: T;
-  setSearchText: Dispatch<SetStateAction<string>>;
-  setSearchVariant: Dispatch<SetStateAction<SearchVariantType<"allMember" | "pendingMember">>>;
-  setMemberVariant?: T extends "pendingMember"
-    ? Dispatch<SetStateAction<MemberVariantType>>
-    : never;
-  searchText: string;
-  onResetPage: () => void;
 };
 
 export default function Header<T extends "allMember" | "pendingMember">({
   variant,
-  setSearchText,
-  setSearchVariant,
-  setMemberVariant,
-  searchText,
-  onResetPage,
 }: HeaderProps<T>) {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
   const [selectedMemberVariant, setSelectedMemberVariant] = useState<number>(1);
+
+  const {
+    setSearchText: setAllMemberSearchText,
+    setSearchVariant: setAllMemberSearchVariant,
+    setPaginationModel: setAllMemberPaginationModel,
+  } = useAllMembersSearchInfoDispatch();
+  const { searchText: allMemberSearchText } = useAllMembersSearchInfoState();
+
+  const {
+    setSearchText: setPendingMemberSearchText,
+    setSearchVariant: setPendingMemberSearchVariant,
+    setPaginationModel: setPendingMemberPaginationModel,
+    setMemberVariant: setPendingMemberVariant,
+  } = usePendingMembersSearchInfoDispatch();
+  const { searchText: pendingMemberSearchText } = usePendingMembersSearchInfoState();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -47,26 +57,47 @@ export default function Header<T extends "allMember" | "pendingMember">({
     }
   };
 
+  const handleResetPage = () => {
+    if (variant === "allMember") {
+      setAllMemberPaginationModel(prevPaginationModel => ({
+        ...prevPaginationModel,
+        page: 0,
+      }));
+    } else if (variant === "pendingMember") {
+      setPendingMemberPaginationModel(prevPaginationModel => ({
+        ...prevPaginationModel,
+        page: 0,
+      }));
+    }
+  };
+
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+    if (variant === "allMember") {
+      setAllMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+      setAllMemberSearchText?.("");
+    } else if (variant === "pendingMember") {
+      setPendingMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+      setPendingMemberSearchText?.("");
+    }
     setSelectedMemberInfoVariant(targetIndex + 1);
-    setSearchText?.("");
-    onResetPage();
+    handleResetPage();
   };
 
   const handleChangeSelectMemberVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setMemberVariant?.(memberTypeSelectMenu[targetIndex]["type"]);
+    setPendingMemberVariant?.(memberTypeSelectMenu[targetIndex]["type"]);
     setSelectedMemberVariant(targetIndex + 1);
-    onResetPage();
+    handleResetPage();
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.target.value.length === 1 && onResetPage();
-    setSearchText?.(e.target.value);
+    const text = e.target.value;
+    text.length === 1 && handleResetPage();
+
+    variant === "allMember" ? setAllMemberSearchText?.(text) : setPendingMemberSearchText?.(text);
   };
 
   return (
@@ -90,7 +121,7 @@ export default function Header<T extends "allMember" | "pendingMember">({
           label="search"
           variant="outlined"
           placeholder="name, email, etc.."
-          value={searchText}
+          value={variant === "allMember" ? allMemberSearchText : pendingMemberSearchText}
           onChange={handleChangeText}
         />
       </StyledHeaderLeftColWrapper>

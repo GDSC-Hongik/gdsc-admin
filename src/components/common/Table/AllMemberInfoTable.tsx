@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
@@ -6,21 +6,12 @@ import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
 import EditInfoModal from "../Modal/EditInfoModal";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
-import { PaginationModelType, SearchVariantType } from "@/types/entities/search";
+import {
+  useAllMembersSearchInfoDispatch,
+  useAllMembersSearchInfoState,
+} from "@/hooks/contexts/useAllMembersSearchInfoContext";
 
-type AllMemberInfoTablePropsType = {
-  searchText: string;
-  searchVariant: SearchVariantType<"allMember">;
-  paginationModel: PaginationModelType;
-  onPaginationModelChange: Dispatch<SetStateAction<PaginationModelType>>;
-};
-
-export default function AllMemberInfoTable({
-  searchText,
-  searchVariant,
-  paginationModel,
-  onPaginationModelChange,
-}: AllMemberInfoTablePropsType) {
+export default function AllMemberInfoTable() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editMemberInfo, setEditMemberInfo] = useState({
     memberId: 0,
@@ -37,6 +28,9 @@ export default function AllMemberInfoTable({
   });
 
   const { mutate } = useDeleteMemberMutation();
+
+  const { paginationModel, searchText, searchVariant } = useAllMembersSearchInfoState();
+  const { setPaginationModel } = useAllMembersSearchInfoDispatch();
 
   const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,
@@ -122,7 +116,7 @@ export default function AllMemberInfoTable({
         rowCount={rowCount}
         paginationMode="server"
         paginationModel={paginationModel}
-        onPaginationModelChange={onPaginationModelChange}
+        onPaginationModelChange={setPaginationModel}
         disableRowSelectionOnClick
         autoHeight
         disableColumnFilter

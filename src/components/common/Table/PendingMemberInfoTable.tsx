@@ -1,24 +1,18 @@
-import { Dispatch, SetStateAction, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { MemberInfoType } from "@/types/entities/member";
 import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
-import { MemberVariantType, PaginationModelType, SearchVariantType } from "@/types/entities/search";
+import {
+  usePendingMembersSearchInfoDispatch,
+  usePendingMembersSearchInfoState,
+} from "@/hooks/contexts/usePendingMembersSearchInfoContext";
 
-type PendingMemberInfoTablePropsType = {
-  searchVariant: SearchVariantType<"pendingMember">;
-  searchText: string;
-  memberVariant: MemberVariantType;
-  paginationModel: PaginationModelType;
-  onPaginationModelChange: Dispatch<SetStateAction<PaginationModelType>>;
-};
-export default function PendingMemberInfoTable({
-  searchVariant,
-  searchText,
-  memberVariant,
-  paginationModel,
-  onPaginationModelChange,
-}: PendingMemberInfoTablePropsType) {
+export default function PendingMemberInfoTable() {
+  const { paginationModel, searchVariant, searchText, memberVariant } =
+    usePendingMembersSearchInfoState();
+  const { setPaginationModel } = usePendingMembersSearchInfoDispatch();
+
   const { pendingMemberList = [], totalElements } = useGetPendingMemberListQuery(
     paginationModel.page,
     paginationModel.pageSize,
@@ -71,7 +65,7 @@ export default function PendingMemberInfoTable({
       paginationMode="server"
       pageSizeOptions={[5, 25, 100]}
       paginationModel={paginationModel}
-      onPaginationModelChange={onPaginationModelChange}
+      onPaginationModelChange={setPaginationModel}
       disableRowSelectionOnClick
       autoHeight
       disableColumnFilter
