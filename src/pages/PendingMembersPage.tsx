@@ -1,14 +1,19 @@
 import Header from "@/components/common/Header";
+import PendingMemberInfoTable from "@/components/common/Table/PendingMemberInfoTable";
 import Title from "@/components/common/Title";
+import PendingMembersSearchInfoContextProvider from "@/contexts/PendingMembersSearchInfoContext";
 
 export default function PendingMembersPage() {
   return (
     <>
       <Title
         variant={"pendingMember"}
-        descriptionText={"가입 신청서를 작성한 게스트 멤버의 정보를 관리합니다."}
+        descriptionText={"소셜 로그인을 완료한 멤버를 관리합니다. "}
       />
-      <Header variant={"pendingMember"} />
+      <PendingMembersSearchInfoContextProvider>
+        <Header variant={"pendingMember"} />
+        <PendingMemberInfoTable />
+      </PendingMembersSearchInfoContextProvider>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { apiClient } from ".";
 import { AllMemberListResponseDtoType, DepartmentListResponseDtoType } from "@/types/dtos/member";
-import { SearchVariantType } from "@/types/entities/store";
+import { SearchVariantType } from "@/types/entities/search";
 
 export const allMemberApi = {
   getAllMemberList: async (

@@ -1,9 +1,4 @@
-import {
-  AllMemberInfoType,
-  PaymentStatusInfoType,
-  PendingMemberInfoType,
-  StatusType,
-} from "@/types/entities/member";
+import { MemberInfoType, StatusType } from "@/types/entities/member";
 
 type PaginationElementType = {
   pageable: {
@@ -34,7 +29,7 @@ type PaginationElementType = {
 };
 
 export type AllMemberListResponseDtoType = {
-  content: AllMemberInfoType[];
+  content: MemberInfoType[];
 } & PaginationElementType;
 
 export type DepartmentListResponseDtoType = {
@@ -43,7 +38,7 @@ export type DepartmentListResponseDtoType = {
 };
 
 export type PendingMemberListResponseDtoType = {
-  content: PendingMemberInfoType[];
+  content: MemberInfoType[];
 } & PaginationElementType;
 
 export type GrantPendingMemberRequestDtoType = {
@@ -56,7 +51,7 @@ export type GrantPendingMemberResponseDtoType = {
 };
 
 export type PaymentStatusMemberListResponseDtoType = {
-  content: PaymentStatusInfoType[];
+  content: MemberInfoType[];
 } & PaginationElementType;
 
 export type MemberPaymentStatusResponseDtoType = StatusType;

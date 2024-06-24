@@ -1,11 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import {
-  commonMemberTableTitle,
-  paymentStatusTableTitle,
-  pendingMemberTableTitle,
-} from "@/constants/table";
+import { paymentStatusTableTitle } from "@/constants/table";
 import { ManagementVariant } from "@/types/entities/member";
-import { SearchVariantType } from "@/types/entities/store";
+import { SearchVariantType } from "@/types/entities/search";
 
 type SetSearchInfoFunctionType = <T extends ManagementVariant>(
   setSelectedValue: Dispatch<SetStateAction<string>>,
@@ -13,21 +9,7 @@ type SetSearchInfoFunctionType = <T extends ManagementVariant>(
   targetIndex: number,
 ) => void;
 
-export const setSearchInfo: Record<ManagementVariant, SetSearchInfoFunctionType> = {
-  allMember: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(commonMemberTableTitle[targetIndex]["value"]);
-    setSearchVariant?.(
-      commonMemberTableTitle[targetIndex]["type"] as SearchVariantType<"allMember">,
-    );
-  },
-  pendingMember: (setSelectedValue, setSearchVariant, targetIndex) => {
-    setSelectedValue(pendingMemberTableTitle[targetIndex]["value"]);
-    setSearchVariant?.(
-      pendingMemberTableTitle.slice(0, 5)[targetIndex][
-        "type"
-      ] as SearchVariantType<"pendingMember">,
-    );
-  },
+export const setSearchInfo: Record<"paymentStatus", SetSearchInfoFunctionType> = {
   paymentStatus: (setSelectedValue, setSearchVariant, targetIndex) => {
     setSelectedValue(paymentStatusTableTitle[targetIndex]["value"]);
     setSearchVariant?.(

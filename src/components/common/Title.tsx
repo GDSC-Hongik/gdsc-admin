@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "@emotion/styled";
 import { Stack, Typography } from "@mui/material";
 import { titleVariant } from "@/constants/common";
@@ -10,7 +11,7 @@ type TitleProps = {
   descriptionText: string;
 };
 
-export default function Title({ variant, descriptionText }: TitleProps) {
+function Title({ variant, descriptionText }: TitleProps) {
   return (
     <StyledTitleWrapper>
       <StyledHeaderTitle css={typo.h5}>{titleVariant[variant]}</StyledHeaderTitle>
@@ -18,6 +19,8 @@ export default function Title({ variant, descriptionText }: TitleProps) {
     </StyledTitleWrapper>
   );
 }
+
+export default memo(Title);
 
 const StyledTitleWrapper = styled(Stack)({
   padding: "16px",
@@ -31,4 +34,3 @@ const StyledHeaderTitle = styled(Typography)({
 const StyledHeaderSubTitle = styled(Typography)({
   color: "rgba(0, 0, 0, 0.60)",
 });
-

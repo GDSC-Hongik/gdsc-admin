@@ -1,11 +1,11 @@
 import { ChangeEvent } from "react";
 import styled from "@emotion/styled";
 import { Box, TextField } from "@mui/material";
-import { AllMemberInfoStateType } from "@/types/entities/member";
+import { MemberInfoType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
-type BasicInfoProps = Pick<AllMemberInfoStateType, "name" | "studentId" | "phone"> & {
+type BasicInfoProps = Pick<MemberInfoType, "name" | "studentId" | "phone"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 

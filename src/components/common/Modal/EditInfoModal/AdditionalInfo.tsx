@@ -4,12 +4,12 @@ import { Box, TextField } from "@mui/material";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { theme } from "@/styles/theme";
 import { DepartmentListResponseDtoType } from "@/types/dtos/member";
-import { AllMemberInfoStateType } from "@/types/entities/member";
+import { MemberInfoType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 
-type AdditionalInfoProps = Pick<AllMemberInfoStateType, "email"> & {
+type AdditionalInfoProps = Pick<MemberInfoType, "email"> & {
   handleChangeMemberInfo: (e: ChangeEvent<HTMLInputElement>) => void;
-  setMemberInfo: Dispatch<SetStateAction<AllMemberInfoStateType>>;
+  setMemberInfo: Dispatch<SetStateAction<MemberInfoType>>;
   departmentSearchText: string;
   setDepartmentSearchText: Dispatch<SetStateAction<string>>;
 };

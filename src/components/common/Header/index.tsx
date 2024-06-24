@@ -12,22 +12,41 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
-import { commonMemberTableTitle, pendingMemberTableTitle } from "@/constants/table";
+import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/table";
 import {
   useAllMembersSearchInfoDispatch,
   useAllMembersSearchInfoState,
-} from "@/hooks/contexts/useAllMemberSearchInfoContext";
-import { ManagementVariant } from "@/types/entities/member";
+} from "@/hooks/contexts/useAllMembersSearchInfoContext";
+import {
+  usePendingMembersSearchInfoDispatch,
+  usePendingMembersSearchInfoState,
+} from "@/hooks/contexts/usePendingMembersSearchInfoContext";
 import { downloadExcelFile } from "@/utils/excel";
 
-export type HeaderProps = {
-  variant: ManagementVariant;
+export type HeaderProps<T extends "allMember" | "pendingMember"> = {
+  variant: T;
 };
 
-export default function Header({ variant }: HeaderProps) {
-  const [selectedValue, setSelectedValue] = useState<number>(1);
-  const { setSearchText, setSearchVariant } = useAllMembersSearchInfoDispatch();
-  const { searchText } = useAllMembersSearchInfoState();
+export default function Header<T extends "allMember" | "pendingMember">({
+  variant,
+}: HeaderProps<T>) {
+  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
+  const [selectedMemberVariant, setSelectedMemberVariant] = useState<number>(1);
+
+  const {
+    setSearchText: setAllMemberSearchText,
+    setSearchVariant: setAllMemberSearchVariant,
+    setPaginationModel: setAllMemberPaginationModel,
+  } = useAllMembersSearchInfoDispatch();
+  const { searchText: allMemberSearchText } = useAllMembersSearchInfoState();
+
+  const {
+    setSearchText: setPendingMemberSearchText,
+    setSearchVariant: setPendingMemberSearchVariant,
+    setPaginationModel: setPendingMemberPaginationModel,
+    setMemberVariant: setPendingMemberVariant,
+  } = usePendingMembersSearchInfoDispatch();
+  const { searchText: pendingMemberSearchText } = usePendingMembersSearchInfoState();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -38,27 +57,47 @@ export default function Header({ variant }: HeaderProps) {
     }
   };
 
-  const handleChangeMemberSelect = (e: SelectChangeEvent<unknown>) => {
-    const targetIndex = (e.target.value as number) - 1;
+  const handleResetPage = () => {
     if (variant === "allMember") {
-      setSearchVariant?.(commonMemberTableTitle[targetIndex]["type"]);
-      setSelectedValue(targetIndex + 1);
-      setSearchText?.("");
+      setAllMemberPaginationModel(prevPaginationModel => ({
+        ...prevPaginationModel,
+        page: 0,
+      }));
+    } else if (variant === "pendingMember") {
+      setPendingMemberPaginationModel(prevPaginationModel => ({
+        ...prevPaginationModel,
+        page: 0,
+      }));
     }
+  };
+
+  const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
+    const targetIndex = (e.target.value as number) - 1;
+
+    if (variant === "allMember") {
+      setAllMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+      setAllMemberSearchText?.("");
+    } else if (variant === "pendingMember") {
+      setPendingMemberSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
+      setPendingMemberSearchText?.("");
+    }
+    setSelectedMemberInfoVariant(targetIndex + 1);
+    handleResetPage();
+  };
+
+  const handleChangeSelectMemberVariant = (e: SelectChangeEvent<unknown>) => {
+    const targetIndex = (e.target.value as number) - 1;
+
+    setPendingMemberVariant?.(memberTypeSelectMenu[targetIndex]["type"]);
+    setSelectedMemberVariant(targetIndex + 1);
+    handleResetPage();
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (variant === "allMember") {
-      setSearchText?.(e.target.value);
-    }
-  };
+    const text = e.target.value;
+    text.length === 1 && handleResetPage();
 
-  const getSelectMenuList = (variant: ManagementVariant) => {
-    if (variant === "allMember") {
-      return commonMemberTableTitle;
-    } else {
-      return pendingMemberTableTitle.slice(0, 5);
-    }
+    variant === "allMember" ? setAllMemberSearchText?.(text) : setPendingMemberSearchText?.(text);
   };
 
   return (
@@ -66,8 +105,12 @@ export default function Header({ variant }: HeaderProps) {
       <StyledHeaderLeftColWrapper>
         <StyledFormWrapper>
           <InputLabel>Type</InputLabel>
-          <Select label="Type" value={selectedValue} onChange={handleChangeMemberSelect}>
-            {getSelectMenuList(variant).map(title => (
+          <Select
+            label="Type"
+            value={selectedMemberInfoVariant}
+            onChange={handleChangeSelectMemberInfoVariant}
+          >
+            {memberInfoSelectMenu.map(title => (
               <MenuItem value={title.value} key={title.value}>
                 {title.name}
               </MenuItem>
@@ -78,7 +121,7 @@ export default function Header({ variant }: HeaderProps) {
           label="search"
           variant="outlined"
           placeholder="name, email, etc.."
-          value={searchText}
+          value={variant === "allMember" ? allMemberSearchText : pendingMemberSearchText}
           onChange={handleChangeText}
         />
       </StyledHeaderLeftColWrapper>
@@ -87,6 +130,22 @@ export default function Header({ variant }: HeaderProps) {
           <StyledExcelDownloadButton variant="outlined" onClick={handleClickExcelDownloadButton}>
             엑셀 다운로드
           </StyledExcelDownloadButton>
+        )}
+        {variant === "pendingMember" && (
+          <StyledFormWrapper>
+            <InputLabel>Type</InputLabel>
+            <Select
+              label="Type"
+              value={selectedMemberVariant}
+              onChange={handleChangeSelectMemberVariant}
+            >
+              {memberTypeSelectMenu.map(title => (
+                <MenuItem value={title.value} key={title.value}>
+                  {title.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </StyledFormWrapper>
         )}
       </StyledHeaderRightColWrapper>
     </StyledHeaderWrapper>
@@ -109,7 +168,9 @@ const StyledHeaderLeftColWrapper = styled(Stack)({
   flexWrap: "wrap",
 });
 
-const StyledHeaderRightColWrapper = styled(Stack)({});
+const StyledHeaderRightColWrapper = styled(Stack)({
+  justifyContent: "space-between",
+});
 
 const StyledFormWrapper = styled(FormControl)({
   width: "180px",

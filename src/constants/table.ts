@@ -1,6 +1,6 @@
-import { MemberTableTitleType } from "@/types/entities/table";
+import { MemberInfoSelectMenuType, MemberTypeSelectMenuType } from "@/types/entities/table";
 
-export const commonMemberTableTitle: MemberTableTitleType = [
+export const memberInfoSelectMenu: MemberInfoSelectMenuType = [
   {
     value: "1",
     name: "학번",
@@ -38,36 +38,16 @@ export const commonMemberTableTitle: MemberTableTitleType = [
   },
 ];
 
-export const pendingMemberTableTitle: MemberTableTitleType = [
+export const memberTypeSelectMenu: MemberTypeSelectMenuType = [
   {
     value: "1",
-    name: "학번",
-    type: "studentId",
+    name: "준회원",
+    type: "associate",
   },
   {
     value: "2",
-    name: "이름",
-    type: "name",
-  },
-  {
-    value: "3",
-    name: "전화번호",
-    type: "phone",
-  },
-  {
-    value: "4",
-    name: "디스코드 사용자명",
-    type: "discordUsername",
-  },
-  {
-    value: "5",
-    name: "디스코드 닉네임",
-    type: "nickname",
-  },
-  {
-    value: "6",
-    name: "회비 납부 여부",
-    type: "paymentStatus",
+    name: "게스트",
+    type: "guest",
   },
 ];
 

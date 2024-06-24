@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { QueryKey } from "@/constants/queryKey";
-import { SearchVariantType } from "@/types/entities/store";
+import { SearchVariantType } from "@/types/entities/search";
 
 export default function useGetAllMemberListQuery(
   page: number,
@@ -15,6 +15,7 @@ export default function useGetAllMemberListQuery(
   });
 
   const allMemberList = data?.content;
+  const totalElements = data?.totalElements;
 
-  return { allMemberList };
+  return { allMemberList, totalElements };
 }

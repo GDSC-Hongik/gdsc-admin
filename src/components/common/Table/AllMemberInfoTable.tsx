@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
-import { useAllMembersSearchInfoState } from "@/hooks/contexts/useAllMemberSearchInfoContext";
-import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-import { AllMemberInfoType } from "@/types/entities/member";
-import EditInfoModal from "../../Modal/EditInfoModal";
+import EditInfoModal from "../Modal/EditInfoModal";
+import {
+  useAllMembersSearchInfoDispatch,
+  useAllMembersSearchInfoState,
+} from "@/hooks/contexts/useAllMembersSearchInfoContext";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
+import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
+import { MemberInfoType } from "@/types/entities/member";
 
 export default function AllMemberInfoTable() {
-  const [paginationModel, setPaginationModel] = useState({
-    pageSize: 5,
-    page: 0,
-  });
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editMemberInfo, setEditMemberInfo] = useState({
     memberId: 0,
@@ -30,16 +29,27 @@ export default function AllMemberInfoTable() {
 
   const { mutate } = useDeleteMemberMutation();
 
-  const { searchText, searchVariant } = useAllMembersSearchInfoState();
+  const { paginationModel, searchText, searchVariant } = useAllMembersSearchInfoState();
+  const { setPaginationModel } = useAllMembersSearchInfoDispatch();
 
-  const { allMemberList = [] } = useGetAllMemberListQuery(
+  const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,
     paginationModel.pageSize,
     searchVariant,
     searchText,
   );
 
-  const getFilteredRows = (allMemberList: AllMemberInfoType[]) => {
+  const rowCountRef = useRef(totalElements || 0);
+
+  const rowCount = useMemo(() => {
+    if (totalElements !== undefined) {
+      rowCountRef.current = totalElements;
+    }
+
+    return rowCountRef.current;
+  }, [totalElements]);
+
+  const getFilteredRows = (allMemberList: MemberInfoType[]) => {
     return allMemberList.map(member => {
       const {
         memberId,
@@ -103,6 +113,8 @@ export default function AllMemberInfoTable() {
         rows={getFilteredRows(allMemberList)}
         columns={getColumns(handleClickEditMemberInfo, handleClickDeleteMember)}
         pageSizeOptions={[5, 25, 100]}
+        rowCount={rowCount}
+        paginationMode="server"
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
         disableRowSelectionOnClick
@@ -155,7 +167,7 @@ const getColumns = (
     field: "department",
     headerName: "소속 학과",
     headerAlign: "center",
-    width: 170,
+    width: 140,
     resizable: false,
     editable: false,
   },
@@ -163,7 +175,7 @@ const getColumns = (
     field: "email",
     headerName: "이메일",
     headerAlign: "center",
-    width: 180,
+    width: 165,
     resizable: false,
     editable: false,
   },
@@ -171,7 +183,7 @@ const getColumns = (
     field: "discordUsername",
     headerName: "디스코드 사용자명",
     headerAlign: "center",
-    width: 150,
+    width: 125,
     resizable: false,
     editable: false,
   },
@@ -179,7 +191,7 @@ const getColumns = (
     field: "nickname",
     headerName: "디스코드 별명",
     headerAlign: "center",
-    width: 125,
+    width: 100,
     resizable: false,
     editable: false,
   },
@@ -211,7 +223,7 @@ const getColumns = (
   },
 ];
 
-const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 400 });
+const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
 
 const StyledButtonWrapper = styled("div")({
   display: "flex",
