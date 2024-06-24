@@ -1,5 +1,5 @@
-import { MemberVariantType, PaginationModelType, SearchVariantType } from "@/types/entities/search";
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { MemberVariantType, PaginationModelType, SearchVariantType } from "@/types/entities/search";
 
 type SearchStateType = {
   searchText: string;

@@ -13,7 +13,6 @@ import {
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/table";
-import { downloadExcelFile } from "@/utils/excel";
 import {
   useAllMembersSearchInfoDispatch,
   useAllMembersSearchInfoState,
@@ -22,6 +21,7 @@ import {
   usePendingMembersSearchInfoDispatch,
   usePendingMembersSearchInfoState,
 } from "@/hooks/contexts/usePendingMembersSearchInfoContext";
+import { downloadExcelFile } from "@/utils/excel";
 
 export type HeaderProps<T extends "allMember" | "pendingMember"> = {
   variant: T;

@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { MemberInfoType } from "@/types/entities/member";
-import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
 import {
   usePendingMembersSearchInfoDispatch,
   usePendingMembersSearchInfoState,
 } from "@/hooks/contexts/usePendingMembersSearchInfoContext";
+import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
+import { MemberInfoType } from "@/types/entities/member";
 
 export default function PendingMemberInfoTable() {
   const { paginationModel, searchVariant, searchText, memberVariant } =
