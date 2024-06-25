@@ -10,7 +10,7 @@ export type MemberInfoSelectMenuType = {
 export type MemberTypeSelectMenuType = {
   value: string;
   name: string;
-  type: "guest" | "associate";
+  type: "GUEST" | "ASSOCIATE";
 }[];
 
 export type DepartmentType = { code: string; name: string };

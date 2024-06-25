@@ -22,7 +22,7 @@ type PendingMembersSearchInfoStateContextProviderPropsType = {
 const defaultState: SearchStateType = {
   searchText: "",
   searchVariant: "studentId",
-  memberVariant: "associate",
+  memberVariant: "ASSOCIATE",
   paginationModel: {
     pageSize: 5,
     page: 0,
@@ -44,7 +44,7 @@ export default function PendingMembersSearchInfoContextProvider({
   const [searchText, setSearchText] = useState<string>("");
   const [searchVariant, setSearchVariant] =
     useState<SearchVariantType<"pendingMember">>("studentId");
-  const [memberVariant, setMemberVariant] = useState<MemberVariantType>("associate");
+  const [memberVariant, setMemberVariant] = useState<MemberVariantType>("ASSOCIATE");
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
     pageSize: 5,
     page: 0,
