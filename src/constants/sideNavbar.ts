@@ -13,7 +13,7 @@ export const membersLinkButtonInfoList = [
 
 export const paymentLinkButtonInfoList = [
   {
-    label: "회비 납부 관리",
+    label: "회비 납부 기록 관리",
     path: RoutePath.PaymentStatus,
   },
   {
@@ -27,5 +27,16 @@ export const paymentLinkButtonInfoList = [
   {
     label: "쿠폰 지급",
     path: RoutePath.CouponProvision,
+  },
+];
+
+export const historyLinkButtonInfoList = [
+  {
+    label: "학기별 정회원 기록",
+    path: RoutePath.AllMemberHistoryPerSemester,
+  },
+  {
+    label: "학기별 회비 납부 기록",
+    path: RoutePath.PaymentStatusHistoryPerSemester,
   },
 ];
