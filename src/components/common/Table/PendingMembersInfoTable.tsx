@@ -8,7 +8,7 @@ import {
 import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
 
-export default function PendingMemberInfoTable() {
+export default function PendingMembersInfoTable() {
   const { paginationModel, searchVariant, searchText, memberVariant } =
     usePendingMembersSearchInfoState();
   const { setPaginationModel } = usePendingMembersSearchInfoDispatch();
