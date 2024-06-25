@@ -11,7 +11,7 @@ import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
 
-export default function AllMemberInfoTable() {
+export default function AllMembersInfoTable() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editMemberInfo, setEditMemberInfo] = useState({
     memberId: 0,

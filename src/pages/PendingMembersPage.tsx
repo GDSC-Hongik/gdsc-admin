@@ -1,5 +1,5 @@
 import Header from "@/components/common/Header";
-import PendingMemberInfoTable from "@/components/common/Table/PendingMemberInfoTable";
+import PendingMembersInfoTable from "@/components/common/Table/PendingMembersInfoTable";
 import Title from "@/components/common/Title";
 import PendingMembersSearchInfoContextProvider from "@/contexts/PendingMembersSearchInfoContext";
 
@@ -12,7 +12,7 @@ export default function PendingMembersPage() {
       />
       <PendingMembersSearchInfoContextProvider>
         <Header variant={"pendingMember"} />
-        <PendingMemberInfoTable />
+        <PendingMembersInfoTable />
       </PendingMembersSearchInfoContextProvider>
     </>
   );
