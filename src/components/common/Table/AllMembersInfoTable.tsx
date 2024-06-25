@@ -11,20 +11,6 @@ import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
 
-const mockMemberInfo = {
-  memberId: 1,
-  studentId: "C111206",
-  name: "홍서현",
-  phone: "01087120786",
-  department: {
-    code: "D001",
-    name: "컴퓨터공학전공",
-  },
-  email: "ghdtjgus76@naver.com",
-  discordUsername: "홍서현",
-  nickname: "홍서현",
-};
-
 export default function AllMembersInfoTable() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editMemberInfo, setEditMemberInfo] = useState({
@@ -141,7 +127,7 @@ export default function AllMembersInfoTable() {
         <EditInfoModal
           open={editModalOpen}
           onClose={handleCloseModal}
-          memberInfo={mockMemberInfo}
+          memberInfo={editMemberInfo}
           key={editMemberInfo.memberId}
         />
       )}
