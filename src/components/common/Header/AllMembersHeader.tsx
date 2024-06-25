@@ -23,7 +23,7 @@ export default function AllMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
 
   const { setSearchText, setSearchVariant, setPaginationModel } = useAllMembersSearchInfoDispatch();
-  const { searchText: allMemberSearchText } = useAllMembersSearchInfoState();
+  const { searchText } = useAllMembersSearchInfoState();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -78,7 +78,7 @@ export default function AllMembersHeader() {
           label="search"
           variant="outlined"
           placeholder="name, email, etc.."
-          value={allMemberSearchText}
+          value={searchText}
           onChange={handleChangeText}
         />
       </StyledHeaderLeftColWrapper>
