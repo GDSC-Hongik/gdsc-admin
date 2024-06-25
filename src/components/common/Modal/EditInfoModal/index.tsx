@@ -4,6 +4,7 @@ import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
+import { memberInfoValidation } from "@/utils/validation";
 
 export type EditMemberInfoType = {
   memberId: number;
@@ -98,6 +99,8 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
               value={modalMemberInfo.studentId}
               name="studentId"
               onChange={handleEditMemberInfo}
+              error={memberInfoValidation.studentId.isError(studentId)}
+              helperText={memberInfoValidation.studentId.helperText(studentId)}
             />
           </StyledInfoWrapper>
           <StyledInfoWrapper>
@@ -108,6 +111,8 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
               value={modalMemberInfo.phone}
               name="phone"
               onChange={handleEditMemberInfo}
+              error={memberInfoValidation.phone.isError(phone)}
+              helperText={memberInfoValidation.phone.helperText(phone)}
             />
           </StyledInfoWrapper>
         </StyledInfoContainerWrapper>
@@ -130,6 +135,8 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
               value={modalMemberInfo.email}
               name="email"
               onChange={handleEditMemberInfo}
+              error={memberInfoValidation.email.isError(email)}
+              helperText={memberInfoValidation.email.helperText(email)}
             />
           </StyledInfoWrapper>
         </StyledInfoContainerWrapper>
@@ -152,6 +159,8 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
               value={modalMemberInfo.nickname}
               name="nickname"
               onChange={handleEditMemberInfo}
+              error={memberInfoValidation.nickname.isError(nickname)}
+              helperText={memberInfoValidation.nickname.helperText(nickname)}
             />
           </StyledInfoWrapper>
         </StyledInfoContainerWrapper>
