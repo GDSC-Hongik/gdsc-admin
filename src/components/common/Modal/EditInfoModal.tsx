@@ -1,10 +1,13 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Modal, Box, Typography, Button, TextField } from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 import { memberInfoValidation } from "@/utils/validation";
+import XIcon from "@/assets/x.svg?react";
+import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
+import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 
 export type EditMemberInfoType = {
   memberId: number;
@@ -32,6 +35,10 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     discordUsername: memberInfo.discordUsername || null,
     nickname: memberInfo.nickname || null,
   });
+  const [departmentSearchText, setDepartmentSearchText] = useState(memberInfo.department.name);
+  const [searchedDeparmentList, setSearchedDepartmentList] = useState<
+    DepartmentListResponseDtoType[]
+  >([]);
 
   const {
     memberId,
@@ -43,6 +50,8 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     discordUsername,
     nickname,
   } = modalMemberInfo;
+
+  const { departmentList } = useGetDepartmentListQuery(departmentSearchText);
 
   const { mutate } = useEditMemberInfoMutation(
     memberId,
@@ -62,6 +71,8 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     const { name, value } = e.target;
 
     if (name === "department") {
+      setDepartmentSearchText(value);
+      return;
     }
 
     setModalMemberInfo(prevMemberInfo => ({
@@ -73,6 +84,24 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   const handleClickSave = () => {
     mutate();
   };
+
+  const handleClickDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
+    setDepartmentSearchText(departmentItem.name);
+    setModalMemberInfo(prevInfo => ({
+      ...prevInfo,
+      department: departmentItem,
+    }));
+  };
+
+  const handleClickRemoveDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
+    setSearchedDepartmentList(prevSearchedDepartmentList =>
+      prevSearchedDepartmentList.filter(department => department.code !== departmentItem.code),
+    );
+  };
+
+  useEffect(() => {
+    setSearchedDepartmentList(departmentList);
+  }, [departmentList]);
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -117,15 +146,29 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
           </StyledInfoWrapper>
         </StyledInfoContainerWrapper>
         <StyledInfoContainerWrapper>
-          <StyledInfoWrapper>
+          <StyledInfoWrapper height={123}>
             <Typography css={typo.h6}>소속 학과</Typography>
             <StyledTextField
               placeholder="학과"
               size="small"
-              value={modalMemberInfo.department?.name}
+              value={departmentSearchText}
               name="department"
               onChange={handleEditMemberInfo}
             />
+            <StyledDivider />
+            <StyledDepartmentListWrapper>
+              {searchedDeparmentList.map((departmentItem, index) => (
+                <StyledDepartmentItemWrapper key={index}>
+                  <StyledXIcon onClick={() => handleClickRemoveDepartmentItem(departmentItem)} />
+                  <StyledDepartmentName
+                    css={typo.body3}
+                    onClick={() => handleClickDepartmentItem(departmentItem)}
+                  >
+                    {departmentItem.name}
+                  </StyledDepartmentName>
+                </StyledDepartmentItemWrapper>
+              ))}
+            </StyledDepartmentListWrapper>
           </StyledInfoWrapper>
           <StyledInfoWrapper>
             <Typography css={typo.h6}>이메일</Typography>
@@ -174,7 +217,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
 
 const StyledModalContentWrapper = styled("main")({
   width: "988px",
-  height: "640px",
+  height: "684px",
   backgroundColor: "white",
   position: "absolute",
   top: "50%",
@@ -188,17 +231,18 @@ const StyledModalContentWrapper = styled("main")({
 const StyledInfoContainerWrapper = styled(Box)({
   display: "flex",
   gap: "19.15px",
-  height: "71px",
+  height: "fit-content",
   marginBottom: "48px",
 });
 
-const StyledInfoWrapper = styled(Box)({
+const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
+  height: height ? `${height}px` : "71px",
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   gap: "12px",
   flex: 1,
-});
+}));
 
 const StyledTextField = styled(TextField)({
   "width": "100%",
@@ -227,4 +271,34 @@ const StyledButton = styled(Button)({
   width: "316px",
   height: "63px",
   padding: "8px 22px",
+});
+
+const StyledDivider = styled("hr")({
+  width: "100%",
+  height: "1px",
+  margin: 0,
+  backgroundColor: "#BEC3CC",
+});
+
+const StyledDepartmentListWrapper = styled(Box)({
+  overflowX: "auto",
+  overflowY: "auto",
+  width: "100%",
+  display: "flex",
+  gap: "24px",
+  flex: 1,
+});
+
+const StyledDepartmentItemWrapper = styled(Box)({
+  height: "24px",
+  gap: "12px",
+  display: "flex",
+  minWidth: "fit-content",
+});
+
+const StyledXIcon = styled(XIcon)({ cursor: "pointer" });
+
+const StyledDepartmentName = styled(Typography)({
+  cursor: "pointer",
+  padding: "2px",
 });
