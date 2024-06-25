@@ -6,14 +6,15 @@ const RoutePath = {
   AllMembers: "/member/all",
   PendingMembers: "/member/pending",
 
-  PastSemester: "/past-semester",
-
   PaymentStatus: "/payment/payment-status",
   Coupon: "/payment/coupon",
   CouponProvisionMembers: "/payment/coupon-provision-members",
   CouponProvision: "/payment/coupon-provision",
 
-  ActivityPeriod: "/activity-period",
+  Recruiting: "/recruiting",
+
+  AllMemberHistoryPerSemester: "history/all-member-per-semester",
+  PaymentStatusHistoryPerSemester: "history/payment-status-per-semester",
 
   Signin: "/sign-in",
 

@@ -1,7 +1,7 @@
 import { styled, Stack } from "@mui/material";
 import LogoIcon from "@/assets/logo.svg?react";
 import AccordionLinkListButton from "@/components/common/SideNavbar/AccordionLinkListButton";
-import { membersLinkButtonInfoList, paymentLinkButtonInfoList } from "@/constants/sideNavbar";
+import { historyLinkButtonInfoList, membersLinkButtonInfoList, paymentLinkButtonInfoList } from "@/constants/sideNavbar";
 import RoutePath from "@/routes/routePath";
 
 export default function SideNavbar() {
@@ -9,13 +9,11 @@ export default function SideNavbar() {
     <StyledSideNavbarWrapper>
       <StyledLogoIcon />
       <StyledLinkWrapper>
-        <AccordionLinkListButton
-          label="정회원 관리"
-          linkButtonInfoList={membersLinkButtonInfoList}
-        />
-        <AccordionLinkListButton label="지난 학기 관리" path={RoutePath.PastSemester} />
+        <AccordionLinkListButton label="회원 관리" linkButtonInfoList={membersLinkButtonInfoList} />
+
         <AccordionLinkListButton label="회비 관리" linkButtonInfoList={paymentLinkButtonInfoList} />
-        <AccordionLinkListButton label="활동기간 관리" path={RoutePath.ActivityPeriod} />
+        <AccordionLinkListButton label="리크루팅 관리" path={RoutePath.Recruiting} />
+        <AccordionLinkListButton label="히스토리" linkButtonInfoList={historyLinkButtonInfoList} />
       </StyledLinkWrapper>
     </StyledSideNavbarWrapper>
   );
