@@ -42,12 +42,12 @@ export const memberTypeSelectMenu: MemberTypeSelectMenuType = [
   {
     value: "1",
     name: "준회원",
-    type: "associate",
+    type: "ASSOCIATE",
   },
   {
     value: "2",
     name: "게스트",
-    type: "guest",
+    type: "GUEST",
   },
 ];
 

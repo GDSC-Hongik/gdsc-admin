@@ -15,7 +15,7 @@ export default function AllMembersInfoTable() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editMemberInfo, setEditMemberInfo] = useState({
     memberId: 0,
-    studentId: 0,
+    studentId: "",
     name: "",
     phone: "",
     department: {

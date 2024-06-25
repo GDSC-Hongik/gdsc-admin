@@ -20,7 +20,7 @@ export type SearchInfoType<T extends ManagementVariant> = {
   variant: SearchVariantType<T>;
 };
 
-export type MemberVariantType = "associate" | "guest";
+export type MemberVariantType = "ASSOCIATE" | "GUEST";
 
 export type PaginationModelType = {
   pageSize: number;
