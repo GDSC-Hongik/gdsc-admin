@@ -6,7 +6,7 @@ import { MemberVariantType, SearchVariantType } from "@/types/entities/search";
 export default function useGetPendingMemberListQuery(
   page: number,
   size: number,
-  searchVariant: SearchVariantType<"pendingMember">,
+  searchVariant: SearchVariantType,
   searchText: string,
   memberVariant: MemberVariantType,
 ) {
