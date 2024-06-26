@@ -1,10 +1,9 @@
-import { ManagementVariant } from "./member";
 import { SearchVariantType } from "./search";
 
 export type MemberInfoSelectMenuType = {
   value: string;
   name: string;
-  type: SearchVariantType<ManagementVariant>;
+  type: SearchVariantType;
 }[];
 
 export type MemberTypeSelectMenuType = {
