@@ -1,5 +1,3 @@
-import { ManagementVariant } from "./member";
-
 type MembersSearchVariantType = [
   "studentId",
   "name",
@@ -8,16 +6,13 @@ type MembersSearchVariantType = [
   "email",
   "discordUsername",
   "nickname",
-  "paymentStatus",
 ];
 
-export type SearchVariantType<T extends ManagementVariant> = T extends "paymentStatus"
-  ? Exclude<MembersSearchVariantType, "department" | "email" | "paymentStatus">[number] | null
-  : Exclude<MembersSearchVariantType, "paymentStatus">[number] | null;
+export type SearchVariantType = MembersSearchVariantType[number] | null;
 
-export type SearchInfoType<T extends ManagementVariant> = {
+export type SearchInfoType = {
   text: string;
-  variant: SearchVariantType<T>;
+  variant: SearchVariantType;
 };
 
 export type MemberVariantType = "ASSOCIATE" | "GUEST";

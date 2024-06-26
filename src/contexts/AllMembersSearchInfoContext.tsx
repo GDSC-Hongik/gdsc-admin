@@ -7,13 +7,13 @@ type AllMembersSearchInfoContextProviderPropsType = {
 
 type SearchStateType = {
   searchText: string;
-  searchVariant: SearchVariantType<"allMember">;
+  searchVariant: SearchVariantType;
   paginationModel: PaginationModelType;
 };
 
 type SearchDispatchType = {
   setSearchText: Dispatch<SetStateAction<string>>;
-  setSearchVariant: Dispatch<SetStateAction<SearchVariantType<"allMember">>>;
+  setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
@@ -38,7 +38,7 @@ export default function AllMembersSearchInfoContextProvider({
   children,
 }: AllMembersSearchInfoContextProviderPropsType) {
   const [searchText, setSearchText] = useState<string>("");
-  const [searchVariant, setSearchVariant] = useState<SearchVariantType<"allMember">>("studentId");
+  const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
     pageSize: 5,
     page: 0,
