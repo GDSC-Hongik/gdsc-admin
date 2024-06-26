@@ -10,7 +10,6 @@ export default function SideNavbar() {
       <StyledLogoIcon />
       <StyledLinkWrapper>
         <AccordionLinkListButton label="회원 관리" linkButtonInfoList={membersLinkButtonInfoList} />
-
         <AccordionLinkListButton label="회비 관리" linkButtonInfoList={paymentLinkButtonInfoList} />
         <AccordionLinkListButton label="리크루팅 관리" path={RoutePath.Recruiting} />
         <AccordionLinkListButton label="히스토리" linkButtonInfoList={historyLinkButtonInfoList} />
