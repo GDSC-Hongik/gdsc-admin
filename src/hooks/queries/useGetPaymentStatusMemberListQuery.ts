@@ -6,7 +6,7 @@ import { SearchVariantType } from "@/types/entities/search";
 export default function useGetPaymentStatusMemberListQuery(
   page: number,
   size: number,
-  searchVariant: SearchVariantType<"paymentStatus">,
+  searchVariant: SearchVariantType,
   searchText: string,
 ) {
   const { data } = useQuery({

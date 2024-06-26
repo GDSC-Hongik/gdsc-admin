@@ -7,12 +7,12 @@ import CouponPage from "@/pages/CouponPage";
 import CouponProvisionMembersPage from "@/pages/CouponProvisionMembersPage";
 import CouponProvisionPage from "@/pages/CouponProvisionPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
-import PaymentStatusPage from "@/pages/AllMemberHistoryPerSemester";
+import PaymentStatusPage from "@/pages/PaymentStatusPage";
 import PendingMembersPage from "@/pages/PendingMembersPage";
 import SigninPage from "@/pages/SigninPage";
 import RoutePath from "@/routes/routePath";
 import RecruitingPage from "@/pages/RecruitingPage";
-import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemester";
+import AllMemberHistoryPerSemesterPage from "@/pages/PaymentStatusPage";
 import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPerSemesterPage";
 
 const routes: RouteObject[] = [

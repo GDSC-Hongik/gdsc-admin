@@ -3,14 +3,14 @@ import { MemberVariantType, PaginationModelType, SearchVariantType } from "@/typ
 
 type SearchStateType = {
   searchText: string;
-  searchVariant: SearchVariantType<"pendingMember">;
+  searchVariant: SearchVariantType;
   memberVariant: MemberVariantType;
   paginationModel: PaginationModelType;
 };
 
 type SearchDispatchType = {
   setSearchText: Dispatch<SetStateAction<string>>;
-  setSearchVariant: Dispatch<SetStateAction<SearchVariantType<"pendingMember">>>;
+  setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
   setMemberVariant: Dispatch<SetStateAction<MemberVariantType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
@@ -43,7 +43,7 @@ export default function PendingMembersSearchInfoContextProvider({
 }: PendingMembersSearchInfoStateContextProviderPropsType) {
   const [searchText, setSearchText] = useState<string>("");
   const [searchVariant, setSearchVariant] =
-    useState<SearchVariantType<"pendingMember">>("studentId");
+    useState<SearchVariantType>("studentId");
   const [memberVariant, setMemberVariant] = useState<MemberVariantType>("ASSOCIATE");
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
     pageSize: 5,

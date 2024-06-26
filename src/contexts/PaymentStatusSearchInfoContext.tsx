@@ -1,7 +1,7 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { PaginationModelType, SearchVariantType } from "@/types/entities/search";
 
-type AllMembersSearchInfoContextProviderPropsType = {
+type PaymentStatusSearchInfoContextProviderPropsType = {
   children: ReactNode;
 };
 
@@ -26,17 +26,17 @@ const defaultState: SearchStateType = {
   },
 };
 
-export const AllMembersSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const PaymentStatusSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
-export const AllMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const PaymentStatusSearchInfoDispatchContext = createContext<SearchDispatchType>({
   setSearchText: () => {},
   setSearchVariant: () => {},
   setPaginationModel: () => {},
 });
 
-export default function AllMembersSearchInfoContextProvider({
+export default function PaymentStatusSearchInfoContextProvider({
   children,
-}: AllMembersSearchInfoContextProviderPropsType) {
+}: PaymentStatusSearchInfoContextProviderPropsType) {
   const [searchText, setSearchText] = useState<string>("");
   const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
@@ -45,14 +45,14 @@ export default function AllMembersSearchInfoContextProvider({
   });
 
   return (
-    <AllMembersSearchInfoDispatchContext.Provider
+    <PaymentStatusSearchInfoDispatchContext.Provider
       value={{ setSearchText, setSearchVariant, setPaginationModel }}
     >
-      <AllMembersSearchInfoStateContext.Provider
+      <PaymentStatusSearchInfoStateContext.Provider
         value={{ searchText, searchVariant, paginationModel }}
       >
         {children}
-      </AllMembersSearchInfoStateContext.Provider>
-    </AllMembersSearchInfoDispatchContext.Provider>
+      </PaymentStatusSearchInfoStateContext.Provider>
+    </PaymentStatusSearchInfoDispatchContext.Provider>
   );
 }

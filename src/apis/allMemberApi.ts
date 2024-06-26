@@ -6,7 +6,7 @@ export const allMemberApi = {
   getAllMemberList: async (
     page: number,
     size: number,
-    searchVariant: SearchVariantType<"allMember">,
+    searchVariant: SearchVariantType,
     searchText: string,
   ): Promise<AllMemberListResponseDtoType> => {
     if (searchText && searchVariant) {

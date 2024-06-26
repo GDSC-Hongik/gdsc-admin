@@ -6,7 +6,7 @@ export const pendingMemberApi = {
   getPendingMemberList: async (
     page: number,
     size: number,
-    searchVariant: SearchVariantType<"pendingMember">,
+    searchVariant: SearchVariantType,
     searchText: string,
     memberVariant: MemberVariantType,
   ): Promise<PendingMemberListResponseDtoType> => {

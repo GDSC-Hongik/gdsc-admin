@@ -6,7 +6,7 @@ import { SearchVariantType } from "@/types/entities/search";
 export default function useGetAllMemberListQuery(
   page: number,
   size: number,
-  searchVariant: SearchVariantType<"allMember">,
+  searchVariant: SearchVariantType,
   searchText: string,
 ) {
   const { data } = useQuery({
