@@ -105,7 +105,7 @@ const columns: GridColDef[] = [
     headerName: "",
     sortable: false,
     flex: 1,
-    renderCell: (params: GridCellParams) => {
+    renderCell: (_: GridCellParams) => {
       return (
         <StyledButtonWrapper>
           <StyledButton variant="outlined" color="primary" onClick={() => {}}>

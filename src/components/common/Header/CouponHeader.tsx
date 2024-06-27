@@ -7,6 +7,7 @@ import {
   FormControl,
   TextField,
   SelectChangeEvent,
+  Button,
 } from "@mui/material";
 import { memberInfoSelectMenu } from "@/constants/table";
 
@@ -19,15 +20,8 @@ import {
 export default function CouponHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
 
-  const { setSearchText, setSearchVariant, setPaginationModel } = useCouponSearchInfoDispatch();
+  const { setSearchText, setSearchVariant } = useCouponSearchInfoDispatch();
   const { searchText } = useCouponSearchInfoState();
-
-  const handleResetPage = () => {
-    setPaginationModel(prevPaginationModel => ({
-      ...prevPaginationModel,
-      page: 0,
-    }));
-  };
 
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
@@ -35,12 +29,10 @@ export default function CouponHeader() {
     setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
     setSearchText?.("");
     setSelectedMemberInfoVariant(targetIndex + 1);
-    handleResetPage();
   };
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const text = e.target.value;
-    text.length === 1 && handleResetPage();
 
     setSearchText?.(text);
   };
@@ -70,6 +62,11 @@ export default function CouponHeader() {
           onChange={handleChangeText}
         />
       </StyledHeaderLeftColWrapper>
+      <StyledHeaderRightColWrapper>
+        <StyledButton variant="contained" onClick={() => {}}>
+          쿠폰 생성
+        </StyledButton>
+      </StyledHeaderRightColWrapper>
     </StyledHeaderWrapper>
   );
 }
@@ -96,4 +93,11 @@ const StyledFormWrapper = styled(FormControl)({
 
 const StyledTextField = styled(TextField)({
   width: 200,
+});
+
+const StyledHeaderRightColWrapper = styled(Stack)({});
+
+const StyledButton = styled(Button)({
+  padding: "6px 16px",
+  height: "36px",
 });
