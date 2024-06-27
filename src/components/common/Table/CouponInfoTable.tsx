@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/date";
+import { Button } from "@mui/material";
 
 const mockIssuedCouponList = [
   {
@@ -99,6 +100,37 @@ const columns: GridColDef[] = [
     resizable: false,
     editable: false,
   },
+  {
+    field: "editCoupon",
+    headerName: "",
+    sortable: false,
+    flex: 1,
+    renderCell: (params: GridCellParams) => {
+      return (
+        <StyledButtonWrapper>
+          <StyledButton variant="outlined" color="primary" onClick={() => {}}>
+            수정
+          </StyledButton>
+          <StyledButton variant="outlined" color="error" onClick={() => {}}>
+            회수
+          </StyledButton>
+        </StyledButtonWrapper>
+      );
+    },
+  },
 ];
 
 const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
+
+const StyledButtonWrapper = styled("div")({
+  display: "flex",
+  gap: 8,
+  alignItems: "center",
+  justifyContent: "flex-end",
+  paddingTop: 9,
+});
+
+const StyledButton = styled(Button)({
+  padding: "8px 22px",
+  height: "32px",
+});
