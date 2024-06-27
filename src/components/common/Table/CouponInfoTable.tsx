@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
+// import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/date";
 
@@ -44,7 +44,7 @@ const mockIssuedCouponList = [
 ];
 
 export default function CouponInfoTable() {
-  const issuedCouponList = useGetIssuedCouponListQuery();
+  //   const issuedCouponList = useGetIssuedCouponListQuery();
 
   const getFilteredIssuedCouponList = (couponList: IssuedCouponListResponseDtoType) => {
     return couponList.map(issuedCoupon => ({
