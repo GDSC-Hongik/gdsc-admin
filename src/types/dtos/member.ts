@@ -1,6 +1,6 @@
 import { MemberInfoType, StatusType } from "@/types/entities/member";
 
-type PaginationElementType = {
+export type PaginationElementType = {
   pageable: {
     pageNumber: number;
     pageSize: number;
