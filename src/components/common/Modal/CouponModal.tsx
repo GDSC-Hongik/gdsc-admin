@@ -1,7 +1,8 @@
+import { ChangeEvent, useState } from "react";
 import { typo } from "@/styles/typo";
 import styled from "@emotion/styled";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import useCreateCouponMutation from "@/hooks/mutations/useCreateCouponMutation";
 
 type CouponModalPropsType = {
   open: boolean;
@@ -23,6 +24,8 @@ export default function CouponModal({
     },
   );
 
+  const { mutate: createCouponMutate } = useCreateCouponMutation();
+
   const handleChangeCouponInfo = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value, name } = e.target;
 
@@ -30,6 +33,14 @@ export default function CouponModal({
       ...prevCouponInfo,
       [name]: value,
     }));
+  };
+
+  const handleClickSubmit = () => {
+    if (isEdit) {
+      return;
+    }
+
+    couponInfo.discountAmount && createCouponMutate(couponInfo);
   };
 
   return (
@@ -66,7 +77,7 @@ export default function CouponModal({
               />
             </StyledInfoWrapper>
           </StyledInfoRow>
-          <StyledButton size="large" variant="contained">
+          <StyledButton size="large" variant="contained" onClick={handleClickSubmit}>
             {isEdit ? "수정하기" : "생성하기"}
           </StyledButton>
         </div>
