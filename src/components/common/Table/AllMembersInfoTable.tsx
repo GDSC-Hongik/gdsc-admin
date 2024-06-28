@@ -123,14 +123,12 @@ export default function AllMembersInfoTable() {
         disableColumnMenu
         disableColumnSorting
       />
-      {editModalOpen && (
-        <EditInfoModal
-          open={editModalOpen}
-          onClose={handleCloseModal}
-          memberInfo={editMemberInfo}
-          key={editMemberInfo.memberId}
-        />
-      )}
+      <EditInfoModal
+        open={editModalOpen}
+        onClose={handleCloseModal}
+        memberInfo={editMemberInfo}
+        key={editMemberInfo.memberId}
+      />
     </>
   );
 }
