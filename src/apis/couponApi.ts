@@ -11,4 +11,9 @@ export const couponApi = {
     const response = await apiClient.post("/admin/coupons", body);
     return response.data;
   },
+
+  deleteCoupon: async (issuedCouponId: number) => {
+    const response = await apiClient.delete(`/admin/coupons/issued/${issuedCouponId}`);
+    return response.data;
+  },
 };

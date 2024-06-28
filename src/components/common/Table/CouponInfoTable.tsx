@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/date";
@@ -9,6 +9,7 @@ import {
   useCouponSearchInfoState,
 } from "@/hooks/contexts/useCouponSearchInfoState";
 import CouponModal from "../Modal/CouponModal";
+import useDeleteCouponMutation from "@/hooks/mutations/useDeleteCouponMutation";
 
 const mockIssuedCouponList = [
   {
@@ -18,7 +19,7 @@ const mockIssuedCouponList = [
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
-    couponId: 0,
+    couponId: 1,
     name: "string",
     discountAmount: 0,
     createdAt: "2024-06-27T17:43:56.259Z",
@@ -54,6 +55,11 @@ export default function CouponInfoTable() {
   const { setCreateCouponModalOpen } = useCouponSearchInfoDispatch();
 
   //   const issuedCouponList = useGetIssuedCouponListQuery();
+  const { mutate: deleteCouponMutate } = useDeleteCouponMutation();
+
+  const handleClickCouponDelete = (row: GridRowModel) => {
+    deleteCouponMutate(row.id);
+  };
 
   const handleCloseModal = () => {
     setCreateCouponModalOpen(false);
@@ -72,7 +78,7 @@ export default function CouponInfoTable() {
     <>
       <StyledDataGrid
         rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-        columns={columns}
+        columns={getColumns(handleClickCouponDelete)}
         autoHeight
         disableRowSelectionOnClick
         disableColumnFilter
@@ -85,7 +91,7 @@ export default function CouponInfoTable() {
   );
 }
 
-const columns: GridColDef[] = [
+const getColumns = (handleClickCouponDelete: (row: GridRowModel) => void): GridColDef[] => [
   {
     field: "name",
     headerName: "이름",
@@ -118,13 +124,17 @@ const columns: GridColDef[] = [
     headerName: "",
     sortable: false,
     flex: 1,
-    renderCell: (_: GridCellParams) => {
+    renderCell: (params: GridCellParams) => {
       return (
         <StyledButtonWrapper>
           <StyledButton variant="outlined" color="primary" onClick={() => {}}>
             수정
           </StyledButton>
-          <StyledButton variant="outlined" color="error" onClick={() => {}}>
+          <StyledButton
+            variant="outlined"
+            color="error"
+            onClick={() => handleClickCouponDelete(params.row)}
+          >
             회수
           </StyledButton>
         </StyledButtonWrapper>

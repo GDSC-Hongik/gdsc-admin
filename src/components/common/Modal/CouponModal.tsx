@@ -47,14 +47,7 @@ export default function CouponModal({
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
         <StyledTitle css={typo.h1}>{isEdit ? "쿠폰 수정" : "쿠폰 생성"}</StyledTitle>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "311px",
-          }}
-        >
+        <StyledContent>
           <StyledInfoRow>
             <StyledInfoWrapper>
               <Typography css={typo.h6}>이름</Typography>
@@ -80,7 +73,7 @@ export default function CouponModal({
           <StyledButton size="large" variant="contained" onClick={handleClickSubmit}>
             {isEdit ? "수정하기" : "생성하기"}
           </StyledButton>
-        </div>
+        </StyledContent>
       </StyledModalContentWrapper>
     </Modal>
   );
@@ -106,6 +99,13 @@ const StyledTitle = styled(Typography)({
 const StyledInfoRow = styled(Box)({
   display: "flex",
   gap: "95px",
+});
+
+const StyledContent = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "311px",
 });
 
 const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
