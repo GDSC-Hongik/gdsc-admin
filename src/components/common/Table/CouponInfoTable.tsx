@@ -100,7 +100,7 @@ export default function CouponInfoTable() {
     return couponList.map(issuedCoupon => ({
       id: issuedCoupon.couponId,
       name: issuedCoupon.name,
-      discountAmount: `${issuedCoupon.discountAmount}원`,
+      discountAmount: issuedCoupon.discountAmount,
       createdAt: formatDateWithText(issuedCoupon.createdAt),
     }));
   };
