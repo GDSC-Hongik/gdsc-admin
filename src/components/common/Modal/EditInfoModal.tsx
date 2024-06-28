@@ -106,9 +106,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
-        <Typography css={typo.h1} sx={{ marginBottom: "38px" }}>
-          정회원 정보 수정
-        </Typography>
+        <StyledTitle css={typo.h1}>정회원 정보 수정</StyledTitle>
         <StyledInfoContainerWrapper>
           <StyledInfoWrapper>
             <Typography css={typo.h6}>이름</Typography>
@@ -233,6 +231,10 @@ const StyledInfoContainerWrapper = styled(Box)({
   gap: "19.15px",
   height: "fit-content",
   marginBottom: "48px",
+});
+
+const StyledTitle = styled(Typography)({
+  marginBottom: "38px",
 });
 
 const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
