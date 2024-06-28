@@ -20,7 +20,8 @@ import {
 export default function CouponHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
 
-  const { setSearchText, setSearchVariant } = useCouponSearchInfoDispatch();
+  const { setSearchText, setSearchVariant, setCreateCouponModalOpen } =
+    useCouponSearchInfoDispatch();
   const { searchText } = useCouponSearchInfoState();
 
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
@@ -35,6 +36,10 @@ export default function CouponHeader() {
     const text = e.target.value;
 
     setSearchText?.(text);
+  };
+
+  const handleClickCreateCoupon = () => {
+    setCreateCouponModalOpen(true);
   };
 
   return (
@@ -63,7 +68,7 @@ export default function CouponHeader() {
         />
       </StyledHeaderLeftColWrapper>
       <StyledHeaderRightColWrapper>
-        <StyledButton variant="contained" onClick={() => {}}>
+        <StyledButton variant="contained" onClick={handleClickCreateCoupon}>
           쿠폰 생성
         </StyledButton>
       </StyledHeaderRightColWrapper>

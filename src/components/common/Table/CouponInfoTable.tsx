@@ -4,6 +4,11 @@ import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/date";
 import { Button } from "@mui/material";
+import {
+  useCouponSearchInfoDispatch,
+  useCouponSearchInfoState,
+} from "@/hooks/contexts/useCouponSearchInfoState";
+import CouponModal from "../Modal/CouponModal";
 
 const mockIssuedCouponList = [
   {
@@ -45,7 +50,14 @@ const mockIssuedCouponList = [
 ];
 
 export default function CouponInfoTable() {
+  const { createCouponModalOpen } = useCouponSearchInfoState();
+  const { setCreateCouponModalOpen } = useCouponSearchInfoDispatch();
+
   //   const issuedCouponList = useGetIssuedCouponListQuery();
+
+  const handleCloseModal = () => {
+    setCreateCouponModalOpen(false);
+  };
 
   const getFilteredIssuedCouponList = (couponList: IssuedCouponListResponseDtoType) => {
     return couponList.map(issuedCoupon => ({
@@ -68,6 +80,7 @@ export default function CouponInfoTable() {
         disableColumnSorting
         hideFooterPagination
       />
+      <CouponModal open={createCouponModalOpen} onClose={handleCloseModal} />
     </>
   );
 }
@@ -133,4 +146,5 @@ const StyledButtonWrapper = styled("div")({
 const StyledButton = styled(Button)({
   padding: "8px 22px",
   height: "32px",
+  width: "64px",
 });
