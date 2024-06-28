@@ -8,19 +8,19 @@ type CouponSearchInfoContextProviderPropsType = {
 type SearchStateType = {
   searchText: string;
   searchVariant: SearchVariantType;
-  createCouponModalOpen: boolean;
+  modalOpen: boolean;
 };
 
 type SearchDispatchType = {
   setSearchText: Dispatch<SetStateAction<string>>;
   setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
-  setCreateCouponModalOpen: Dispatch<SetStateAction<boolean>>;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const defaultState: SearchStateType = {
   searchText: "",
   searchVariant: "studentId",
-  createCouponModalOpen: false,
+  modalOpen: false,
 };
 
 export const CouponSearchInfoStateContext = createContext<SearchStateType>(defaultState);
@@ -28,7 +28,7 @@ export const CouponSearchInfoStateContext = createContext<SearchStateType>(defau
 export const CouponSearchInfoDispatchContext = createContext<SearchDispatchType>({
   setSearchText: () => {},
   setSearchVariant: () => {},
-  setCreateCouponModalOpen: () => {},
+  setModalOpen: () => {},
 });
 
 export default function CouponSearchInfoContextProvider({
@@ -36,15 +36,13 @@ export default function CouponSearchInfoContextProvider({
 }: CouponSearchInfoContextProviderPropsType) {
   const [searchText, setSearchText] = useState("");
   const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
-  const [createCouponModalOpen, setCreateCouponModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <CouponSearchInfoDispatchContext.Provider
-      value={{ setSearchText, setSearchVariant, setCreateCouponModalOpen }}
+      value={{ setSearchText, setSearchVariant, setModalOpen }}
     >
-      <CouponSearchInfoStateContext.Provider
-        value={{ searchText, searchVariant, createCouponModalOpen }}
-      >
+      <CouponSearchInfoStateContext.Provider value={{ searchText, searchVariant, modalOpen }}>
         {children}
       </CouponSearchInfoStateContext.Provider>
     </CouponSearchInfoDispatchContext.Provider>

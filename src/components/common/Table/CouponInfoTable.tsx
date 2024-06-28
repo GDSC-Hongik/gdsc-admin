@@ -10,59 +10,90 @@ import {
 } from "@/hooks/contexts/useCouponSearchInfoState";
 import CouponModal from "../Modal/CouponModal";
 import useDeleteCouponMutation from "@/hooks/mutations/useDeleteCouponMutation";
+import { useState } from "react";
 
 const mockIssuedCouponList = [
   {
-    couponId: 0,
-    name: "string",
-    discountAmount: 0,
-    createdAt: "2024-06-27T17:43:56.259Z",
-  },
-  {
     couponId: 1,
     name: "string",
-    discountAmount: 0,
+    discountAmount: 234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
-    couponId: 0,
+    couponId: 2,
     name: "string",
-    discountAmount: 0,
+    discountAmount: 234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
-    couponId: 0,
+    couponId: 3,
     name: "string",
-    discountAmount: 0,
+    discountAmount: 234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
-    couponId: 0,
+    couponId: 4,
     name: "string",
-    discountAmount: 0,
+    discountAmount: 234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
-    couponId: 0,
+    couponId: 5,
     name: "string",
-    discountAmount: 0,
+    discountAmount: 234,
+    createdAt: "2024-06-27T17:43:56.259Z",
+  },
+  {
+    couponId: 6,
+    name: "string",
+    discountAmount: 234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
 ];
 
 export default function CouponInfoTable() {
-  const { createCouponModalOpen } = useCouponSearchInfoState();
-  const { setCreateCouponModalOpen } = useCouponSearchInfoDispatch();
+  const [editCouponData, setEditCouponData] = useState({
+    couponId: 0,
+    name: "",
+    discountAmount: 0,
+    createdAt: "",
+  });
+  const [isEdit, setIsEdit] = useState(false);
+
+  const { modalOpen } = useCouponSearchInfoState();
+  const { setModalOpen } = useCouponSearchInfoDispatch();
 
   //   const issuedCouponList = useGetIssuedCouponListQuery();
   const { mutate: deleteCouponMutate } = useDeleteCouponMutation();
 
-  const handleClickCouponDelete = (row: GridRowModel) => {
-    deleteCouponMutate(row.id);
+  const handleClickCouponEdit = (row: GridRowModel) => {
+    const { id, name, discountAmount, createdAt } = row;
+
+    setIsEdit(true);
+    setEditCouponData({
+      couponId: id,
+      name,
+      discountAmount,
+      createdAt,
+    });
+    setModalOpen(true);
+  };
+
+  const handleClickCouponDelete = (id: number) => {
+    deleteCouponMutate(id);
   };
 
   const handleCloseModal = () => {
-    setCreateCouponModalOpen(false);
+    if (isEdit) {
+      setIsEdit(false);
+      setEditCouponData({
+        couponId: 0,
+        name: "",
+        discountAmount: 0,
+        createdAt: "",
+      });
+    }
+    setModalOpen(false);
   };
 
   const getFilteredIssuedCouponList = (couponList: IssuedCouponListResponseDtoType) => {
@@ -78,7 +109,7 @@ export default function CouponInfoTable() {
     <>
       <StyledDataGrid
         rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-        columns={getColumns(handleClickCouponDelete)}
+        columns={getColumns(handleClickCouponDelete, handleClickCouponEdit)}
         autoHeight
         disableRowSelectionOnClick
         disableColumnFilter
@@ -86,12 +117,21 @@ export default function CouponInfoTable() {
         disableColumnSorting
         hideFooterPagination
       />
-      <CouponModal open={createCouponModalOpen} onClose={handleCloseModal} />
+      <CouponModal
+        key={Date.now()}
+        open={modalOpen}
+        onClose={handleCloseModal}
+        defaultValue={editCouponData}
+        isEdit={isEdit}
+      />
     </>
   );
 }
 
-const getColumns = (handleClickCouponDelete: (row: GridRowModel) => void): GridColDef[] => [
+const getColumns = (
+  handleClickCouponDelete: (id: number) => void,
+  handleClickCouponEdit: (row: GridRowModel) => void,
+): GridColDef[] => [
   {
     field: "name",
     headerName: "이름",
@@ -127,13 +167,17 @@ const getColumns = (handleClickCouponDelete: (row: GridRowModel) => void): GridC
     renderCell: (params: GridCellParams) => {
       return (
         <StyledButtonWrapper>
-          <StyledButton variant="outlined" color="primary" onClick={() => {}}>
+          <StyledButton
+            variant="outlined"
+            color="primary"
+            onClick={() => handleClickCouponEdit(params.row)}
+          >
             수정
           </StyledButton>
           <StyledButton
             variant="outlined"
             color="error"
-            onClick={() => handleClickCouponDelete(params.row)}
+            onClick={() => handleClickCouponDelete(params.row.id)}
           >
             회수
           </StyledButton>

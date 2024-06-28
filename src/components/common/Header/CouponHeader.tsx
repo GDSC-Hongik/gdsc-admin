@@ -20,8 +20,7 @@ import {
 export default function CouponHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
 
-  const { setSearchText, setSearchVariant, setCreateCouponModalOpen } =
-    useCouponSearchInfoDispatch();
+  const { setSearchText, setSearchVariant, setModalOpen } = useCouponSearchInfoDispatch();
   const { searchText } = useCouponSearchInfoState();
 
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
@@ -39,7 +38,7 @@ export default function CouponHeader() {
   };
 
   const handleClickCreateCoupon = () => {
-    setCreateCouponModalOpen(true);
+    setModalOpen(true);
   };
 
   return (
