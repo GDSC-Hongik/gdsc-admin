@@ -1,4 +1,9 @@
-export type ManagementVariant = "allMember" | "pendingMember" | "paymentStatus" | "coupon";
+export type ManagementVariant =
+  | "allMember"
+  | "pendingMember"
+  | "paymentStatus"
+  | "coupon"
+  | "couponProvision";
 
 export type MemberInfoType = {
   memberId: number;
