@@ -79,7 +79,7 @@ const columns: GridColDef[] = [
   {
     field: "studentId",
     headerName: "학번",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 75,
     resizable: false,
     editable: false,
@@ -87,7 +87,7 @@ const columns: GridColDef[] = [
   {
     field: "name",
     headerName: "이름",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 75,
     resizable: false,
     editable: false,
@@ -95,7 +95,7 @@ const columns: GridColDef[] = [
   {
     field: "phone",
     headerName: "전화번호",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 120,
     resizable: false,
     editable: false,
@@ -103,7 +103,7 @@ const columns: GridColDef[] = [
   {
     field: "department",
     headerName: "소속 학과",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 140,
     resizable: false,
     editable: false,
@@ -111,7 +111,7 @@ const columns: GridColDef[] = [
   {
     field: "email",
     headerName: "이메일",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 165,
     resizable: false,
     editable: false,
@@ -119,7 +119,7 @@ const columns: GridColDef[] = [
   {
     field: "discordUsername",
     headerName: "디스코드 사용자명",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 125,
     resizable: false,
     editable: false,
@@ -127,7 +127,7 @@ const columns: GridColDef[] = [
   {
     field: "nickname",
     headerName: "디스코드 별명",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 100,
     resizable: false,
     editable: false,

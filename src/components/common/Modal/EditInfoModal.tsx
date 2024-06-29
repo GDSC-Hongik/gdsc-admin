@@ -284,7 +284,7 @@ const StyledDivider = styled("hr")({
 
 const StyledDepartmentListWrapper = styled(Box)({
   overflowX: "auto",
-  overflowY: "auto",
+  overflowY: "hidden",
   width: "100%",
   display: "flex",
   gap: "24px",
