@@ -10,6 +10,7 @@ import {
 } from "@/hooks/contexts/useCouponSearchInfoState";
 import CouponModal from "../Modal/CouponModal";
 import useDeleteCouponMutation from "@/hooks/mutations/useDeleteCouponMutation";
+import { useRef } from "react";
 
 const mockIssuedCouponList = [
   {
@@ -51,6 +52,8 @@ const mockIssuedCouponList = [
 ];
 
 export default function CouponInfoTable() {
+  const modalKey = useRef(0);
+
   const { modalOpen } = useCouponSearchInfoState();
   const { setModalOpen } = useCouponSearchInfoDispatch();
 
@@ -63,6 +66,7 @@ export default function CouponInfoTable() {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    modalKey.current += 1;
   };
 
   const getFilteredIssuedCouponList = (couponList: IssuedCouponListResponseDtoType) => {
@@ -86,7 +90,7 @@ export default function CouponInfoTable() {
         disableColumnSorting
         hideFooterPagination
       />
-      <CouponModal key={Date.now()} open={modalOpen} onClose={handleCloseModal} />
+      <CouponModal key={modalKey.current} open={modalOpen} onClose={handleCloseModal} />
     </>
   );
 }

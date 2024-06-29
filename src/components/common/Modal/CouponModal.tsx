@@ -3,7 +3,6 @@ import { typo } from "@/styles/typo";
 import styled from "@emotion/styled";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import useCreateCouponMutation from "@/hooks/mutations/useCreateCouponMutation";
-import { useCouponSearchInfoDispatch } from "@/hooks/contexts/useCouponSearchInfoState";
 import { CouponInfoType } from "@/types/entities/coupon";
 
 type CouponModalPropsType = {
@@ -17,7 +16,6 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
     discountAmount: null,
   });
 
-  const { setModalOpen } = useCouponSearchInfoDispatch();
   const { mutate: createCouponMutate } = useCreateCouponMutation();
 
   const handleChangeCouponInfo = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -35,7 +33,7 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
     }
 
     createCouponMutate(couponInfo);
-    setModalOpen(false);
+    onClose();
   };
 
   return (
