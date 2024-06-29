@@ -1,8 +1,8 @@
-import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
+import { CouponListResponseDtoType, IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 import { apiClient } from ".";
 
 export const couponApi = {
-  getIssuedCouponList: async (): Promise<IssuedCouponListResponseDtoType> => {
+  getCouponList: async (): Promise<CouponListResponseDtoType> => {
     const response = await apiClient.get("/admin/coupons");
     return response.data;
   },
@@ -14,6 +14,11 @@ export const couponApi = {
 
   deleteCoupon: async (issuedCouponId: number) => {
     const response = await apiClient.delete(`/admin/coupons/issued/${issuedCouponId}`);
+    return response.data;
+  },
+
+  getIssuedCouponList: async (): Promise<IssuedCouponListResponseDtoType> => {
+    const response = await apiClient.get("/admin/coupons/issued");
     return response.data;
   },
 };

@@ -10,7 +10,7 @@ export default function useDeleteCouponMutation() {
     mutationFn: couponApi.deleteCoupon,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QueryKey.issuedCouponList],
+        queryKey: [QueryKey.couponList],
       });
       toast.success("쿠폰을 회수하였습니다.");
     },

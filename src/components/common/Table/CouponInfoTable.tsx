@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
-// import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
-import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
-import { formatDateWithText } from "@/utils/date";
+// import useGetCouponListQuery from "@/hooks/queries/useGetCouponListQuery";
+import { CouponListResponseDtoType } from "@/types/dtos/coupon";
+import { formatDateWithText } from "@/utils/validation/formatDate";
 import { Button } from "@mui/material";
 import {
   useCouponSearchInfoDispatch,
@@ -57,7 +57,7 @@ export default function CouponInfoTable() {
   const { modalOpen } = useCouponSearchInfoState();
   const { setModalOpen } = useCouponSearchInfoDispatch();
 
-  //   const issuedCouponList = useGetIssuedCouponListQuery();
+  //   const issuedCouponList = useGetCouponListQuery();
   const { mutate: deleteCouponMutate } = useDeleteCouponMutation();
 
   const handleClickCouponDelete = (id: number) => {
@@ -69,7 +69,7 @@ export default function CouponInfoTable() {
     modalKey.current += 1;
   };
 
-  const getFilteredIssuedCouponList = (couponList: IssuedCouponListResponseDtoType) => {
+  const getFilteredIssuedCouponList = (couponList: CouponListResponseDtoType) => {
     return couponList.map(issuedCoupon => ({
       id: issuedCoupon.couponId,
       name: issuedCoupon.name,
