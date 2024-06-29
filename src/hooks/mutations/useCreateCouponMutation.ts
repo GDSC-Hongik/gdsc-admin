@@ -10,7 +10,7 @@ export default function useCreateCouponMutation() {
     mutationFn: couponApi.createCoupon,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QueryKey.issuedCouponList],
+        queryKey: [QueryKey.couponList],
       });
       toast.success("쿠폰이 생성되었습니다.");
     },
