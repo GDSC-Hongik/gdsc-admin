@@ -7,7 +7,7 @@ export const couponApi = {
     return response.data;
   },
 
-  createCoupon: async (body: { name: string; discountAmount: number }) => {
+  createCoupon: async (body: { name: string; discountAmount: number | null }) => {
     const response = await apiClient.post("/admin/coupons", body);
     return response.data;
   },
