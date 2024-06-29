@@ -12,8 +12,8 @@ import PendingMembersPage from "@/pages/PendingMembersPage";
 import SigninPage from "@/pages/SigninPage";
 import RoutePath from "@/routes/routePath";
 import RecruitingPage from "@/pages/RecruitingPage";
-import AllMemberHistoryPerSemesterPage from "@/pages/PaymentStatusPage";
 import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPerSemesterPage";
+import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemesterPage";
 
 const routes: RouteObject[] = [
   {
