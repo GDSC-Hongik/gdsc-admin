@@ -7,7 +7,7 @@ type CouponType = {
 
 export type CouponListResponseDtoType = CouponType[];
 
-type IssuedCouponType = {
+export type IssuedCouponType = {
   issuedCouponId: number;
   member: {
     memberId: number;

@@ -1,10 +1,13 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
-import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
-import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
+import { IssuedCouponType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
+import DetailInfoModal from "../Modal/DetailInfoModal";
+import { DetailCouponInfoType } from "@/types/entities/coupon";
 
 const mockIssuedCouponList = [
   {
@@ -52,9 +55,20 @@ const mockIssuedCouponList = [
 ];
 
 export default function CouponProvisionInfoTable() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [detailInfo, setDetailInfo] = useState<DetailCouponInfoType>({
+    id: 0,
+    studentId: "",
+    name: "",
+    phone: "",
+    couponName: "",
+    discountAmount: "",
+    usedAt: "",
+    isUsed: "",
+  });
   //   const issuedCouponList = useGetIssuedCouponListQuery();
 
-  const getFilteredIssuedCouponList = (issuedCouponList: IssuedCouponListResponseDtoType) => {
+  const getFilteredIssuedCouponList = (issuedCouponList: IssuedCouponType[]) => {
     return issuedCouponList.map(issuedCoupon => ({
       id: issuedCoupon.issuedCouponId,
       studentId: issuedCoupon.member.studentId,
@@ -67,23 +81,35 @@ export default function CouponProvisionInfoTable() {
     }));
   };
 
-  const handleClickCouponDetail = () => {};
+  const handleClickCouponDetail = (row: GridRowModel) => {
+    const { id, studentId, name, phone, couponName, discountAmount, usedAt, isUsed } = row;
+
+    setDetailInfo({ id, studentId, name, phone, couponName, discountAmount, usedAt, isUsed });
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   return (
-    <StyledDataGrid
-      rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-      columns={getColumns(handleClickCouponDetail)}
-      autoHeight
-      disableRowSelectionOnClick
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSorting
-      hideFooterPagination
-    />
+    <>
+      <StyledDataGrid
+        rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
+        columns={getColumns(handleClickCouponDetail)}
+        autoHeight
+        disableRowSelectionOnClick
+        disableColumnFilter
+        disableColumnMenu
+        disableColumnSorting
+        hideFooterPagination
+      />
+      <DetailInfoModal open={modalOpen} onClose={handleCloseModal} detailInfo={detailInfo} />
+    </>
   );
 }
 
-const getColumns = (handleClickCouponDetail: (id: number) => void): GridColDef[] => [
+const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridColDef[] => [
   {
     field: "studentId",
     headerName: "학번",
@@ -158,7 +184,7 @@ const getColumns = (handleClickCouponDetail: (id: number) => void): GridColDef[]
           <StyledButton
             variant="outlined"
             color="secondary"
-            onClick={() => handleClickCouponDetail(params.row.id)}
+            onClick={() => handleClickCouponDetail(params.row)}
           >
             상세
           </StyledButton>
