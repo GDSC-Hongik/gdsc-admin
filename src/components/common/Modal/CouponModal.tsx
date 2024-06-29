@@ -4,26 +4,18 @@ import styled from "@emotion/styled";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import useCreateCouponMutation from "@/hooks/mutations/useCreateCouponMutation";
 import { useCouponSearchInfoDispatch } from "@/hooks/contexts/useCouponSearchInfoState";
+import { CouponInfoType } from "@/types/entities/coupon";
 
 type CouponModalPropsType = {
   open: boolean;
   onClose: () => void;
-  isEdit?: boolean;
-  defaultValue?: { name: string; discountAmount: number };
 };
 
-export default function CouponModal({
-  open,
-  onClose,
-  isEdit = false,
-  defaultValue,
-}: CouponModalPropsType) {
-  const [couponInfo, setCouponInfo] = useState(
-    defaultValue ?? {
-      name: "",
-      discountAmount: null,
-    },
-  );
+export default function CouponModal({ open, onClose }: CouponModalPropsType) {
+  const [couponInfo, setCouponInfo] = useState<CouponInfoType>({
+    name: "",
+    discountAmount: null,
+  });
 
   const { setModalOpen } = useCouponSearchInfoDispatch();
   const { mutate: createCouponMutate } = useCreateCouponMutation();
@@ -38,18 +30,18 @@ export default function CouponModal({
   };
 
   const handleClickSubmit = () => {
-    if (isEdit) {
+    if (!couponInfo.discountAmount) {
       return;
     }
 
-    couponInfo.discountAmount && createCouponMutate(couponInfo);
+    createCouponMutate(couponInfo);
     setModalOpen(false);
   };
 
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
-        <StyledTitle css={typo.h1}>{isEdit ? "쿠폰 수정" : "쿠폰 생성"}</StyledTitle>
+        <StyledTitle css={typo.h1}>{"쿠폰 생성"}</StyledTitle>
         <StyledContent>
           <StyledInfoRow>
             <StyledInfoWrapper>
@@ -74,7 +66,7 @@ export default function CouponModal({
             </StyledInfoWrapper>
           </StyledInfoRow>
           <StyledButton size="large" variant="contained" onClick={handleClickSubmit}>
-            {isEdit ? "수정하기" : "생성하기"}
+            {"생성하기"}
           </StyledButton>
         </StyledContent>
       </StyledModalContentWrapper>

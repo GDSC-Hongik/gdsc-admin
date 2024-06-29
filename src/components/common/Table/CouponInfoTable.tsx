@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/date";
@@ -10,7 +10,6 @@ import {
 } from "@/hooks/contexts/useCouponSearchInfoState";
 import CouponModal from "../Modal/CouponModal";
 import useDeleteCouponMutation from "@/hooks/mutations/useDeleteCouponMutation";
-import { useState } from "react";
 
 const mockIssuedCouponList = [
   {
@@ -52,47 +51,17 @@ const mockIssuedCouponList = [
 ];
 
 export default function CouponInfoTable() {
-  const [editCouponData, setEditCouponData] = useState({
-    couponId: 0,
-    name: "",
-    discountAmount: 0,
-    createdAt: "",
-  });
-  const [isEdit, setIsEdit] = useState(false);
-
   const { modalOpen } = useCouponSearchInfoState();
   const { setModalOpen } = useCouponSearchInfoDispatch();
 
   //   const issuedCouponList = useGetIssuedCouponListQuery();
   const { mutate: deleteCouponMutate } = useDeleteCouponMutation();
 
-  const handleClickCouponEdit = (row: GridRowModel) => {
-    const { id, name, discountAmount, createdAt } = row;
-
-    setIsEdit(true);
-    setEditCouponData({
-      couponId: id,
-      name,
-      discountAmount,
-      createdAt,
-    });
-    setModalOpen(true);
-  };
-
   const handleClickCouponDelete = (id: number) => {
     deleteCouponMutate(id);
   };
 
   const handleCloseModal = () => {
-    if (isEdit) {
-      setIsEdit(false);
-      setEditCouponData({
-        couponId: 0,
-        name: "",
-        discountAmount: 0,
-        createdAt: "",
-      });
-    }
     setModalOpen(false);
   };
 
@@ -109,7 +78,7 @@ export default function CouponInfoTable() {
     <>
       <StyledDataGrid
         rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-        columns={getColumns(handleClickCouponDelete, handleClickCouponEdit)}
+        columns={getColumns(handleClickCouponDelete)}
         autoHeight
         disableRowSelectionOnClick
         disableColumnFilter
@@ -117,21 +86,12 @@ export default function CouponInfoTable() {
         disableColumnSorting
         hideFooterPagination
       />
-      <CouponModal
-        key={Date.now()}
-        open={modalOpen}
-        onClose={handleCloseModal}
-        defaultValue={editCouponData}
-        isEdit={isEdit}
-      />
+      <CouponModal key={Date.now()} open={modalOpen} onClose={handleCloseModal} />
     </>
   );
 }
 
-const getColumns = (
-  handleClickCouponDelete: (id: number) => void,
-  handleClickCouponEdit: (row: GridRowModel) => void,
-): GridColDef[] => [
+const getColumns = (handleClickCouponDelete: (id: number) => void): GridColDef[] => [
   {
     field: "name",
     headerName: "이름",
@@ -167,13 +127,6 @@ const getColumns = (
     renderCell: (params: GridCellParams) => {
       return (
         <StyledButtonWrapper>
-          <StyledButton
-            variant="outlined"
-            color="primary"
-            onClick={() => handleClickCouponEdit(params.row)}
-          >
-            수정
-          </StyledButton>
           <StyledButton
             variant="outlined"
             color="error"
