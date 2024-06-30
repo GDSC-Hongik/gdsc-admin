@@ -11,36 +11,37 @@ import {
 import CouponModal from "../Modal/CouponModal";
 import useDeleteCouponMutation from "@/hooks/mutations/useDeleteCouponMutation";
 import { useRef } from "react";
+import { formatPrice } from "@/utils/validation/formatPrice";
 
 const mockIssuedCouponList = [
   {
     couponId: 1,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 1234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 2,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 2234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 3,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 3234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 4,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 4234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 5,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 5234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
@@ -73,7 +74,7 @@ export default function CouponInfoTable() {
     return couponList.map(issuedCoupon => ({
       id: issuedCoupon.couponId,
       name: issuedCoupon.name,
-      discountAmount: issuedCoupon.discountAmount,
+      discountAmount: formatPrice(issuedCoupon.discountAmount),
       createdAt: formatDateWithText(issuedCoupon.createdAt),
     }));
   };
@@ -136,7 +137,7 @@ const getColumns = (handleClickCouponDelete: (id: number) => void): GridColDef[]
             color="error"
             onClick={() => handleClickCouponDelete(params.row.id)}
           >
-            회수
+            삭제
           </StyledButton>
         </StyledButtonWrapper>
       );
