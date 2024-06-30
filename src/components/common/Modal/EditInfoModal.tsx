@@ -106,106 +106,108 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
-        <StyledTitle css={typo.h1}>정회원 정보 수정</StyledTitle>
-        <StyledInfoContainerWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>이름</Typography>
-            <StyledTextField
-              placeholder="이름"
-              size="small"
-              value={modalMemberInfo.name}
-              name="name"
-              onChange={handleEditMemberInfo}
-            />
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>학번</Typography>
-            <StyledTextField
-              placeholder="학번"
-              size="small"
-              value={modalMemberInfo.studentId}
-              name="studentId"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.studentId.isError(studentId)}
-              helperText={memberInfoValidation.studentId.helperText(studentId)}
-            />
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>전화번호</Typography>
-            <StyledTextField
-              placeholder="전화번호"
-              size="small"
-              value={modalMemberInfo.phone}
-              name="phone"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.phone.isError(phone)}
-              helperText={memberInfoValidation.phone.helperText(phone)}
-            />
-          </StyledInfoWrapper>
-        </StyledInfoContainerWrapper>
-        <StyledInfoContainerWrapper>
-          <StyledInfoWrapper height={123}>
-            <Typography css={typo.h6}>소속 학과</Typography>
-            <StyledTextField
-              placeholder="학과"
-              size="small"
-              value={departmentSearchText}
-              name="department"
-              onChange={handleEditMemberInfo}
-            />
-            <StyledDivider />
-            <StyledDepartmentListWrapper>
-              {searchedDeparmentList.map((departmentItem, index) => (
-                <StyledDepartmentItemWrapper key={index}>
-                  <StyledXIcon onClick={() => handleClickRemoveDepartmentItem(departmentItem)} />
-                  <StyledDepartmentName
-                    css={typo.body3}
-                    onClick={() => handleClickDepartmentItem(departmentItem)}
-                  >
-                    {departmentItem.name}
-                  </StyledDepartmentName>
-                </StyledDepartmentItemWrapper>
-              ))}
-            </StyledDepartmentListWrapper>
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>이메일</Typography>
-            <StyledTextField
-              placeholder="이메일"
-              size="small"
-              value={modalMemberInfo.email}
-              name="email"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.email.isError(email)}
-              helperText={memberInfoValidation.email.helperText(email)}
-            />
-          </StyledInfoWrapper>
-        </StyledInfoContainerWrapper>
-        <StyledInfoContainerWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>디스코드 핸들명</Typography>
-            <StyledTextField
-              placeholder="핸들명"
-              size="small"
-              value={modalMemberInfo.discordUsername}
-              name="discordUsername"
-              onChange={handleEditMemberInfo}
-            />
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>디스코드 커뮤니티 닉네임</Typography>
-            <StyledTextField
-              placeholder="닉네임"
-              size="small"
-              value={modalMemberInfo.nickname}
-              name="nickname"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.nickname.isError(nickname)}
-              helperText={memberInfoValidation.nickname.helperText(nickname)}
-            />
-          </StyledInfoWrapper>
-        </StyledInfoContainerWrapper>
-        <StyledButton size="large" variant="contained" css={typo.button1} onClick={handleClickSave}>
+        <StyledTitle>정회원 정보 수정</StyledTitle>
+        <StyledContentWrapper>
+          <StyledInfoRowWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>이름</Typography>
+              <StyledTextField
+                placeholder="이름"
+                size="small"
+                value={modalMemberInfo.name}
+                name="name"
+                onChange={handleEditMemberInfo}
+              />
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>학번</Typography>
+              <StyledTextField
+                placeholder="학번"
+                size="small"
+                value={modalMemberInfo.studentId}
+                name="studentId"
+                onChange={handleEditMemberInfo}
+                error={memberInfoValidation.studentId.isError(studentId)}
+                helperText={memberInfoValidation.studentId.helperText(studentId)}
+              />
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>전화번호</Typography>
+              <StyledTextField
+                placeholder="전화번호"
+                size="small"
+                value={modalMemberInfo.phone}
+                name="phone"
+                onChange={handleEditMemberInfo}
+                error={memberInfoValidation.phone.isError(phone)}
+                helperText={memberInfoValidation.phone.helperText(phone)}
+              />
+            </StyledInfoWrapper>
+          </StyledInfoRowWrapper>
+          <StyledInfoRowWrapper>
+            <StyledInfoWrapper height={123}>
+              <Typography css={typo.h6}>소속 학과</Typography>
+              <StyledTextField
+                placeholder="학과"
+                size="small"
+                value={departmentSearchText}
+                name="department"
+                onChange={handleEditMemberInfo}
+              />
+              <StyledDivider />
+              <StyledDepartmentListWrapper>
+                {searchedDeparmentList.map((departmentItem, index) => (
+                  <StyledDepartmentItemWrapper key={index}>
+                    <StyledXIcon onClick={() => handleClickRemoveDepartmentItem(departmentItem)} />
+                    <StyledDepartmentName
+                      css={typo.body3}
+                      onClick={() => handleClickDepartmentItem(departmentItem)}
+                    >
+                      {departmentItem.name}
+                    </StyledDepartmentName>
+                  </StyledDepartmentItemWrapper>
+                ))}
+              </StyledDepartmentListWrapper>
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>이메일</Typography>
+              <StyledTextField
+                placeholder="이메일"
+                size="small"
+                value={modalMemberInfo.email}
+                name="email"
+                onChange={handleEditMemberInfo}
+                error={memberInfoValidation.email.isError(email)}
+                helperText={memberInfoValidation.email.helperText(email)}
+              />
+            </StyledInfoWrapper>
+          </StyledInfoRowWrapper>
+          <StyledInfoRowWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>디스코드 핸들명</Typography>
+              <StyledTextField
+                placeholder="핸들명"
+                size="small"
+                value={modalMemberInfo.discordUsername}
+                name="discordUsername"
+                onChange={handleEditMemberInfo}
+              />
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>디스코드 커뮤니티 닉네임</Typography>
+              <StyledTextField
+                placeholder="닉네임"
+                size="small"
+                value={modalMemberInfo.nickname}
+                name="nickname"
+                onChange={handleEditMemberInfo}
+                error={memberInfoValidation.nickname.isError(nickname)}
+                helperText={memberInfoValidation.nickname.helperText(nickname)}
+              />
+            </StyledInfoWrapper>
+          </StyledInfoRowWrapper>
+        </StyledContentWrapper>
+        <StyledButton size="large" variant="contained" onClick={handleClickSave}>
           저장하기
         </StyledButton>
       </StyledModalContentWrapper>
@@ -215,18 +217,24 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
 
 const StyledModalContentWrapper = styled("main")({
   width: "988px",
-  height: "684px",
+  height: "640px",
   backgroundColor: "white",
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   textAlign: "center",
-  padding: "58px",
+  padding: "40px",
   boxSizing: "border-box",
 });
 
-const StyledInfoContainerWrapper = styled(Box)({
+const StyledContentWrapper = styled(Box)({
+  height: "410px",
+  padding: "10px",
+  marginBottom: "20px",
+});
+
+const StyledInfoRowWrapper = styled(Box)({
   display: "flex",
   gap: "19.15px",
   height: "fit-content",
@@ -234,11 +242,16 @@ const StyledInfoContainerWrapper = styled(Box)({
 });
 
 const StyledTitle = styled(Typography)({
-  marginBottom: "38px",
+  marginBottom: "20px",
+  fontFamily: "SUIT v1",
+  fontSize: "32px",
+  fontWeight: 700,
+  lineHeight: "41.6px",
+  letterSpacing: "-0.32px",
 });
 
 const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
-  height: height ? `${height}px` : "71px",
+  height: height ? `${height}px` : "89px",
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
@@ -270,9 +283,14 @@ const StyledTextField = styled(TextField)({
 });
 
 const StyledButton = styled(Button)({
-  width: "316px",
-  height: "63px",
-  padding: "8px 22px",
+  width: "328px",
+  height: "48px",
+  padding: "16px 0",
+  fontFamily: "SUIT v1",
+  fontSize: "16px",
+  fontWeight: 600,
+  lineHeight: "16px",
+  letterSpacing: "-0.16px",
 });
 
 const StyledDivider = styled("hr")({
