@@ -6,9 +6,7 @@ import SideNavbar from "@/components/common/SideNavbar";
 import useAuthStorage from "@/hooks/useAuthStorage";
 import RoutePath from "@/routes/routePath";
 
-type LayoutPropsType = { isAllMember?: boolean };
-
-export default function Layout({ isAllMember = false }: LayoutPropsType) {
+export default function Layout() {
   const { clearAuthData } = useAuthStorage();
   const navigate = useNavigate();
 
@@ -28,16 +26,14 @@ export default function Layout({ isAllMember = false }: LayoutPropsType) {
         <SideNavbar />
         <StyledBodyWrapper>
           <Outlet />
-          {isAllMember && (
-            <StyledButton
-              variant={"outlined"}
-              size={"large"}
-              color={"primary"}
-              onClick={handleClickLogout}
-            >
-              로그아웃
-            </StyledButton>
-          )}
+          <StyledButton
+            variant={"outlined"}
+            size={"large"}
+            color={"primary"}
+            onClick={handleClickLogout}
+          >
+            로그아웃
+          </StyledButton>
         </StyledBodyWrapper>
       </StyledLayoutWrapper>
     </ApiErrorBoundary>
