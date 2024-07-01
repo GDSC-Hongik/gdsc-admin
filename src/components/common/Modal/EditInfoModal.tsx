@@ -1,6 +1,15 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { Modal, Box, Typography, Button, TextField, Select } from "@mui/material";
+import {
+  Modal,
+  Box,
+  Typography,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+} from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
@@ -8,6 +17,7 @@ import { memberInfoValidation } from "@/utils/validation";
 import XIcon from "@/assets/x.svg?react";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { DepartmentListResponseDtoType } from "@/types/dtos/member";
+import { emailSelectMenu } from "@/constants/table";
 
 export type EditMemberInfoType = {
   memberId: number;
@@ -39,6 +49,8 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   const [searchedDeparmentList, setSearchedDepartmentList] = useState<
     DepartmentListResponseDtoType[]
   >([]);
+  const [domain, setDomain] = useState<string>("gmail.com");
+  const [emailUsername, _] = modalMemberInfo.email.split("@");
 
   const {
     memberId,
@@ -46,7 +58,6 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     name,
     phone,
     department: { code: departmentCode },
-    email,
     discordUsername,
     nickname,
   } = modalMemberInfo;
@@ -60,7 +71,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
       name,
       phone: formatPhoneNumber(phone),
       department: departmentCode,
-      email,
+      email: `${emailUsername}@${domain}`,
       discordUsername: discordUsername,
       nickname: nickname,
     },
@@ -97,6 +108,10 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     setSearchedDepartmentList(prevSearchedDepartmentList =>
       prevSearchedDepartmentList.filter(department => department.code !== departmentItem.code),
     );
+  };
+
+  const handleChangeSelect = (e: SelectChangeEvent<unknown>) => {
+    setDomain(e.target.value as string);
   };
 
   useEffect(() => {
@@ -174,14 +189,18 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
               <StyledTextField
                 placeholder="이메일 주소"
                 size="small"
-                value={modalMemberInfo.email}
+                value={emailUsername}
                 name="email"
                 onChange={handleEditMemberInfo}
-                error={memberInfoValidation.email.isError(email)}
-                helperText={memberInfoValidation.email.helperText(email)}
               />
             </StyledInfoWrapper>
-            <StyledSelect multiple />
+            <StyledSelect value={domain} onChange={handleChangeSelect} placeholder="선택하세요">
+              {emailSelectMenu.map(email => (
+                <MenuItem key={email} value={email}>
+                  {email}
+                </MenuItem>
+              ))}
+            </StyledSelect>
           </StyledInfoRowWrapper>
           <StyledInfoRowWrapper>
             <StyledInfoWrapper>
@@ -290,7 +309,6 @@ const StyledTextField = styled(TextField)({
 const StyledSelect = styled(Select)({
   borderRadius: 4,
   border: "1px solid #C2C2C2",
-  padding: "8px 12px",
   height: "40px",
   width: "100%",
   marginTop: "31px",
@@ -311,7 +329,7 @@ const StyledButton = styled(Button)({
   letterSpacing: "-0.16px",
 });
 
-const StyledDivider = styled("hr")({
+const StyledDivider = styled("div")({
   width: "100%",
   height: "1px",
   margin: 0,
