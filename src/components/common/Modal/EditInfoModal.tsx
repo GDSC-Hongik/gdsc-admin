@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { Modal, Box, Typography, Button, TextField } from "@mui/material";
+import { Modal, Box, Typography, Button, TextField, Select } from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
@@ -172,7 +172,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
             <StyledInfoWrapper>
               <Typography css={typo.h6}>이메일</Typography>
               <StyledTextField
-                placeholder="이메일"
+                placeholder="이메일 주소"
                 size="small"
                 value={modalMemberInfo.email}
                 name="email"
@@ -181,6 +181,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
                 helperText={memberInfoValidation.email.helperText(email)}
               />
             </StyledInfoWrapper>
+            <StyledSelect multiple />
           </StyledInfoRowWrapper>
           <StyledInfoRowWrapper>
             <StyledInfoWrapper>
@@ -255,16 +256,16 @@ const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
-  gap: "12px",
-  flex: 1,
+  gap: "10px",
+  width: "100%",
 }));
 
 const StyledTextField = styled(TextField)({
   "width": "100%",
 
   ".MuiInputBase-root": {
-    borderRadius: 0,
-    border: "1px solid #BEC3CC",
+    borderRadius: 4,
+    border: "1px solid #C2C2C2",
     padding: "8px 14px",
     height: "40px",
   },
@@ -279,6 +280,23 @@ const StyledTextField = styled(TextField)({
 
   ".MuiInputBase-input::placeholder": {
     color: "#646D7A",
+  },
+
+  "fieldset": {
+    border: "none",
+  },
+});
+
+const StyledSelect = styled(Select)({
+  borderRadius: 4,
+  border: "1px solid #C2C2C2",
+  padding: "8px 12px",
+  height: "40px",
+  width: "100%",
+  marginTop: "31px",
+
+  fieldset: {
+    border: "none",
   },
 });
 
@@ -303,10 +321,9 @@ const StyledDivider = styled("hr")({
 const StyledDepartmentListWrapper = styled(Box)({
   overflowX: "auto",
   overflowY: "hidden",
-  width: "100%",
   display: "flex",
   gap: "24px",
-  flex: 1,
+  width: "100%",
 });
 
 const StyledDepartmentItemWrapper = styled(Box)({
