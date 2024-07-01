@@ -110,7 +110,22 @@ export default function AllMembersInfoTable() {
     mutate(targetMemberId);
   };
 
-  const handleCloseModal = () => setEditModalOpen(false);
+  const handleCloseModal = () => {
+    setEditMemberInfo({
+      memberId: 0,
+      studentId: "",
+      name: "",
+      phone: "",
+      department: {
+        code: "",
+        name: "",
+      },
+      email: "",
+      discordUsername: "",
+      nickname: "",
+    });
+    setEditModalOpen(false);
+  };
 
   return (
     <>

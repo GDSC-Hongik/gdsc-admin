@@ -1,46 +1,45 @@
+import { useRef } from "react";
 import styled from "@emotion/styled";
-import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 // import useGetCouponListQuery from "@/hooks/queries/useGetCouponListQuery";
 import { CouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
-import { Button } from "@mui/material";
 import {
   useCouponSearchInfoDispatch,
   useCouponSearchInfoState,
 } from "@/hooks/contexts/useCouponSearchInfoState";
 import CouponModal from "../Modal/CouponModal";
-import useDeleteCouponMutation from "@/hooks/mutations/useDeleteCouponMutation";
-import { useRef } from "react";
+import { formatPrice } from "@/utils/validation/formatPrice";
 
 const mockIssuedCouponList = [
   {
     couponId: 1,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 1234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 2,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 2234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 3,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 3234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 4,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 4234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
     couponId: 5,
     name: "string",
-    discountAmount: 234,
+    discountAmount: 5234,
     createdAt: "2024-06-27T17:43:56.259Z",
   },
   {
@@ -58,11 +57,6 @@ export default function CouponInfoTable() {
   const { setModalOpen } = useCouponSearchInfoDispatch();
 
   //   const issuedCouponList = useGetCouponListQuery();
-  const { mutate: deleteCouponMutate } = useDeleteCouponMutation();
-
-  const handleClickCouponDelete = (id: number) => {
-    deleteCouponMutate(id);
-  };
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -73,7 +67,7 @@ export default function CouponInfoTable() {
     return couponList.map(issuedCoupon => ({
       id: issuedCoupon.couponId,
       name: issuedCoupon.name,
-      discountAmount: issuedCoupon.discountAmount,
+      discountAmount: formatPrice(issuedCoupon.discountAmount),
       createdAt: formatDateWithText(issuedCoupon.createdAt),
     }));
   };
@@ -82,7 +76,7 @@ export default function CouponInfoTable() {
     <>
       <StyledDataGrid
         rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-        columns={getColumns(handleClickCouponDelete)}
+        columns={columns}
         autoHeight
         disableRowSelectionOnClick
         disableColumnFilter
@@ -95,7 +89,7 @@ export default function CouponInfoTable() {
   );
 }
 
-const getColumns = (handleClickCouponDelete: (id: number) => void): GridColDef[] => [
+const columns: GridColDef[] = [
   {
     field: "name",
     headerName: "이름",
@@ -123,39 +117,6 @@ const getColumns = (handleClickCouponDelete: (id: number) => void): GridColDef[]
     resizable: false,
     editable: false,
   },
-  {
-    field: "editCoupon",
-    headerName: "",
-    sortable: false,
-    flex: 1,
-    renderCell: (params: GridCellParams) => {
-      return (
-        <StyledButtonWrapper>
-          <StyledButton
-            variant="outlined"
-            color="error"
-            onClick={() => handleClickCouponDelete(params.row.id)}
-          >
-            회수
-          </StyledButton>
-        </StyledButtonWrapper>
-      );
-    },
-  },
 ];
 
 const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
-
-const StyledButtonWrapper = styled("div")({
-  display: "flex",
-  gap: 8,
-  alignItems: "center",
-  justifyContent: "flex-end",
-  paddingTop: 9,
-});
-
-const StyledButton = styled(Button)({
-  padding: "8px 22px",
-  height: "32px",
-  width: "64px",
-});

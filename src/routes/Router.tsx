@@ -21,6 +21,10 @@ const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { path: "", element: <Navigate to={RoutePath.AllMembers} replace /> },
+      {
+        path: RoutePath.AllMembers,
+        element: <AllMembersPage />,
+      },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
       { path: RoutePath.PaymentStatus, element: <PaymentStatusPage /> },
       { path: RoutePath.Coupon, element: <CouponPage /> },
@@ -33,11 +37,6 @@ const routes: RouteObject[] = [
         element: <PaymentStatusHistoryPerSemesterPage />,
       },
     ],
-  },
-  {
-    path: RoutePath.AllMembers,
-    element: <Layout isAllMember />,
-    children: [{ path: RoutePath.AllMembers, element: <AllMembersPage /> }],
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
   {
