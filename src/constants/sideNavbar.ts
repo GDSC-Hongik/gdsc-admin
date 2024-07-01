@@ -6,7 +6,7 @@ export const membersLinkButtonInfoList = [
     path: RoutePath.AllMembers,
   },
   {
-    label: "가입 대기 멤버 관리",
+    label: "가입 대기 회원 관리",
     path: RoutePath.PendingMembers,
   },
 ];

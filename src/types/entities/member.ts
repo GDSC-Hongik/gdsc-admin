@@ -3,7 +3,8 @@ export type ManagementVariant =
   | "pendingMember"
   | "paymentStatus"
   | "coupon"
-  | "couponProvision";
+  | "couponProvision"
+  | "couponProvisionMembers";
 
 export type MemberInfoType = {
   memberId: number;

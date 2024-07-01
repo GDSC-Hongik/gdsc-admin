@@ -3,5 +3,6 @@ export const titleVariant = {
   pendingMember: "가입 대기 회원 관리",
   paymentStatus: "회비 납부 기록 관리",
   coupon: "쿠폰 관리",
-  couponProvision: "발급된 쿠폰 관리"
+  couponProvisionMembers: "발급한 쿠폰 관리",
+  couponProvision: "쿠폰 지급",
 } as const;
