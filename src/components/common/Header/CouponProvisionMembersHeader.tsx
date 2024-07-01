@@ -13,7 +13,7 @@ import { memberInfoSelectMenu } from "@/constants/table";
 import {
   useCouponProvisionSearchInfoDispatch,
   useCouponProvisionSearchInfoState,
-} from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
+} from "@/hooks/contexts/useCouponProvisionMembersSearchInfoContext";
 
 export default function CouponProvisionMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);

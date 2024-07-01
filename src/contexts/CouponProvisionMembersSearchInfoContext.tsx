@@ -13,7 +13,7 @@ type SearchDispatchType = {
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
-type CouponProvisionSearchInfoStateContextProviderPropsType = {
+type CouponProvisionMembersSearchInfoStateContextProviderPropsType = {
   children: ReactNode;
 };
 
@@ -26,17 +26,17 @@ const defaultState: SearchStateType = {
   },
 };
 
-export const CouponProvisionSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const CouponProvisionMembersSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
-export const CouponProvisionSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const CouponProvisionMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
   setSearchText: () => {},
   setSearchVariant: () => {},
   setPaginationModel: () => {},
 });
 
-export default function CouponProvisionSearchInfoContextProvider({
+export default function CouponProvisionMembersSearchInfoContextProvider({
   children,
-}: CouponProvisionSearchInfoStateContextProviderPropsType) {
+}: CouponProvisionMembersSearchInfoStateContextProviderPropsType) {
   const [searchText, setSearchText] = useState<string>("");
   const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
@@ -45,14 +45,14 @@ export default function CouponProvisionSearchInfoContextProvider({
   });
 
   return (
-    <CouponProvisionSearchInfoDispatchContext.Provider
+    <CouponProvisionMembersSearchInfoDispatchContext.Provider
       value={{ setSearchText, setSearchVariant, setPaginationModel }}
     >
-      <CouponProvisionSearchInfoStateContext.Provider
+      <CouponProvisionMembersSearchInfoStateContext.Provider
         value={{ searchText, searchVariant, paginationModel }}
       >
         {children}
-      </CouponProvisionSearchInfoStateContext.Provider>
-    </CouponProvisionSearchInfoDispatchContext.Provider>
+      </CouponProvisionMembersSearchInfoStateContext.Provider>
+    </CouponProvisionMembersSearchInfoDispatchContext.Provider>
   );
 }
