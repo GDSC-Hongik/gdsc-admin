@@ -81,24 +81,26 @@ const StyledModalContentWrapper = styled("main")({
   left: "50%",
   transform: "translate(-50%, -50%)",
   textAlign: "center",
-  padding: "64px 172px 44px 172px",
+  padding: "40px",
   boxSizing: "border-box",
 });
 
 const StyledTitle = styled(Typography)({
-  marginBottom: "39px",
+  marginBottom: "20px",
 });
 
 const StyledInfoRow = styled(Box)({
   display: "flex",
-  gap: "95px",
+  gap: "10px",
+  flex: 1,
 });
 
 const StyledContent = styled(Box)({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "311px",
+  justifyContent: "space-between",
+  height: "490px",
 });
 
 const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
