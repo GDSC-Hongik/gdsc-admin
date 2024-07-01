@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import {
   Modal,
@@ -46,9 +46,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     nickname: memberInfo.nickname || null,
   });
   const [departmentSearchText, setDepartmentSearchText] = useState(memberInfo.department.name);
-  const [searchedDeparmentList, setSearchedDepartmentList] = useState<
-    DepartmentListResponseDtoType[]
-  >([]);
+  const [removedDepartments, setRemovedDepartments] = useState<string[]>([]);
   const [domain, setDomain] = useState<string>("gmail.com");
   const [emailUsername, _] = modalMemberInfo.email.split("@");
 
@@ -63,6 +61,10 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   } = modalMemberInfo;
 
   const { departmentList } = useGetDepartmentListQuery(departmentSearchText);
+
+  const searchedDepartmentList = useMemo(() => {
+    return departmentList.filter(department => !removedDepartments.includes(department.code));
+  }, [departmentList, removedDepartments]);
 
   const { mutate } = useEditMemberInfoMutation(
     memberId,
@@ -105,18 +107,15 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   };
 
   const handleClickRemoveDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
-    setSearchedDepartmentList(prevSearchedDepartmentList =>
-      prevSearchedDepartmentList.filter(department => department.code !== departmentItem.code),
-    );
+    setRemovedDepartments(prevRemovedDepartments => [
+      ...prevRemovedDepartments,
+      departmentItem.code,
+    ]);
   };
 
   const handleChangeSelect = (e: SelectChangeEvent<unknown>) => {
     setDomain(e.target.value as string);
   };
-
-  useEffect(() => {
-    setSearchedDepartmentList(departmentList);
-  }, [departmentList]);
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -171,7 +170,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
               />
               <StyledDivider />
               <StyledDepartmentListWrapper>
-                {searchedDeparmentList.map((departmentItem, index) => (
+                {searchedDepartmentList.map((departmentItem, index) => (
                   <StyledDepartmentItemWrapper key={index}>
                     <StyledXIcon onClick={() => handleClickRemoveDepartmentItem(departmentItem)} />
                     <StyledDepartmentName
@@ -277,6 +276,7 @@ const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
   alignItems: "flex-start",
   gap: "10px",
   width: "100%",
+  maxWidth: "283px",
 }));
 
 const StyledTextField = styled(TextField)({
