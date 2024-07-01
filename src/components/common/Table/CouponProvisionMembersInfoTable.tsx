@@ -54,7 +54,7 @@ const mockIssuedCouponList = [
   },
 ];
 
-export default function CouponProvisionInfoTable() {
+export default function CouponProvisionMembersInfoTable() {
   const [modalOpen, setModalOpen] = useState(false);
   const [detailInfo, setDetailInfo] = useState<DetailCouponInfoType>({
     id: 0,

@@ -15,7 +15,7 @@ import {
   useCouponProvisionSearchInfoState,
 } from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
 
-export default function CouponProvisionHeader() {
+export default function CouponProvisionMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
 
   const { setSearchText, setSearchVariant, setPaginationModel } =
