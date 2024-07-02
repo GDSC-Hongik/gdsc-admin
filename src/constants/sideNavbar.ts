@@ -21,7 +21,7 @@ export const paymentLinkButtonInfoList = [
     path: RoutePath.Coupon,
   },
   {
-    label: "쿠폰 지급 명단 관리",
+    label: "발급한 쿠폰 관리",
     path: RoutePath.CouponProvisionMembers,
   },
   {
