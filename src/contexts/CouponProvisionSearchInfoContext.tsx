@@ -5,12 +5,14 @@ type SearchStateType = {
   searchText: string;
   searchVariant: SearchVariantType;
   paginationModel: PaginationModelType;
+  selectedCoupon: string;
 };
 
 type SearchDispatchType = {
   setSearchText: Dispatch<SetStateAction<string>>;
   setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
+  setSelectedCoupon: Dispatch<SetStateAction<string>>;
 };
 
 type CouponProvisionSearchInfoStateContextProviderPropsType = {
@@ -24,6 +26,7 @@ const defaultState: SearchStateType = {
     pageSize: 5,
     page: 0,
   },
+  selectedCoupon: "",
 };
 
 export const CouponProvisionSearchInfoStateContext = createContext<SearchStateType>(defaultState);
@@ -32,6 +35,7 @@ export const CouponProvisionSearchInfoDispatchContext = createContext<SearchDisp
   setSearchText: () => {},
   setSearchVariant: () => {},
   setPaginationModel: () => {},
+  setSelectedCoupon: () => {},
 });
 
 export default function CouponProvisionSearchInfoContextProvider({
@@ -43,13 +47,14 @@ export default function CouponProvisionSearchInfoContextProvider({
     pageSize: 5,
     page: 0,
   });
+  const [selectedCoupon, setSelectedCoupon] = useState("");
 
   return (
     <CouponProvisionSearchInfoDispatchContext.Provider
-      value={{ setSearchText, setSearchVariant, setPaginationModel }}
+      value={{ setSearchText, setSearchVariant, setPaginationModel, setSelectedCoupon }}
     >
       <CouponProvisionSearchInfoStateContext.Provider
-        value={{ searchText, searchVariant, paginationModel }}
+        value={{ searchText, searchVariant, paginationModel, selectedCoupon }}
       >
         {children}
       </CouponProvisionSearchInfoStateContext.Provider>
