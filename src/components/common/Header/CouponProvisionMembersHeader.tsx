@@ -11,16 +11,16 @@ import {
 } from "@mui/material";
 import { memberInfoSelectMenu } from "@/constants/table";
 import {
-  useCouponProvisionSearchInfoDispatch,
-  useCouponProvisionSearchInfoState,
+  useCouponProvisionMembersSearchInfoDispatch,
+  useCouponProvisionMembersSearchInfoState,
 } from "@/hooks/contexts/useCouponProvisionMembersSearchInfoContext";
 
 export default function CouponProvisionMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
 
   const { setSearchText, setSearchVariant, setPaginationModel } =
-    useCouponProvisionSearchInfoDispatch();
-  const { searchText } = useCouponProvisionSearchInfoState();
+    useCouponProvisionMembersSearchInfoDispatch();
+  const { searchText } = useCouponProvisionMembersSearchInfoState();
 
   const handleResetPage = () => {
     setPaginationModel(prevPaginationModel => ({
