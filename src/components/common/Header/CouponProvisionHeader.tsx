@@ -24,8 +24,13 @@ export default function CouponProvisionHeader() {
 
   const couponList = useGetCouponListQuery();
 
-  const { setSearchText, setSearchVariant, setPaginationModel, setSelectedCoupon } =
-    useCouponProvisionSearchInfoDispatch();
+  const {
+    setSearchText,
+    setSearchVariant,
+    setPaginationModel,
+    setSelectedCoupon,
+    setProvisionModalOpen,
+  } = useCouponProvisionSearchInfoDispatch();
   const { searchText, selectedCoupon } = useCouponProvisionSearchInfoState();
 
   const getFilteredCouponList = (couponList: CouponListResponseDtoType) => {
@@ -68,6 +73,10 @@ export default function CouponProvisionHeader() {
     setSelectedCoupon(e.target.value as string);
   };
 
+  const handleClickCouponProvision = () => {
+    setProvisionModalOpen(true);
+  };
+
   return (
     <StyledHeaderWrapper>
       <StyledLeftColWrapper>
@@ -108,7 +117,9 @@ export default function CouponProvisionHeader() {
             ))}
           </StyledSelect>
         </StyledFormWrapper>
-        <StyledButton variant="contained">쿠폰 지급</StyledButton>
+        <StyledButton variant="contained" onClick={handleClickCouponProvision}>
+          쿠폰 지급
+        </StyledButton>
       </StyledRightColWrapper>
     </StyledHeaderWrapper>
   );

@@ -6,6 +6,7 @@ type SearchStateType = {
   searchVariant: SearchVariantType;
   paginationModel: PaginationModelType;
   selectedCoupon: string;
+  provisionModalOpen: boolean;
 };
 
 type SearchDispatchType = {
@@ -13,6 +14,7 @@ type SearchDispatchType = {
   setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
   setSelectedCoupon: Dispatch<SetStateAction<string>>;
+  setProvisionModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 type CouponProvisionSearchInfoStateContextProviderPropsType = {
@@ -27,6 +29,7 @@ const defaultState: SearchStateType = {
     page: 0,
   },
   selectedCoupon: "",
+  provisionModalOpen: false,
 };
 
 export const CouponProvisionSearchInfoStateContext = createContext<SearchStateType>(defaultState);
@@ -36,6 +39,7 @@ export const CouponProvisionSearchInfoDispatchContext = createContext<SearchDisp
   setSearchVariant: () => {},
   setPaginationModel: () => {},
   setSelectedCoupon: () => {},
+  setProvisionModalOpen: () => {},
 });
 
 export default function CouponProvisionSearchInfoContextProvider({
@@ -48,13 +52,20 @@ export default function CouponProvisionSearchInfoContextProvider({
     page: 0,
   });
   const [selectedCoupon, setSelectedCoupon] = useState("");
+  const [provisionModalOpen, setProvisionModalOpen] = useState(false);
 
   return (
     <CouponProvisionSearchInfoDispatchContext.Provider
-      value={{ setSearchText, setSearchVariant, setPaginationModel, setSelectedCoupon }}
+      value={{
+        setSearchText,
+        setSearchVariant,
+        setPaginationModel,
+        setSelectedCoupon,
+        setProvisionModalOpen,
+      }}
     >
       <CouponProvisionSearchInfoStateContext.Provider
-        value={{ searchText, searchVariant, paginationModel, selectedCoupon }}
+        value={{ searchText, searchVariant, paginationModel, selectedCoupon, provisionModalOpen }}
       >
         {children}
       </CouponProvisionSearchInfoStateContext.Provider>

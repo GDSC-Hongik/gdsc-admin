@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
-import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridCellParams,
+  GridColDef,
+  GridRowModel,
+  GridRowSelectionModel,
+} from "@mui/x-data-grid";
 import {
   useCouponProvisionSearchInfoDispatch,
   useCouponProvisionSearchInfoState,
@@ -9,13 +15,33 @@ import { useMemo, useRef, useState } from "react";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import MemberDetailInfoModal from "../Modal/MemberDetailInfoModal";
 import { DetailMemberInfoType } from "@/types/dtos/member";
+import CouponProvisionModal from "../Modal/CouponProvisionModal";
 
 const mockData = [
   {
     semester: "2024-1",
-    memberId: 0,
+    memberId: 1,
     studentId: "C111206",
     name: "홍서현",
+    phone: "010-8712-0786",
+    department: {
+      code: "D001",
+      name: "컴퓨터공학전공",
+    },
+    email: "ghdtjgus76@naver.com",
+    discordUsername: "홍서현",
+    nickname: "홍서현",
+    requirement: {
+      univStatus: "VERIFIED",
+      discordStatus: "VERIFIED",
+      bevyStatus: "VERIFIED",
+    },
+  },
+  {
+    semester: "2024-1",
+    memberId: 2,
+    studentId: "C111206",
+    name: "홍서현2",
     phone: "010-8712-0786",
     department: {
       code: "D001",
@@ -43,9 +69,11 @@ export default function CouponProvisionInfoTable() {
     nickname: "",
   });
   const [detailModalOpen, setDetailModalOpen] = useState(false);
+  const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
-  const { paginationModel, searchText, searchVariant } = useCouponProvisionSearchInfoState();
-  const { setPaginationModel } = useCouponProvisionSearchInfoDispatch();
+  const { paginationModel, searchText, searchVariant, provisionModalOpen } =
+    useCouponProvisionSearchInfoState();
+  const { setPaginationModel, setProvisionModalOpen } = useCouponProvisionSearchInfoDispatch();
 
   const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,
@@ -53,6 +81,8 @@ export default function CouponProvisionInfoTable() {
     searchVariant,
     searchText,
   );
+
+  const selectedMemberList = mockData.filter(member => rowSelectionModel.includes(member.memberId));
 
   const rowCountRef = useRef(totalElements || 0);
 
@@ -121,11 +151,21 @@ export default function CouponProvisionInfoTable() {
     setDetailModalOpen(false);
   };
 
+  const handleRowSelectionModelChange = (newRowSelectionModel: GridRowSelectionModel) => {
+    setRowSelectionModel(newRowSelectionModel);
+  };
+
+  const handleCloseCouponProvisionModal = () => {
+    setProvisionModalOpen(false);
+  };
+
   return (
     <>
       <StyledDataGrid
         rows={getFilteredMemberList(mockData)}
         columns={getColumns(handleClickDetail)}
+        onRowSelectionModelChange={handleRowSelectionModelChange}
+        rowSelectionModel={rowSelectionModel}
         checkboxSelection
         autoHeight
         pageSizeOptions={[5, 25, 100]}
@@ -142,6 +182,11 @@ export default function CouponProvisionInfoTable() {
         open={detailModalOpen}
         onClose={handleCloseDetailModal}
         detailInfo={getFilteredDetailInfoList(detailMemberInfo)}
+      />
+      <CouponProvisionModal
+        open={provisionModalOpen}
+        onClose={handleCloseCouponProvisionModal}
+        detailInfo={selectedMemberList}
       />
     </>
   );
