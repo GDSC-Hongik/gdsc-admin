@@ -11,7 +11,7 @@ import {
 import CouponModal from "../Modal/CouponModal";
 import { formatPrice } from "@/utils/validation/formatPrice";
 
-const mockIssuedCouponList = [
+const mockCouponList = [
   {
     couponId: 1,
     name: "string",
@@ -56,26 +56,26 @@ export default function CouponInfoTable() {
   const { modalOpen } = useCouponSearchInfoState();
   const { setModalOpen } = useCouponSearchInfoDispatch();
 
-  //   const issuedCouponList = useGetCouponListQuery();
+  //   const couponList = useGetCouponListQuery();
 
   const handleCloseModal = () => {
     setModalOpen(false);
     modalKey.current += 1;
   };
 
-  const getFilteredIssuedCouponList = (couponList: CouponListResponseDtoType) => {
-    return couponList.map(issuedCoupon => ({
-      id: issuedCoupon.couponId,
-      name: issuedCoupon.name,
-      discountAmount: formatPrice(issuedCoupon.discountAmount),
-      createdAt: formatDateWithText(issuedCoupon.createdAt),
+  const getFilteredCouponList = (couponList: CouponListResponseDtoType) => {
+    return couponList.map(coupon => ({
+      id: coupon.couponId,
+      name: coupon.name,
+      discountAmount: formatPrice(coupon.discountAmount),
+      createdAt: formatDateWithText(coupon.createdAt),
     }));
   };
 
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
+        rows={getFilteredCouponList(mockCouponList)}
         columns={columns}
         autoHeight
         disableRowSelectionOnClick
