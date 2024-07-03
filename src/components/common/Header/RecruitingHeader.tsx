@@ -30,7 +30,7 @@ export default function RecruitingHeader() {
     <StyledHeaderWrapper>
       <StyledFormControl>
         <InputLabel>활동학기</InputLabel>
-        <Select value={semester} onChange={handleChangeSemester}>
+        <Select label="활동학기" value={semester} onChange={handleChangeSemester}>
           {semesterList.map(semester => (
             <MenuItem value={semester.value} key={semester.value}>
               {semester.name}
@@ -49,7 +49,7 @@ export default function RecruitingHeader() {
 }
 
 const StyledHeaderWrapper = styled(Stack)({
-  gap: 20,
+  gap: 16,
   flexDirection: "row",
   justifyContent: "flex-end",
   alignItems: "center",
