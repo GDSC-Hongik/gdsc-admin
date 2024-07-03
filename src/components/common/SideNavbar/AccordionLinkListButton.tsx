@@ -12,7 +12,7 @@ type LinkButtonLabelType = "회원 관리" | "회비 관리" | "리크루팅 관
 
 type AccordionLinkListButtonPropsType<T extends LinkButtonLabelType> = {
   label: T;
-  linkButtonInfoList?: T extends "회원 관리" | "회비 관리" | "히스토리"
+  linkButtonInfoList?: T extends "회원 관리" | "회비 관리" | "히스토리" | "리크루팅 관리"
     ? LinkButtonPropsType[]
     : undefined;
   path?: T extends "히스토리" | "리크루팅 관리" ? string : undefined;
