@@ -21,4 +21,9 @@ export const couponApi = {
     const response = await apiClient.get("/admin/coupons/issued");
     return response.data;
   },
+
+  issueCoupon: async (body: { couponId: number; memberIds: number[] }) => {
+    const response = await apiClient.post("/admin/coupons/issued", body);
+    return response.data;
+  },
 };

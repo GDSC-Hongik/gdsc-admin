@@ -28,10 +28,10 @@ export default function CouponProvisionHeader() {
     setSearchText,
     setSearchVariant,
     setPaginationModel,
-    setSelectedCoupon,
+    setSelectedCouponId,
     setProvisionModalOpen,
   } = useCouponProvisionSearchInfoDispatch();
-  const { searchText, selectedCoupon } = useCouponProvisionSearchInfoState();
+  const { searchText, selectedCouponId } = useCouponProvisionSearchInfoState();
 
   const getFilteredCouponList = (couponList: CouponListResponseDtoType) => {
     const newCouponList: string[] = [];
@@ -70,7 +70,7 @@ export default function CouponProvisionHeader() {
   };
 
   const handleChangeSelectedCoupon = (e: SelectChangeEvent<unknown>) => {
-    setSelectedCoupon(e.target.value as string);
+    setSelectedCouponId(e.target.value as number);
   };
 
   const handleClickCouponProvision = () => {
@@ -107,11 +107,11 @@ export default function CouponProvisionHeader() {
           <InputLabel>쿠폰 선택</InputLabel>
           <StyledSelect
             label="쿠폰 선택"
-            value={selectedCoupon}
+            value={selectedCouponId || ""}
             onChange={handleChangeSelectedCoupon}
           >
             {getFilteredCouponList(couponList).map(coupon => (
-              <MenuItem value={coupon.name} key={coupon.couponId}>
+              <MenuItem value={coupon.couponId} key={coupon.couponId}>
                 {coupon.name}
               </MenuItem>
             ))}

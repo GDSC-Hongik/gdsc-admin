@@ -5,7 +5,7 @@ type SearchStateType = {
   searchText: string;
   searchVariant: SearchVariantType;
   paginationModel: PaginationModelType;
-  selectedCoupon: string;
+  selectedCouponId: number | 0;
   provisionModalOpen: boolean;
 };
 
@@ -13,7 +13,7 @@ type SearchDispatchType = {
   setSearchText: Dispatch<SetStateAction<string>>;
   setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
-  setSelectedCoupon: Dispatch<SetStateAction<string>>;
+  setSelectedCouponId: Dispatch<SetStateAction<number | 0>>;
   setProvisionModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -28,7 +28,7 @@ const defaultState: SearchStateType = {
     pageSize: 5,
     page: 0,
   },
-  selectedCoupon: "",
+  selectedCouponId: 0,
   provisionModalOpen: false,
 };
 
@@ -38,7 +38,7 @@ export const CouponProvisionSearchInfoDispatchContext = createContext<SearchDisp
   setSearchText: () => {},
   setSearchVariant: () => {},
   setPaginationModel: () => {},
-  setSelectedCoupon: () => {},
+  setSelectedCouponId: () => {},
   setProvisionModalOpen: () => {},
 });
 
@@ -51,7 +51,7 @@ export default function CouponProvisionSearchInfoContextProvider({
     pageSize: 5,
     page: 0,
   });
-  const [selectedCoupon, setSelectedCoupon] = useState("");
+  const [selectedCouponId, setSelectedCouponId] = useState<number | 0>(0);
   const [provisionModalOpen, setProvisionModalOpen] = useState(false);
 
   return (
@@ -60,12 +60,12 @@ export default function CouponProvisionSearchInfoContextProvider({
         setSearchText,
         setSearchVariant,
         setPaginationModel,
-        setSelectedCoupon,
+        setSelectedCouponId,
         setProvisionModalOpen,
       }}
     >
       <CouponProvisionSearchInfoStateContext.Provider
-        value={{ searchText, searchVariant, paginationModel, selectedCoupon, provisionModalOpen }}
+        value={{ searchText, searchVariant, paginationModel, selectedCouponId, provisionModalOpen }}
       >
         {children}
       </CouponProvisionSearchInfoStateContext.Provider>

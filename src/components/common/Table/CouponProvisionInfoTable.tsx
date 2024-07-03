@@ -12,14 +12,13 @@ import {
   useCouponProvisionSearchInfoState,
 } from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
 import { useMemo, useRef, useState } from "react";
-import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
+// import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import MemberDetailInfoModal from "../Modal/MemberDetailInfoModal";
 import { DetailMemberInfoType } from "@/types/dtos/member";
 import CouponProvisionModal from "../Modal/CouponProvisionModal";
 
 const mockData = [
   {
-    semester: "2024-1",
     memberId: 1,
     studentId: "C111206",
     name: "홍서현",
@@ -38,7 +37,6 @@ const mockData = [
     },
   },
   {
-    semester: "2024-1",
     memberId: 2,
     studentId: "C111206",
     name: "홍서현2",
@@ -58,6 +56,8 @@ const mockData = [
   },
 ];
 
+const totalElements = 2;
+
 export default function CouponProvisionInfoTable() {
   const [detailMemberInfo, setDetailMemberInfo] = useState<DetailMemberInfoType>({
     name: "",
@@ -71,18 +71,27 @@ export default function CouponProvisionInfoTable() {
   const [detailModalOpen, setDetailModalOpen] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
-  const { paginationModel, searchText, searchVariant, provisionModalOpen } =
-    useCouponProvisionSearchInfoState();
-  const { setPaginationModel, setProvisionModalOpen } = useCouponProvisionSearchInfoDispatch();
+  const { paginationModel, provisionModalOpen } = useCouponProvisionSearchInfoState();
+  const { setPaginationModel, setProvisionModalOpen, setSelectedCouponId } =
+    useCouponProvisionSearchInfoDispatch();
 
-  const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
-    paginationModel.page,
-    paginationModel.pageSize,
-    searchVariant,
-    searchText,
-  );
+  // const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
+  //   paginationModel.page,
+  //   paginationModel.pageSize,
+  //   searchVariant,
+  //   searchText,
+  // );
 
-  const selectedMemberList = mockData.filter(member => rowSelectionModel.includes(member.memberId));
+  const selectedMemberList = mockData
+    .filter(member => rowSelectionModel.includes(member.memberId))
+    .map(member => ({
+      id: member.memberId,
+      studentId: member.studentId,
+      name: member.name,
+      phone: member.phone,
+      discordUsername: member.discordUsername,
+      nickname: member.nickname,
+    }));
 
   const rowCountRef = useRef(totalElements || 0);
 
@@ -97,7 +106,6 @@ export default function CouponProvisionInfoTable() {
   const getFilteredMemberList = (allMemberList: any[]) => {
     return allMemberList.map(memberInfo => ({
       id: memberInfo.memberId,
-      semester: memberInfo.semester,
       studentId: memberInfo.studentId,
       name: memberInfo.name,
       phone: memberInfo.phone,
@@ -148,6 +156,7 @@ export default function CouponProvisionInfoTable() {
       discordUsername: "",
       nickname: "",
     });
+
     setDetailModalOpen(false);
   };
 
@@ -156,6 +165,8 @@ export default function CouponProvisionInfoTable() {
   };
 
   const handleCloseCouponProvisionModal = () => {
+    setRowSelectionModel([]);
+    setSelectedCouponId(0);
     setProvisionModalOpen(false);
   };
 
@@ -194,15 +205,6 @@ export default function CouponProvisionInfoTable() {
 
 const getColumns = (handleClickDetail: (row: GridRowModel) => void): GridColDef[] => [
   {
-    field: "semester",
-    headerName: "학기",
-    headerAlign: "left",
-    align: "left",
-    width: 70,
-    resizable: false,
-    editable: false,
-  },
-  {
     field: "studentId",
     headerName: "학번",
     headerAlign: "left",
@@ -216,7 +218,7 @@ const getColumns = (handleClickDetail: (row: GridRowModel) => void): GridColDef[
     headerName: "이름",
     headerAlign: "left",
     align: "left",
-    width: 60,
+    width: 70,
     resizable: false,
     editable: false,
   },
