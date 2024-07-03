@@ -6,7 +6,7 @@ import CouponSearchInfoContextProvider from "@/contexts/CouponSearchInfoContext"
 export default function CouponPage() {
   return (
     <>
-      <Title variant={"coupon"} descriptionText={"쿠폰 관리 설명"} />
+      <Title variant={"coupon"} descriptionText={"코어 멤버가 생성한 쿠폰을 관리합니다."} />
       <CouponSearchInfoContextProvider>
         <CouponHeader />
         <CouponInfoTable />
