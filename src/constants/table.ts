@@ -98,3 +98,5 @@ export const paymentStatusFieldMapping = {
   VERIFIED: "완료",
   PENDING: "미완료",
 };
+
+export const emailSelectMenu = ["gmail.com", "naver.com", "g.hongik.ac.kr", "daum.net"];

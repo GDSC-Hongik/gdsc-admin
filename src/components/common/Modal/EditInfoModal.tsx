@@ -1,6 +1,15 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 import styled from "@emotion/styled";
-import { Modal, Box, Typography, Button, TextField } from "@mui/material";
+import {
+  Modal,
+  Box,
+  Typography,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+} from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
@@ -8,6 +17,7 @@ import { memberInfoValidation } from "@/utils/validation";
 import XIcon from "@/assets/x.svg?react";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { DepartmentListResponseDtoType } from "@/types/dtos/member";
+import { emailSelectMenu } from "@/constants/table";
 
 export type EditMemberInfoType = {
   memberId: number;
@@ -36,9 +46,9 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     nickname: memberInfo.nickname || null,
   });
   const [departmentSearchText, setDepartmentSearchText] = useState(memberInfo.department.name);
-  const [searchedDeparmentList, setSearchedDepartmentList] = useState<
-    DepartmentListResponseDtoType[]
-  >([]);
+  const [removedDepartments, setRemovedDepartments] = useState<string[]>([]);
+  const [domain, setDomain] = useState<string>("gmail.com");
+  const [emailUsername, _] = modalMemberInfo.email.split("@");
 
   const {
     memberId,
@@ -46,12 +56,15 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     name,
     phone,
     department: { code: departmentCode },
-    email,
     discordUsername,
     nickname,
   } = modalMemberInfo;
 
   const { departmentList } = useGetDepartmentListQuery(departmentSearchText);
+
+  const searchedDepartmentList = useMemo(() => {
+    return departmentList.filter(department => !removedDepartments.includes(department.code));
+  }, [departmentList, removedDepartments]);
 
   const { mutate } = useEditMemberInfoMutation(
     memberId,
@@ -60,7 +73,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
       name,
       phone: formatPhoneNumber(phone),
       department: departmentCode,
-      email,
+      email: `${emailUsername}@${domain}`,
       discordUsername: discordUsername,
       nickname: nickname,
     },
@@ -94,120 +107,126 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   };
 
   const handleClickRemoveDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
-    setSearchedDepartmentList(prevSearchedDepartmentList =>
-      prevSearchedDepartmentList.filter(department => department.code !== departmentItem.code),
-    );
+    setRemovedDepartments(prevRemovedDepartments => [
+      ...prevRemovedDepartments,
+      departmentItem.code,
+    ]);
   };
 
-  useEffect(() => {
-    setSearchedDepartmentList(departmentList);
-  }, [departmentList]);
+  const handleChangeSelect = (e: SelectChangeEvent<unknown>) => {
+    setDomain(e.target.value as string);
+  };
 
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
-        <Typography css={typo.h1} sx={{ marginBottom: "38px" }}>
-          정회원 정보 수정
-        </Typography>
-        <StyledInfoContainerWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>이름</Typography>
-            <StyledTextField
-              placeholder="이름"
-              size="small"
-              value={modalMemberInfo.name}
-              name="name"
-              onChange={handleEditMemberInfo}
-            />
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>학번</Typography>
-            <StyledTextField
-              placeholder="학번"
-              size="small"
-              value={modalMemberInfo.studentId}
-              name="studentId"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.studentId.isError(studentId)}
-              helperText={memberInfoValidation.studentId.helperText(studentId)}
-            />
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>전화번호</Typography>
-            <StyledTextField
-              placeholder="전화번호"
-              size="small"
-              value={modalMemberInfo.phone}
-              name="phone"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.phone.isError(phone)}
-              helperText={memberInfoValidation.phone.helperText(phone)}
-            />
-          </StyledInfoWrapper>
-        </StyledInfoContainerWrapper>
-        <StyledInfoContainerWrapper>
-          <StyledInfoWrapper height={123}>
-            <Typography css={typo.h6}>소속 학과</Typography>
-            <StyledTextField
-              placeholder="학과"
-              size="small"
-              value={departmentSearchText}
-              name="department"
-              onChange={handleEditMemberInfo}
-            />
-            <StyledDivider />
-            <StyledDepartmentListWrapper>
-              {searchedDeparmentList.map((departmentItem, index) => (
-                <StyledDepartmentItemWrapper key={index}>
-                  <StyledXIcon onClick={() => handleClickRemoveDepartmentItem(departmentItem)} />
-                  <StyledDepartmentName
-                    css={typo.body3}
-                    onClick={() => handleClickDepartmentItem(departmentItem)}
-                  >
-                    {departmentItem.name}
-                  </StyledDepartmentName>
-                </StyledDepartmentItemWrapper>
+        <StyledTitle>정회원 정보 수정</StyledTitle>
+        <StyledContentWrapper>
+          <StyledInfoRowWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>이름</Typography>
+              <StyledTextField
+                placeholder="이름"
+                size="small"
+                value={modalMemberInfo.name}
+                name="name"
+                onChange={handleEditMemberInfo}
+              />
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>학번</Typography>
+              <StyledTextField
+                placeholder="학번"
+                size="small"
+                value={modalMemberInfo.studentId}
+                name="studentId"
+                onChange={handleEditMemberInfo}
+                error={memberInfoValidation.studentId.isError(studentId)}
+                helperText={memberInfoValidation.studentId.helperText(studentId)}
+              />
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>전화번호</Typography>
+              <StyledTextField
+                placeholder="전화번호"
+                size="small"
+                value={modalMemberInfo.phone}
+                name="phone"
+                onChange={handleEditMemberInfo}
+                error={memberInfoValidation.phone.isError(phone)}
+                helperText={memberInfoValidation.phone.helperText(phone)}
+              />
+            </StyledInfoWrapper>
+          </StyledInfoRowWrapper>
+          <StyledInfoRowWrapper>
+            <StyledInfoWrapper height={123}>
+              <Typography css={typo.h6}>소속 학과</Typography>
+              <StyledTextField
+                placeholder="학과"
+                size="small"
+                value={departmentSearchText}
+                name="department"
+                onChange={handleEditMemberInfo}
+              />
+              <StyledDivider />
+              <StyledDepartmentListWrapper>
+                {searchedDepartmentList.map((departmentItem, index) => (
+                  <StyledDepartmentItemWrapper key={index}>
+                    <StyledXIcon onClick={() => handleClickRemoveDepartmentItem(departmentItem)} />
+                    <StyledDepartmentName
+                      css={typo.body3}
+                      onClick={() => handleClickDepartmentItem(departmentItem)}
+                    >
+                      {departmentItem.name}
+                    </StyledDepartmentName>
+                  </StyledDepartmentItemWrapper>
+                ))}
+              </StyledDepartmentListWrapper>
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>이메일</Typography>
+              <StyledTextField
+                placeholder="이메일 주소"
+                size="small"
+                value={emailUsername}
+                name="email"
+                onChange={handleEditMemberInfo}
+              />
+            </StyledInfoWrapper>
+            <StyledSelect value={domain} onChange={handleChangeSelect} placeholder="선택하세요">
+              {emailSelectMenu.map(email => (
+                <MenuItem key={email} value={email}>
+                  {email}
+                </MenuItem>
               ))}
-            </StyledDepartmentListWrapper>
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>이메일</Typography>
-            <StyledTextField
-              placeholder="이메일"
-              size="small"
-              value={modalMemberInfo.email}
-              name="email"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.email.isError(email)}
-              helperText={memberInfoValidation.email.helperText(email)}
-            />
-          </StyledInfoWrapper>
-        </StyledInfoContainerWrapper>
-        <StyledInfoContainerWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>디스코드 핸들명</Typography>
-            <StyledTextField
-              placeholder="핸들명"
-              size="small"
-              value={modalMemberInfo.discordUsername}
-              name="discordUsername"
-              onChange={handleEditMemberInfo}
-            />
-          </StyledInfoWrapper>
-          <StyledInfoWrapper>
-            <Typography css={typo.h6}>디스코드 커뮤니티 닉네임</Typography>
-            <StyledTextField
-              placeholder="닉네임"
-              size="small"
-              value={modalMemberInfo.nickname}
-              name="nickname"
-              onChange={handleEditMemberInfo}
-              error={memberInfoValidation.nickname.isError(nickname)}
-              helperText={memberInfoValidation.nickname.helperText(nickname)}
-            />
-          </StyledInfoWrapper>
-        </StyledInfoContainerWrapper>
-        <StyledButton size="large" variant="contained" css={typo.button1} onClick={handleClickSave}>
+            </StyledSelect>
+          </StyledInfoRowWrapper>
+          <StyledInfoRowWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>디스코드 핸들명</Typography>
+              <StyledTextField
+                placeholder="핸들명"
+                size="small"
+                value={modalMemberInfo.discordUsername}
+                name="discordUsername"
+                onChange={handleEditMemberInfo}
+              />
+            </StyledInfoWrapper>
+            <StyledInfoWrapper>
+              <Typography css={typo.h6}>디스코드 커뮤니티 닉네임</Typography>
+              <StyledTextField
+                placeholder="닉네임"
+                size="small"
+                value={modalMemberInfo.nickname}
+                name="nickname"
+                onChange={handleEditMemberInfo}
+                error={memberInfoValidation.nickname.isError(nickname)}
+                helperText={memberInfoValidation.nickname.helperText(nickname)}
+              />
+            </StyledInfoWrapper>
+          </StyledInfoRowWrapper>
+        </StyledContentWrapper>
+        <StyledButton size="large" variant="contained" onClick={handleClickSave}>
           저장하기
         </StyledButton>
       </StyledModalContentWrapper>
@@ -217,39 +236,55 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
 
 const StyledModalContentWrapper = styled("main")({
   width: "988px",
-  height: "684px",
+  height: "640px",
   backgroundColor: "white",
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   textAlign: "center",
-  padding: "58px",
+  padding: "40px",
   boxSizing: "border-box",
 });
 
-const StyledInfoContainerWrapper = styled(Box)({
+const StyledContentWrapper = styled(Box)({
+  height: "410px",
+  padding: "10px",
+  marginBottom: "20px",
+});
+
+const StyledInfoRowWrapper = styled(Box)({
   display: "flex",
   gap: "19.15px",
   height: "fit-content",
   marginBottom: "48px",
 });
 
+const StyledTitle = styled(Typography)({
+  marginBottom: "20px",
+  fontFamily: "SUIT v1",
+  fontSize: "32px",
+  fontWeight: 700,
+  lineHeight: "41.6px",
+  letterSpacing: "-0.32px",
+});
+
 const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
-  height: height ? `${height}px` : "71px",
+  height: height ? `${height}px` : "89px",
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
-  gap: "12px",
-  flex: 1,
+  gap: "10px",
+  width: "100%",
+  maxWidth: "283px",
 }));
 
 const StyledTextField = styled(TextField)({
   "width": "100%",
 
   ".MuiInputBase-root": {
-    borderRadius: 0,
-    border: "1px solid #BEC3CC",
+    borderRadius: 4,
+    border: "1px solid #C2C2C2",
     padding: "8px 14px",
     height: "40px",
   },
@@ -265,15 +300,36 @@ const StyledTextField = styled(TextField)({
   ".MuiInputBase-input::placeholder": {
     color: "#646D7A",
   },
+
+  "fieldset": {
+    border: "none",
+  },
+});
+
+const StyledSelect = styled(Select)({
+  borderRadius: 4,
+  border: "1px solid #C2C2C2",
+  height: "40px",
+  width: "100%",
+  marginTop: "31px",
+
+  fieldset: {
+    border: "none",
+  },
 });
 
 const StyledButton = styled(Button)({
-  width: "316px",
-  height: "63px",
-  padding: "8px 22px",
+  width: "328px",
+  height: "48px",
+  padding: "16px 0",
+  fontFamily: "SUIT v1",
+  fontSize: "16px",
+  fontWeight: 600,
+  lineHeight: "16px",
+  letterSpacing: "-0.16px",
 });
 
-const StyledDivider = styled("hr")({
+const StyledDivider = styled("div")({
   width: "100%",
   height: "1px",
   margin: 0,
@@ -282,11 +338,10 @@ const StyledDivider = styled("hr")({
 
 const StyledDepartmentListWrapper = styled(Box)({
   overflowX: "auto",
-  overflowY: "auto",
-  width: "100%",
+  overflowY: "hidden",
   display: "flex",
   gap: "24px",
-  flex: 1,
+  width: "100%",
 });
 
 const StyledDepartmentItemWrapper = styled(Box)({

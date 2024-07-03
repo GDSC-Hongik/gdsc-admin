@@ -12,8 +12,8 @@ import PendingMembersPage from "@/pages/PendingMembersPage";
 import SigninPage from "@/pages/SigninPage";
 import RoutePath from "@/routes/routePath";
 import RecruitingPage from "@/pages/RecruitingPage";
-import AllMemberHistoryPerSemesterPage from "@/pages/PaymentStatusPage";
 import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPerSemesterPage";
+import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemesterPage";
 
 const routes: RouteObject[] = [
   {
@@ -21,6 +21,10 @@ const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { path: "", element: <Navigate to={RoutePath.AllMembers} replace /> },
+      {
+        path: RoutePath.AllMembers,
+        element: <AllMembersPage />,
+      },
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
       { path: RoutePath.PaymentStatus, element: <PaymentStatusPage /> },
       { path: RoutePath.Coupon, element: <CouponPage /> },
@@ -33,11 +37,6 @@ const routes: RouteObject[] = [
         element: <PaymentStatusHistoryPerSemesterPage />,
       },
     ],
-  },
-  {
-    path: RoutePath.AllMembers,
-    element: <Layout isAllMember />,
-    children: [{ path: RoutePath.AllMembers, element: <AllMembersPage /> }],
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
   {

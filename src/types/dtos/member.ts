@@ -1,6 +1,6 @@
 import { MemberInfoType, StatusType } from "@/types/entities/member";
 
-type PaginationElementType = {
+export type PaginationElementType = {
   pageable: {
     pageNumber: number;
     pageSize: number;
@@ -41,17 +41,28 @@ export type PendingMemberListResponseDtoType = {
   content: MemberInfoType[];
 } & PaginationElementType;
 
-export type GrantPendingMemberRequestDtoType = {
-  memberIdList: number[];
-};
-
-export type GrantPendingMemberResponseDtoType = {
-  grantedMembers: string[];
-  notGrantedMembers: string[];
-};
-
 export type PaymentStatusMemberListResponseDtoType = {
   content: MemberInfoType[];
 } & PaginationElementType;
 
 export type MemberPaymentStatusResponseDtoType = StatusType;
+
+export type DetailMemberInfoType = {
+  name: string;
+  studentId: string;
+  phone: string;
+  departmentName: string;
+  email: string;
+  discordUsername: string;
+  nickname: string;
+};
+
+export type DetailMemberModalInfoType = {
+  "이름": DetailMemberInfoType["name"];
+  "학번": DetailMemberInfoType["studentId"];
+  "전화번호": DetailMemberInfoType["phone"];
+  "소속 학과": DetailMemberInfoType["departmentName"];
+  "이메일": DetailMemberInfoType["email"];
+  "디스코드 사용자명": DetailMemberInfoType["discordUsername"];
+  "디스코드 별명": DetailMemberInfoType["nickname"];
+};

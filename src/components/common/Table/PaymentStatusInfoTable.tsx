@@ -5,10 +5,9 @@ import {
 import styled from "@emotion/styled";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
-import DetailInfoModal from "../Modal/DetailInfoModal";
 
 export default function PaymentStatusInfoTable() {
-  const [detailInfoModalOpen] = useState(false);
+  const [] = useState(false);
 
   const { paginationModel } = usePaymentStatusSearchInfoState();
   const { setPaginationModel } = usePaymentStatusSearchInfoDispatch();
@@ -29,7 +28,6 @@ export default function PaymentStatusInfoTable() {
         disableColumnMenu
         disableColumnSorting
       />
-      {detailInfoModalOpen && <DetailInfoModal />}
     </>
   );
 }

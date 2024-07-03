@@ -56,7 +56,7 @@ export default function AllMembersInfoTable() {
         studentId,
         name,
         phone,
-        department: { name: departmentName },
+        department: { name: departmentName, code: departmentCode },
         email,
         discordUsername,
         nickname,
@@ -67,7 +67,8 @@ export default function AllMembersInfoTable() {
         studentId: studentId,
         name: name,
         phone: phone,
-        department: departmentName,
+        departmentName,
+        departmentCode,
         email: email,
         discordUsername: discordUsername,
         nickname: nickname,
@@ -81,7 +82,8 @@ export default function AllMembersInfoTable() {
       studentId,
       name,
       phone,
-      department,
+      departmentName,
+      departmentCode,
       email,
       discordUsername,
       nickname,
@@ -92,7 +94,10 @@ export default function AllMembersInfoTable() {
       studentId,
       name,
       phone,
-      department,
+      department: {
+        name: departmentName,
+        code: departmentCode,
+      },
       email,
       discordUsername,
       nickname,
@@ -105,7 +110,22 @@ export default function AllMembersInfoTable() {
     mutate(targetMemberId);
   };
 
-  const handleCloseModal = () => setEditModalOpen(false);
+  const handleCloseModal = () => {
+    setEditMemberInfo({
+      memberId: 0,
+      studentId: "",
+      name: "",
+      phone: "",
+      department: {
+        code: "",
+        name: "",
+      },
+      email: "",
+      discordUsername: "",
+      nickname: "",
+    });
+    setEditModalOpen(false);
+  };
 
   return (
     <>
@@ -123,14 +143,12 @@ export default function AllMembersInfoTable() {
         disableColumnMenu
         disableColumnSorting
       />
-      {editModalOpen && (
-        <EditInfoModal
-          open={editModalOpen}
-          onClose={handleCloseModal}
-          memberInfo={editMemberInfo}
-          key={editMemberInfo.memberId}
-        />
-      )}
+      <EditInfoModal
+        open={editModalOpen}
+        onClose={handleCloseModal}
+        memberInfo={editMemberInfo}
+        key={editMemberInfo.memberId}
+      />
     </>
   );
 }
@@ -142,15 +160,15 @@ const getColumns = (
   {
     field: "studentId",
     headerName: "학번",
-    headerAlign: "center",
-    width: 75,
+    headerAlign: "left",
+    width: 85,
     resizable: false,
     editable: false,
   },
   {
     field: "name",
     headerName: "이름",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 75,
     resizable: false,
     editable: false,
@@ -158,15 +176,15 @@ const getColumns = (
   {
     field: "phone",
     headerName: "전화번호",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 120,
     resizable: false,
     editable: false,
   },
   {
-    field: "department",
+    field: "departmentName",
     headerName: "소속 학과",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 140,
     resizable: false,
     editable: false,
@@ -174,7 +192,7 @@ const getColumns = (
   {
     field: "email",
     headerName: "이메일",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 165,
     resizable: false,
     editable: false,
@@ -182,7 +200,7 @@ const getColumns = (
   {
     field: "discordUsername",
     headerName: "디스코드 사용자명",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 125,
     resizable: false,
     editable: false,
@@ -190,7 +208,7 @@ const getColumns = (
   {
     field: "nickname",
     headerName: "디스코드 별명",
-    headerAlign: "center",
+    headerAlign: "left",
     width: 100,
     resizable: false,
     editable: false,

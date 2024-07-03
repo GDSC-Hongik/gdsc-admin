@@ -6,7 +6,7 @@ export const membersLinkButtonInfoList = [
     path: RoutePath.AllMembers,
   },
   {
-    label: "가입 대기 멤버 관리",
+    label: "가입 대기 회원 관리",
     path: RoutePath.PendingMembers,
   },
 ];
@@ -21,7 +21,7 @@ export const paymentLinkButtonInfoList = [
     path: RoutePath.Coupon,
   },
   {
-    label: "쿠폰 지급 명단 관리",
+    label: "발급한 쿠폰 관리",
     path: RoutePath.CouponProvisionMembers,
   },
   {
