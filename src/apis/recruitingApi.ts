@@ -1,4 +1,4 @@
-import { SemesterVariantType } from "@/types/dtos/recruiting";
+import { SemesterVariantType } from "@/types/entities/recruiting";
 import { apiClient } from ".";
 
 export const recruitingApi = {

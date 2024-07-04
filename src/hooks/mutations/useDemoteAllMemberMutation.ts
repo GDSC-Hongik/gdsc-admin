@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { recruitingApi } from "@/apis/recruitingApi";
-import { SemesterVariantType } from "@/types/dtos/recruiting";
+import { SemesterVariantType } from "@/types/entities/recruiting";
 
 export default function useDemoteAllMemberMutation(
   academicYear: number,

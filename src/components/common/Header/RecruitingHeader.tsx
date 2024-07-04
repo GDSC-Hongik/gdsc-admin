@@ -11,7 +11,7 @@ import {
 import styled from "@emotion/styled";
 import { semesterList } from "@/constants/header";
 import useDemoteAllMemberMutation from "@/hooks/mutations/useDemoteAllMemberMutation";
-import { SemesterVariantType } from "@/types/dtos/recruiting";
+import { SemesterVariantType } from "@/types/entities/recruiting";
 
 export default function RecruitingHeader() {
   const [semester, setSemester] = useState<SemesterVariantType | "">("");

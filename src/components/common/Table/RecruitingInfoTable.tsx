@@ -30,7 +30,9 @@ export default function RecruitingInfoTable() {
     }));
   };
 
-  const handleClickEditRecruitingInfo = (recruitmentId: number) => {};
+  const handleClickEditRecruitingInfo = (recruitmentId: number) => {
+    console.log(recruitmentId);
+  };
 
   return (
     <>

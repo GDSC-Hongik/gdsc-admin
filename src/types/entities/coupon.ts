@@ -1,5 +1,3 @@
-import { IssuedCouponType } from "../dtos/coupon";
-
 export type CouponInfoType = {
   name: string;
   discountAmount: null | number;
@@ -14,4 +12,26 @@ export type DetailCouponInfoType = {
   discountAmount: string;
   usedAt: string;
   isUsed: string;
+};
+
+export type IssuedCouponType = {
+  issuedCouponId: number;
+  member: {
+    memberId: number;
+    studentId: string;
+    name: string;
+    email: string;
+    phone: string;
+  };
+  couponName: string;
+  discountAmount: number;
+  usedAt: string;
+  isUsed: boolean;
+};
+
+export type CouponType = {
+  couponId: number;
+  name: string;
+  discountAmount: number;
+  createdAt: string;
 };

@@ -1,5 +1,4 @@
-import { SemesterVariantType } from "@/types/dtos/recruiting";
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { createContext, ReactNode } from "react";
 
 type SearchStateType = {};
 
