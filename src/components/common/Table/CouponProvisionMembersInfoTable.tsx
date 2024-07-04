@@ -1,13 +1,9 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
-import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
-import DetailInfoModal from "../Modal/DetailInfoModal";
-import { DetailCouponInfoType } from "@/types/entities/coupon";
 
 const mockIssuedCouponList = [
   {
@@ -55,17 +51,6 @@ const mockIssuedCouponList = [
 ];
 
 export default function CouponProvisionMembersInfoTable() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [detailInfo, setDetailInfo] = useState<DetailCouponInfoType>({
-    id: 0,
-    studentId: "",
-    name: "",
-    phone: "",
-    couponName: "",
-    discountAmount: "",
-    usedAt: "",
-    isUsed: "",
-  });
   //   const issuedCouponList = useGetIssuedCouponListQuery();
 
   const getFilteredIssuedCouponList = (issuedCouponList: IssuedCouponType[]) => {
@@ -81,22 +66,11 @@ export default function CouponProvisionMembersInfoTable() {
     }));
   };
 
-  const handleClickCouponDetail = (row: GridRowModel) => {
-    const { id, studentId, name, phone, couponName, discountAmount, usedAt, isUsed } = row;
-
-    setDetailInfo({ id, studentId, name, phone, couponName, discountAmount, usedAt, isUsed });
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
   return (
     <>
       <StyledDataGrid
         rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-        columns={getColumns(handleClickCouponDetail)}
+        columns={columns}
         autoHeight
         disableRowSelectionOnClick
         disableColumnFilter
@@ -104,12 +78,11 @@ export default function CouponProvisionMembersInfoTable() {
         disableColumnSorting
         hideFooterPagination
       />
-      <DetailInfoModal open={modalOpen} onClose={handleCloseModal} detailInfo={detailInfo} />
     </>
   );
 }
 
-const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridColDef[] => [
+const columns: GridColDef[] = [
   {
     field: "studentId",
     headerName: "학번",
@@ -173,39 +146,6 @@ const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridC
     resizable: false,
     editable: false,
   },
-  {
-    field: "detailInfo",
-    headerName: "",
-    sortable: false,
-    flex: 1,
-    renderCell: (params: GridCellParams) => {
-      return (
-        <StyledButtonWrapper>
-          <StyledButton
-            variant="outlined"
-            color="secondary"
-            onClick={() => handleClickCouponDetail(params.row)}
-          >
-            상세
-          </StyledButton>
-        </StyledButtonWrapper>
-      );
-    },
-  },
 ];
-
-const StyledButtonWrapper = styled("div")({
-  display: "flex",
-  gap: 8,
-  alignItems: "center",
-  justifyContent: "flex-end",
-  paddingTop: 9,
-});
-
-const StyledButton = styled(Button)({
-  padding: "6px 16px",
-  height: "32px",
-  width: "66px",
-});
 
 const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
