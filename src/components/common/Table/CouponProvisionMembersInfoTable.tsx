@@ -1,19 +1,17 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
-import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponType } from "@/types/entities/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
-import DetailInfoModal from "../Modal/DetailInfoModal";
-import { DetailCouponInfoType } from "@/types/entities/coupon";
+import useRevokeIssuedCouponMutation from "@/hooks/mutations/useRevokeIssuedCouponMutation";
 
 const mockIssuedCouponList = [
   {
-    issuedCouponId: 0,
+    issuedCouponId: 2,
     member: {
-      memberId: 0,
+      memberId: 1,
       studentId: "C111206",
       name: "홍서현",
       email: "ghdtjgus76@naver.com",
@@ -21,52 +19,16 @@ const mockIssuedCouponList = [
     },
     couponName: "2024-1 정규 스터디 수료 쿠폰",
     discountAmount: 10000,
-    usedAt: "2024-06-29T07:47:58.632Z",
+    usedAt: "2024-07-04T04:26:16.587Z",
+    issuedAt: "2024-07-04T04:26:16.587Z",
     isUsed: true,
-  },
-  {
-    issuedCouponId: 1,
-    member: {
-      memberId: 0,
-      studentId: "C111206",
-      name: "string",
-      email: "string",
-      phone: "string",
-    },
-    couponName: "string",
-    discountAmount: 0,
-    usedAt: "2024-06-29T07:47:58.632Z",
-    isUsed: true,
-  },
-  {
-    issuedCouponId: 2,
-    member: {
-      memberId: 0,
-      studentId: "C111206",
-      name: "string",
-      email: "string",
-      phone: "string",
-    },
-    couponName: "string",
-    discountAmount: 0,
-    usedAt: "2024-06-29T07:47:58.632Z",
-    isUsed: true,
+    isRevoked: true,
   },
 ];
 
 export default function CouponProvisionMembersInfoTable() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [detailInfo, setDetailInfo] = useState<DetailCouponInfoType>({
-    id: 0,
-    studentId: "",
-    name: "",
-    phone: "",
-    couponName: "",
-    discountAmount: "",
-    usedAt: "",
-    isUsed: "",
-  });
   //   const issuedCouponList = useGetIssuedCouponListQuery();
+  const { mutate } = useRevokeIssuedCouponMutation();
 
   const getFilteredIssuedCouponList = (issuedCouponList: IssuedCouponType[]) => {
     return issuedCouponList.map(issuedCoupon => ({
@@ -77,26 +39,21 @@ export default function CouponProvisionMembersInfoTable() {
       couponName: issuedCoupon.couponName,
       discountAmount: formatPrice(issuedCoupon.discountAmount),
       usedAt: formatDateWithText(issuedCoupon.usedAt),
+      issuedAt: formatDateWithText(issuedCoupon.issuedAt),
       isUsed: issuedCoupon.isUsed ? "O" : "X",
+      isRevoked: issuedCoupon.isRevoked ? "O" : "X",
     }));
   };
 
-  const handleClickCouponDetail = (row: GridRowModel) => {
-    const { id, studentId, name, phone, couponName, discountAmount, usedAt, isUsed } = row;
-
-    setDetailInfo({ id, studentId, name, phone, couponName, discountAmount, usedAt, isUsed });
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
+  const handleClickRevokeCoupon = (couponId: number) => {
+    mutate(couponId);
   };
 
   return (
     <>
       <StyledDataGrid
         rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-        columns={getColumns(handleClickCouponDetail)}
+        columns={getColumns(handleClickRevokeCoupon)}
         autoHeight
         disableRowSelectionOnClick
         disableColumnFilter
@@ -104,12 +61,11 @@ export default function CouponProvisionMembersInfoTable() {
         disableColumnSorting
         hideFooterPagination
       />
-      <DetailInfoModal open={modalOpen} onClose={handleCloseModal} detailInfo={detailInfo} />
     </>
   );
 }
 
-const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridColDef[] => [
+const getColumns = (handleClickRevokeCoupon: (couponId: number) => void): GridColDef[] => [
   {
     field: "studentId",
     headerName: "학번",
@@ -142,7 +98,7 @@ const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridC
     headerName: "쿠폰",
     headerAlign: "left",
     align: "left",
-    width: 250,
+    width: 190,
     resizable: false,
     editable: false,
   },
@@ -160,7 +116,16 @@ const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridC
     headerName: "사용일시",
     headerAlign: "left",
     align: "left",
-    width: 200,
+    width: 180,
+    resizable: false,
+    editable: false,
+  },
+  {
+    field: "issuedAt",
+    headerName: "발급일시",
+    headerAlign: "left",
+    align: "left",
+    width: 180,
     resizable: false,
     editable: false,
   },
@@ -174,19 +139,29 @@ const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridC
     editable: false,
   },
   {
-    field: "detailInfo",
+    field: "isRevoked",
+    headerName: "회수여부",
+    headerAlign: "left",
+    align: "left",
+    width: 70,
+    resizable: false,
+    editable: false,
+  },
+  {
+    field: "revokeCoupon",
     headerName: "",
     sortable: false,
+    minWidth: 90,
     flex: 1,
     renderCell: (params: GridCellParams) => {
       return (
         <StyledButtonWrapper>
           <StyledButton
             variant="outlined"
-            color="secondary"
-            onClick={() => handleClickCouponDetail(params.row)}
+            color="error"
+            onClick={() => handleClickRevokeCoupon(params.row.id)}
           >
-            상세
+            회수
           </StyledButton>
         </StyledButtonWrapper>
       );
@@ -194,18 +169,15 @@ const getColumns = (handleClickCouponDetail: (row: GridRowModel) => void): GridC
   },
 ];
 
+const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
+
 const StyledButtonWrapper = styled("div")({
   display: "flex",
   gap: 8,
-  alignItems: "center",
-  justifyContent: "flex-end",
   paddingTop: 9,
 });
 
 const StyledButton = styled(Button)({
-  padding: "6px 16px",
+  padding: "8px 22px",
   height: "32px",
-  width: "66px",
 });
-
-const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
