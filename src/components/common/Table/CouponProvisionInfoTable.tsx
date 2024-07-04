@@ -1,20 +1,11 @@
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
-import {
-  DataGrid,
-  GridCellParams,
-  GridColDef,
-  GridRowModel,
-  GridRowSelectionModel,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import {
   useCouponProvisionSearchInfoDispatch,
   useCouponProvisionSearchInfoState,
 } from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
 import { useMemo, useRef, useState } from "react";
 // import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-import MemberDetailInfoModal from "../Modal/MemberDetailInfoModal";
-import { DetailMemberInfoType } from "@/types/dtos/member";
 import CouponProvisionModal from "../Modal/CouponProvisionModal";
 
 const mockData = [
@@ -59,16 +50,6 @@ const mockData = [
 const totalElements = 2;
 
 export default function CouponProvisionInfoTable() {
-  const [detailMemberInfo, setDetailMemberInfo] = useState<DetailMemberInfoType>({
-    name: "",
-    studentId: "",
-    phone: "",
-    departmentName: "",
-    email: "",
-    discordUsername: "",
-    nickname: "",
-  });
-  const [detailModalOpen, setDetailModalOpen] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
   const { paginationModel, provisionModalOpen } = useCouponProvisionSearchInfoState();
@@ -116,50 +97,6 @@ export default function CouponProvisionInfoTable() {
     }));
   };
 
-  const getFilteredDetailInfoList = (detailMemberInfo: DetailMemberInfoType) => {
-    const { name, studentId, phone, departmentName, email, discordUsername, nickname } =
-      detailMemberInfo;
-
-    return {
-      "이름": name,
-      "학번": studentId,
-      "전화번호": phone,
-      "소속 학과": departmentName,
-      "이메일": email,
-      "디스코드 사용자명": discordUsername,
-      "디스코드 별명": nickname,
-    };
-  };
-
-  const handleClickDetail = (row: GridRowModel) => {
-    const { name, studentId, phone, departmentName, email, discordUsername, nickname } = row;
-
-    setDetailMemberInfo({
-      name,
-      studentId,
-      phone,
-      departmentName,
-      email,
-      discordUsername,
-      nickname,
-    });
-    setDetailModalOpen(true);
-  };
-
-  const handleCloseDetailModal = () => {
-    setDetailMemberInfo({
-      name: "",
-      studentId: "",
-      phone: "",
-      departmentName: "",
-      email: "",
-      discordUsername: "",
-      nickname: "",
-    });
-
-    setDetailModalOpen(false);
-  };
-
   const handleRowSelectionModelChange = (newRowSelectionModel: GridRowSelectionModel) => {
     setRowSelectionModel(newRowSelectionModel);
   };
@@ -174,7 +111,7 @@ export default function CouponProvisionInfoTable() {
     <>
       <StyledDataGrid
         rows={getFilteredMemberList(mockData)}
-        columns={getColumns(handleClickDetail)}
+        columns={columns}
         onRowSelectionModelChange={handleRowSelectionModelChange}
         rowSelectionModel={rowSelectionModel}
         checkboxSelection
@@ -189,11 +126,6 @@ export default function CouponProvisionInfoTable() {
         disableColumnMenu
         disableColumnSorting
       />
-      <MemberDetailInfoModal
-        open={detailModalOpen}
-        onClose={handleCloseDetailModal}
-        detailInfo={getFilteredDetailInfoList(detailMemberInfo)}
-      />
       <CouponProvisionModal
         open={provisionModalOpen}
         onClose={handleCloseCouponProvisionModal}
@@ -203,7 +135,7 @@ export default function CouponProvisionInfoTable() {
   );
 }
 
-const getColumns = (handleClickDetail: (row: GridRowModel) => void): GridColDef[] => [
+const columns: GridColDef[] = [
   {
     field: "studentId",
     headerName: "학번",
@@ -245,43 +177,10 @@ const getColumns = (handleClickDetail: (row: GridRowModel) => void): GridColDef[
     headerName: "디스코드 닉네임",
     headerAlign: "left",
     align: "left",
-    width: 180,
+    flex: 1,
     resizable: false,
     editable: false,
-  },
-  {
-    field: "detailInfo",
-    headerName: "",
-    sortable: false,
-    flex: 1,
-    renderCell: (params: GridCellParams) => {
-      return (
-        <StyledButtonWrapper>
-          <StyledButton
-            variant="outlined"
-            color="secondary"
-            onClick={() => handleClickDetail(params.row)}
-          >
-            상세
-          </StyledButton>
-        </StyledButtonWrapper>
-      );
-    },
   },
 ];
 
 const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
-
-const StyledButtonWrapper = styled("div")({
-  display: "flex",
-  gap: 8,
-  alignItems: "center",
-  justifyContent: "flex-end",
-  paddingTop: 9,
-});
-
-const StyledButton = styled(Button)({
-  padding: "6px 16px",
-  height: "32px",
-  width: "66px",
-});
