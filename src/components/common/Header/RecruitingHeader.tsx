@@ -30,7 +30,12 @@ export default function RecruitingHeader() {
     <StyledHeaderWrapper>
       <StyledFormControl>
         <InputLabel>활동학기</InputLabel>
-        <Select label="활동학기" value={semester} onChange={handleChangeSemester}>
+        <Select
+          label="활동학기"
+          value={semester}
+          onChange={handleChangeSemester}
+          style={{ height: "42px" }}
+        >
           {semesterList.map(semester => (
             <MenuItem value={semester.value} key={semester.value}>
               {semester.name}
@@ -63,5 +68,14 @@ const StyledButton = styled(Button)({
 });
 
 const StyledFormControl = styled(FormControl)({
-  width: "115px",
+  "width": "115px",
+
+  ".MuiFormLabel-root": {
+    top: "-6px",
+  },
+
+  ".MuiInputLabel-shrink": {
+    height: "fit-content",
+    top: "0",
+  },
 });
