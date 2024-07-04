@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-// import useGetCouponListQuery from "@/hooks/queries/useGetCouponListQuery";
+import useGetCouponListQuery from "@/hooks/queries/useGetCouponListQuery";
 import { CouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import {
@@ -11,52 +11,13 @@ import {
 import CouponModal from "../Modal/CouponModal";
 import { formatPrice } from "@/utils/validation/formatPrice";
 
-const mockCouponList = [
-  {
-    couponId: 1,
-    name: "string",
-    discountAmount: 1234,
-    createdAt: "2024-06-27T17:43:56.259Z",
-  },
-  {
-    couponId: 2,
-    name: "string",
-    discountAmount: 2234,
-    createdAt: "2024-06-27T17:43:56.259Z",
-  },
-  {
-    couponId: 3,
-    name: "string",
-    discountAmount: 3234,
-    createdAt: "2024-06-27T17:43:56.259Z",
-  },
-  {
-    couponId: 4,
-    name: "string",
-    discountAmount: 4234,
-    createdAt: "2024-06-27T17:43:56.259Z",
-  },
-  {
-    couponId: 5,
-    name: "string",
-    discountAmount: 5234,
-    createdAt: "2024-06-27T17:43:56.259Z",
-  },
-  {
-    couponId: 6,
-    name: "string",
-    discountAmount: 234,
-    createdAt: "2024-06-27T17:43:56.259Z",
-  },
-];
-
 export default function CouponInfoTable() {
   const modalKey = useRef(0);
 
   const { modalOpen } = useCouponSearchInfoState();
   const { setModalOpen } = useCouponSearchInfoDispatch();
 
-  //   const couponList = useGetCouponListQuery();
+  const couponList = useGetCouponListQuery();
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -75,7 +36,7 @@ export default function CouponInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredCouponList(mockCouponList)}
+        rows={getFilteredCouponList(couponList)}
         columns={columns}
         autoHeight
         disableRowSelectionOnClick
