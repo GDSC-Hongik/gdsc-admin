@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
-import { Button } from "@mui/material";
+import useRevokeIssuedCouponMutation from "@/hooks/mutations/useRevokeIssuedCouponMutation";
 
 const mockIssuedCouponList = [
   {
-    issuedCouponId: 1,
+    issuedCouponId: 2,
     member: {
       memberId: 1,
       studentId: "C111206",
@@ -27,6 +28,7 @@ const mockIssuedCouponList = [
 
 export default function CouponProvisionMembersInfoTable() {
   //   const issuedCouponList = useGetIssuedCouponListQuery();
+  const { mutate } = useRevokeIssuedCouponMutation();
 
   const getFilteredIssuedCouponList = (issuedCouponList: IssuedCouponType[]) => {
     return issuedCouponList.map(issuedCoupon => ({
@@ -43,11 +45,15 @@ export default function CouponProvisionMembersInfoTable() {
     }));
   };
 
+  const handleClickRevokeCoupon = (couponId: number) => {
+    mutate(couponId);
+  };
+
   return (
     <>
       <StyledDataGrid
         rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
-        columns={columns}
+        columns={getColumns(handleClickRevokeCoupon)}
         autoHeight
         disableRowSelectionOnClick
         disableColumnFilter
@@ -59,7 +65,7 @@ export default function CouponProvisionMembersInfoTable() {
   );
 }
 
-const columns: GridColDef[] = [
+const getColumns = (handleClickRevokeCoupon: (couponId: number) => void): GridColDef[] => [
   {
     field: "studentId",
     headerName: "학번",
@@ -150,7 +156,11 @@ const columns: GridColDef[] = [
     renderCell: (params: GridCellParams) => {
       return (
         <StyledButtonWrapper>
-          <StyledButton variant="outlined" color="error" onClick={() => {}}>
+          <StyledButton
+            variant="outlined"
+            color="error"
+            onClick={() => handleClickRevokeCoupon(params.row.id)}
+          >
             회수
           </StyledButton>
         </StyledButtonWrapper>

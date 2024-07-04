@@ -12,7 +12,7 @@ export const couponApi = {
     return response.data;
   },
 
-  deleteCoupon: async (issuedCouponId: number) => {
+  revokeIssuedCoupon: async (issuedCouponId: number) => {
     const response = await apiClient.delete(`/admin/coupons/issued/${issuedCouponId}`);
     return response.data;
   },

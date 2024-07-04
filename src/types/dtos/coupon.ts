@@ -19,7 +19,9 @@ export type IssuedCouponType = {
   couponName: string;
   discountAmount: number;
   usedAt: string;
+  issuedAt: string;
   isUsed: boolean;
+  isRevoked: boolean;
 };
 
 export type IssuedCouponListResponseDtoType = IssuedCouponType[];

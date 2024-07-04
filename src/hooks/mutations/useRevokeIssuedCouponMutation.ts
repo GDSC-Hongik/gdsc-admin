@@ -3,14 +3,14 @@ import { QueryKey } from "@/constants/queryKey";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export default function useDeleteCouponMutation() {
+export default function useRevokeIssuedCouponMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: couponApi.deleteCoupon,
+    mutationFn: couponApi.revokeIssuedCoupon,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QueryKey.couponList],
+        queryKey: [QueryKey.issuedCouponList],
       });
       toast.success("쿠폰을 회수하였습니다.");
     },
