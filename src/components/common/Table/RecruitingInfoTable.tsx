@@ -35,17 +35,16 @@ export default function RecruitingInfoTable() {
   };
 
   return (
-    <>
-      <StyledDataGrid
-        rows={getFilteredRecruitingInfo(mockData)}
-        columns={getColumns(handleClickEditRecruitingInfo)}
-        disableRowSelectionOnClick
-        autoHeight
-        disableColumnFilter
-        disableColumnMenu
-        disableColumnSorting
-      />
-    </>
+    <StyledDataGrid
+      rows={getFilteredRecruitingInfo(mockData)}
+      columns={getColumns(handleClickEditRecruitingInfo)}
+      disableRowSelectionOnClick
+      autoHeight
+      disableColumnFilter
+      disableColumnMenu
+      disableColumnSorting
+      hideFooter
+    />
   );
 }
 
