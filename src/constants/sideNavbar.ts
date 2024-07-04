@@ -32,11 +32,11 @@ export const paymentLinkButtonInfoList = [
 
 export const recruitingLinkButtonInfoList = [
   {
-    label: "리크루팅 관리",
+    label: "학기 정보 관리",
     path: RoutePath.Recruiting,
   },
   {
-    label: "리크루팅 회차 관리",
+    label: "모집 회차 관리",
     path: RoutePath.RecruitingRound,
   },
 ];
