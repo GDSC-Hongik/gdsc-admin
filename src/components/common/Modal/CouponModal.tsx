@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from "react";
-import { typo } from "@/styles/typo";
 import styled from "@emotion/styled";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import useCreateCouponMutation from "@/hooks/mutations/useCreateCouponMutation";
@@ -39,11 +38,11 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
-        <StyledTitle css={typo.h1}>{"쿠폰 생성"}</StyledTitle>
+        <StyledTitle>{"쿠폰 생성"}</StyledTitle>
         <StyledContent>
           <StyledInfoRow>
             <StyledInfoWrapper>
-              <Typography css={typo.h6}>이름</Typography>
+              <StyledText>이름</StyledText>
               <StyledTextField
                 placeholder="이름"
                 size="small"
@@ -53,7 +52,7 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
               />
             </StyledInfoWrapper>
             <StyledInfoWrapper>
-              <Typography css={typo.h6}>할인금액</Typography>
+              <StyledText>할인금액</StyledText>
               <StyledTextField
                 placeholder="금액"
                 size="small"
@@ -87,6 +86,20 @@ const StyledModalContentWrapper = styled("main")({
 
 const StyledTitle = styled(Typography)({
   marginBottom: "20px",
+  fontFamily: "SUIT v1",
+  fontSize: "32px",
+  fontWeight: 700,
+  lineHeight: "41.6px",
+  letterSpacing: "-0.32px",
+});
+
+const StyledText = styled(Typography)({
+  color: "#6B6B6B",
+  fontFamily: "SUIT v1",
+  fontSize: "14px",
+  fontWeight: 600,
+  lineHeight: "14px",
+  letterSpacing: "-0.14px",
 });
 
 const StyledInfoRow = styled(Box)({
@@ -108,7 +121,7 @@ const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
-  gap: "12px",
+  gap: "8px",
   flex: 1,
 }));
 
@@ -116,8 +129,8 @@ const StyledTextField = styled(TextField)({
   "width": "274px",
 
   ".MuiInputBase-root": {
-    borderRadius: 0,
-    border: "1px solid #BEC3CC",
+    borderRadius: 4,
+    border: "1px solid #C2C2C2",
     padding: "8px 14px",
     height: "40px",
   },
@@ -130,18 +143,23 @@ const StyledTextField = styled(TextField)({
     lineHeight: "22.4px",
   },
 
+  "fieldset": {
+    border: "none",
+  },
+
   ".MuiInputBase-input::placeholder": {
-    color: "#646D7A",
+    color: "#C2C2C2",
   },
 });
 
 const StyledButton = styled(Button)({
-  width: "316px",
-  height: "63px",
+  width: "328px",
+  height: "48px",
+  padding: "16px 0",
   marginTop: "auto",
-  fontFamily: "Roboto",
-  fontSize: "24px",
-  fontWeight: 500,
-  lineHeight: "26px",
-  letterSpacing: "0.46px",
+  fontFamily: "SUIT v1",
+  fontSize: "16px",
+  fontWeight: 600,
+  lineHeight: "16px",
+  letterSpacing: "-0.16px",
 });
