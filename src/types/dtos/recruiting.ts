@@ -1,1 +1,3 @@
-export type SemesterVariantType = "FIRST" | "SECOND";
+import { RecruitmentType } from "../entities/recruiting";
+
+export type RecruitmentsResponseDtoType = RecruitmentType[];
