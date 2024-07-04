@@ -1,4 +1,4 @@
 export const semesterList = [
-  { value: "1", name: "1학기" },
-  { value: "2", name: "2학기" },
+  { value: "FIRST", name: "1학기" },
+  { value: "SECOND", name: "2학기" },
 ];

@@ -1,10 +1,4 @@
-import { semesterList } from "@/constants/header";
-import {
-  useRecruitingSearchInfoDispatch,
-  useRecruitingSearchInfoState,
-} from "@/hooks/contexts/useRecruitingSearchInfoContext";
-import { SemesterType } from "@/types/dtos/recruiting";
-import styled from "@emotion/styled";
+import { useState } from "react";
 import {
   Stack,
   Button,
@@ -14,39 +8,45 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
+import styled from "@emotion/styled";
+import { semesterList } from "@/constants/header";
+import useDemoteAllMemberMutation from "@/hooks/mutations/useDemoteAllMemberMutation";
+import { SemesterVariantType } from "@/types/dtos/recruiting";
 
 export default function RecruitingHeader() {
-  const { semester } = useRecruitingSearchInfoState();
-  const { setSemester } = useRecruitingSearchInfoDispatch();
+  const [semester, setSemester] = useState<SemesterVariantType | "">("");
+
+  const academicYear = new Date().getFullYear();
+
+  const { mutate } = useDemoteAllMemberMutation(academicYear, semester as SemesterVariantType);
 
   const handleChangeSemester = (e: SelectChangeEvent<unknown>) => {
-    setSemester(e.target.value as SemesterType);
+    setSemester(e.target.value as SemesterVariantType);
   };
 
-  const handleClickAllDemote = () => {};
-  const handleClickCreateRecruitments = () => {};
+  const handleClickAllMemberDemote = () => {
+    semester && mutate();
+    setSemester("");
+  };
+
+  const handleClickCreateRecruitment = () => {};
 
   return (
     <StyledHeaderWrapper>
       <StyledFormControl>
         <InputLabel>활동학기</InputLabel>
-        <Select
-          label="활동학기"
-          value={semester}
-          onChange={handleChangeSemester}
-          style={{ height: "42px" }}
-        >
+        <StyledSelect label="활동학기" value={semester} onChange={handleChangeSemester}>
           {semesterList.map(semester => (
             <MenuItem value={semester.value} key={semester.value}>
               {semester.name}
             </MenuItem>
           ))}
-        </Select>
+        </StyledSelect>
       </StyledFormControl>
-      <StyledButton variant="outlined" color="error" onClick={handleClickAllDemote}>
+      <StyledButton variant="outlined" color="error" onClick={handleClickAllMemberDemote}>
         일괄 강등하기
       </StyledButton>
-      <StyledButton variant="contained" onClick={handleClickCreateRecruitments}>
+      <StyledButton variant="contained" onClick={handleClickCreateRecruitment}>
         활동학기 생성
       </StyledButton>
     </StyledHeaderWrapper>
@@ -61,6 +61,8 @@ const StyledHeaderWrapper = styled(Stack)({
   flexWrap: "wrap",
   padding: "16px",
 });
+
+const StyledSelect = styled(Select)({ height: "42px" });
 
 const StyledButton = styled(Button)({
   padding: "6px 16px",

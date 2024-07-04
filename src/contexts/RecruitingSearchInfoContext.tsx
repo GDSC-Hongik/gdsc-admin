@@ -1,35 +1,26 @@
+import { SemesterVariantType } from "@/types/dtos/recruiting";
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
-type SearchStateType = {
-  semester: "1" | "2" | undefined;
-};
+type SearchStateType = {};
 
-type SearchDispatchType = {
-  setSemester: Dispatch<SetStateAction<SearchStateType["semester"]>>;
-};
+type SearchDispatchType = {};
 
 type RecruitingSearchInfoStateContextProviderPropsType = {
   children: ReactNode;
 };
 
-const defaultState: SearchStateType = {
-  semester: undefined,
-};
+const defaultState: SearchStateType = {};
 
 export const RecruitingSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
-export const RecruitingSearchInfoDispatchContext = createContext<SearchDispatchType>({
-  setSemester: () => {},
-});
+export const RecruitingSearchInfoDispatchContext = createContext<SearchDispatchType>({});
 
 export default function RecruitingSearchInfoContextProvider({
   children,
 }: RecruitingSearchInfoStateContextProviderPropsType) {
-  const [semester, setSemester] = useState<SearchStateType["semester"]>(undefined);
-
   return (
-    <RecruitingSearchInfoDispatchContext.Provider value={{ setSemester }}>
-      <RecruitingSearchInfoStateContext.Provider value={{ semester }}>
+    <RecruitingSearchInfoDispatchContext.Provider value={{}}>
+      <RecruitingSearchInfoStateContext.Provider value={{}}>
         {children}
       </RecruitingSearchInfoStateContext.Provider>
     </RecruitingSearchInfoDispatchContext.Provider>

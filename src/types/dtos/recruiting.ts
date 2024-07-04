@@ -1,1 +1,1 @@
-export type SemesterType = "1" | "2";
+export type SemesterVariantType = "FIRST" | "SECOND";
