@@ -1,20 +1,8 @@
-import { useState } from "react";
 import { Stack, Button } from "@mui/material";
 import styled from "@emotion/styled";
-import useDemoteAllMemberMutation from "@/hooks/mutations/useDemoteAllMemberMutation";
-import { SemesterVariantType } from "@/types/entities/recruiting";
 
 export default function RecruitingHeader() {
-  const [semester, setSemester] = useState<SemesterVariantType | "">("");
-
-  const academicYear = new Date().getFullYear();
-
-  const { mutate } = useDemoteAllMemberMutation(academicYear, semester as SemesterVariantType);
-
-  const handleClickAllMemberDemote = () => {
-    semester && mutate();
-    setSemester("");
-  };
+  const handleClickAllMemberDemote = () => {};
 
   const handleClickCreateRecruitment = () => {};
 
