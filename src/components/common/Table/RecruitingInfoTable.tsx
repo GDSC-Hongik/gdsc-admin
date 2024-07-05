@@ -8,6 +8,7 @@ import {
 import { RecruitmentsResponseDtoType } from "@/types/dtos/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
+import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
 
 const mockData: RecruitmentsResponseDtoType = [
   {
@@ -21,8 +22,8 @@ const mockData: RecruitmentsResponseDtoType = [
 ];
 
 export default function RecruitingInfoTable() {
-  const { demoteModalOpen } = useRecruitingSearchInfoState();
-  const { setDemoteModalOpen } = useRecruitingSearchInfoDispatch();
+  const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitingSearchInfoState();
+  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitingSearchInfoDispatch();
 
   const getFilteredRecruitingInfo = (recruitingInfo: RecruitmentsResponseDtoType) => {
     return recruitingInfo.map(info => ({
@@ -39,6 +40,10 @@ export default function RecruitingInfoTable() {
     setDemoteModalOpen(false);
   };
 
+  const handleCloseCreateSemesterInfoModal = () => {
+    setCreateSemesterInfoModalOpen(false);
+  };
+
   return (
     <>
       <StyledDataGrid
@@ -52,6 +57,10 @@ export default function RecruitingInfoTable() {
         hideFooter
       />
       <DemoteMembersModal open={demoteModalOpen} onClose={handleCloseDemoteModal} />
+      <CreateSemesterInfoModal
+        open={createSemesterInfoModalOpen}
+        onClose={handleCloseCreateSemesterInfoModal}
+      />
     </>
   );
 }

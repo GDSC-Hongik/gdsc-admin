@@ -1,7 +1,7 @@
+import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import WarningIcon from "@/assets/warning.svg?react";
-import { ChangeEvent, useState } from "react";
 import useDemoteAllMemberMutation from "@/hooks/mutations/useDemoteAllMemberMutation";
 
 type DemoteMembersModalPropsType = {

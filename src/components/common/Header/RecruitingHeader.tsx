@@ -3,13 +3,15 @@ import styled from "@emotion/styled";
 import { useRecruitingSearchInfoDispatch } from "@/hooks/contexts/useRecruitingSearchInfoContext";
 
 export default function RecruitingHeader() {
-  const { setDemoteModalOpen } = useRecruitingSearchInfoDispatch();
+  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitingSearchInfoDispatch();
 
   const handleClickAllMemberDemote = () => {
     setDemoteModalOpen(true);
   };
 
-  const handleClickCreateRecruitment = () => {};
+  const handleClickCreateRecruitment = () => {
+    setCreateSemesterInfoModalOpen(true);
+  };
 
   return (
     <StyledHeaderWrapper>
