@@ -5,7 +5,7 @@ import { SemesterVariantType } from "@/types/entities/recruiting";
 
 export default function useDemoteAllMemberMutation(
   academicYear: number,
-  semesterType: SemesterVariantType,
+  semesterType: SemesterVariantType | null,
 ) {
   return useMutation({
     mutationFn: () => recruitingApi.demoteAllMember(academicYear, semesterType),

@@ -1,9 +1,14 @@
+import {
+  useRecruitingSearchInfoDispatch,
+  useRecruitingSearchInfoState,
+} from "@/hooks/contexts/useRecruitingSearchInfoContext";
 import { RecruitmentsResponseDtoType } from "@/types/dtos/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import DemoteMembersModal from "../Modal/DemoteMembersModal";
 
 const mockData: RecruitmentsResponseDtoType = [
   {
@@ -18,6 +23,9 @@ const mockData: RecruitmentsResponseDtoType = [
 ];
 
 export default function RecruitingInfoTable() {
+  const { demoteModalOpen } = useRecruitingSearchInfoState();
+  const { setDemoteModalOpen } = useRecruitingSearchInfoDispatch();
+
   const getFilteredRecruitingInfo = (recruitingInfo: RecruitmentsResponseDtoType) => {
     return recruitingInfo.map(info => ({
       id: info.recruitmentId,
@@ -34,17 +42,24 @@ export default function RecruitingInfoTable() {
     console.log(recruitmentId);
   };
 
+  const handleCloseDemoteModal = () => {
+    setDemoteModalOpen(false);
+  };
+
   return (
-    <StyledDataGrid
-      rows={getFilteredRecruitingInfo(mockData)}
-      columns={getColumns(handleClickEditRecruitingInfo)}
-      disableRowSelectionOnClick
-      autoHeight
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSorting
-      hideFooter
-    />
+    <>
+      <StyledDataGrid
+        rows={getFilteredRecruitingInfo(mockData)}
+        columns={getColumns(handleClickEditRecruitingInfo)}
+        disableRowSelectionOnClick
+        autoHeight
+        disableColumnFilter
+        disableColumnMenu
+        disableColumnSorting
+        hideFooter
+      />
+      <DemoteMembersModal open={demoteModalOpen} onClose={handleCloseDemoteModal} />
+    </>
   );
 }
 
