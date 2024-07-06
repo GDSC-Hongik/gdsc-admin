@@ -8,7 +8,7 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
-  Stack,
+  Box,
 } from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
@@ -234,13 +234,13 @@ const StyledModalContentWrapper = styled("main")({
   boxSizing: "border-box",
 });
 
-const StyledContentWrapper = styled(Stack)({
+const StyledContentWrapper = styled(Box)({
   height: "410px",
   padding: "10px",
   marginBottom: "20px",
 });
 
-const StyledInfoRowWrapper = styled(Stack)({
+const StyledInfoRowWrapper = styled(Box)({
   display: "flex",
   gap: "19.15px",
   height: "fit-content",
@@ -256,7 +256,7 @@ const StyledTitle = styled(Typography)({
   letterSpacing: "-0.32px",
 });
 
-const StyledInfoWrapper = styled(Stack)<{ height?: number }>(({ height }) => ({
+const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
   height: height ? `${height}px` : "89px",
   display: "flex",
   flexDirection: "column",

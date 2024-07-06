@@ -6,7 +6,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  Stack,
+  Box,
   styled,
   TextField,
 } from "@mui/material";
@@ -108,15 +108,15 @@ const StyledHeaderWrapper = styled("header")({
   padding: "16px",
 });
 
-const StyledHeaderLeftColWrapper = styled(Stack)({
-  gap: 10,
-  flexDirection: "row",
+const StyledHeaderLeftColWrapper = styled(Box)({
+  display: "flex",
+  gap: 20,
   alignItems: "center",
   flexWrap: "wrap",
   width: "fit-content",
 });
 
-const StyledHeaderRightColWrapper = styled(Stack)({
+const StyledHeaderRightColWrapper = styled(Box)({
   justifyContent: "space-between",
 });
 
