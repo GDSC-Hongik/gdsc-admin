@@ -14,7 +14,8 @@ const createApiClient = (): AxiosInstance => {
   apiClient.interceptors.request.use(config => {
     // const authStorage = useAuthStorage();
 
-    const accessToken = "";
+    const accessToken =
+      "eyJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJnZHNjLWhvbmdpayIsInN1YiI6IjI5NSIsImlhdCI6MTcwODA1NjQzMCwiZXhwIjoxODI4MDYzNjMwLCJyb2xlIjoiQURNSU4ifQ.IU6M3GCNMMblOG6KWBiN_0VInptZNTl-TaI4I_Cg74YEFAskGhUEeBUZsV8GQlSW";
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;

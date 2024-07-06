@@ -15,8 +15,8 @@ const mockData = [
     academicYear: "2024",
     semester: "1",
     round: 1,
-    startDate: formatDateWithDot("2024-07-06T10:03:25.743Z"),
-    endDate: formatDateWithDot("2024-07-06T10:03:25.743Z"),
+    startDate: formatDateWithDot("2024-07-05T10:03:25.743Z"),
+    endDate: formatDateWithDot("2024-07-05T10:03:25.743Z"),
     name: "2024년도 2학기 정회원 모집",
   },
 ];
@@ -28,7 +28,7 @@ export default function RecruitingRoundInfoTable() {
   const { createRoundInfoModalOpen } = useRecruitingRoundSearchInfoState();
   const { setCreateRoundInfoModalOpen } = useRecruitingRoundSearchInfoDispatch();
 
-  const editRoundInfoList = mockData.find(data => data.id === editRoundInfoId);
+  const editRoundInfo = mockData.find(data => data.id === editRoundInfoId);
 
   const handleCloseEditRoundInfoModal = () => {
     setEditRoundInfoModalOpen(false);
@@ -59,7 +59,7 @@ export default function RecruitingRoundInfoTable() {
         open={editRoundInfoModalOpen}
         onClose={handleCloseEditRoundInfoModal}
         isEdit
-        roundInfoList={editRoundInfoList}
+        editRoundInfo={editRoundInfo}
       />
       <RecruitingRoundInfoModal
         open={createRoundInfoModalOpen}
