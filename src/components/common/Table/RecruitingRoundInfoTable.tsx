@@ -1,7 +1,13 @@
-import { formatDateWithDot } from "@/utils/validation/formatDate";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import RecruitingRoundInfoModal from "../Modal/RecruitingRoundInfoModal";
+import { formatDateWithDot } from "@/utils/validation/formatDate";
+import {
+  useRecruitingRoundSearchInfoDispatch,
+  useRecruitingRoundSearchInfoState,
+} from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
 
 const mockData = [
   {
@@ -16,19 +22,50 @@ const mockData = [
 ];
 
 export default function RecruitingRoundInfoTable() {
-  const handleClickEditRecruitingRoundInfo = (roundId: number) => {};
+  const [editRoundInfoId, setEditRoundInfoId] = useState(0);
+  const [editRoundInfoModalOpen, setEditRoundInfoModalOpen] = useState(false);
+
+  const { createRoundInfoModalOpen } = useRecruitingRoundSearchInfoState();
+  const { setCreateRoundInfoModalOpen } = useRecruitingRoundSearchInfoDispatch();
+
+  const editRoundInfoList = mockData.find(data => data.id === editRoundInfoId);
+
+  const handleCloseEditRoundInfoModal = () => {
+    setEditRoundInfoModalOpen(false);
+  };
+
+  const handleCloseCreateRoundInfoModal = () => {
+    setCreateRoundInfoModalOpen(false);
+  };
+
+  const handleClickEditRecruitingRoundInfo = (roundId: number) => {
+    setEditRoundInfoId(roundId);
+    setEditRoundInfoModalOpen(true);
+  };
 
   return (
-    <StyledDataGrid
-      rows={mockData}
-      columns={getColumns(handleClickEditRecruitingRoundInfo)}
-      disableRowSelectionOnClick
-      autoHeight
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnSorting
-      hideFooter
-    />
+    <>
+      <StyledDataGrid
+        rows={mockData}
+        columns={getColumns(handleClickEditRecruitingRoundInfo)}
+        disableRowSelectionOnClick
+        autoHeight
+        disableColumnFilter
+        disableColumnMenu
+        disableColumnSorting
+        hideFooter
+      />
+      <RecruitingRoundInfoModal
+        open={editRoundInfoModalOpen}
+        onClose={handleCloseEditRoundInfoModal}
+        isEdit
+        roundInfoList={editRoundInfoList}
+      />
+      <RecruitingRoundInfoModal
+        open={createRoundInfoModalOpen}
+        onClose={handleCloseCreateRoundInfoModal}
+      />
+    </>
   );
 }
 const getColumns = (

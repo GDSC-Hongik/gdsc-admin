@@ -1,9 +1,18 @@
+import { useRecruitingRoundSearchInfoDispatch } from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
 import { Button, Stack, styled } from "@mui/material";
 
 export default function RecruitingRoundHeader() {
+  const { setCreateRoundInfoModalOpen } = useRecruitingRoundSearchInfoDispatch();
+
+  const handleClickCreateRound = () => {
+    setCreateRoundInfoModalOpen(true);
+  };
+
   return (
     <StyledHeaderWrapper>
-      <Button variant="contained">모집 회차 생성</Button>
+      <Button variant="contained" onClick={handleClickCreateRound}>
+        모집 회차 생성
+      </Button>
     </StyledHeaderWrapper>
   );
 }
