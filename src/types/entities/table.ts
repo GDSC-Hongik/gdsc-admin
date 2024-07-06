@@ -1,4 +1,4 @@
-import { SearchVariantType } from "./search";
+import { SearchVariantType } from "./member";
 
 export type MemberInfoSelectMenuType = {
   value: string;

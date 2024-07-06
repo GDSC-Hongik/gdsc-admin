@@ -1,6 +1,7 @@
 import { apiClient } from ".";
 import { PendingMemberListResponseDtoType } from "@/types/dtos/member";
-import { MemberVariantType, SearchVariantType } from "@/types/entities/search";
+import { MemberVariantType } from "@/types/entities/common";
+import { SearchVariantType } from "@/types/entities/member";
 
 export const pendingMemberApi = {
   getPendingMemberList: async (

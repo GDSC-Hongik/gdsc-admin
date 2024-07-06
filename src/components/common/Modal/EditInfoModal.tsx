@@ -2,13 +2,13 @@ import { ChangeEvent, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import {
   Modal,
-  Box,
   Typography,
   Button,
   TextField,
   Select,
   MenuItem,
   SelectChangeEvent,
+  Box,
 } from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
@@ -18,20 +18,7 @@ import XIcon from "@/assets/x.svg?react";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { emailSelectMenu } from "@/constants/table";
-
-export type EditMemberInfoType = {
-  memberId: number;
-  studentId: string;
-  name: string;
-  phone: string;
-  department: {
-    code: string;
-    name: string;
-  };
-  email: string;
-  discordUsername: string;
-  nickname: string;
-};
+import { EditMemberInfoType } from "@/types/entities/member";
 
 type EditInfoModalProps = {
   open: boolean;
@@ -336,7 +323,7 @@ const StyledDivider = styled("div")({
   backgroundColor: "#BEC3CC",
 });
 
-const StyledDepartmentListWrapper = styled(Box)({
+const StyledDepartmentListWrapper = styled("ul")({
   overflowX: "auto",
   overflowY: "hidden",
   display: "flex",
@@ -344,7 +331,7 @@ const StyledDepartmentListWrapper = styled(Box)({
   width: "100%",
 });
 
-const StyledDepartmentItemWrapper = styled(Box)({
+const StyledDepartmentItemWrapper = styled("li")({
   height: "24px",
   gap: "12px",
   display: "flex",

@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
 import EditInfoModal from "../Modal/EditInfoModal";
 import {
@@ -9,27 +9,18 @@ import {
 } from "@/hooks/contexts/useAllMembersSearchInfoContext";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-import { MemberInfoType } from "@/types/entities/member";
+import { EditMemberInfoType, MemberInfoType } from "@/types/entities/member";
 
 export default function AllMembersInfoTable() {
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editMemberInfo, setEditMemberInfo] = useState({
-    memberId: 0,
-    studentId: "",
-    name: "",
-    phone: "",
-    department: {
-      code: "",
-      name: "",
-    },
-    email: "",
-    discordUsername: "",
-    nickname: "",
-  });
+  const [editMemberId, setEditMemberId] = useState(0);
 
   const { mutate } = useDeleteMemberMutation();
 
-  const { paginationModel, searchText, searchVariant } = useAllMembersSearchInfoState();
+  const {
+    paginationModel,
+    searchInfo: { text: searchText, variant: searchVariant },
+  } = useAllMembersSearchInfoState();
   const { setPaginationModel } = useAllMembersSearchInfoDispatch();
 
   const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
@@ -38,6 +29,22 @@ export default function AllMembersInfoTable() {
     searchVariant,
     searchText,
   );
+
+  const editMemberInfo =
+    allMemberList.find(member => member.memberId === editMemberId) ||
+    ({
+      memberId: 0,
+      studentId: "",
+      name: "",
+      phone: "",
+      department: {
+        code: "",
+        name: "",
+      },
+      email: "",
+      discordUsername: "",
+      nickname: "",
+    } as EditMemberInfoType);
 
   const rowCountRef = useRef(totalElements || 0);
 
@@ -64,44 +71,22 @@ export default function AllMembersInfoTable() {
 
       return {
         id: memberId,
-        studentId: studentId,
-        name: name,
-        phone: phone,
+        studentId,
+        name,
+        phone,
         departmentName,
         departmentCode,
-        email: email,
-        discordUsername: discordUsername,
-        nickname: nickname,
+        email,
+        discordUsername,
+        nickname,
       };
     });
   };
 
   const handleClickEditMemberInfo = (row: GridRowModel) => {
-    const {
-      id: memberId,
-      studentId,
-      name,
-      phone,
-      departmentName,
-      departmentCode,
-      email,
-      discordUsername,
-      nickname,
-    } = row;
+    const { id: memberId } = row;
 
-    setEditMemberInfo({
-      memberId,
-      studentId,
-      name,
-      phone,
-      department: {
-        name: departmentName,
-        code: departmentCode,
-      },
-      email,
-      discordUsername,
-      nickname,
-    });
+    setEditMemberId(memberId);
     setEditModalOpen(true);
   };
 
@@ -111,19 +96,7 @@ export default function AllMembersInfoTable() {
   };
 
   const handleCloseModal = () => {
-    setEditMemberInfo({
-      memberId: 0,
-      studentId: "",
-      name: "",
-      phone: "",
-      department: {
-        code: "",
-        name: "",
-      },
-      email: "",
-      discordUsername: "",
-      nickname: "",
-    });
+    setEditMemberId(0);
     setEditModalOpen(false);
   };
 
@@ -147,7 +120,7 @@ export default function AllMembersInfoTable() {
         open={editModalOpen}
         onClose={handleCloseModal}
         memberInfo={editMemberInfo}
-        key={editMemberInfo.memberId}
+        key={editMemberId}
       />
     </>
   );
@@ -220,7 +193,7 @@ const getColumns = (
     width: 156,
     renderCell: (params: GridCellParams) => {
       return (
-        <StyledButtonWrapper>
+        <StyledButtonWrapper flexDirection={"row"}>
           <StyledButton
             variant="outlined"
             color="primary"
@@ -243,7 +216,7 @@ const getColumns = (
 
 const StyledDataGrid = styled(DataGrid)({ border: "none", minHeight: 370 });
 
-const StyledButtonWrapper = styled("div")({
+const StyledButtonWrapper = styled(Stack)({
   display: "flex",
   gap: 8,
   paddingTop: 9,

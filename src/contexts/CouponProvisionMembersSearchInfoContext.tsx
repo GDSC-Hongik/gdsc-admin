@@ -1,5 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { PaginationModelType, SearchVariantType } from "@/types/entities/search";
+import { PaginationModelType } from "@/types/entities/common";
+import { SearchVariantType } from "@/types/entities/member";
 
 type SearchStateType = {
   searchText: string;
@@ -26,7 +27,8 @@ const defaultState: SearchStateType = {
   },
 };
 
-export const CouponProvisionMembersSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const CouponProvisionMembersSearchInfoStateContext =
+  createContext<SearchStateType>(defaultState);
 
 export const CouponProvisionMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
   setSearchText: () => {},

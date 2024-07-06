@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Button, Modal, TextField } from "@mui/material";
-import { DetailMemberModalInfoType } from "@/types/dtos/member";
+import { DetailMemberModalInfoType } from "@/types/entities/member";
 
 type DetailInfoModalPropsType = {
   open: boolean;

@@ -1,5 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { MemberVariantType, PaginationModelType, SearchVariantType } from "@/types/entities/search";
+import { MemberVariantType, PaginationModelType } from "@/types/entities/common";
+import { SearchVariantType } from "@/types/entities/member";
 
 type SearchStateType = {
   searchText: string;
@@ -42,8 +43,7 @@ export default function PendingMembersSearchInfoContextProvider({
   children,
 }: PendingMembersSearchInfoStateContextProviderPropsType) {
   const [searchText, setSearchText] = useState<string>("");
-  const [searchVariant, setSearchVariant] =
-    useState<SearchVariantType>("studentId");
+  const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
   const [memberVariant, setMemberVariant] = useState<MemberVariantType>("ASSOCIATE");
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
     pageSize: 5,
