@@ -193,7 +193,7 @@ const getColumns = (
     width: 156,
     renderCell: (params: GridCellParams) => {
       return (
-        <StyledButtonWrapper>
+        <StyledButtonWrapper flexDirection={"row"}>
           <StyledButton
             variant="outlined"
             color="primary"
