@@ -1,4 +1,4 @@
-import { MemberInfoSelectMenuType, MemberTypeSelectMenuType } from "@/types/entities/table";
+import { MemberInfoSelectMenuType, MemberTypeSelectMenuType } from "@/types/entities/member";
 
 export const memberInfoSelectMenu: MemberInfoSelectMenuType = [
   {
