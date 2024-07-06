@@ -20,10 +20,12 @@ import {
 import { downloadExcelFile } from "@/utils/excel";
 
 export default function AllMembersHeader() {
-  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
+  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState(1);
 
-  const { setSearchText, setSearchVariant, setPaginationModel } = useAllMembersSearchInfoDispatch();
-  const { searchText } = useAllMembersSearchInfoState();
+  const { setSearchInfo, setPaginationModel } = useAllMembersSearchInfoDispatch();
+  const {
+    searchInfo: { text: searchText },
+  } = useAllMembersSearchInfoState();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -44,8 +46,11 @@ export default function AllMembersHeader() {
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
-    setSearchText?.("");
+    setSearchInfo(prevInfo => ({
+      ...prevInfo,
+      variant: memberInfoSelectMenu[targetIndex]["type"],
+      text: "",
+    }));
     setSelectedMemberInfoVariant(targetIndex + 1);
     handleResetPage();
   };
@@ -54,7 +59,10 @@ export default function AllMembersHeader() {
     const text = e.target.value;
     text.length === 1 && handleResetPage();
 
-    setSearchText?.(text);
+    setSearchInfo(prevInfo => ({
+      ...prevInfo,
+      text: text,
+    }));
   };
 
   return (
@@ -67,9 +75,9 @@ export default function AllMembersHeader() {
             value={selectedMemberInfoVariant}
             onChange={handleChangeSelectMemberInfoVariant}
           >
-            {memberInfoSelectMenu.map(title => (
-              <MenuItem value={title.value} key={title.value}>
-                {title.name}
+            {memberInfoSelectMenu.map(menu => (
+              <MenuItem value={menu.value} key={menu.value}>
+                {menu.name}
               </MenuItem>
             ))}
           </Select>
@@ -91,9 +99,9 @@ export default function AllMembersHeader() {
   );
 }
 
-const StyledHeaderWrapper = styled(Stack)({
+const StyledHeaderWrapper = styled("header")({
   gap: 20,
-  flexDirection: "row",
+  display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   flexWrap: "wrap",
@@ -105,6 +113,7 @@ const StyledHeaderLeftColWrapper = styled(Stack)({
   flexDirection: "row",
   alignItems: "center",
   flexWrap: "wrap",
+  width: "fit-content",
 });
 
 const StyledHeaderRightColWrapper = styled(Stack)({
@@ -121,5 +130,6 @@ const StyledTextField = styled(TextField)({
 
 const StyledExcelDownloadButton = styled(Button)({
   padding: "8px 22px",
+  width: "134px",
   height: "32px",
 });
