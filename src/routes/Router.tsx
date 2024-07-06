@@ -14,6 +14,7 @@ import RoutePath from "@/routes/routePath";
 import RecruitingPage from "@/pages/RecruitingPage";
 import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPerSemesterPage";
 import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemesterPage";
+import RecruitingRoundPage from "@/pages/RecruitingRoundPage";
 
 const routes: RouteObject[] = [
   {
@@ -31,6 +32,7 @@ const routes: RouteObject[] = [
       { path: RoutePath.CouponProvisionMembers, element: <CouponProvisionMembersPage /> },
       { path: RoutePath.CouponProvision, element: <CouponProvisionPage /> },
       { path: RoutePath.Recruiting, element: <RecruitingPage /> },
+      { path: RoutePath.RecruitingRound, element: <RecruitingRoundPage /> },
       { path: RoutePath.AllMemberHistoryPerSemester, element: <AllMemberHistoryPerSemesterPage /> },
       {
         path: RoutePath.PaymentStatusHistoryPerSemester,

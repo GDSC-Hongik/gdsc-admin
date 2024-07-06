@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 // import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
-import { IssuedCouponType } from "@/types/dtos/coupon";
+import { IssuedCouponType } from "@/types/entities/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
 import useRevokeIssuedCouponMutation from "@/hooks/mutations/useRevokeIssuedCouponMutation";

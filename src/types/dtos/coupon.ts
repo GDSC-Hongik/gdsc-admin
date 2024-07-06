@@ -1,27 +1,5 @@
-type CouponType = {
-  couponId: number;
-  name: string;
-  discountAmount: number;
-  createdAt: string;
-};
+import { CouponType, IssuedCouponType } from "../entities/coupon";
 
 export type CouponListResponseDtoType = CouponType[];
-
-export type IssuedCouponType = {
-  issuedCouponId: number;
-  member: {
-    memberId: number;
-    studentId: string;
-    name: string;
-    email: string;
-    phone: string;
-  };
-  couponName: string;
-  discountAmount: number;
-  usedAt: string;
-  issuedAt: string;
-  isUsed: boolean;
-  isRevoked: boolean;
-};
 
 export type IssuedCouponListResponseDtoType = IssuedCouponType[];

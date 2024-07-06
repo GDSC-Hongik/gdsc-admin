@@ -2,6 +2,7 @@ export type ManagementVariant =
   | "allMember"
   | "pendingMember"
   | "paymentStatus"
+  | "recruiting"
   | "coupon"
   | "couponProvision"
   | "couponProvisionMembers";
