@@ -28,7 +28,6 @@ export default function ApiErrorBoundary({ children }: PropsWithChildren) {
     const message = errorResponse.errorMessage;
 
     switch (axiosError.response?.status) {
-      case 401:
       case 403:
         toast.error(message);
         redirect(RoutePath.AuthorizedError);
