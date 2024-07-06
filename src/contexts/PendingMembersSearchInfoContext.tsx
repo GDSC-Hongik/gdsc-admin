@@ -1,17 +1,15 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { MemberVariantType, PaginationModelType } from "@/types/entities/common";
-import { SearchVariantType } from "@/types/entities/member";
+import { SearchInfoType } from "@/types/entities/member";
 
 type SearchStateType = {
-  searchText: string;
-  searchVariant: SearchVariantType;
+  searchInfo: SearchInfoType;
   memberVariant: MemberVariantType;
   paginationModel: PaginationModelType;
 };
 
 type SearchDispatchType = {
-  setSearchText: Dispatch<SetStateAction<string>>;
-  setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
+  setSearchInfo: Dispatch<SetStateAction<SearchInfoType>>;
   setMemberVariant: Dispatch<SetStateAction<MemberVariantType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
@@ -21,8 +19,10 @@ type PendingMembersSearchInfoStateContextProviderPropsType = {
 };
 
 const defaultState: SearchStateType = {
-  searchText: "",
-  searchVariant: "studentId",
+  searchInfo: {
+    text: "",
+    variant: "studentId",
+  },
   memberVariant: "ASSOCIATE",
   paginationModel: {
     pageSize: 5,
@@ -33,8 +33,7 @@ const defaultState: SearchStateType = {
 export const PendingMembersSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
 export const PendingMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
-  setSearchText: () => {},
-  setSearchVariant: () => {},
+  setSearchInfo: () => {},
   setMemberVariant: () => {},
   setPaginationModel: () => {},
 });
@@ -42,20 +41,16 @@ export const PendingMembersSearchInfoDispatchContext = createContext<SearchDispa
 export default function PendingMembersSearchInfoContextProvider({
   children,
 }: PendingMembersSearchInfoStateContextProviderPropsType) {
-  const [searchText, setSearchText] = useState<string>("");
-  const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
-  const [memberVariant, setMemberVariant] = useState<MemberVariantType>("ASSOCIATE");
-  const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
-    pageSize: 5,
-    page: 0,
-  });
+  const [searchInfo, setSearchInfo] = useState<SearchInfoType>(defaultState.searchInfo);
+  const [memberVariant, setMemberVariant] = useState<MemberVariantType>(defaultState.memberVariant);
+  const [paginationModel, setPaginationModel] = useState<PaginationModelType>(defaultState.paginationModel);
 
   return (
     <PendingMembersSearchInfoDispatchContext.Provider
-      value={{ setSearchText, setMemberVariant, setSearchVariant, setPaginationModel }}
+      value={{ setSearchInfo, setMemberVariant, setPaginationModel }}
     >
       <PendingMembersSearchInfoStateContext.Provider
-        value={{ searchText, searchVariant, memberVariant, paginationModel }}
+        value={{ searchInfo, memberVariant, paginationModel }}
       >
         {children}
       </PendingMembersSearchInfoStateContext.Provider>

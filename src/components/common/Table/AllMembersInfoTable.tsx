@@ -190,7 +190,8 @@ const getColumns = (
     field: "editMember",
     headerName: "",
     sortable: false,
-    width: 156,
+    flex: 1,
+    minWidth: 156,
     renderCell: (params: GridCellParams) => {
       return (
         <StyledButtonWrapper flexDirection={"row"}>

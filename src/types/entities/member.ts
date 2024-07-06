@@ -76,3 +76,15 @@ export type DetailMemberModalInfoType = {
   "디스코드 사용자명": DetailMemberInfoType["discordUsername"];
   "디스코드 별명": DetailMemberInfoType["nickname"];
 };
+
+export type MemberInfoSelectMenuType = {
+  value: string;
+  name: string;
+  type: SearchVariantType;
+}[];
+
+export type MemberTypeSelectMenuType = {
+  value: string;
+  name: string;
+  type: "GUEST" | "ASSOCIATE";
+}[];

@@ -9,8 +9,11 @@ import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberLis
 import { MemberInfoType } from "@/types/entities/member";
 
 export default function PendingMembersInfoTable() {
-  const { paginationModel, searchVariant, searchText, memberVariant } =
-    usePendingMembersSearchInfoState();
+  const {
+    paginationModel,
+    searchInfo: { text: searchText, variant: searchVariant },
+    memberVariant,
+  } = usePendingMembersSearchInfoState();
   const { setPaginationModel } = usePendingMembersSearchInfoDispatch();
 
   const { pendingMemberList = [], totalElements } = useGetPendingMemberListQuery(
@@ -128,7 +131,8 @@ const columns: GridColDef[] = [
     field: "nickname",
     headerName: "디스코드 별명",
     headerAlign: "left",
-    width: 100,
+    flex: 1,
+    minWidth: 100,
     resizable: false,
     editable: false,
   },

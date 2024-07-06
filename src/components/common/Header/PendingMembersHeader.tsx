@@ -19,9 +19,11 @@ export default function PendingMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
   const [selectedMemberVariant, setSelectedMemberVariant] = useState<number>(1);
 
-  const { setSearchText, setSearchVariant, setPaginationModel, setMemberVariant } =
+  const { setSearchInfo, setPaginationModel, setMemberVariant } =
     usePendingMembersSearchInfoDispatch();
-  const { searchText } = usePendingMembersSearchInfoState();
+  const {
+    searchInfo: { text: searchText },
+  } = usePendingMembersSearchInfoState();
 
   const handleResetPage = () => {
     setPaginationModel(prevPaginationModel => ({
@@ -33,8 +35,11 @@ export default function PendingMembersHeader() {
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
-    setSearchText?.("");
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      variant: memberInfoSelectMenu[targetIndex]["type"],
+      text: "",
+    }));
     setSelectedMemberInfoVariant(targetIndex + 1);
     handleResetPage();
   };
@@ -51,7 +56,10 @@ export default function PendingMembersHeader() {
     const text = e.target.value;
     text.length === 1 && handleResetPage();
 
-    setSearchText?.(text);
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      text,
+    }));
   };
 
   return (
@@ -99,8 +107,9 @@ export default function PendingMembersHeader() {
   );
 }
 
-const StyledHeaderWrapper = styled(Stack)({
+const StyledHeaderWrapper = styled("header")({
   gap: 20,
+  display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
@@ -113,6 +122,7 @@ const StyledHeaderLeftColWrapper = styled(Stack)({
   flexDirection: "row",
   alignItems: "center",
   flexWrap: "wrap",
+  width: "fit-content",
 });
 
 const StyledHeaderRightColWrapper = styled(Stack)({
