@@ -2,13 +2,13 @@ import { ChangeEvent, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import {
   Modal,
-  Box,
   Typography,
   Button,
   TextField,
   Select,
   MenuItem,
   SelectChangeEvent,
+  Stack,
 } from "@mui/material";
 import { typo } from "@/styles/typo";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
@@ -18,20 +18,7 @@ import XIcon from "@/assets/x.svg?react";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { emailSelectMenu } from "@/constants/table";
-
-export type EditMemberInfoType = {
-  memberId: number;
-  studentId: string;
-  name: string;
-  phone: string;
-  department: {
-    code: string;
-    name: string;
-  };
-  email: string;
-  discordUsername: string;
-  nickname: string;
-};
+import { EditMemberInfoType } from "@/types/entities/member";
 
 type EditInfoModalProps = {
   open: boolean;
@@ -247,13 +234,13 @@ const StyledModalContentWrapper = styled("main")({
   boxSizing: "border-box",
 });
 
-const StyledContentWrapper = styled(Box)({
+const StyledContentWrapper = styled(Stack)({
   height: "410px",
   padding: "10px",
   marginBottom: "20px",
 });
 
-const StyledInfoRowWrapper = styled(Box)({
+const StyledInfoRowWrapper = styled(Stack)({
   display: "flex",
   gap: "19.15px",
   height: "fit-content",
@@ -269,7 +256,7 @@ const StyledTitle = styled(Typography)({
   letterSpacing: "-0.32px",
 });
 
-const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
+const StyledInfoWrapper = styled(Stack)<{ height?: number }>(({ height }) => ({
   height: height ? `${height}px` : "89px",
   display: "flex",
   flexDirection: "column",
@@ -336,7 +323,7 @@ const StyledDivider = styled("div")({
   backgroundColor: "#BEC3CC",
 });
 
-const StyledDepartmentListWrapper = styled(Box)({
+const StyledDepartmentListWrapper = styled("ul")({
   overflowX: "auto",
   overflowY: "hidden",
   display: "flex",
@@ -344,7 +331,7 @@ const StyledDepartmentListWrapper = styled(Box)({
   width: "100%",
 });
 
-const StyledDepartmentItemWrapper = styled(Box)({
+const StyledDepartmentItemWrapper = styled("li")({
   height: "24px",
   gap: "12px",
   display: "flex",
