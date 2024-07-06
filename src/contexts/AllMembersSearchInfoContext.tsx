@@ -1,25 +1,26 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { PaginationModelType, SearchVariantType } from "@/types/entities/search";
+import { PaginationModelType } from "@/types/entities/search";
+import { SearchInfoType } from "@/types/entities/member";
 
 type AllMembersSearchInfoContextProviderPropsType = {
   children: ReactNode;
 };
 
 type SearchStateType = {
-  searchText: string;
-  searchVariant: SearchVariantType;
+  searchInfo: SearchInfoType;
   paginationModel: PaginationModelType;
 };
 
 type SearchDispatchType = {
-  setSearchText: Dispatch<SetStateAction<string>>;
-  setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
+  setSearchInfo: Dispatch<SetStateAction<SearchInfoType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
 const defaultState: SearchStateType = {
-  searchText: "",
-  searchVariant: "studentId",
+  searchInfo: {
+    text: "",
+    variant: "studentId",
+  },
   paginationModel: {
     pageSize: 5,
     page: 0,
@@ -29,27 +30,25 @@ const defaultState: SearchStateType = {
 export const AllMembersSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
 export const AllMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
-  setSearchText: () => {},
-  setSearchVariant: () => {},
+  setSearchInfo: () => {},
   setPaginationModel: () => {},
 });
 
 export default function AllMembersSearchInfoContextProvider({
   children,
 }: AllMembersSearchInfoContextProviderPropsType) {
-  const [searchText, setSearchText] = useState<string>("");
-  const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
-  const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
-    pageSize: 5,
-    page: 0,
-  });
+  const [searchInfo, setSearchInfo] = useState<SearchInfoType>(defaultState.searchInfo);
+  const [paginationModel, setPaginationModel] = useState<PaginationModelType>(
+    defaultState.paginationModel,
+  );
 
   return (
-    <AllMembersSearchInfoDispatchContext.Provider
-      value={{ setSearchText, setSearchVariant, setPaginationModel }}
-    >
+    <AllMembersSearchInfoDispatchContext.Provider value={{ setSearchInfo, setPaginationModel }}>
       <AllMembersSearchInfoStateContext.Provider
-        value={{ searchText, searchVariant, paginationModel }}
+        value={{
+          searchInfo,
+          paginationModel,
+        }}
       >
         {children}
       </AllMembersSearchInfoStateContext.Provider>

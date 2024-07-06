@@ -37,3 +37,20 @@ export type PendingMemberTableInfoType = {
   nickname: string;
   paymentStatus: "완료" | "미완료";
 };
+
+type MembersSearchVariantType = [
+  "studentId",
+  "name",
+  "phone",
+  "department",
+  "email",
+  "discordUsername",
+  "nickname",
+];
+
+export type SearchVariantType = MembersSearchVariantType[number] | null;
+
+export type SearchInfoType = {
+  text: string;
+  variant: SearchVariantType;
+};
