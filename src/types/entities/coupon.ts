@@ -27,6 +27,8 @@ export type IssuedCouponType = {
   discountAmount: number;
   usedAt: string;
   isUsed: boolean;
+  issuedAt: string;
+  isRevoked: boolean;
 };
 
 export type CouponType = {

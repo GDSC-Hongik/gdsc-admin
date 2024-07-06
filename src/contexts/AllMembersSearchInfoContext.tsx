@@ -1,5 +1,5 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { PaginationModelType } from "@/types/entities/search";
+import { PaginationModelType } from "@/types/entities/common";
 import { SearchInfoType } from "@/types/entities/member";
 
 type AllMembersSearchInfoContextProviderPropsType = {
