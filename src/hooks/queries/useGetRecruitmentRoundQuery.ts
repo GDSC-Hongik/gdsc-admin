@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { recruitmentApi } from "@/apis/recruitmentApi";
 import { QueryKey } from "@/constants/queryKey";
 
-export default function useGetRecruitmentsQuery() {
+export default function useGetRecruitmentRoundQuery() {
   const { data = [] } = useQuery({
-    queryKey: [QueryKey.recruitment],
-    queryFn: recruitmentApi.getRecruitments,
+    queryKey: [QueryKey.recruitmentRound],
+    queryFn: recruitmentApi.getRecruitmentRound,
   });
 
   return data;

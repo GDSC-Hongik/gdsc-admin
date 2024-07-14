@@ -5,7 +5,7 @@ import {
   historyLinkButtonInfoList,
   membersLinkButtonInfoList,
   paymentLinkButtonInfoList,
-  recruitingLinkButtonInfoList,
+  recruitmentLinkButtonInfoList,
 } from "@/constants/sideNavbar";
 
 export default function SideNavbar() {
@@ -17,7 +17,7 @@ export default function SideNavbar() {
         <AccordionLinkListButton label="회비 관리" linkButtonInfoList={paymentLinkButtonInfoList} />
         <AccordionLinkListButton
           label="리크루팅 관리"
-          linkButtonInfoList={recruitingLinkButtonInfoList}
+          linkButtonInfoList={recruitmentLinkButtonInfoList}
         />
         <AccordionLinkListButton label="히스토리" linkButtonInfoList={historyLinkButtonInfoList} />
       </StyledLinkWrapper>
