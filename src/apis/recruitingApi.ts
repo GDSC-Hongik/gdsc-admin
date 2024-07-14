@@ -10,8 +10,21 @@ export const recruitingApi = {
     return response.data;
   },
 
-  getRecruitmentsRounds: async (): Promise<RecruitmentRoundResponseDtoType> => {
+  getRecruitmentRound: async (): Promise<RecruitmentRoundResponseDtoType> => {
     const response = await apiClient.get("/admin/recruitments/rounds");
+    return response.data;
+  },
+
+  editRecruitmentRound: async (
+    recruitmentRoundId: number,
+    body: {
+      name: string;
+      startDate: string;
+      endDate: string;
+      roundType: "FIRST" | "SECOND";
+    },
+  ) => {
+    const response = await apiClient.put(`/admin/recruitments/rounds/${recruitmentRoundId}`, body);
     return response.data;
   },
 };
