@@ -1,5 +1,8 @@
 import { apiClient } from ".";
-import { RecruitmentRoundResponseDtoType } from "@/types/dtos/recruitment";
+import {
+  RecruitmentResponseDtoType,
+  RecruitmentRoundResponseDtoType,
+} from "@/types/dtos/recruitment";
 import { SemesterVariantType } from "@/types/entities/recruitment";
 
 export const recruitmentApi = {
@@ -10,7 +13,7 @@ export const recruitmentApi = {
     return response.data;
   },
 
-  getRecruitments: async () => {
+  getRecruitments: async (): Promise<RecruitmentResponseDtoType> => {
     const response = await apiClient.get("/admin/recruitments");
     return response.data;
   },

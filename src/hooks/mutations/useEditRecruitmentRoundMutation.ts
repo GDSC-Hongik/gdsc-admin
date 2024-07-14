@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { recruitmentApi } from "@/apis/recruitmentApi";
 import { QueryKey } from "@/constants/queryKey";
 
-export default function useEditRecruitmentRound() {
+export default function useEditRecruitmentRoundMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({

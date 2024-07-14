@@ -14,7 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
-import useEditRecruitmentRound from "@/hooks/mutations/useEditRecruitmentRound";
+import useEditRecruitmentRoundMutation from "@/hooks/mutations/useEditRecruitmentRoundMutation";
 import {
   FilteredRecruitmentRoundInfoType,
   RecruitmentRoundModalInfoType,
@@ -43,7 +43,7 @@ export default function RecruitmentRoundInfoModal({
     name: editRoundInfo?.name ?? "",
   });
 
-  const { mutate } = useEditRecruitmentRound();
+  const { mutate } = useEditRecruitmentRoundMutation();
 
   useEffect(() => {
     if (!editRoundInfo) {

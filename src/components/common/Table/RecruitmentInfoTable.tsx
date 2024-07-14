@@ -7,7 +7,7 @@ import {
   useRecruitmentDispatch,
 } from "@/hooks/contexts/useRecruitmentContext";
 import useGetRecruitmentsQuery from "@/hooks/queries/useGetRecruitmentsQuery";
-import { RecruitmentsResponseDtoType } from "@/types/dtos/recruitment";
+import { RecruitmentType } from "@/types/entities/recruitment";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
 export default function RecruitmentInfoTable() {
@@ -16,7 +16,7 @@ export default function RecruitmentInfoTable() {
 
   const recruitmentList = useGetRecruitmentsQuery();
 
-  const getFilteredRecruitmentInfo = (recruitmentInfo: RecruitmentsResponseDtoType) => {
+  const getFilteredRecruitmentInfo = (recruitmentInfo: RecruitmentType[]) => {
     return recruitmentInfo.map(info => {
       const { recruitmentId, semester, semesterStartDate, semesterEndDate, recruitmentFee } = info;
 
