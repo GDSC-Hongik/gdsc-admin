@@ -5,8 +5,8 @@ import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
 import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
 import CouponPage from "@/pages/CouponPage";
-import CouponProvisionMembersPage from "@/pages/CouponProvisionMembersPage";
 import CouponProvisionPage from "@/pages/CouponProvisionPage";
+import IssuedCouponPage from "@/pages/IssuedCouponPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
 import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPerSemesterPage";
 import PaymentStatusPage from "@/pages/PaymentStatusPage";
@@ -29,7 +29,7 @@ const routes: RouteObject[] = [
       { path: RoutePath.PendingMembers, element: <PendingMembersPage /> },
       { path: RoutePath.PaymentStatus, element: <PaymentStatusPage /> },
       { path: RoutePath.Coupon, element: <CouponPage /> },
-      { path: RoutePath.CouponProvisionMembers, element: <CouponProvisionMembersPage /> },
+      { path: RoutePath.IssuedCoupon, element: <IssuedCouponPage /> },
       { path: RoutePath.CouponProvision, element: <CouponProvisionPage /> },
       { path: RoutePath.Recruiting, element: <RecruitingPage /> },
       { path: RoutePath.RecruitingRound, element: <RecruitingRoundPage /> },

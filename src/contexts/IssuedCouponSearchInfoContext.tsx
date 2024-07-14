@@ -14,7 +14,7 @@ type SearchDispatchType = {
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
-type CouponProvisionMembersSearchInfoStateContextProviderPropsType = {
+type IssuedCouponSearchInfoStateContextProviderPropsType = {
   children: ReactNode;
 };
 
@@ -27,18 +27,18 @@ const defaultState: SearchStateType = {
   },
 };
 
-export const CouponProvisionMembersSearchInfoStateContext =
+export const IssuedCouponSearchInfoStateContext =
   createContext<SearchStateType>(defaultState);
 
-export const CouponProvisionMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const IssuedCouponSearchInfoDispatchContext = createContext<SearchDispatchType>({
   setSearchText: () => {},
   setSearchVariant: () => {},
   setPaginationModel: () => {},
 });
 
-export default function CouponProvisionMembersSearchInfoContextProvider({
+export default function IssuedCouponSearchInfoContextProvider({
   children,
-}: CouponProvisionMembersSearchInfoStateContextProviderPropsType) {
+}: IssuedCouponSearchInfoStateContextProviderPropsType) {
   const [searchText, setSearchText] = useState<string>("");
   const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
@@ -47,14 +47,14 @@ export default function CouponProvisionMembersSearchInfoContextProvider({
   });
 
   return (
-    <CouponProvisionMembersSearchInfoDispatchContext.Provider
+    <IssuedCouponSearchInfoDispatchContext.Provider
       value={{ setSearchText, setSearchVariant, setPaginationModel }}
     >
-      <CouponProvisionMembersSearchInfoStateContext.Provider
+      <IssuedCouponSearchInfoStateContext.Provider
         value={{ searchText, searchVariant, paginationModel }}
       >
         {children}
-      </CouponProvisionMembersSearchInfoStateContext.Provider>
-    </CouponProvisionMembersSearchInfoDispatchContext.Provider>
+      </IssuedCouponSearchInfoStateContext.Provider>
+    </IssuedCouponSearchInfoDispatchContext.Provider>
   );
 }

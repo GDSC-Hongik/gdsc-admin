@@ -5,6 +5,6 @@ export const titleVariant = {
   recruiting: "학기 정보 관리",
   recruitingRound: "모집 회차 관리",
   coupon: "쿠폰 관리",
-  couponProvisionMembers: "발급한 쿠폰 관리",
+  issuedCoupon: "발급한 쿠폰 관리",
   couponProvision: "쿠폰 지급",
 } as const;

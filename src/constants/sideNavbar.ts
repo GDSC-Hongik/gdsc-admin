@@ -22,7 +22,7 @@ export const paymentLinkButtonInfoList = [
   },
   {
     label: "발급한 쿠폰 관리",
-    path: RoutePath.CouponProvisionMembers,
+    path: RoutePath.IssuedCoupon,
   },
   {
     label: "쿠폰 지급",

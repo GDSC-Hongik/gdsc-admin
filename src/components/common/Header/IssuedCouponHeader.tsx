@@ -9,18 +9,20 @@ import {
   styled,
   TextField,
 } from "@mui/material";
-import { memberInfoSelectMenu } from "@/constants/table";
-import {
-  useCouponProvisionMembersSearchInfoDispatch,
-  useCouponProvisionMembersSearchInfoState,
-} from "@/hooks/contexts/useCouponProvisionMembersSearchInfoContext";
 
-export default function CouponProvisionMembersHeader() {
+import { issuedCouponInfoSelectMenu } from "@/constants/coupon";
+import { memberInfoSelectMenu } from "@/constants/member";
+import {
+  useIssuedCouponSearchInfoDispatch,
+  useIssuedCouponSearchInfoState,
+} from "@/hooks/contexts/useIssuedCouponSearchInfoContext";
+
+export default function IssuedCouponHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
 
   const { setSearchText, setSearchVariant, setPaginationModel } =
-    useCouponProvisionMembersSearchInfoDispatch();
-  const { searchText } = useCouponProvisionMembersSearchInfoState();
+    useIssuedCouponSearchInfoDispatch();
+  const { searchText } = useIssuedCouponSearchInfoState();
 
   const handleResetPage = () => {
     setPaginationModel(prevPaginationModel => ({
@@ -54,9 +56,9 @@ export default function CouponProvisionMembersHeader() {
           value={selectedMemberInfoVariant}
           onChange={handleChangeSelectMemberInfoVariant}
         >
-          {memberInfoSelectMenu.map(title => (
-            <MenuItem value={title.value} key={title.value}>
-              {title.name}
+          {issuedCouponInfoSelectMenu.map(menu => (
+            <MenuItem value={menu.value} key={menu.value}>
+              {menu.name}
             </MenuItem>
           ))}
         </Select>

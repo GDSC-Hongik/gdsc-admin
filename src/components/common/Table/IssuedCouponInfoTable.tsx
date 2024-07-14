@@ -26,7 +26,7 @@ const mockIssuedCouponList = [
   },
 ];
 
-export default function CouponProvisionMembersInfoTable() {
+export default function IssuedCouponInfoTable() {
   //   const issuedCouponList = useGetIssuedCouponListQuery();
   const { mutate } = useRevokeIssuedCouponMutation();
 
