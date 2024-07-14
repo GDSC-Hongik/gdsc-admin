@@ -1,3 +1,3 @@
-import { RecruitmentType } from "../entities/recruiting";
+import { RecruitmentType } from "../entities/recruitment";
 
 export type RecruitmentsResponseDtoType = RecruitmentType[];

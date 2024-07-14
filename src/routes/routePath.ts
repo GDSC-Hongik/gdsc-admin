@@ -11,8 +11,8 @@ const RoutePath = {
   CouponProvisionMembers: "/payment/coupon-provision-members",
   CouponProvision: "/payment/coupon-provision",
 
-  Recruiting: "/recruiting",
-  RecruitingRound: "/recruiting/round",
+  Recruitment: "/recruitment",
+  RecruitmentRound: "/recruitment/round",
 
   AllMemberHistoryPerSemester: "history/all-member-per-semester",
   PaymentStatusHistoryPerSemester: "history/payment-status-per-semester",

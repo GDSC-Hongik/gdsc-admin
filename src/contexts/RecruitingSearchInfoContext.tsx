@@ -10,7 +10,7 @@ type SearchDispatchType = {
   setCreateSemesterInfoModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-type RecruitingSearchInfoStateContextProviderPropsType = {
+type RecruitmentSearchInfoStateContextProviderPropsType = {
   children: ReactNode;
 };
 
@@ -19,28 +19,28 @@ const defaultState: SearchStateType = {
   createSemesterInfoModalOpen: false,
 };
 
-export const RecruitingSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const RecruitmentSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
-export const RecruitingSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const RecruitmentSearchInfoDispatchContext = createContext<SearchDispatchType>({
   setDemoteModalOpen: () => {},
   setCreateSemesterInfoModalOpen: () => {},
 });
 
-export default function RecruitingSearchInfoContextProvider({
+export default function RecruitmentSearchInfoContextProvider({
   children,
-}: RecruitingSearchInfoStateContextProviderPropsType) {
+}: RecruitmentSearchInfoStateContextProviderPropsType) {
   const [demoteModalOpen, setDemoteModalOpen] = useState(false);
   const [createSemesterInfoModalOpen, setCreateSemesterInfoModalOpen] = useState(false);
 
   return (
-    <RecruitingSearchInfoDispatchContext.Provider
+    <RecruitmentSearchInfoDispatchContext.Provider
       value={{ setDemoteModalOpen, setCreateSemesterInfoModalOpen }}
     >
-      <RecruitingSearchInfoStateContext.Provider
+      <RecruitmentSearchInfoStateContext.Provider
         value={{ demoteModalOpen, createSemesterInfoModalOpen }}
       >
         {children}
-      </RecruitingSearchInfoStateContext.Provider>
-    </RecruitingSearchInfoDispatchContext.Provider>
+      </RecruitmentSearchInfoStateContext.Provider>
+    </RecruitmentSearchInfoDispatchContext.Provider>
   );
 }

@@ -15,19 +15,19 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 
-export type RecruitingRoundInfoModalPropsType = {
+export type RecruitmentRoundInfoModalPropsType = {
   open: boolean;
   onClose: () => void;
   isEdit?: boolean;
   editRoundInfo?: any;
 };
 
-export default function RecruitingRoundInfoModal({
+export default function RecruitmentRoundInfoModal({
   open,
   onClose,
   isEdit = false,
   editRoundInfo,
-}: RecruitingRoundInfoModalPropsType) {
+}: RecruitmentRoundInfoModalPropsType) {
   const [roundModalInfo, setRoundModalInfo] = useState<{
     academicYear: string;
     semester: string;

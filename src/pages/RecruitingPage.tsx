@@ -1,16 +1,16 @@
-import RecruitingHeader from "@/components/common/Header/RecruitingHeader";
-import RecruitingInfoTable from "@/components/common/Table/RecruitingInfoTable";
+import RecruitmentHeader from "@/components/common/Header/RecruitmentHeader";
+import RecruitmentInfoTable from "@/components/common/Table/RecruitmentInfoTable";
 import Title from "@/components/common/Title";
-import RecruitingSearchInfoContextProvider from "@/contexts/RecruitingSearchInfoContext";
+import RecruitmentSearchInfoContextProvider from "@/contexts/RecruitmentSearchInfoContext";
 
-export default function RecruitingPage() {
+export default function RecruitmentPage() {
   return (
     <>
-      <Title variant={"recruiting"} descriptionText={"매 학기 신청 받을 리크루팅을 관리합니다."} />
-      <RecruitingSearchInfoContextProvider>
-        <RecruitingHeader />
-        <RecruitingInfoTable />
-      </RecruitingSearchInfoContextProvider>
+      <Title variant={"recruitment"} descriptionText={"매 학기 신청 받을 리크루팅을 관리합니다."} />
+      <RecruitmentSearchInfoContextProvider>
+        <RecruitmentHeader />
+        <RecruitmentInfoTable />
+      </RecruitmentSearchInfoContextProvider>
     </>
   );
 }

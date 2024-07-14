@@ -2,11 +2,11 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
-import RecruitingRoundInfoModal from "../Modal/RecruitingRoundInfoModal";
+import RecruitmentRoundInfoModal from "../Modal/RecruitmentRoundInfoModal";
 import {
-  useRecruitingRoundSearchInfoDispatch,
-  useRecruitingRoundSearchInfoState,
-} from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
+  useRecruitmentRoundSearchInfoDispatch,
+  useRecruitmentRoundSearchInfoState,
+} from "@/hooks/contexts/useRecruitmentRoundSearchInfoContext";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
 const mockData = [
@@ -21,12 +21,12 @@ const mockData = [
   },
 ];
 
-export default function RecruitingRoundInfoTable() {
+export default function RecruitmentRoundInfoTable() {
   const [editRoundInfoId, setEditRoundInfoId] = useState(0);
   const [editRoundInfoModalOpen, setEditRoundInfoModalOpen] = useState(false);
 
-  const { createRoundInfoModalOpen } = useRecruitingRoundSearchInfoState();
-  const { setCreateRoundInfoModalOpen } = useRecruitingRoundSearchInfoDispatch();
+  const { createRoundInfoModalOpen } = useRecruitmentRoundSearchInfoState();
+  const { setCreateRoundInfoModalOpen } = useRecruitmentRoundSearchInfoDispatch();
 
   const editRoundInfo = mockData.find(data => data.id === editRoundInfoId);
 
@@ -38,7 +38,7 @@ export default function RecruitingRoundInfoTable() {
     setCreateRoundInfoModalOpen(false);
   };
 
-  const handleClickEditRecruitingRoundInfo = (roundId: number) => {
+  const handleClickEditRecruitmentRoundInfo = (roundId: number) => {
     setEditRoundInfoId(roundId);
     setEditRoundInfoModalOpen(true);
   };
@@ -47,7 +47,7 @@ export default function RecruitingRoundInfoTable() {
     <>
       <StyledDataGrid
         rows={mockData}
-        columns={getColumns(handleClickEditRecruitingRoundInfo)}
+        columns={getColumns(handleClickEditRecruitmentRoundInfo)}
         disableRowSelectionOnClick
         autoHeight
         disableColumnFilter
@@ -55,13 +55,13 @@ export default function RecruitingRoundInfoTable() {
         disableColumnSorting
         hideFooter
       />
-      <RecruitingRoundInfoModal
+      <RecruitmentRoundInfoModal
         open={editRoundInfoModalOpen}
         onClose={handleCloseEditRoundInfoModal}
         isEdit
         editRoundInfo={editRoundInfo}
       />
-      <RecruitingRoundInfoModal
+      <RecruitmentRoundInfoModal
         open={createRoundInfoModalOpen}
         onClose={handleCloseCreateRoundInfoModal}
       />
@@ -69,7 +69,7 @@ export default function RecruitingRoundInfoTable() {
   );
 }
 const getColumns = (
-  handleClickEditRecruitingRoundInfo: (roundId: number) => void,
+  handleClickEditRecruitmentRoundInfo: (roundId: number) => void,
 ): GridColDef[] => [
   {
     field: "academicYear",
@@ -120,7 +120,7 @@ const getColumns = (
     editable: false,
   },
   {
-    field: "editRecruitingRoundInfo",
+    field: "editRecruitmentRoundInfo",
     headerName: "",
     sortable: false,
     flex: 1,
@@ -131,7 +131,7 @@ const getColumns = (
           <StyledButton
             variant="outlined"
             color="primary"
-            onClick={() => handleClickEditRecruitingRoundInfo(params.row.id)}
+            onClick={() => handleClickEditRecruitmentRoundInfo(params.row.id)}
           >
             수정
           </StyledButton>

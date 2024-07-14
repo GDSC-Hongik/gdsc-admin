@@ -1,27 +1,27 @@
 import { useContext } from "react";
 import {
-  RecruitingSearchInfoStateContext,
-  RecruitingSearchInfoDispatchContext,
-} from "@/contexts/RecruitingSearchInfoContext";
+  RecruitmentSearchInfoStateContext,
+  RecruitmentSearchInfoDispatchContext,
+} from "@/contexts/RecruitmentSearchInfoContext";
 
-export const useRecruitingSearchInfoState = () => {
-  const context = useContext(RecruitingSearchInfoStateContext);
+export const useRecruitmentSearchInfoState = () => {
+  const context = useContext(RecruitmentSearchInfoStateContext);
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitingSearchInfoState must be used within a RecruitingSearchInfoContextProvider",
+      "useRecruitmentSearchInfoState must be used within a RecruitmentSearchInfoContextProvider",
     );
   }
 
   return context;
 };
 
-export const useRecruitingSearchInfoDispatch = () => {
-  const context = useContext(RecruitingSearchInfoDispatchContext);
+export const useRecruitmentSearchInfoDispatch = () => {
+  const context = useContext(RecruitmentSearchInfoDispatchContext);
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitingSearchInfoDispatch must be used within a RecruitingSearchInfoContextProvider",
+      "useRecruitmentSearchInfoDispatch must be used within a RecruitmentSearchInfoContextProvider",
     );
   }
 

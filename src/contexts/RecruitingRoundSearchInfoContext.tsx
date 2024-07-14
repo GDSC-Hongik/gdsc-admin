@@ -8,7 +8,7 @@ type SearchDispatchType = {
   setCreateRoundInfoModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-type RecruitingRoundSearchInfoStateContextProviderPropsType = {
+type RecruitmentRoundSearchInfoStateContextProviderPropsType = {
   children: ReactNode;
 };
 
@@ -16,22 +16,22 @@ const defaultState: SearchStateType = {
   createRoundInfoModalOpen: false,
 };
 
-export const RecruitingRoundSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const RecruitmentRoundSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
-export const RecruitingRoundSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const RecruitmentRoundSearchInfoDispatchContext = createContext<SearchDispatchType>({
   setCreateRoundInfoModalOpen: () => {},
 });
 
-export default function RecruitingRoundSearchInfoContextProvider({
+export default function RecruitmentRoundSearchInfoContextProvider({
   children,
-}: RecruitingRoundSearchInfoStateContextProviderPropsType) {
+}: RecruitmentRoundSearchInfoStateContextProviderPropsType) {
   const [createRoundInfoModalOpen, setCreateRoundInfoModalOpen] = useState(false);
 
   return (
-    <RecruitingRoundSearchInfoDispatchContext.Provider value={{ setCreateRoundInfoModalOpen }}>
-      <RecruitingRoundSearchInfoStateContext.Provider value={{ createRoundInfoModalOpen }}>
+    <RecruitmentRoundSearchInfoDispatchContext.Provider value={{ setCreateRoundInfoModalOpen }}>
+      <RecruitmentRoundSearchInfoStateContext.Provider value={{ createRoundInfoModalOpen }}>
         {children}
-      </RecruitingRoundSearchInfoStateContext.Provider>
-    </RecruitingRoundSearchInfoDispatchContext.Provider>
+      </RecruitmentRoundSearchInfoStateContext.Provider>
+    </RecruitmentRoundSearchInfoDispatchContext.Provider>
   );
 }

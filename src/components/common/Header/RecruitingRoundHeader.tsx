@@ -1,8 +1,8 @@
 import { Button, Stack, styled } from "@mui/material";
-import { useRecruitingRoundSearchInfoDispatch } from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
+import { useRecruitmentRoundSearchInfoDispatch } from "@/hooks/contexts/useRecruitmentRoundSearchInfoContext";
 
-export default function RecruitingRoundHeader() {
-  const { setCreateRoundInfoModalOpen } = useRecruitingRoundSearchInfoDispatch();
+export default function RecruitmentRoundHeader() {
+  const { setCreateRoundInfoModalOpen } = useRecruitmentRoundSearchInfoDispatch();
 
   const handleClickCreateRound = () => {
     setCreateRoundInfoModalOpen(true);

@@ -3,21 +3,21 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
 import DemoteMembersModal from "../Modal/DemoteMembersModal";
 import {
-  useRecruitingSearchInfoDispatch,
-  useRecruitingSearchInfoState,
-} from "@/hooks/contexts/useRecruitingSearchInfoContext";
+  useRecruitmentSearchInfoDispatch,
+  useRecruitmentSearchInfoState,
+} from "@/hooks/contexts/useRecruitmentSearchInfoContext";
 import useGetRecruitmentsQuery from "@/hooks/queries/useGetRecruitmentsQuery";
-import { RecruitmentsResponseDtoType } from "@/types/dtos/recruiting";
+import { RecruitmentsResponseDtoType } from "@/types/dtos/recruitment";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
-export default function RecruitingInfoTable() {
-  const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitingSearchInfoState();
-  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitingSearchInfoDispatch();
+export default function RecruitmentInfoTable() {
+  const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitmentSearchInfoState();
+  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentSearchInfoDispatch();
 
   const recruitmentList = useGetRecruitmentsQuery();
 
-  const getFilteredRecruitingInfo = (recruitingInfo: RecruitmentsResponseDtoType) => {
-    return recruitingInfo.map(info => ({
+  const getFilteredRecruitmentInfo = (recruitmentInfo: RecruitmentsResponseDtoType) => {
+    return recruitmentInfo.map(info => ({
       id: info.recruitmentId,
       academicYear: info.semester.slice(0, 4),
       semester: info.semester.slice(5, 6),
@@ -38,7 +38,7 @@ export default function RecruitingInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredRecruitingInfo(recruitmentList)}
+        rows={getFilteredRecruitmentInfo(recruitmentList)}
         columns={columns}
         disableRowSelectionOnClick
         autoHeight
