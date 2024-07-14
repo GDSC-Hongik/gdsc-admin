@@ -1,46 +1,44 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
-type SearchStateType = {
+type RecruitmentStateContextType = {
   demoteModalOpen: boolean;
   createSemesterInfoModalOpen: boolean;
 };
 
-type SearchDispatchType = {
+type RecruitmentDispatchContextType = {
   setDemoteModalOpen: Dispatch<SetStateAction<boolean>>;
   setCreateSemesterInfoModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-type RecruitmentSearchInfoStateContextProviderPropsType = {
+type RecruitmentStateContextProviderPropsType = {
   children: ReactNode;
 };
 
-const defaultState: SearchStateType = {
+const defaultState: RecruitmentStateContextType = {
   demoteModalOpen: false,
   createSemesterInfoModalOpen: false,
 };
 
-export const RecruitmentSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const RecruitmentStateContext = createContext<RecruitmentStateContextType>(defaultState);
 
-export const RecruitmentSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const RecruitmentDispatchContext = createContext<RecruitmentDispatchContextType>({
   setDemoteModalOpen: () => {},
   setCreateSemesterInfoModalOpen: () => {},
 });
 
-export default function RecruitmentSearchInfoContextProvider({
+export default function RecruitmentContextProvider({
   children,
-}: RecruitmentSearchInfoStateContextProviderPropsType) {
+}: RecruitmentStateContextProviderPropsType) {
   const [demoteModalOpen, setDemoteModalOpen] = useState(false);
   const [createSemesterInfoModalOpen, setCreateSemesterInfoModalOpen] = useState(false);
 
   return (
-    <RecruitmentSearchInfoDispatchContext.Provider
+    <RecruitmentDispatchContext.Provider
       value={{ setDemoteModalOpen, setCreateSemesterInfoModalOpen }}
     >
-      <RecruitmentSearchInfoStateContext.Provider
-        value={{ demoteModalOpen, createSemesterInfoModalOpen }}
-      >
+      <RecruitmentStateContext.Provider value={{ demoteModalOpen, createSemesterInfoModalOpen }}>
         {children}
-      </RecruitmentSearchInfoStateContext.Provider>
-    </RecruitmentSearchInfoDispatchContext.Provider>
+      </RecruitmentStateContext.Provider>
+    </RecruitmentDispatchContext.Provider>
   );
 }

@@ -3,28 +3,32 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
 import DemoteMembersModal from "../Modal/DemoteMembersModal";
 import {
-  useRecruitmentSearchInfoDispatch,
-  useRecruitmentSearchInfoState,
-} from "@/hooks/contexts/useRecruitmentSearchInfoContext";
+  useRecruitmentState,
+  useRecruitmentDispatch,
+} from "@/hooks/contexts/useRecruitmentContext";
 import useGetRecruitmentsQuery from "@/hooks/queries/useGetRecruitmentsQuery";
 import { RecruitmentsResponseDtoType } from "@/types/dtos/recruitment";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
 export default function RecruitmentInfoTable() {
-  const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitmentSearchInfoState();
-  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentSearchInfoDispatch();
+  const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitmentState();
+  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentDispatch();
 
   const recruitmentList = useGetRecruitmentsQuery();
 
   const getFilteredRecruitmentInfo = (recruitmentInfo: RecruitmentsResponseDtoType) => {
-    return recruitmentInfo.map(info => ({
-      id: info.recruitmentId,
-      academicYear: info.semester.slice(0, 4),
-      semester: info.semester.slice(5, 6),
-      semesterStartDate: formatDateWithDot(info.semesterStartDate),
-      semesterEndDate: formatDateWithDot(info.semesterEndDate),
-      recruitmentFee: info.recruitmentFee,
-    }));
+    return recruitmentInfo.map(info => {
+      const { recruitmentId, semester, semesterStartDate, semesterEndDate, recruitmentFee } = info;
+
+      return {
+        id: recruitmentId,
+        academicYear: semester.slice(0, 4),
+        semester: semester.slice(5, 6),
+        semesterStartDate: formatDateWithDot(semesterStartDate),
+        semesterEndDate: formatDateWithDot(semesterEndDate),
+        recruitmentFee: recruitmentFee,
+      };
+    });
   };
 
   const handleCloseDemoteModal = () => {

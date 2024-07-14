@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { Stack, Button } from "@mui/material";
-import { useRecruitmentSearchInfoDispatch } from "@/hooks/contexts/useRecruitmentSearchInfoContext";
+import { useRecruitmentDispatch } from "@/hooks/contexts/useRecruitmentContext";
 
 export default function RecruitmentHeader() {
-  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentSearchInfoDispatch();
+  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentDispatch();
 
   const handleClickAllMemberDemote = () => {
     setDemoteModalOpen(true);
