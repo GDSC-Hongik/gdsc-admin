@@ -91,15 +91,20 @@ export default function RecruitmentRoundInfoModal({
     const { name, startDate, endDate, recruitmentRoundId, roundType } = roundModalInfo;
 
     if (isEdit) {
-      mutate({
-        recruitmentRoundId: recruitmentRoundId,
-        body: {
-          name,
-          startDate: startDate!.toDate().toISOString(),
-          endDate: endDate!.toDate().toISOString(),
-          roundType: roundType === "1차" ? "FIRST" : "SECOND",
+      mutate(
+        {
+          recruitmentRoundId: recruitmentRoundId,
+          body: {
+            name,
+            startDate: startDate!.toDate().toISOString(),
+            endDate: endDate!.toDate().toISOString(),
+            roundType: roundType === "1차" ? "FIRST" : "SECOND",
+          },
         },
-      });
+        {
+          onSuccess: () => onClose(),
+        },
+      );
       return;
     }
     console.log(roundModalInfo);
@@ -139,7 +144,7 @@ export default function RecruitmentRoundInfoModal({
           <StyledInfoWrapper sx={{ gridArea: "item3" }}>
             <StyledText>차수</StyledText>
             <StyledRadioGroup
-              name="round"
+              name="roundType"
               row
               value={roundType}
               onChange={handleChangeRoundModalInfo}
