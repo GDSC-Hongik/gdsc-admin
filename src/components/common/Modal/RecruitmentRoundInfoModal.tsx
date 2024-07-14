@@ -156,8 +156,8 @@ export default function RecruitmentRoundInfoModal({
               value={roundType}
               onChange={handleChangeRoundModalInfo}
             >
-              <FormControlLabel value="1" control={<Radio />} label="1차" />
-              <FormControlLabel value="2" control={<Radio />} label="2차" />
+              <FormControlLabel value="1차" control={<Radio />} label="1차" />
+              <FormControlLabel value="2차" control={<Radio />} label="2차" />
             </StyledRadioGroup>
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item4" }}>
