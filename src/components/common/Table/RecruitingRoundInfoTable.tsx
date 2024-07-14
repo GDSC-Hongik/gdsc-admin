@@ -4,44 +4,58 @@ import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import RecruitingRoundInfoModal from "../Modal/RecruitingRoundInfoModal";
 import {
-  useRecruitingRoundSearchInfoDispatch,
-  useRecruitingRoundSearchInfoState,
-} from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
-import useGetRecruitmentsRoundsQuery from "@/hooks/queries/useGetRecruitmentRoundQuery";
-import { RecruitmentRoundResponseDtoType } from "@/types/dtos/recruiting";
+  useRecruitingRoundState,
+  useRecruitingRoundDispatch,
+} from "@/hooks/contexts/useRecruitingRoundContext";
+import useGetRecruitmentRoundQuery from "@/hooks/queries/useGetRecruitmentRoundQuery";
+import { RecruitmentRoundType } from "@/types/dtos/recruiting";
+import { RecruitingRoundInfoType, RecruitmentRoundInfoType } from "@/types/entities/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
 export default function RecruitingRoundInfoTable() {
   const [editRoundInfoId, setEditRoundInfoId] = useState(0);
   const [editRoundInfoModalOpen, setEditRoundInfoModalOpen] = useState(false);
 
-  const recruitmentsRoundsList = useGetRecruitmentsRoundsQuery();
+  const recruitmentRoundList = useGetRecruitmentRoundQuery();
 
-  const { createRoundInfoModalOpen } = useRecruitingRoundSearchInfoState();
-  const { setCreateRoundInfoModalOpen } = useRecruitingRoundSearchInfoDispatch();
+  const { createRoundModalOpen } = useRecruitingRoundState();
+  const { setCreateRoundModalOpen } = useRecruitingRoundDispatch();
 
-  const editRoundInfo = recruitmentsRoundsList.find(
+  const editRoundInfo = recruitmentRoundList.find(
     data => data.recruitmentRoundId === editRoundInfoId,
   );
 
-  const getFilteredRecruitingInfo = (recruitingInfo: RecruitmentRoundResponseDtoType) => {
-    return recruitingInfo.map(info => ({
-      id: info.recruitmentRoundId,
-      academicYear: info.semester.slice(0, 4),
-      roundType: info.roundType === "FIRST" ? "1차" : "2차",
-      semester: info.semester.slice(5, 6),
-      startDate: formatDateWithDot(info.startDate),
-      endDate: formatDateWithDot(info.endDate),
-      name: info.name,
-    }));
+  const formatRecruitingRoundInfo = (info: RecruitmentRoundInfoType) => {
+    const { recruitmentRoundId, semester, roundType, startDate, endDate, name } = info;
+
+    return {
+      startDate: formatDateWithDot(startDate) ?? "",
+      endDate: formatDateWithDot(endDate) ?? "",
+      name: name ?? "",
+      semester: semester.slice(5, 6) ?? "",
+      roundType: (roundType === "FIRST" ? "1차" : "2차") as RecruitmentRoundType,
+      id: recruitmentRoundId ?? 0,
+      academicYear: semester.slice(0, 4) ?? "",
+    };
+  };
+
+  const editRoundModalInfo = editRoundInfo ? formatRecruitingRoundInfo(editRoundInfo) : undefined;
+
+  const getFilteredRecruitingRoundInfo = (
+    recruitingInfo: RecruitmentRoundInfoType[],
+  ): RecruitingRoundInfoType[] => {
+    return recruitingInfo.map(info => {
+      return formatRecruitingRoundInfo(info);
+    });
   };
 
   const handleCloseEditRoundInfoModal = () => {
+    setEditRoundInfoId(0);
     setEditRoundInfoModalOpen(false);
   };
 
   const handleCloseCreateRoundInfoModal = () => {
-    setCreateRoundInfoModalOpen(false);
+    setCreateRoundModalOpen(false);
   };
 
   const handleClickEditRecruitingRoundInfo = (roundId: number) => {
@@ -52,7 +66,7 @@ export default function RecruitingRoundInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredRecruitingInfo(recruitmentsRoundsList)}
+        rows={getFilteredRecruitingRoundInfo(recruitmentRoundList)}
         columns={getColumns(handleClickEditRecruitingRoundInfo)}
         disableRowSelectionOnClick
         autoHeight
@@ -65,10 +79,10 @@ export default function RecruitingRoundInfoTable() {
         open={editRoundInfoModalOpen}
         onClose={handleCloseEditRoundInfoModal}
         isEdit
-        editRoundInfo={editRoundInfo}
+        editRoundInfo={editRoundModalInfo}
       />
       <RecruitingRoundInfoModal
-        open={createRoundInfoModalOpen}
+        open={createRoundModalOpen}
         onClose={handleCloseCreateRoundInfoModal}
       />
     </>
