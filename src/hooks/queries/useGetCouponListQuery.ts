@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { QueryKey } from "@/constants/queryKey";
 import { couponApi } from "@/apis/couponApi";
+import { QueryKey } from "@/constants/queryKey";
 
 export default function useGetCouponListQuery() {
   const { data = [] } = useQuery({

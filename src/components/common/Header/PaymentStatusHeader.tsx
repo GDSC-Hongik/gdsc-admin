@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import {
   InputLabel,
@@ -13,7 +14,6 @@ import {
   usePaymentStatusSearchInfoDispatch,
   usePaymentStatusSearchInfoState,
 } from "@/hooks/contexts/usePaymentStatusSearchInfoContext";
-import { ChangeEvent, useState } from "react";
 
 export default function PaymentStatusHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);

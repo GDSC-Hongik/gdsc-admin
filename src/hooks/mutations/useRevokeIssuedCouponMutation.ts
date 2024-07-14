@@ -1,7 +1,7 @@
-import { couponApi } from "@/apis/couponApi";
-import { QueryKey } from "@/constants/queryKey";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { couponApi } from "@/apis/couponApi";
+import { QueryKey } from "@/constants/queryKey";
 
 export default function useRevokeIssuedCouponMutation() {
   const queryClient = useQueryClient();

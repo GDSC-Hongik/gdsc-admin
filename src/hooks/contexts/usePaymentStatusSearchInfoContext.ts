@@ -1,8 +1,8 @@
+import { useContext } from "react";
 import {
   PaymentStatusSearchInfoDispatchContext,
   PaymentStatusSearchInfoStateContext,
 } from "@/contexts/PaymentStatusSearchInfoContext";
-import { useContext } from "react";
 
 export const usePaymentStatusSearchInfoState = () => {
   const context = useContext(PaymentStatusSearchInfoStateContext);

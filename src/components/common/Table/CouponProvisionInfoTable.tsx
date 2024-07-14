@@ -1,12 +1,12 @@
+import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
+import CouponProvisionModal from "../Modal/CouponProvisionModal";
 import {
   useCouponProvisionSearchInfoDispatch,
   useCouponProvisionSearchInfoState,
 } from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
-import { useMemo, useRef, useState } from "react";
 // import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-import CouponProvisionModal from "../Modal/CouponProvisionModal";
 
 const mockData = [
   {
@@ -82,7 +82,7 @@ export default function CouponProvisionInfoTable() {
     }
 
     return rowCountRef.current;
-  }, [totalElements]);
+  }, []);
 
   const getFilteredMemberList = (allMemberList: any[]) => {
     return allMemberList.map(memberInfo => ({

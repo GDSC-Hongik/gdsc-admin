@@ -1,13 +1,13 @@
+// import { useState } from "react";
+import styled from "@emotion/styled";
+import { DataGrid } from "@mui/x-data-grid";
 import {
   usePaymentStatusSearchInfoDispatch,
   usePaymentStatusSearchInfoState,
 } from "@/hooks/contexts/usePaymentStatusSearchInfoContext";
-import styled from "@emotion/styled";
-import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
 
 export default function PaymentStatusInfoTable() {
-  const [] = useState(false);
+  // const [] = useState(false);
 
   const { paginationModel } = usePaymentStatusSearchInfoState();
   const { setPaginationModel } = usePaymentStatusSearchInfoDispatch();

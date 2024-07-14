@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { Modal, Typography, Box, Button, TextField } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import WarningIcon from "@/assets/warning.svg?react";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
+import WarningIcon from "@/assets/warning.svg?react";
 
 type CreateSemesterInfoModalPropsType = {
   open: boolean;
