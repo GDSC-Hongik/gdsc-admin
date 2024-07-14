@@ -6,4 +6,5 @@ export const enum QueryKey {
   paymentStatusMemberList = "paymentStatusMemberList",
   couponList = "couponList",
   issuedCouponList = "issuedCouponList",
+  recruitmentsRounds = "recruitmentsRounds",
 }
