@@ -8,3 +8,11 @@ export type RecruitmentType = {
 };
 
 export type SemesterVariantType = "FIRST" | "SECOND";
+
+export type RecruitmentRoundType = {
+  recruitmentRoundId: number;
+  semester: string;
+  startDate: string;
+  endDate: string;
+  name: string;
+};
