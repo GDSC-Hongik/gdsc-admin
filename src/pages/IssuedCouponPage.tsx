@@ -1,5 +1,5 @@
-import CouponProvisionMembersHeader from "@/components/common/Header/IssuedCouponHeader";
-import CouponProvisionMembersInfoTable from "@/components/common/Table/IssuedCouponInfoTable";
+import IssuedCouponHeader from "@/components/common/Header/IssuedCouponHeader";
+import IssuedCouponInfoTable from "@/components/common/Table/IssuedCouponInfoTable";
 import Title from "@/components/common/Title";
 
 export default function IssuedCouponPage() {
@@ -9,8 +9,8 @@ export default function IssuedCouponPage() {
         variant={"issuedCoupon"}
         descriptionText={"회원들에게 발급한 쿠폰을 확인하고 관리합니다."}
       />
-      <CouponProvisionMembersHeader />
-      <CouponProvisionMembersInfoTable />
+      <IssuedCouponHeader />
+      <IssuedCouponInfoTable />
     </>
   );
 }
