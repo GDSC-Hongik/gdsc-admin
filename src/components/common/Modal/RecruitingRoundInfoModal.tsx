@@ -14,6 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
+import useEditRecruitmentRound from "@/hooks/mutations/useEditRecruitmentRound";
 
 export type RecruitingRoundInfoModalPropsType = {
   open: boolean;
@@ -44,17 +45,20 @@ export default function RecruitingRoundInfoModal({
     name: "",
   });
   const [editRoundModalInfo, setEditRoundModalInfo] = useState<{
+    recruitmentRoundId: number;
     academicYear: string;
     semester: string;
-    round: string;
-    startDate: Dayjs | null;
-    endDate: Dayjs | null;
+    round: "1차" | "2차";
+    startDate: Dayjs;
+    endDate: Dayjs;
     name: string;
   }>({
     ...editRoundInfo,
     startDate: dayjs(editRoundInfo?.startDate),
     endDate: dayjs(editRoundInfo?.endDate),
   });
+
+  const { mutate } = useEditRecruitmentRound();
 
   useEffect(() => {
     setEditRoundModalInfo({
@@ -82,8 +86,8 @@ export default function RecruitingRoundInfoModal({
 
   const handleChangeStartDate = (newDate: Dayjs | null) => {
     if (!newDate) {
-return;
-}
+      return;
+    }
 
     if (isEdit) {
       setEditRoundModalInfo(prevModalInfo => ({
@@ -100,8 +104,8 @@ return;
 
   const handleChangeEndDate = (newDate: Dayjs | null) => {
     if (!newDate) {
-return;
-}
+      return;
+    }
 
     if (isEdit) {
       setEditRoundModalInfo(prevModalInfo => ({
@@ -118,7 +122,15 @@ return;
 
   const handleClickSubmit = () => {
     if (isEdit) {
-      console.log(editRoundModalInfo);
+      mutate({
+        recruitmentRoundId: editRoundModalInfo.recruitmentRoundId,
+        body: {
+          name: editRoundModalInfo.name,
+          startDate: editRoundModalInfo.startDate?.toDate().toISOString(),
+          endDate: editRoundModalInfo.startDate?.toDate().toISOString(),
+          roundType: editRoundModalInfo.round === "1차" ? "FIRST" : "SECOND",
+        },
+      });
       return;
     }
     console.log(roundModalInfo);
