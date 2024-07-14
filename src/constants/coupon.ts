@@ -24,12 +24,12 @@ export const issuedCouponInfoSelectMenu: CouponInfoSelectMenuType = [
   {
     value: "5",
     name: "사용여부",
-    type: "isUsed",
+    type: "hasUsed",
   },
   {
     value: "6",
     name: "회수여부",
-    type: "isRevoked",
+    type: "hasRevoked",
   },
 ];
 
