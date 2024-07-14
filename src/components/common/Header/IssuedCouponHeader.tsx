@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 import {
   FormControl,
   InputLabel,
@@ -23,7 +23,7 @@ export default function IssuedCouponHeader() {
 
   const { setSearchInfo, setPaginationModel } = useIssuedCouponSearchInfoDispatch();
   const {
-    searchInfo: { text: searchText, variant: searchVariant },
+    searchInfo: { text: searchText },
   } = useIssuedCouponSearchInfoState();
 
   const handleResetPage = () => {
@@ -39,11 +39,12 @@ export default function IssuedCouponHeader() {
     setSearchInfo(prevSearchInfo => ({
       ...prevSearchInfo,
       variant: issuedCouponInfoSelectMenu[targetIndex]["type"],
-      text: "",
+      text: targetIndex === 4 || targetIndex === 5 ? "true" : "",
     }));
     setSelectedCouponInfo(prevSelectedCouponInfo => ({
       ...prevSelectedCouponInfo,
       variant: targetIndex + 1,
+      text: targetIndex === 4 || targetIndex === 5 ? 1 : 0,
     }));
     handleResetPage();
   };
@@ -71,10 +72,6 @@ export default function IssuedCouponHeader() {
       text,
     }));
   };
-
-  useEffect(() => {
-    console.log(searchVariant, searchText);
-  }, [searchVariant, searchText]);
 
   return (
     <StyledHeaderWrapper>
