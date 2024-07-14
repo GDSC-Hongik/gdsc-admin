@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import {
   FormControl,
   InputLabel,
@@ -9,20 +9,22 @@ import {
   styled,
   TextField,
 } from "@mui/material";
-
-import { issuedCouponInfoSelectMenu } from "@/constants/coupon";
-import { memberInfoSelectMenu } from "@/constants/member";
+import { couponStatusSelectMenu, issuedCouponInfoSelectMenu } from "@/constants/coupon";
 import {
   useIssuedCouponSearchInfoDispatch,
   useIssuedCouponSearchInfoState,
 } from "@/hooks/contexts/useIssuedCouponSearchInfoContext";
 
 export default function IssuedCouponHeader() {
-  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
+  const [selectedCouponInfo, setSelectedCouponInfo] = useState({
+    variant: 1,
+    text: 1,
+  });
 
-  const { setSearchText, setSearchVariant, setPaginationModel } =
-    useIssuedCouponSearchInfoDispatch();
-  const { searchText } = useIssuedCouponSearchInfoState();
+  const { setSearchInfo, setPaginationModel } = useIssuedCouponSearchInfoDispatch();
+  const {
+    searchInfo: { text: searchText, variant: searchVariant },
+  } = useIssuedCouponSearchInfoState();
 
   const handleResetPage = () => {
     setPaginationModel(prevPaginationModel => ({
@@ -31,12 +33,32 @@ export default function IssuedCouponHeader() {
     }));
   };
 
-  const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
+  const handleChangeSelectCouponInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
-    setSearchText?.("");
-    setSelectedMemberInfoVariant(targetIndex + 1);
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      variant: issuedCouponInfoSelectMenu[targetIndex]["type"],
+      text: "",
+    }));
+    setSelectedCouponInfo(prevSelectedCouponInfo => ({
+      ...prevSelectedCouponInfo,
+      variant: targetIndex + 1,
+    }));
+    handleResetPage();
+  };
+
+  const handleChangeSelectCouponStatus = (e: SelectChangeEvent<unknown>) => {
+    const targetIndex = (e.target.value as number) - 1;
+
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      text: couponStatusSelectMenu[targetIndex]["type"],
+    }));
+    setSelectedCouponInfo(prevSelectedCouponInfo => ({
+      ...prevSelectedCouponInfo,
+      text: targetIndex + 1,
+    }));
     handleResetPage();
   };
 
@@ -44,8 +66,15 @@ export default function IssuedCouponHeader() {
     const text = e.target.value;
     text.length === 1 && handleResetPage();
 
-    setSearchText?.(text);
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      text,
+    }));
   };
+
+  useEffect(() => {
+    console.log(searchVariant, searchText);
+  }, [searchVariant, searchText]);
 
   return (
     <StyledHeaderWrapper>
@@ -53,8 +82,8 @@ export default function IssuedCouponHeader() {
         <InputLabel>Type</InputLabel>
         <Select
           label="Type"
-          value={selectedMemberInfoVariant}
-          onChange={handleChangeSelectMemberInfoVariant}
+          value={selectedCouponInfo.variant}
+          onChange={handleChangeSelectCouponInfoVariant}
         >
           {issuedCouponInfoSelectMenu.map(menu => (
             <MenuItem value={menu.value} key={menu.value}>
@@ -63,13 +92,30 @@ export default function IssuedCouponHeader() {
           ))}
         </Select>
       </StyledFormWrapper>
-      <StyledTextField
-        label="search"
-        variant="outlined"
-        placeholder="name, email, etc.."
-        value={searchText}
-        onChange={handleChangeText}
-      />
+      {selectedCouponInfo.variant === 5 || selectedCouponInfo.variant === 6 ? (
+        <StyledFormWrapper>
+          <InputLabel>Status</InputLabel>
+          <Select
+            label="Type"
+            value={selectedCouponInfo.text}
+            onChange={handleChangeSelectCouponStatus}
+          >
+            {couponStatusSelectMenu.map(menu => (
+              <MenuItem value={menu.value} key={menu.value}>
+                {menu.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </StyledFormWrapper>
+      ) : (
+        <StyledTextField
+          label="search"
+          variant="outlined"
+          placeholder="name, email, etc.."
+          value={searchText}
+          onChange={handleChangeText}
+        />
+      )}
     </StyledHeaderWrapper>
   );
 }

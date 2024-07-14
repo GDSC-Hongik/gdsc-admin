@@ -1,16 +1,22 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { PaginationModelType } from "@/types/entities/common";
-import { SearchVariantType } from "@/types/entities/member";
+import { SearchVariantType } from "@/types/entities/coupon";
 
 type SearchStateType = {
-  searchText: string;
-  searchVariant: SearchVariantType;
+  searchInfo: {
+    text?: string | boolean;
+    variant: SearchVariantType;
+  };
   paginationModel: PaginationModelType;
 };
 
 type SearchDispatchType = {
-  setSearchText: Dispatch<SetStateAction<string>>;
-  setSearchVariant: Dispatch<SetStateAction<SearchVariantType>>;
+  setSearchInfo: Dispatch<
+    SetStateAction<{
+      text?: string | boolean;
+      variant: SearchVariantType;
+    }>
+  >;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
@@ -19,40 +25,41 @@ type IssuedCouponSearchInfoStateContextProviderPropsType = {
 };
 
 const defaultState: SearchStateType = {
-  searchText: "",
-  searchVariant: "studentId",
+  searchInfo: {
+    text: "",
+    variant: "studentId",
+  },
   paginationModel: {
     pageSize: 5,
     page: 0,
   },
 };
 
-export const IssuedCouponSearchInfoStateContext =
-  createContext<SearchStateType>(defaultState);
+export const IssuedCouponSearchInfoStateContext = createContext<SearchStateType>(defaultState);
 
 export const IssuedCouponSearchInfoDispatchContext = createContext<SearchDispatchType>({
-  setSearchText: () => {},
-  setSearchVariant: () => {},
+  setSearchInfo: () => {},
   setPaginationModel: () => {},
 });
 
 export default function IssuedCouponSearchInfoContextProvider({
   children,
 }: IssuedCouponSearchInfoStateContextProviderPropsType) {
-  const [searchText, setSearchText] = useState<string>("");
-  const [searchVariant, setSearchVariant] = useState<SearchVariantType>("studentId");
+  const [searchInfo, setSearchInfo] = useState<{
+    text?: string | boolean;
+    variant: SearchVariantType;
+  }>({
+    text: "",
+    variant: "studentId",
+  });
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>({
     pageSize: 5,
     page: 0,
   });
 
   return (
-    <IssuedCouponSearchInfoDispatchContext.Provider
-      value={{ setSearchText, setSearchVariant, setPaginationModel }}
-    >
-      <IssuedCouponSearchInfoStateContext.Provider
-        value={{ searchText, searchVariant, paginationModel }}
-      >
+    <IssuedCouponSearchInfoDispatchContext.Provider value={{ setSearchInfo, setPaginationModel }}>
+      <IssuedCouponSearchInfoStateContext.Provider value={{ searchInfo, paginationModel }}>
         {children}
       </IssuedCouponSearchInfoStateContext.Provider>
     </IssuedCouponSearchInfoDispatchContext.Provider>
