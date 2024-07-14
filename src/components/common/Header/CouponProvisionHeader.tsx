@@ -11,7 +11,8 @@ import {
   styled,
   TextField,
 } from "@mui/material";
-import { memberInfoSelectMenu } from "@/constants/table";
+
+import { memberInfoSelectMenu } from "@/constants/member";
 import {
   useCouponProvisionSearchInfoDispatch,
   useCouponProvisionSearchInfoState,

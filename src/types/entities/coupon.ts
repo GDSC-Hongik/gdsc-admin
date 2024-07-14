@@ -37,3 +37,20 @@ export type CouponType = {
   discountAmount: number;
   createdAt: string;
 };
+
+type CouponSearchVariantType = [
+  "studentId",
+  "memberName",
+  "phone",
+  "couponName",
+  "isUsed",
+  "isRevoked",
+];
+
+export type SearchVariantType = CouponSearchVariantType[number] | null;
+
+export type CouponInfoSelectMenuType = {
+  value: string;
+  name: string;
+  type: SearchVariantType;
+}[];
