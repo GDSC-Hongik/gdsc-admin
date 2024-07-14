@@ -72,26 +72,14 @@ export default function RecruitmentRoundInfoModal({
     }));
   };
 
-  const handleChangeStartDate = (newDate: Dayjs | null) => {
+  const handleChangeDate = (name: "startDate" | "endDate", newDate: Dayjs | null) => {
     if (!newDate) {
       return;
     }
 
     setRoundModalInfo(prevModalInfo => ({
       ...prevModalInfo,
-      startDate: newDate,
-    }));
-    return;
-  };
-
-  const handleChangeEndDate = (newDate: Dayjs | null) => {
-    if (!newDate) {
-      return;
-    }
-
-    setRoundModalInfo(prevModalInfo => ({
-      ...prevModalInfo,
-      endDate: newDate,
+      [name]: newDate,
     }));
   };
 
@@ -166,14 +154,18 @@ export default function RecruitmentRoundInfoModal({
               <StyledDatePicker
                 name="startDate"
                 value={startDate}
-                onChange={handleChangeStartDate}
+                onChange={date => handleChangeDate("startDate", date)}
               />
             </LocalizationProvider>
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item5" }}>
             <StyledText>모집 종료일</StyledText>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <StyledDatePicker name="endDate" value={endDate} onChange={handleChangeEndDate} />
+              <StyledDatePicker
+                name="endDate"
+                value={endDate}
+                onChange={date => handleChangeDate("endDate", date)}
+              />
             </LocalizationProvider>
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item6" }}>
