@@ -15,12 +15,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 import useEditRecruitmentRound from "@/hooks/mutations/useEditRecruitmentRound";
+import { RecruitingRoundModalInfoType, RecruitingRoundInfoType } from "@/types/entities/recruiting";
 
 export type RecruitingRoundInfoModalPropsType = {
   open: boolean;
   onClose: () => void;
   isEdit?: boolean;
-  editRoundInfo?: any;
+  editRoundInfo?: RecruitingRoundInfoType;
 };
 
 export default function RecruitingRoundInfoModal({
@@ -29,55 +30,39 @@ export default function RecruitingRoundInfoModal({
   isEdit = false,
   editRoundInfo,
 }: RecruitingRoundInfoModalPropsType) {
-  const [roundModalInfo, setRoundModalInfo] = useState<{
-    academicYear: string;
-    semester: string;
-    round: string;
-    startDate: Dayjs | null;
-    endDate: Dayjs | null;
-    name: string;
-  }>({
-    academicYear: "",
-    semester: "",
-    round: "1",
-    startDate: null,
-    endDate: null,
-    name: "",
-  });
-  const [editRoundModalInfo, setEditRoundModalInfo] = useState<{
-    recruitmentRoundId: number;
-    academicYear: string;
-    semester: string;
-    round: "1차" | "2차";
-    startDate: Dayjs;
-    endDate: Dayjs;
-    name: string;
-  }>({
-    ...editRoundInfo,
-    startDate: dayjs(editRoundInfo?.startDate),
-    endDate: dayjs(editRoundInfo?.endDate),
+  const [roundModalInfo, setRoundModalInfo] = useState<RecruitingRoundModalInfoType>({
+    recruitmentRoundId: editRoundInfo?.id ?? 0,
+    academicYear: editRoundInfo?.academicYear ?? "",
+    semester: editRoundInfo?.semester ?? "",
+    roundType: editRoundInfo?.roundType ?? "1차",
+    startDate: dayjs(editRoundInfo?.startDate) ?? null,
+    endDate: dayjs(editRoundInfo?.endDate) ?? null,
+    name: editRoundInfo?.name ?? "",
   });
 
   const { mutate } = useEditRecruitmentRound();
 
   useEffect(() => {
-    setEditRoundModalInfo({
-      ...editRoundInfo,
-      startDate: dayjs(editRoundInfo?.startDate),
-      endDate: dayjs(editRoundInfo?.endDate),
+    if (!editRoundInfo) {
+      return;
+    }
+
+    const { id, academicYear, semester, roundType, startDate, endDate, name } = editRoundInfo;
+
+    setRoundModalInfo({
+      recruitmentRoundId: id,
+      academicYear: academicYear,
+      semester: semester,
+      roundType: roundType ?? "1차",
+      startDate: dayjs(startDate) ?? null,
+      endDate: dayjs(endDate) ?? null,
+      name: name ?? "",
     });
   }, [editRoundInfo]);
 
   const handleChangeRoundModalInfo = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    if (isEdit) {
-      setEditRoundModalInfo(prevModalInfo => ({
-        ...prevModalInfo,
-        [name]: value,
-      }));
-      return;
-    }
     setRoundModalInfo(prevModalInfo => ({
       ...prevModalInfo,
       [name]: value,
@@ -89,17 +74,11 @@ export default function RecruitingRoundInfoModal({
       return;
     }
 
-    if (isEdit) {
-      setEditRoundModalInfo(prevModalInfo => ({
-        ...prevModalInfo,
-        startDate: newDate,
-      }));
-      return;
-    }
     setRoundModalInfo(prevModalInfo => ({
       ...prevModalInfo,
       startDate: newDate,
     }));
+    return;
   };
 
   const handleChangeEndDate = (newDate: Dayjs | null) => {
@@ -107,13 +86,6 @@ export default function RecruitingRoundInfoModal({
       return;
     }
 
-    if (isEdit) {
-      setEditRoundModalInfo(prevModalInfo => ({
-        ...prevModalInfo,
-        endDate: newDate,
-      }));
-      return;
-    }
     setRoundModalInfo(prevModalInfo => ({
       ...prevModalInfo,
       endDate: newDate,
@@ -121,20 +93,28 @@ export default function RecruitingRoundInfoModal({
   };
 
   const handleClickSubmit = () => {
+    if (!roundModalInfo) {
+      return;
+    }
+
+    const { name, startDate, endDate, recruitmentRoundId, roundType } = roundModalInfo;
+
     if (isEdit) {
       mutate({
-        recruitmentRoundId: editRoundModalInfo.recruitmentRoundId,
+        recruitmentRoundId: recruitmentRoundId,
         body: {
-          name: editRoundModalInfo.name,
-          startDate: editRoundModalInfo.startDate?.toDate().toISOString(),
-          endDate: editRoundModalInfo.startDate?.toDate().toISOString(),
-          roundType: editRoundModalInfo.round === "1차" ? "FIRST" : "SECOND",
+          name,
+          startDate: startDate!.toDate().toISOString(),
+          endDate: endDate!.toDate().toISOString(),
+          roundType: roundType === "1차" ? "FIRST" : "SECOND",
         },
       });
       return;
     }
     console.log(roundModalInfo);
   };
+
+  const { academicYear, semester, roundType, startDate, endDate, name } = roundModalInfo;
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -148,7 +128,7 @@ export default function RecruitingRoundInfoModal({
               placeholder="연도"
               size="small"
               inputProps={{ readOnly: isEdit }}
-              value={editRoundModalInfo?.academicYear ?? roundModalInfo.academicYear}
+              value={academicYear}
               name="academicYear"
               onChange={handleChangeRoundModalInfo}
             />
@@ -160,7 +140,7 @@ export default function RecruitingRoundInfoModal({
               placeholder="학기"
               size="small"
               inputProps={{ readOnly: isEdit }}
-              value={editRoundModalInfo?.semester ?? roundModalInfo.semester}
+              value={semester}
               name="semester"
               onChange={handleChangeRoundModalInfo}
             />
@@ -170,7 +150,7 @@ export default function RecruitingRoundInfoModal({
             <StyledRadioGroup
               name="round"
               row
-              value={editRoundModalInfo?.round ?? roundModalInfo.round}
+              value={roundType}
               onChange={handleChangeRoundModalInfo}
             >
               <FormControlLabel value="1" control={<Radio />} label="1차" />
@@ -182,7 +162,7 @@ export default function RecruitingRoundInfoModal({
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <StyledDatePicker
                 name="startDate"
-                value={editRoundModalInfo?.startDate ?? roundModalInfo.startDate}
+                value={startDate}
                 onChange={handleChangeStartDate}
               />
             </LocalizationProvider>
@@ -190,11 +170,7 @@ export default function RecruitingRoundInfoModal({
           <StyledInfoWrapper sx={{ gridArea: "item5" }}>
             <StyledText>모집 종료일</StyledText>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <StyledDatePicker
-                name="endDate"
-                value={editRoundModalInfo?.startDate ?? roundModalInfo.startDate}
-                onChange={handleChangeEndDate}
-              />
+              <StyledDatePicker name="endDate" value={endDate} onChange={handleChangeEndDate} />
             </LocalizationProvider>
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item6" }}>
@@ -202,7 +178,7 @@ export default function RecruitingRoundInfoModal({
             <StyledTextField
               placeholder="이름"
               size="small"
-              value={editRoundModalInfo?.name ?? roundModalInfo.name}
+              value={name}
               name="name"
               onChange={handleChangeRoundModalInfo}
             />
