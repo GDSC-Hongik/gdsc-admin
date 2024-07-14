@@ -4,7 +4,7 @@ import { SearchVariantType } from "@/types/entities/coupon";
 
 type SearchStateType = {
   searchInfo: {
-    text?: string | boolean;
+    text: string;
     variant: SearchVariantType;
   };
   paginationModel: PaginationModelType;
@@ -13,7 +13,7 @@ type SearchStateType = {
 type SearchDispatchType = {
   setSearchInfo: Dispatch<
     SetStateAction<{
-      text?: string | boolean;
+      text: string;
       variant: SearchVariantType;
     }>
   >;
@@ -46,7 +46,7 @@ export default function IssuedCouponSearchInfoContextProvider({
   children,
 }: IssuedCouponSearchInfoStateContextProviderPropsType) {
   const [searchInfo, setSearchInfo] = useState<{
-    text?: string | boolean;
+    text: string;
     variant: SearchVariantType;
   }>({
     text: "",
