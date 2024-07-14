@@ -20,7 +20,19 @@ export type RecruitmentRoundInfoType = {
   name: string;
 };
 
-export type RecruitingRoundModalInfoType = {
+export type FilteredRecruitmentRoundInfoType = {
+  id: number;
+  academicYear: string;
+  semester: string;
+  roundType: RecruitmentRoundType;
+  startDate: string;
+  endDate: string;
+  name: string;
+};
+
+export type RecruitmentRoundType = "1차" | "2차";
+
+export type RecruitmentRoundModalInfoType = {
   recruitmentRoundId: number;
   academicYear: string;
   semester: string;
@@ -29,15 +41,3 @@ export type RecruitingRoundModalInfoType = {
   endDate: Dayjs | null;
   name: string;
 };
-
-export type RecruitingRoundInfoType = {
-  id: number;
-  academicYear: string;
-  roundType: RecruitmentRoundType;
-  semester: string;
-  startDate: string;
-  endDate: string;
-  name: string;
-};
-
-export type RecruitmentRoundType = "1차" | "2차";

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { recruitingApi } from "@/apis/recruitingApi";
+import { recruitmentApi } from "@/apis/recruitmentApi";
 import { QueryKey } from "@/constants/queryKey";
 
 export default function useEditRecruitmentRound() {
@@ -18,7 +18,7 @@ export default function useEditRecruitmentRound() {
         endDate: string;
         roundType: "FIRST" | "SECOND";
       };
-    }) => recruitingApi.editRecruitmentRound(recruitmentRoundId, body),
+    }) => recruitmentApi.editRecruitmentRound(recruitmentRoundId, body),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QueryKey.recruitmentRound],

@@ -1,8 +1,8 @@
 import { apiClient } from ".";
-import { RecruitmentRoundResponseDtoType } from "@/types/dtos/recruiting";
-import { SemesterVariantType } from "@/types/entities/recruiting";
+import { RecruitmentRoundResponseDtoType } from "@/types/dtos/recruitment";
+import { SemesterVariantType } from "@/types/entities/recruitment";
 
-export const recruitingApi = {
+export const recruitmentApi = {
   demoteAllMember: async (academicYear: number, semesterType: SemesterVariantType | null) => {
     const response = await apiClient.patch(
       `/admin/members/demotion?academicYear=${academicYear}&semesterType=${semesterType}`,

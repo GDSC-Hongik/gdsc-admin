@@ -15,22 +15,25 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 import useEditRecruitmentRound from "@/hooks/mutations/useEditRecruitmentRound";
-import { RecruitingRoundModalInfoType, RecruitingRoundInfoType } from "@/types/entities/recruiting";
+import {
+  FilteredRecruitmentRoundInfoType,
+  RecruitmentRoundModalInfoType,
+} from "@/types/entities/recruitment";
 
-export type RecruitingRoundInfoModalPropsType = {
+export type RecruitmentRoundInfoModalPropsType = {
   open: boolean;
   onClose: () => void;
   isEdit?: boolean;
-  editRoundInfo?: RecruitingRoundInfoType;
+  editRoundInfo?: FilteredRecruitmentRoundInfoType;
 };
 
-export default function RecruitingRoundInfoModal({
+export default function RecruitmentRoundInfoModal({
   open,
   onClose,
   isEdit = false,
   editRoundInfo,
-}: RecruitingRoundInfoModalPropsType) {
-  const [roundModalInfo, setRoundModalInfo] = useState<RecruitingRoundModalInfoType>({
+}: RecruitmentRoundInfoModalPropsType) {
+  const [roundModalInfo, setRoundModalInfo] = useState<RecruitmentRoundModalInfoType>({
     recruitmentRoundId: editRoundInfo?.id ?? 0,
     academicYear: editRoundInfo?.academicYear ?? "",
     semester: editRoundInfo?.semester ?? "",
@@ -51,12 +54,12 @@ export default function RecruitingRoundInfoModal({
 
     setRoundModalInfo({
       recruitmentRoundId: id,
-      academicYear: academicYear,
-      semester: semester,
-      roundType: roundType ?? "1차",
+      academicYear,
+      semester,
+      roundType,
       startDate: dayjs(startDate) ?? null,
       endDate: dayjs(endDate) ?? null,
-      name: name ?? "",
+      name,
     });
   }, [editRoundInfo]);
 

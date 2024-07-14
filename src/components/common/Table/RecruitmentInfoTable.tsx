@@ -6,7 +6,7 @@ import {
   useRecruitingSearchInfoDispatch,
   useRecruitingSearchInfoState,
 } from "@/hooks/contexts/useRecruitingSearchInfoContext";
-import { RecruitmentsResponseDtoType } from "@/types/dtos/recruiting";
+import { RecruitmentsResponseDtoType } from "@/types/dtos/recruitment";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
 
@@ -21,7 +21,7 @@ const mockData: RecruitmentsResponseDtoType = [
   },
 ];
 
-export default function RecruitingInfoTable() {
+export default function RecruitmentInfoTable() {
   const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitingSearchInfoState();
   const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitingSearchInfoDispatch();
 

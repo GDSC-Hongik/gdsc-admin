@@ -12,7 +12,7 @@ import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPer
 import PaymentStatusPage from "@/pages/PaymentStatusPage";
 import PendingMembersPage from "@/pages/PendingMembersPage";
 import RecruitingPage from "@/pages/RecruitingPage";
-import RecruitingRoundPage from "@/pages/RecruitingRoundPage";
+import RecruitmentRoundPage from "@/pages/RecruitmentRoundPage";
 import SigninPage from "@/pages/SigninPage";
 import RoutePath from "@/routes/routePath";
 
@@ -32,7 +32,7 @@ const routes: RouteObject[] = [
       { path: RoutePath.CouponProvisionMembers, element: <CouponProvisionMembersPage /> },
       { path: RoutePath.CouponProvision, element: <CouponProvisionPage /> },
       { path: RoutePath.Recruiting, element: <RecruitingPage /> },
-      { path: RoutePath.RecruitingRound, element: <RecruitingRoundPage /> },
+      { path: RoutePath.RecruitmentRound, element: <RecruitmentRoundPage /> },
       { path: RoutePath.AllMemberHistoryPerSemester, element: <AllMemberHistoryPerSemesterPage /> },
       {
         path: RoutePath.PaymentStatusHistoryPerSemester,

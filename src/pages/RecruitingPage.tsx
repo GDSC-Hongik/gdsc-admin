@@ -1,5 +1,5 @@
 import RecruitingHeader from "@/components/common/Header/RecruitingHeader";
-import RecruitingInfoTable from "@/components/common/Table/RecruitingInfoTable";
+import RecruitingInfoTable from "@/components/common/Table/RecruitmentInfoTable";
 import Title from "@/components/common/Title";
 import RecruitingSearchInfoContextProvider from "@/contexts/RecruitingSearchInfoContext";
 

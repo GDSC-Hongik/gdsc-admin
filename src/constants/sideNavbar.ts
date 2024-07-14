@@ -37,7 +37,7 @@ export const recruitingLinkButtonInfoList = [
   },
   {
     label: "모집 회차 관리",
-    path: RoutePath.RecruitingRound,
+    path: RoutePath.RecruitmentRound,
   },
 ];
 
