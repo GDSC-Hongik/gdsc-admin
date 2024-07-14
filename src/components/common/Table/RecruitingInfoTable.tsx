@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
 import DemoteMembersModal from "../Modal/DemoteMembersModal";
 import {
   useRecruitingSearchInfoDispatch,
@@ -8,7 +9,6 @@ import {
 import { RecruitmentsResponseDtoType } from "@/types/dtos/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
-import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
 
 const mockData: RecruitmentsResponseDtoType = [
   {

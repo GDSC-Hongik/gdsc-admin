@@ -1,5 +1,5 @@
-import { MemberInfoType, StatusType } from "@/types/entities/member";
 import { PaginationElementType } from "./common";
+import { MemberInfoType, StatusType } from "@/types/entities/member";
 
 export type AllMemberListResponseDtoType = {
   content: MemberInfoType[];

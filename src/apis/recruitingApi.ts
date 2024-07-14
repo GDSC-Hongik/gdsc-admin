@@ -1,5 +1,5 @@
-import { SemesterVariantType } from "@/types/entities/recruiting";
 import { apiClient } from ".";
+import { SemesterVariantType } from "@/types/entities/recruiting";
 
 export const recruitingApi = {
   demoteAllMember: async (academicYear: number, semesterType: SemesterVariantType | null) => {

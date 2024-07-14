@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import RecruitingRoundInfoModal from "../Modal/RecruitingRoundInfoModal";
-import { formatDateWithDot } from "@/utils/validation/formatDate";
 import {
   useRecruitingRoundSearchInfoDispatch,
   useRecruitingRoundSearchInfoState,
 } from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
+import { formatDateWithDot } from "@/utils/validation/formatDate";
 
 const mockData = [
   {

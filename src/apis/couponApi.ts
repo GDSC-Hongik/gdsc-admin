@@ -1,5 +1,5 @@
-import { CouponListResponseDtoType, IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 import { apiClient } from ".";
+import { CouponListResponseDtoType, IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
 
 export const couponApi = {
   getCouponList: async (): Promise<CouponListResponseDtoType> => {

@@ -1,3 +1,4 @@
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -13,7 +14,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
-import { ChangeEvent, useEffect, useState } from "react";
 
 export type RecruitingRoundInfoModalPropsType = {
   open: boolean;
@@ -81,7 +81,9 @@ export default function RecruitingRoundInfoModal({
   };
 
   const handleChangeStartDate = (newDate: Dayjs | null) => {
-    if (!newDate) return;
+    if (!newDate) {
+return;
+}
 
     if (isEdit) {
       setEditRoundModalInfo(prevModalInfo => ({
@@ -97,7 +99,9 @@ export default function RecruitingRoundInfoModal({
   };
 
   const handleChangeEndDate = (newDate: Dayjs | null) => {
-    if (!newDate) return;
+    if (!newDate) {
+return;
+}
 
     if (isEdit) {
       setEditRoundModalInfo(prevModalInfo => ({

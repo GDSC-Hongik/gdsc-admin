@@ -1,5 +1,6 @@
 import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemesterPage";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
 import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
@@ -7,14 +8,13 @@ import CouponPage from "@/pages/CouponPage";
 import CouponProvisionMembersPage from "@/pages/CouponProvisionMembersPage";
 import CouponProvisionPage from "@/pages/CouponProvisionPage";
 import NotFoundErrorPage from "@/pages/NotFoundErrorPage";
+import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPerSemesterPage";
 import PaymentStatusPage from "@/pages/PaymentStatusPage";
 import PendingMembersPage from "@/pages/PendingMembersPage";
+import RecruitingPage from "@/pages/RecruitingPage";
+import RecruitingRoundPage from "@/pages/RecruitingRoundPage";
 import SigninPage from "@/pages/SigninPage";
 import RoutePath from "@/routes/routePath";
-import RecruitingPage from "@/pages/RecruitingPage";
-import PaymentStatusHistoryPerSemesterPage from "@/pages/PaymentStatusHistoryPerSemesterPage";
-import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemesterPage";
-import RecruitingRoundPage from "@/pages/RecruitingRoundPage";
 
 const routes: RouteObject[] = [
   {

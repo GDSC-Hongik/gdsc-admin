@@ -10,15 +10,15 @@ import {
   SelectChangeEvent,
   Box,
 } from "@mui/material";
-import { typo } from "@/styles/typo";
-import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
-import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
-import { memberInfoValidation } from "@/utils/validation";
 import XIcon from "@/assets/x.svg?react";
-import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
-import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { emailSelectMenu } from "@/constants/table";
+import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
+import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
+import { typo } from "@/styles/typo";
+import { DepartmentListResponseDtoType } from "@/types/dtos/member";
 import { EditMemberInfoType } from "@/types/entities/member";
+import { memberInfoValidation } from "@/utils/validation";
+import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
 type EditInfoModalProps = {
   open: boolean;
@@ -35,7 +35,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   const [departmentSearchText, setDepartmentSearchText] = useState(memberInfo.department.name);
   const [removedDepartments, setRemovedDepartments] = useState<string[]>([]);
   const [domain, setDomain] = useState<string>("gmail.com");
-  const [emailUsername, _] = modalMemberInfo.email.split("@");
+  const [emailUsername] = modalMemberInfo.email.split("@");
 
   const {
     memberId,
