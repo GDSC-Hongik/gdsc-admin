@@ -6,33 +6,24 @@ import {
   useRecruitingSearchInfoDispatch,
   useRecruitingSearchInfoState,
 } from "@/hooks/contexts/useRecruitingSearchInfoContext";
+import useGetRecruitmentsQuery from "@/hooks/queries/useGetRecruitmentsQuery";
 import { RecruitmentsResponseDtoType } from "@/types/dtos/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
-import { formatPrice } from "@/utils/validation/formatPrice";
-
-const mockData: RecruitmentsResponseDtoType = [
-  {
-    recruitmentId: 1,
-    semester: "2024-1학기",
-    round: "1차",
-    startDate: "2024-06-23T23:09:22",
-    endDate: "2024-08-23T23:10:55",
-    fee: 20000,
-  },
-];
 
 export default function RecruitingInfoTable() {
   const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitingSearchInfoState();
   const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitingSearchInfoDispatch();
+
+  const recruitmentList = useGetRecruitmentsQuery();
 
   const getFilteredRecruitingInfo = (recruitingInfo: RecruitmentsResponseDtoType) => {
     return recruitingInfo.map(info => ({
       id: info.recruitmentId,
       academicYear: info.semester.slice(0, 4),
       semester: info.semester.slice(5, 6),
-      startDate: formatDateWithDot(info.startDate),
-      endDate: formatDateWithDot(info.endDate),
-      fee: formatPrice(info.fee),
+      semesterStartDate: formatDateWithDot(info.semesterStartDate),
+      semesterEndDate: formatDateWithDot(info.semesterEndDate),
+      recruitmentFee: info.recruitmentFee,
     }));
   };
 
@@ -47,7 +38,7 @@ export default function RecruitingInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredRecruitingInfo(mockData)}
+        rows={getFilteredRecruitingInfo(recruitmentList)}
         columns={columns}
         disableRowSelectionOnClick
         autoHeight
@@ -83,7 +74,7 @@ const columns: GridColDef[] = [
     editable: false,
   },
   {
-    field: "startDate",
+    field: "semesterStartDate",
     headerName: "학기 시작일",
     headerAlign: "left",
     width: 120,
@@ -91,7 +82,7 @@ const columns: GridColDef[] = [
     editable: false,
   },
   {
-    field: "endDate",
+    field: "semesterEndDate",
     headerName: "학기 종료일",
     headerAlign: "left",
     width: 140,
@@ -99,7 +90,7 @@ const columns: GridColDef[] = [
     editable: false,
   },
   {
-    field: "fee",
+    field: "recruitmentFee",
     headerName: "회비",
     headerAlign: "left",
     width: 125,
