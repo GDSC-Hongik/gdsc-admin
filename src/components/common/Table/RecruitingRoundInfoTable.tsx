@@ -7,28 +7,33 @@ import {
   useRecruitingRoundSearchInfoDispatch,
   useRecruitingRoundSearchInfoState,
 } from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
+import useGetRecruitmentsRoundsQuery from "@/hooks/queries/useGetRecruitmentsRoundsQuery";
+import { RecruitmentRoundResponseDtoType } from "@/types/dtos/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
-
-const mockData = [
-  {
-    id: 1,
-    academicYear: "2024",
-    semester: "1",
-    round: 1,
-    startDate: formatDateWithDot("2024-07-05T10:03:25.743Z"),
-    endDate: formatDateWithDot("2024-07-05T10:03:25.743Z"),
-    name: "2024년도 2학기 정회원 모집",
-  },
-];
 
 export default function RecruitingRoundInfoTable() {
   const [editRoundInfoId, setEditRoundInfoId] = useState(0);
   const [editRoundInfoModalOpen, setEditRoundInfoModalOpen] = useState(false);
 
+  const recruitmentsRoundsList = useGetRecruitmentsRoundsQuery();
+
   const { createRoundInfoModalOpen } = useRecruitingRoundSearchInfoState();
   const { setCreateRoundInfoModalOpen } = useRecruitingRoundSearchInfoDispatch();
 
-  const editRoundInfo = mockData.find(data => data.id === editRoundInfoId);
+  const editRoundInfo = recruitmentsRoundsList.find(
+    data => data.recruitmentRoundId === editRoundInfoId,
+  );
+
+  const getFilteredRecruitingInfo = (recruitingInfo: RecruitmentRoundResponseDtoType) => {
+    return recruitingInfo.map(info => ({
+      id: info.recruitmentRoundId,
+      academicYear: info.semester.slice(0, 4),
+      semester: info.semester.slice(5, 6),
+      startDate: formatDateWithDot(info.startDate),
+      endDate: formatDateWithDot(info.endDate),
+      name: info.name,
+    }));
+  };
 
   const handleCloseEditRoundInfoModal = () => {
     setEditRoundInfoModalOpen(false);
@@ -46,7 +51,7 @@ export default function RecruitingRoundInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={mockData}
+        rows={getFilteredRecruitingInfo(recruitmentsRoundsList)}
         columns={getColumns(handleClickEditRecruitingRoundInfo)}
         disableRowSelectionOnClick
         autoHeight
