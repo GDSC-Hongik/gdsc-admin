@@ -12,6 +12,7 @@ export type SemesterVariantType = "FIRST" | "SECOND";
 export type RecruitmentRoundType = {
   recruitmentRoundId: number;
   semester: string;
+  roundType: "FIRST" | "SECOND";
   startDate: string;
   endDate: string;
   name: string;

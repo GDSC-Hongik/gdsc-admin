@@ -7,7 +7,7 @@ import {
   useRecruitingRoundSearchInfoDispatch,
   useRecruitingRoundSearchInfoState,
 } from "@/hooks/contexts/useRecruitingRoundSearchInfoContext";
-import useGetRecruitmentsRoundsQuery from "@/hooks/queries/useGetRecruitmentsRoundsQuery";
+import useGetRecruitmentsRoundsQuery from "@/hooks/queries/useGetRecruitmentRoundQuery";
 import { RecruitmentRoundResponseDtoType } from "@/types/dtos/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
@@ -28,6 +28,7 @@ export default function RecruitingRoundInfoTable() {
     return recruitingInfo.map(info => ({
       id: info.recruitmentRoundId,
       academicYear: info.semester.slice(0, 4),
+      roundType: info.roundType === "FIRST" ? "1차" : "2차",
       semester: info.semester.slice(5, 6),
       startDate: formatDateWithDot(info.startDate),
       endDate: formatDateWithDot(info.endDate),
@@ -93,7 +94,7 @@ const getColumns = (
     editable: false,
   },
   {
-    field: "round",
+    field: "roundType",
     headerName: "차수",
     headerAlign: "left",
     width: 75,
