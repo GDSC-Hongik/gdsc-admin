@@ -8,7 +8,7 @@ import {
   useRecruitingRoundDispatch,
 } from "@/hooks/contexts/useRecruitingRoundContext";
 import useGetRecruitmentRoundQuery from "@/hooks/queries/useGetRecruitmentRoundQuery";
-import { RecruitmentRoundType } from "@/types/dtos/recruiting";
+import { RecruitmentRoundType } from "@/types/entities/recruiting";
 import { RecruitingRoundInfoType, RecruitmentRoundInfoType } from "@/types/entities/recruiting";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
