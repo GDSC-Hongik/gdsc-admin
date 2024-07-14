@@ -4,38 +4,59 @@ import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import RecruitmentRoundInfoModal from "../Modal/RecruitmentRoundInfoModal";
 import {
-  useRecruitmentRoundSearchInfoDispatch,
-  useRecruitmentRoundSearchInfoState,
-} from "@/hooks/contexts/useRecruitmentRoundSearchInfoContext";
+  useRecruitmentRoundState,
+  useRecruitmentRoundDispatch,
+} from "@/hooks/contexts/useRecruitmentRoundContext";
+import useGetRecruitmentRoundQuery from "@/hooks/queries/useGetRecruitmentRoundQuery";
+import {
+  RecruitmentRoundInfoType,
+  RecruitmentRoundType,
+  FilteredRecruitmentRoundInfoType,
+} from "@/types/entities/recruitment";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
-
-const mockData = [
-  {
-    id: 1,
-    academicYear: "2024",
-    semester: "1",
-    round: 1,
-    startDate: formatDateWithDot("2024-07-05T10:03:25.743Z"),
-    endDate: formatDateWithDot("2024-07-05T10:03:25.743Z"),
-    name: "2024년도 2학기 정회원 모집",
-  },
-];
 
 export default function RecruitmentRoundInfoTable() {
   const [editRoundInfoId, setEditRoundInfoId] = useState(0);
   const [editRoundInfoModalOpen, setEditRoundInfoModalOpen] = useState(false);
 
-  const { createRoundInfoModalOpen } = useRecruitmentRoundSearchInfoState();
-  const { setCreateRoundInfoModalOpen } = useRecruitmentRoundSearchInfoDispatch();
+  const recruitmentRoundList = useGetRecruitmentRoundQuery();
 
-  const editRoundInfo = mockData.find(data => data.id === editRoundInfoId);
+  const { createRoundModalOpen } = useRecruitmentRoundState();
+  const { setCreateRoundModalOpen } = useRecruitmentRoundDispatch();
+
+  const editRoundInfo = recruitmentRoundList.find(
+    data => data.recruitmentRoundId === editRoundInfoId,
+  );
+
+  const formatRecruitmentRoundInfo = (info: RecruitmentRoundInfoType) => {
+    const { recruitmentRoundId, semester, roundType, startDate, endDate, name } = info;
+
+    return {
+      startDate: formatDateWithDot(startDate) ?? "",
+      endDate: formatDateWithDot(endDate) ?? "",
+      name: name ?? "",
+      semester: semester.slice(5, 6) ?? "",
+      roundType: (roundType === "FIRST" ? "1차" : "2차") as RecruitmentRoundType,
+      id: recruitmentRoundId ?? 0,
+      academicYear: semester.slice(0, 4) ?? "",
+    };
+  };
+
+  const editRoundModalInfo = editRoundInfo ? formatRecruitmentRoundInfo(editRoundInfo) : undefined;
+
+  const getFilteredRecruitmentRoundInfo = (
+    recruitmentInfo: RecruitmentRoundInfoType[],
+  ): FilteredRecruitmentRoundInfoType[] => {
+    return recruitmentInfo.map(info => formatRecruitmentRoundInfo(info));
+  };
 
   const handleCloseEditRoundInfoModal = () => {
+    setEditRoundInfoId(0);
     setEditRoundInfoModalOpen(false);
   };
 
   const handleCloseCreateRoundInfoModal = () => {
-    setCreateRoundInfoModalOpen(false);
+    setCreateRoundModalOpen(false);
   };
 
   const handleClickEditRecruitmentRoundInfo = (roundId: number) => {
@@ -46,7 +67,7 @@ export default function RecruitmentRoundInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={mockData}
+        rows={getFilteredRecruitmentRoundInfo(recruitmentRoundList)}
         columns={getColumns(handleClickEditRecruitmentRoundInfo)}
         disableRowSelectionOnClick
         autoHeight
@@ -59,10 +80,10 @@ export default function RecruitmentRoundInfoTable() {
         open={editRoundInfoModalOpen}
         onClose={handleCloseEditRoundInfoModal}
         isEdit
-        editRoundInfo={editRoundInfo}
+        editRoundInfo={editRoundModalInfo}
       />
       <RecruitmentRoundInfoModal
-        open={createRoundInfoModalOpen}
+        open={createRoundModalOpen}
         onClose={handleCloseCreateRoundInfoModal}
       />
     </>
@@ -88,7 +109,7 @@ const getColumns = (
     editable: false,
   },
   {
-    field: "round",
+    field: "roundType",
     headerName: "차수",
     headerAlign: "left",
     width: 75,

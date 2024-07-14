@@ -1,7 +1,7 @@
 import RecruitmentRoundHeader from "@/components/common/Header/RecruitmentRoundHeader";
 import RecruitmentRoundInfoTable from "@/components/common/Table/RecruitmentRoundInfoTable";
 import Title from "@/components/common/Title";
-import RecruitmentRoundSearchInfoContextProvider from "@/contexts/RecruitmentRoundSearchInfoContext";
+import RecruitmentRoundContextProvider from "@/contexts/RecruitmentRoundContext";
 
 export default function RecruitmentRoundPage() {
   return (
@@ -10,10 +10,10 @@ export default function RecruitmentRoundPage() {
         variant={"recruitmentRound"}
         descriptionText={"매 학기 신청 받을 리크루팅을 관리합니다."}
       />
-      <RecruitmentRoundSearchInfoContextProvider>
+      <RecruitmentRoundContextProvider>
         <RecruitmentRoundHeader />
         <RecruitmentRoundInfoTable />
-      </RecruitmentRoundSearchInfoContextProvider>
+      </RecruitmentRoundContextProvider>
     </>
   );
 }

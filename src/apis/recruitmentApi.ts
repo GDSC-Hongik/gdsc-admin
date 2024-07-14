@@ -1,4 +1,5 @@
 import { apiClient } from ".";
+import { RecruitmentRoundResponseDtoType } from "@/types/dtos/recruitment";
 import { SemesterVariantType } from "@/types/entities/recruitment";
 
 export const recruitmentApi = {
@@ -11,6 +12,24 @@ export const recruitmentApi = {
 
   getRecruitments: async () => {
     const response = await apiClient.get("/admin/recruitments");
+    return response.data;
+  },
+
+  getRecruitmentRound: async (): Promise<RecruitmentRoundResponseDtoType> => {
+    const response = await apiClient.get("/admin/recruitments/rounds");
+    return response.data;
+  },
+
+  editRecruitmentRound: async (
+    recruitmentRoundId: number,
+    body: {
+      name: string;
+      startDate: string;
+      endDate: string;
+      roundType: "FIRST" | "SECOND";
+    },
+  ) => {
+    const response = await apiClient.put(`/admin/recruitments/rounds/${recruitmentRoundId}`, body);
     return response.data;
   },
 };
