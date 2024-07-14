@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Stack, Button } from "@mui/material";
+import { useRecruitmentSearchInfoDispatch } from "@/hooks/contexts/useRecruitmentSearchInfoContext";
 
 export default function RecruitmentHeader() {
   const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentSearchInfoDispatch();
