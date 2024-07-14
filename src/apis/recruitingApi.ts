@@ -8,4 +8,9 @@ export const recruitingApi = {
     );
     return response.data;
   },
+
+  getRecruitments: async () => {
+    const response = await apiClient.get("/admin/recruitments");
+    return response.data;
+  },
 };
