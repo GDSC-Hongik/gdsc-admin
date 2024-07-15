@@ -88,3 +88,5 @@ export type MemberTypeSelectMenuType = {
   name: string;
   type: "GUEST" | "ASSOCIATE";
 }[];
+
+export type MemberVariantType = "ASSOCIATE" | "GUEST";
