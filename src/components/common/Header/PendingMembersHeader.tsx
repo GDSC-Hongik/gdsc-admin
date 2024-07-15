@@ -13,7 +13,7 @@ import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/member";
 import {
   usePendingMembersSearchInfoDispatch,
   usePendingMembersSearchInfoState,
-} from "@/hooks/contexts/usePendingMembersSearchInfoContext";
+} from "@/hooks/contexts/usePendingMembersContext";
 
 export default function PendingMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);

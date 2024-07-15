@@ -2,23 +2,23 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "re
 import { PaginationModelType } from "@/types/entities/common";
 import { MemberVariantType, SearchInfoType } from "@/types/entities/member";
 
-type SearchStateType = {
+type PendingMembersStateContextType = {
   searchInfo: SearchInfoType;
   memberVariant: MemberVariantType;
   paginationModel: PaginationModelType;
 };
 
-type SearchDispatchType = {
+type PendingMembersDispatchContextType = {
   setSearchInfo: Dispatch<SetStateAction<SearchInfoType>>;
   setMemberVariant: Dispatch<SetStateAction<MemberVariantType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
-type PendingMembersSearchInfoStateContextProviderPropsType = {
+type PendingMembersContextProviderPropsType = {
   children: ReactNode;
 };
 
-const defaultState: SearchStateType = {
+const defaultState: PendingMembersStateContextType = {
   searchInfo: {
     text: "",
     variant: "studentId",
@@ -30,17 +30,18 @@ const defaultState: SearchStateType = {
   },
 };
 
-export const PendingMembersSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const PendingMembersStateContext =
+  createContext<PendingMembersStateContextType>(defaultState);
 
-export const PendingMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const PendingMembersDispatchContext = createContext<PendingMembersDispatchContextType>({
   setSearchInfo: () => {},
   setMemberVariant: () => {},
   setPaginationModel: () => {},
 });
 
-export default function PendingMembersSearchInfoContextProvider({
+export default function PendingMembersContextProvider({
   children,
-}: PendingMembersSearchInfoStateContextProviderPropsType) {
+}: PendingMembersContextProviderPropsType) {
   const [searchInfo, setSearchInfo] = useState<SearchInfoType>(defaultState.searchInfo);
   const [memberVariant, setMemberVariant] = useState<MemberVariantType>(defaultState.memberVariant);
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>(
@@ -48,14 +49,12 @@ export default function PendingMembersSearchInfoContextProvider({
   );
 
   return (
-    <PendingMembersSearchInfoDispatchContext.Provider
+    <PendingMembersDispatchContext.Provider
       value={{ setSearchInfo, setMemberVariant, setPaginationModel }}
     >
-      <PendingMembersSearchInfoStateContext.Provider
-        value={{ searchInfo, memberVariant, paginationModel }}
-      >
+      <PendingMembersStateContext.Provider value={{ searchInfo, memberVariant, paginationModel }}>
         {children}
-      </PendingMembersSearchInfoStateContext.Provider>
-    </PendingMembersSearchInfoDispatchContext.Provider>
+      </PendingMembersStateContext.Provider>
+    </PendingMembersDispatchContext.Provider>
   );
 }

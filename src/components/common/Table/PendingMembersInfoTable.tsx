@@ -4,7 +4,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import {
   usePendingMembersSearchInfoDispatch,
   usePendingMembersSearchInfoState,
-} from "@/hooks/contexts/usePendingMembersSearchInfoContext";
+} from "@/hooks/contexts/usePendingMembersContext";
 import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
 
