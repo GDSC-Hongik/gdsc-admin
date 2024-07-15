@@ -15,10 +15,7 @@ export default function DemoteMembersModal({ open, onClose }: DemoteMembersModal
     semester: "",
   });
 
-  const { mutate } = useDemoteAllMemberMutation(
-    Number(academicInfo.academicYear),
-    academicInfo.semester === "1" ? "FIRST" : academicInfo.semester === "2" ? "SECOND" : null,
-  );
+  const { mutate } = useDemoteAllMemberMutation();
 
   const handleChangeAcademicInfo = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -30,7 +27,11 @@ export default function DemoteMembersModal({ open, onClose }: DemoteMembersModal
   };
 
   const handleClickDemote = () => {
-    mutate();
+    mutate({
+      academicYear: Number(academicInfo.academicYear),
+      semesterType:
+        academicInfo.semester === "1" ? "FIRST" : academicInfo.semester === "2" ? "SECOND" : null,
+    });
     onClose();
   };
 
