@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AllMembersDispatchContext, AllMembersStateContext } from "@/contexts/AllMembersContext";
 
-export const useAllMembersState = () => {
+export const useAllMembersStateContext = () => {
   const context = useContext(AllMembersStateContext);
 
   if (context === undefined) {
@@ -11,7 +11,7 @@ export const useAllMembersState = () => {
   return context;
 };
 
-export const useAllMembersDispatch = () => {
+export const useAllMembersDispatchContext = () => {
   const context = useContext(AllMembersDispatchContext);
 
   if (context === undefined) {

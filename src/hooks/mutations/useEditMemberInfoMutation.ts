@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { QueryKey } from "@/constants/queryKey";
 
-export default function useEditMemberInfoMutation(
-  memberId: number,
+type EditMemberInfoMutationArgumentType = {
+  memberId: number;
   body: {
     studentId: string;
     name: string;
@@ -13,21 +13,24 @@ export default function useEditMemberInfoMutation(
     email: string;
     discordUsername: string | null;
     nickname: string | null;
-  },
-  onSuccess: () => void,
-) {
+  };
+  onSuccess: () => void;
+};
+
+export default function useEditMemberInfoMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => allMemberApi.editMemberInfo(memberId, body),
-    onSuccess: async () => {
+    mutationFn: ({ memberId, body }: EditMemberInfoMutationArgumentType) =>
+      allMemberApi.editMemberInfo(memberId, body),
+    onSuccess: async (_, variables) => {
       Promise.all([
         queryClient.invalidateQueries({
           queryKey: [QueryKey.allMemberList],
         }),
       ]);
       toast.success("수정 완료되었습니다.");
-      onSuccess();
+      variables.onSuccess();
     },
     onError: (error: any) => {
       toast.error(error.response.data.errorMessage);

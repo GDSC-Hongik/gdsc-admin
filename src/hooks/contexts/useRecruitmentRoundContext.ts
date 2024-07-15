@@ -4,7 +4,7 @@ import {
   RecruitmentRoundDispatchContext,
 } from "@/contexts/RecruitmentRoundContext";
 
-export const useRecruitmentRoundState = () => {
+export const useRecruitmentRoundStateContext = () => {
   const context = useContext(RecruitmentRoundStateContext);
 
   if (context === undefined) {
@@ -16,7 +16,7 @@ export const useRecruitmentRoundState = () => {
   return context;
 };
 
-export const useRecruitmentRoundDispatch = () => {
+export const useRecruitmentRoundDispatchContext = () => {
   const context = useContext(RecruitmentRoundDispatchContext);
 
   if (context === undefined) {

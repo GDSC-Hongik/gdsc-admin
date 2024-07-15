@@ -11,19 +11,19 @@ import {
 } from "@mui/material";
 import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/member";
 import {
-  usePendingMembersSearchInfoDispatch,
-  usePendingMembersSearchInfoState,
-} from "@/hooks/contexts/usePendingMembersSearchInfoContext";
+  usePendingMembersDispatchContext,
+  usePendingMembersStateContext,
+} from "@/hooks/contexts/usePendingMembersContext";
 
 export default function PendingMembersHeader() {
-  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
+  const [selectedSearchInfoVariant, setSelectedSearchInfoVariant] = useState<number>(1);
   const [selectedMemberVariant, setSelectedMemberVariant] = useState<number>(1);
 
   const { setSearchInfo, setPaginationModel, setMemberVariant } =
-    usePendingMembersSearchInfoDispatch();
+    usePendingMembersDispatchContext();
   const {
     searchInfo: { text: searchText },
-  } = usePendingMembersSearchInfoState();
+  } = usePendingMembersStateContext();
 
   const handleResetPage = () => {
     setPaginationModel(prevPaginationModel => ({
@@ -32,7 +32,7 @@ export default function PendingMembersHeader() {
     }));
   };
 
-  const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
+  const handleChangeSelectSearchInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
     setSearchInfo(prevSearchInfo => ({
@@ -40,7 +40,7 @@ export default function PendingMembersHeader() {
       variant: memberInfoSelectMenu[targetIndex]["type"],
       text: "",
     }));
-    setSelectedMemberInfoVariant(targetIndex + 1);
+    setSelectedSearchInfoVariant(targetIndex + 1);
     handleResetPage();
   };
 
@@ -69,8 +69,8 @@ export default function PendingMembersHeader() {
           <InputLabel>Type</InputLabel>
           <Select
             label="Type"
-            value={selectedMemberInfoVariant}
-            onChange={handleChangeSelectMemberInfoVariant}
+            value={selectedSearchInfoVariant}
+            onChange={handleChangeSelectSearchInfoVariant}
           >
             {memberInfoSelectMenu.map(title => (
               <MenuItem value={title.value} key={title.value}>

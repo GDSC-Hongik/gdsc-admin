@@ -1,7 +1,7 @@
 import PendingMembersHeader from "@/components/common/Header/PendingMembersHeader";
 import PendingMembersInfoTable from "@/components/common/Table/PendingMembersInfoTable";
 import Title from "@/components/common/Title";
-import PendingMembersSearchInfoContextProvider from "@/contexts/PendingMembersSearchInfoContext";
+import PendingMembersSearchInfoContextProvider from "@/contexts/PendingMembersContext";
 
 export default function PendingMembersPage() {
   return (
