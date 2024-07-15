@@ -4,7 +4,7 @@ import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
 import EditInfoModal from "../Modal/EditInfoModal";
 
-import { useAllMembersState, useAllMembersDispatch } from "@/hooks/contexts/useAllMembersContext";
+import { useAllMembersStateContext, useAllMembersDispatchContext } from "@/hooks/contexts/useAllMembersContext";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { EditMemberInfoType, MemberInfoType } from "@/types/entities/member";
@@ -32,8 +32,8 @@ export default function AllMembersInfoTable() {
   const {
     paginationModel,
     searchInfo: { text: searchText, variant: searchVariant },
-  } = useAllMembersState();
-  const { setPaginationModel } = useAllMembersDispatch();
+  } = useAllMembersStateContext();
+  const { setPaginationModel } = useAllMembersDispatchContext();
 
   const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,

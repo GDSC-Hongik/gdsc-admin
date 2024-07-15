@@ -13,16 +13,16 @@ import {
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { memberInfoSelectMenu } from "@/constants/member";
-import { useAllMembersDispatch, useAllMembersState } from "@/hooks/contexts/useAllMembersContext";
+import { useAllMembersDispatchContext, useAllMembersStateContext } from "@/hooks/contexts/useAllMembersContext";
 import { downloadExcelFile } from "@/utils/excel";
 
 export default function AllMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState(1);
 
-  const { setSearchInfo, setPaginationModel } = useAllMembersDispatch();
+  const { setSearchInfo, setPaginationModel } = useAllMembersDispatchContext();
   const {
     searchInfo: { text: searchText },
-  } = useAllMembersState();
+  } = useAllMembersStateContext();
 
   const handleClickExcelDownloadButton = async () => {
     try {
