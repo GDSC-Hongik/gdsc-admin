@@ -3,13 +3,25 @@ import styled from "@emotion/styled";
 import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
 import EditInfoModal from "../Modal/EditInfoModal";
-import {
-  useAllMembersSearchInfoDispatch,
-  useAllMembersSearchInfoState,
-} from "@/hooks/contexts/useAllMembersContext";
+
+import { useAllMembersState, useAllMembersDispatch } from "@/hooks/contexts/useAllMembersContext";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { EditMemberInfoType, MemberInfoType } from "@/types/entities/member";
+
+const initialMemberInfo = {
+  memberId: 0,
+  studentId: "",
+  name: "",
+  phone: "",
+  department: {
+    code: "",
+    name: "",
+  },
+  email: "",
+  discordUsername: "",
+  nickname: "",
+};
 
 export default function AllMembersInfoTable() {
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -20,8 +32,8 @@ export default function AllMembersInfoTable() {
   const {
     paginationModel,
     searchInfo: { text: searchText, variant: searchVariant },
-  } = useAllMembersSearchInfoState();
-  const { setPaginationModel } = useAllMembersSearchInfoDispatch();
+  } = useAllMembersState();
+  const { setPaginationModel } = useAllMembersDispatch();
 
   const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,
@@ -32,19 +44,7 @@ export default function AllMembersInfoTable() {
 
   const editMemberInfo =
     allMemberList.find(member => member.memberId === editMemberId) ||
-    ({
-      memberId: 0,
-      studentId: "",
-      name: "",
-      phone: "",
-      department: {
-        code: "",
-        name: "",
-      },
-      email: "",
-      discordUsername: "",
-      nickname: "",
-    } as EditMemberInfoType);
+    (initialMemberInfo as EditMemberInfoType);
 
   const rowCountRef = useRef(totalElements || 0);
 
