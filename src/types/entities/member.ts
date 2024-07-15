@@ -52,11 +52,6 @@ type MembersSearchVariantType = [
 
 export type SearchVariantType = MembersSearchVariantType[number] | null;
 
-export type SearchInfoType = {
-  text: string;
-  variant: SearchVariantType;
-};
-
 export type DetailMemberInfoType = {
   name: string;
   studentId: string;
