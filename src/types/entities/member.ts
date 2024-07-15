@@ -90,3 +90,5 @@ export type MemberTypeSelectMenuType = {
 }[];
 
 export type MemberVariantType = "ASSOCIATE" | "GUEST";
+
+export type DepartmentType = { code: string; name: string };
