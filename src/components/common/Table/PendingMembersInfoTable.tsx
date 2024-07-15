@@ -2,8 +2,8 @@ import { useMemo, useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import {
-  usePendingMembersSearchInfoDispatch,
-  usePendingMembersSearchInfoState,
+  usePendingMembersDispatchContext,
+  usePendingMembersStateContext,
 } from "@/hooks/contexts/usePendingMembersContext";
 import useGetPendingMemberListQuery from "@/hooks/queries/useGetPendingMemberListQuery";
 import { MemberInfoType } from "@/types/entities/member";
@@ -13,8 +13,8 @@ export default function PendingMembersInfoTable() {
     paginationModel,
     searchInfo: { text: searchText, variant: searchVariant },
     memberVariant,
-  } = usePendingMembersSearchInfoState();
-  const { setPaginationModel } = usePendingMembersSearchInfoDispatch();
+  } = usePendingMembersStateContext();
+  const { setPaginationModel } = usePendingMembersDispatchContext();
 
   const { pendingMemberList = [], totalElements } = useGetPendingMemberListQuery(
     paginationModel.page,

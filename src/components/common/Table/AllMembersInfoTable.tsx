@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
-import EditInfoModal from "../Modal/EditInfoModal";
+import EditInfoMemberModal from "../Modal/EditMemberInfoModal";
 
 import { useAllMembersStateContext, useAllMembersDispatchContext } from "@/hooks/contexts/useAllMembersContext";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
@@ -116,7 +116,7 @@ export default function AllMembersInfoTable() {
         disableColumnMenu
         disableColumnSorting
       />
-      <EditInfoModal
+      <EditInfoMemberModal
         open={editModalOpen}
         onClose={handleCloseModal}
         memberInfo={editMemberInfo}

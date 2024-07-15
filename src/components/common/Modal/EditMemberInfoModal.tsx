@@ -26,7 +26,7 @@ type EditInfoModalProps = {
   memberInfo: EditMemberInfoType;
 };
 
-export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoModalProps) {
+export default function EditMemberInfoModal({ open, onClose, memberInfo }: EditInfoModalProps) {
   const [modalMemberInfo, setModalMemberInfo] = useState({
     ...memberInfo,
     discordUsername: memberInfo.discordUsername || null,
