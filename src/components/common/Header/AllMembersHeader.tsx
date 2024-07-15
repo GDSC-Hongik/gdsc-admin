@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
-import { memberInfoSelectMenu } from "@/constants/table";
+import { memberInfoSelectMenu } from "@/constants/member";
 import { useAllMembersDispatch, useAllMembersState } from "@/hooks/contexts/useAllMembersContext";
 import { downloadExcelFile } from "@/utils/excel";
 

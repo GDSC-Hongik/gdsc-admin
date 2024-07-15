@@ -9,7 +9,7 @@ import {
   styled,
   TextField,
 } from "@mui/material";
-import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/table";
+import { memberInfoSelectMenu, memberTypeSelectMenu } from "@/constants/member";
 import {
   usePendingMembersSearchInfoDispatch,
   usePendingMembersSearchInfoState,

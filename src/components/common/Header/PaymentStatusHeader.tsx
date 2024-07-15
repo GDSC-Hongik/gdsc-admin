@@ -9,7 +9,7 @@ import {
   TextField,
   SelectChangeEvent,
 } from "@mui/material";
-import { memberInfoSelectMenu } from "@/constants/table";
+import { memberInfoSelectMenu } from "@/constants/member";
 import {
   usePaymentStatusSearchInfoDispatch,
   usePaymentStatusSearchInfoState,
