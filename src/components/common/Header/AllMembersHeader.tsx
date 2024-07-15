@@ -16,7 +16,7 @@ import { memberInfoSelectMenu } from "@/constants/table";
 import {
   useAllMembersSearchInfoDispatch,
   useAllMembersSearchInfoState,
-} from "@/hooks/contexts/useAllMembersSearchInfoContext";
+} from "@/hooks/contexts/useAllMembersContext";
 import { downloadExcelFile } from "@/utils/excel";
 
 export default function AllMembersHeader() {

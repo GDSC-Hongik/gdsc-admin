@@ -27,15 +27,15 @@ const defaultState: AllMembersStateContextType = {
   },
 };
 
-export const AllMembersSearchInfoStateContext =
+export const AllMembersStateContext =
   createContext<AllMembersStateContextType>(defaultState);
 
-export const AllMembersSearchInfoDispatchContext = createContext<AllMembersStateDispatchType>({
+export const AllMembersDispatchContext = createContext<AllMembersStateDispatchType>({
   setSearchInfo: () => {},
   setPaginationModel: () => {},
 });
 
-export default function AllMembersSearchInfoContextProvider({
+export default function AllMembersContextProvider({
   children,
 }: AllMembersContextProviderPropsType) {
   const [searchInfo, setSearchInfo] = useState<SearchInfoType>(defaultState.searchInfo);
@@ -44,15 +44,15 @@ export default function AllMembersSearchInfoContextProvider({
   );
 
   return (
-    <AllMembersSearchInfoDispatchContext.Provider value={{ setSearchInfo, setPaginationModel }}>
-      <AllMembersSearchInfoStateContext.Provider
+    <AllMembersDispatchContext.Provider value={{ setSearchInfo, setPaginationModel }}>
+      <AllMembersStateContext.Provider
         value={{
           searchInfo,
           paginationModel,
         }}
       >
         {children}
-      </AllMembersSearchInfoStateContext.Provider>
-    </AllMembersSearchInfoDispatchContext.Provider>
+      </AllMembersStateContext.Provider>
+    </AllMembersDispatchContext.Provider>
   );
 }

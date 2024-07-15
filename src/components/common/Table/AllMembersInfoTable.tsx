@@ -6,7 +6,7 @@ import EditInfoModal from "../Modal/EditInfoModal";
 import {
   useAllMembersSearchInfoDispatch,
   useAllMembersSearchInfoState,
-} from "@/hooks/contexts/useAllMembersSearchInfoContext";
+} from "@/hooks/contexts/useAllMembersContext";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { EditMemberInfoType, MemberInfoType } from "@/types/entities/member";
