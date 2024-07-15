@@ -11,16 +11,17 @@ import {
 } from "@mui/material";
 import { memberInfoSelectMenu } from "@/constants/member";
 import {
-  usePaymentStatusSearchInfoDispatch,
-  usePaymentStatusSearchInfoState,
-} from "@/hooks/contexts/usePaymentStatusSearchInfoContext";
+  usePaymentStatusDispatchContext,
+  usePaymentStatusStateContext,
+} from "@/hooks/contexts/usePaymentStatusContext";
 
 export default function PaymentStatusHeader() {
-  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState<number>(1);
+  const [selectedSearchInfoVariant, setSelectedSearchInfoVariant] = useState<number>(1);
 
-  const { setSearchText, setSearchVariant, setPaginationModel } =
-    usePaymentStatusSearchInfoDispatch();
-  const { searchText } = usePaymentStatusSearchInfoState();
+  const { setSearchInfo, setPaginationModel } = usePaymentStatusDispatchContext();
+  const {
+    searchInfo: { text: searchText },
+  } = usePaymentStatusStateContext();
 
   const handleResetPage = () => {
     setPaginationModel(prevPaginationModel => ({
@@ -29,12 +30,15 @@ export default function PaymentStatusHeader() {
     }));
   };
 
-  const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
+  const handleChangeSelectSearchInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
-    setSearchText?.("");
-    setSelectedMemberInfoVariant(targetIndex + 1);
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      variant: memberInfoSelectMenu[targetIndex]["type"],
+      text: "",
+    }));
+    setSelectedSearchInfoVariant(targetIndex + 1);
     handleResetPage();
   };
 
@@ -42,7 +46,10 @@ export default function PaymentStatusHeader() {
     const text = e.target.value;
     text.length === 1 && handleResetPage();
 
-    setSearchText?.(text);
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      text,
+    }));
   };
 
   return (
@@ -52,8 +59,8 @@ export default function PaymentStatusHeader() {
           <InputLabel>Type</InputLabel>
           <Select
             label="Type"
-            value={selectedMemberInfoVariant}
-            onChange={handleChangeSelectMemberInfoVariant}
+            value={selectedSearchInfoVariant}
+            onChange={handleChangeSelectSearchInfoVariant}
           >
             {memberInfoSelectMenu.map(title => (
               <MenuItem value={title.value} key={title.value}>

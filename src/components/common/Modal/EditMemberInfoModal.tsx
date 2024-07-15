@@ -53,19 +53,7 @@ export default function EditMemberInfoModal({ open, onClose, memberInfo }: EditI
     return departmentList.filter(department => !removedDepartments.includes(department.code));
   }, [departmentList, removedDepartments]);
 
-  const { mutate } = useEditMemberInfoMutation(
-    memberId,
-    {
-      studentId,
-      name,
-      phone: formatPhoneNumber(phone),
-      department: departmentCode,
-      email: `${emailUsername}@${domain}`,
-      discordUsername: discordUsername,
-      nickname: nickname,
-    },
-    () => onClose(),
-  );
+  const { mutate } = useEditMemberInfoMutation();
 
   const handleEditMemberInfo = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -82,7 +70,19 @@ export default function EditMemberInfoModal({ open, onClose, memberInfo }: EditI
   };
 
   const handleClickSave = () => {
-    mutate();
+    mutate({
+      memberId,
+      body: {
+        studentId,
+        name,
+        phone: formatPhoneNumber(phone),
+        department: departmentCode,
+        email: `${emailUsername}@${domain}`,
+        discordUsername: discordUsername,
+        nickname: nickname,
+      },
+      onSuccess: () => onClose(),
+    });
   };
 
   const handleClickDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
