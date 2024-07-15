@@ -11,7 +11,7 @@ import {
   Box,
 } from "@mui/material";
 import XIcon from "@/assets/x.svg?react";
-import { emailSelectMenu } from "@/constants/table";
+import { emailSelectMenu } from "@/constants/member";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { typo } from "@/styles/typo";

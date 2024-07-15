@@ -12,20 +12,17 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
-import { memberInfoSelectMenu } from "@/constants/table";
-import {
-  useAllMembersSearchInfoDispatch,
-  useAllMembersSearchInfoState,
-} from "@/hooks/contexts/useAllMembersSearchInfoContext";
+import { memberInfoSelectMenu } from "@/constants/member";
+import { useAllMembersDispatch, useAllMembersState } from "@/hooks/contexts/useAllMembersContext";
 import { downloadExcelFile } from "@/utils/excel";
 
 export default function AllMembersHeader() {
   const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState(1);
 
-  const { setSearchInfo, setPaginationModel } = useAllMembersSearchInfoDispatch();
+  const { setSearchInfo, setPaginationModel } = useAllMembersDispatch();
   const {
     searchInfo: { text: searchText },
-  } = useAllMembersSearchInfoState();
+  } = useAllMembersState();
 
   const handleClickExcelDownloadButton = async () => {
     try {

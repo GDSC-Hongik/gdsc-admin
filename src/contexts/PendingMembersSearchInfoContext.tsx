@@ -1,6 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { MemberVariantType, PaginationModelType } from "@/types/entities/common";
-import { SearchInfoType } from "@/types/entities/member";
+import { PaginationModelType } from "@/types/entities/common";
+import { MemberVariantType, SearchInfoType } from "@/types/entities/member";
 
 type SearchStateType = {
   searchInfo: SearchInfoType;
@@ -43,7 +43,9 @@ export default function PendingMembersSearchInfoContextProvider({
 }: PendingMembersSearchInfoStateContextProviderPropsType) {
   const [searchInfo, setSearchInfo] = useState<SearchInfoType>(defaultState.searchInfo);
   const [memberVariant, setMemberVariant] = useState<MemberVariantType>(defaultState.memberVariant);
-  const [paginationModel, setPaginationModel] = useState<PaginationModelType>(defaultState.paginationModel);
+  const [paginationModel, setPaginationModel] = useState<PaginationModelType>(
+    defaultState.paginationModel,
+  );
 
   return (
     <PendingMembersSearchInfoDispatchContext.Provider
