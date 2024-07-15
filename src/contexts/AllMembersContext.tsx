@@ -2,21 +2,21 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "re
 import { PaginationModelType } from "@/types/entities/common";
 import { SearchInfoType } from "@/types/entities/member";
 
-type AllMembersSearchInfoContextProviderPropsType = {
+type AllMembersContextProviderPropsType = {
   children: ReactNode;
 };
 
-type SearchStateType = {
+type AllMembersStateContextType = {
   searchInfo: SearchInfoType;
   paginationModel: PaginationModelType;
 };
 
-type SearchDispatchType = {
+type AllMembersStateDispatchType = {
   setSearchInfo: Dispatch<SetStateAction<SearchInfoType>>;
   setPaginationModel: Dispatch<SetStateAction<PaginationModelType>>;
 };
 
-const defaultState: SearchStateType = {
+const defaultState: AllMembersStateContextType = {
   searchInfo: {
     text: "",
     variant: "studentId",
@@ -27,16 +27,17 @@ const defaultState: SearchStateType = {
   },
 };
 
-export const AllMembersSearchInfoStateContext = createContext<SearchStateType>(defaultState);
+export const AllMembersSearchInfoStateContext =
+  createContext<AllMembersStateContextType>(defaultState);
 
-export const AllMembersSearchInfoDispatchContext = createContext<SearchDispatchType>({
+export const AllMembersSearchInfoDispatchContext = createContext<AllMembersStateDispatchType>({
   setSearchInfo: () => {},
   setPaginationModel: () => {},
 });
 
 export default function AllMembersSearchInfoContextProvider({
   children,
-}: AllMembersSearchInfoContextProviderPropsType) {
+}: AllMembersContextProviderPropsType) {
   const [searchInfo, setSearchInfo] = useState<SearchInfoType>(defaultState.searchInfo);
   const [paginationModel, setPaginationModel] = useState<PaginationModelType>(
     defaultState.paginationModel,

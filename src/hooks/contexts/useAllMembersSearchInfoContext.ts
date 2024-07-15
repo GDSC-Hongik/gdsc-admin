@@ -2,7 +2,7 @@ import { useContext } from "react";
 import {
   AllMembersSearchInfoStateContext,
   AllMembersSearchInfoDispatchContext,
-} from "@/contexts/AllMembersSearchInfoContext";
+} from "@/contexts/AllMembersContext";
 
 export const useAllMembersSearchInfoState = () => {
   const context = useContext(AllMembersSearchInfoStateContext);
