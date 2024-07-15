@@ -1,6 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { PaginationModelType } from "@/types/entities/common";
-import { MemberVariantType, SearchInfoType } from "@/types/entities/member";
+import { PaginationModelType, SearchInfoType } from "@/types/entities/common";
+import { MemberVariantType } from "@/types/entities/member";
 
 type PendingMembersStateContextType = {
   searchInfo: SearchInfoType;
