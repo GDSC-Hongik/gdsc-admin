@@ -31,8 +31,8 @@ export default function IssuedCouponInfoTable() {
       phone: issuedCoupon.member.phone,
       couponName: issuedCoupon.couponName,
       discountAmount: formatPrice(issuedCoupon.discountAmount),
-      usedAt: formatDateWithText(issuedCoupon.usedAt),
-      issuedAt: formatDateWithText(issuedCoupon.issuedAt),
+      usedAt: !issuedCoupon.usedAt ? null : formatDateWithText(issuedCoupon.usedAt),
+      issuedAt: !issuedCoupon.issuedAt ? null : formatDateWithText(issuedCoupon.issuedAt),
       hasUsed: issuedCoupon.hasUsed ? "O" : "X",
       hasRevoked: issuedCoupon.hasRevoked ? "O" : "X",
     }));
