@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
-import { useIssuedCouponSearchInfoState } from "@/hooks/contexts/useIssuedCouponSearchInfoContext";
+import { useIssuedCouponState } from "@/hooks/contexts/useIssuedCouponContext";
 import useRevokeIssuedCouponMutation from "@/hooks/mutations/useRevokeIssuedCouponMutation";
 import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponType } from "@/types/entities/coupon";
@@ -12,7 +12,7 @@ export default function IssuedCouponInfoTable() {
   const {
     paginationModel,
     searchInfo: { variant: searchVariant, text: searchText },
-  } = useIssuedCouponSearchInfoState();
+  } = useIssuedCouponState();
 
   const issuedCouponList = useGetIssuedCouponListQuery(
     paginationModel.page,

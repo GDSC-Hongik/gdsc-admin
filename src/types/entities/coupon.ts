@@ -54,3 +54,8 @@ export type CouponInfoSelectMenuType = {
   name: string;
   type: SearchVariantType;
 }[];
+
+export type CouponSearchInfoContextType = {
+  text: string;
+  variant: SearchVariantType;
+};
