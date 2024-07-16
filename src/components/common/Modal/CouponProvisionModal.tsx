@@ -17,7 +17,7 @@ export default function CouponProvisionModal({
   detailInfo,
 }: DetailInfoModalPropsType) {
   const { selectedCouponId } = useCouponProvisionSearchInfoState();
-  const { mutate } = useIssueCouponMutation(onClose);
+  const { mutate } = useIssueCouponMutation();
 
   const handleClickCouponProvision = () => {
     const memberIds = detailInfo.map((info: any) => info.id);
@@ -30,10 +30,15 @@ export default function CouponProvisionModal({
       return;
     }
 
-    mutate({
-      couponId: selectedCouponId,
-      memberIds,
-    });
+    mutate(
+      {
+        couponId: selectedCouponId,
+        memberIds,
+      },
+      {
+        onSuccess: onClose,
+      },
+    );
   };
 
   return (
