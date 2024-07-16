@@ -8,8 +8,8 @@ const RoutePath = {
 
   PaymentStatus: "/payment/payment-status",
   Coupon: "/payment/coupon",
-  CouponProvisionMembers: "/payment/coupon-provision-members",
-  CouponProvision: "/payment/coupon-provision",
+  IssuedCoupon: "/payment/coupon/issued",
+  CouponProvision: "/payment/coupon/provision",
 
   Recruitment: "/recruitment",
   RecruitmentRound: "/recruitment/round",
