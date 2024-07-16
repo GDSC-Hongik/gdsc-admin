@@ -6,7 +6,7 @@ export type ManagementVariant =
   | "recruitmentRound"
   | "coupon"
   | "couponProvision"
-  | "couponProvisionMembers";
+  | "issuedCoupon";
 
 export type EditMemberInfoType = Exclude<MemberInfoType, "requirement">;
 

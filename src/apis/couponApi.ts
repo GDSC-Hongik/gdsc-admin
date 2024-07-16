@@ -1,5 +1,6 @@
 import { apiClient } from ".";
 import { CouponListResponseDtoType, IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
+import { SearchVariantType } from "@/types/entities/coupon";
 
 export const couponApi = {
   getCouponList: async (): Promise<CouponListResponseDtoType> => {
@@ -17,8 +18,23 @@ export const couponApi = {
     return response.data;
   },
 
-  getIssuedCouponList: async (): Promise<IssuedCouponListResponseDtoType> => {
-    const response = await apiClient.get("/admin/coupons/issued");
+  getIssuedCouponList: async (
+    page: number,
+    size: number,
+    searchVariant: SearchVariantType,
+    searchText: string,
+  ): Promise<IssuedCouponListResponseDtoType> => {
+    if (searchText && searchVariant) {
+      const searchUrl = `/admin/coupons/issued?${searchVariant}=${searchText}&page=${page}&size=${size}`;
+
+      const response = await apiClient.get(searchUrl);
+      return response.data;
+    }
+
+    const commonUrl = `/admin/coupons/issued?page=${page}&size=${size}`;
+
+    const response = await apiClient.get(commonUrl);
+
     return response.data;
   },
 

@@ -1,33 +1,26 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
-// import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
+import { useIssuedCouponSearchInfoState } from "@/hooks/contexts/useIssuedCouponSearchInfoContext";
 import useRevokeIssuedCouponMutation from "@/hooks/mutations/useRevokeIssuedCouponMutation";
+import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponType } from "@/types/entities/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
 
-const mockIssuedCouponList = [
-  {
-    issuedCouponId: 2,
-    member: {
-      memberId: 1,
-      studentId: "C111206",
-      name: "홍서현",
-      email: "ghdtjgus76@naver.com",
-      phone: "010-8712-0786",
-    },
-    couponName: "2024-1 정규 스터디 수료 쿠폰",
-    discountAmount: 10000,
-    usedAt: "2024-07-04T04:26:16.587Z",
-    issuedAt: "2024-07-04T04:26:16.587Z",
-    isUsed: true,
-    isRevoked: true,
-  },
-];
+export default function IssuedCouponInfoTable() {
+  const {
+    paginationModel,
+    searchInfo: { variant: searchVariant, text: searchText },
+  } = useIssuedCouponSearchInfoState();
 
-export default function CouponProvisionMembersInfoTable() {
-  //   const issuedCouponList = useGetIssuedCouponListQuery();
+  const issuedCouponList = useGetIssuedCouponListQuery(
+    paginationModel.page,
+    paginationModel.pageSize,
+    searchVariant,
+    searchText,
+  );
+
   const { mutate } = useRevokeIssuedCouponMutation();
 
   const getFilteredIssuedCouponList = (issuedCouponList: IssuedCouponType[]) => {
@@ -40,8 +33,8 @@ export default function CouponProvisionMembersInfoTable() {
       discountAmount: formatPrice(issuedCoupon.discountAmount),
       usedAt: formatDateWithText(issuedCoupon.usedAt),
       issuedAt: formatDateWithText(issuedCoupon.issuedAt),
-      isUsed: issuedCoupon.isUsed ? "O" : "X",
-      isRevoked: issuedCoupon.isRevoked ? "O" : "X",
+      hasUsed: issuedCoupon.hasUsed ? "O" : "X",
+      hasRevoked: issuedCoupon.hasRevoked ? "O" : "X",
     }));
   };
 
@@ -52,7 +45,7 @@ export default function CouponProvisionMembersInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredIssuedCouponList(mockIssuedCouponList)}
+        rows={getFilteredIssuedCouponList(issuedCouponList)}
         columns={getColumns(handleClickRevokeCoupon)}
         autoHeight
         disableRowSelectionOnClick
@@ -130,7 +123,7 @@ const getColumns = (handleClickRevokeCoupon: (couponId: number) => void): GridCo
     editable: false,
   },
   {
-    field: "isUsed",
+    field: "hasUsed",
     headerName: "사용여부",
     headerAlign: "left",
     align: "left",
@@ -139,7 +132,7 @@ const getColumns = (handleClickRevokeCoupon: (couponId: number) => void): GridCo
     editable: false,
   },
   {
-    field: "isRevoked",
+    field: "hasRevoked",
     headerName: "회수여부",
     headerAlign: "left",
     align: "left",
