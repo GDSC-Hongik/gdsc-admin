@@ -28,14 +28,14 @@ export const couponApi = {
       const searchUrl = `/admin/coupons/issued?${searchVariant}=${searchText}&page=${page}&size=${size}`;
 
       const response = await apiClient.get(searchUrl);
-      return response.data;
+      return response.data.content;
     }
 
     const commonUrl = `/admin/coupons/issued?page=${page}&size=${size}`;
 
     const response = await apiClient.get(commonUrl);
 
-    return response.data;
+    return response.data.content;
   },
 
   issueCoupon: async (body: { couponId: number; memberIds: number[] }) => {
