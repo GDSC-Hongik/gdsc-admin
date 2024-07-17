@@ -6,64 +6,24 @@ import {
   useCouponProvisionSearchInfoDispatch,
   useCouponProvisionSearchInfoState,
 } from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
-// import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
-
-const mockData = [
-  {
-    memberId: 1,
-    studentId: "C111206",
-    name: "홍서현",
-    phone: "010-8712-0786",
-    department: {
-      code: "D001",
-      name: "컴퓨터공학전공",
-    },
-    email: "ghdtjgus76@naver.com",
-    discordUsername: "홍서현",
-    nickname: "홍서현",
-    requirement: {
-      univStatus: "VERIFIED",
-      discordStatus: "VERIFIED",
-      bevyStatus: "VERIFIED",
-    },
-  },
-  {
-    memberId: 2,
-    studentId: "C111206",
-    name: "홍서현2",
-    phone: "010-8712-0786",
-    department: {
-      code: "D001",
-      name: "컴퓨터공학전공",
-    },
-    email: "ghdtjgus76@naver.com",
-    discordUsername: "홍서현",
-    nickname: "홍서현",
-    requirement: {
-      univStatus: "VERIFIED",
-      discordStatus: "VERIFIED",
-      bevyStatus: "VERIFIED",
-    },
-  },
-];
-
-const totalElements = 2;
+import useGetCouponProvisionMemberListQuery from "@/hooks/queries/useGetCouponProvisionMemberListQuery";
 
 export default function CouponProvisionInfoTable() {
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
-  const { paginationModel, provisionModalOpen } = useCouponProvisionSearchInfoState();
+  const { paginationModel, provisionModalOpen, searchVariant, searchText } =
+    useCouponProvisionSearchInfoState();
   const { setPaginationModel, setProvisionModalOpen, setSelectedCouponId } =
     useCouponProvisionSearchInfoDispatch();
 
-  // const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
-  //   paginationModel.page,
-  //   paginationModel.pageSize,
-  //   searchVariant,
-  //   searchText,
-  // );
+  const { couponProvisionMemberList = [], totalElements } = useGetCouponProvisionMemberListQuery(
+    paginationModel.page,
+    paginationModel.pageSize,
+    searchVariant,
+    searchText,
+  );
 
-  const selectedMemberList = mockData
+  const selectedMemberList = couponProvisionMemberList
     .filter(member => rowSelectionModel.includes(member.memberId))
     .map(member => ({
       id: member.memberId,
@@ -82,7 +42,7 @@ export default function CouponProvisionInfoTable() {
     }
 
     return rowCountRef.current;
-  }, []);
+  }, [totalElements]);
 
   const getFilteredMemberList = (allMemberList: any[]) => {
     return allMemberList.map(memberInfo => ({
@@ -110,7 +70,7 @@ export default function CouponProvisionInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredMemberList(mockData)}
+        rows={getFilteredMemberList(couponProvisionMemberList)}
         columns={columns}
         onRowSelectionModelChange={handleRowSelectionModelChange}
         rowSelectionModel={rowSelectionModel}
