@@ -2,10 +2,7 @@ import { useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CouponModal from "../Modal/CouponModal";
-import {
-  useCouponSearchInfoDispatch,
-  useCouponSearchInfoState,
-} from "@/hooks/contexts/useCouponSearchInfoState";
+import { useCouponDispatchContext, useCouponStateContext } from "@/hooks/contexts/useCouponContext";
 import useGetCouponListQuery from "@/hooks/queries/useGetCouponListQuery";
 import { CouponListResponseDtoType } from "@/types/dtos/coupon";
 import { formatDateWithText } from "@/utils/validation/formatDate";
@@ -14,8 +11,8 @@ import { formatPrice } from "@/utils/validation/formatPrice";
 export default function CouponInfoTable() {
   const modalKey = useRef(0);
 
-  const { modalOpen } = useCouponSearchInfoState();
-  const { setModalOpen } = useCouponSearchInfoDispatch();
+  const { modalOpen } = useCouponStateContext();
+  const { setModalOpen } = useCouponDispatchContext();
 
   const couponList = useGetCouponListQuery();
 

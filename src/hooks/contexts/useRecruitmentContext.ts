@@ -9,7 +9,7 @@ export const useRecruitmentStateContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitmentState must be used within a RecruitmentContextProvider",
+      "useRecruitmentStateContext must be used within a RecruitmentContextProvider",
     );
   }
 
@@ -21,7 +21,7 @@ export const useRecruitmentDispatchContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitmentDispatch must be used within a RecruitmentContextProvider",
+      "useRecruitmentDispatchContext must be used within a RecruitmentContextProvider",
     );
   }
 

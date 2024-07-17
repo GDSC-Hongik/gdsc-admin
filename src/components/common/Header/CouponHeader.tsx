@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { Stack, Button } from "@mui/material";
-import { useCouponSearchInfoDispatch } from "@/hooks/contexts/useCouponSearchInfoState";
+import { useCouponDispatchContext } from "@/hooks/contexts/useCouponContext";
 
 export default function CouponHeader() {
-  const { setModalOpen } = useCouponSearchInfoDispatch();
+  const { setModalOpen } = useCouponDispatchContext();
 
   const handleClickCreateCoupon = () => {
     setModalOpen(true);

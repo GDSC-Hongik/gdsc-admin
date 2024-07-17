@@ -4,24 +4,24 @@ import {
   IssuedCouponStateContext,
 } from "@/contexts/IssuedCouponContext";
 
-export const useIssuedCouponState = () => {
+export const useIssuedCouponStateContext = () => {
   const context = useContext(IssuedCouponStateContext);
 
   if (context === undefined) {
     throw new Error(
-      "useIssuedCouponState must be used within a IssuedCouponContextProvider",
+      "useIssuedCouponStateContext must be used within a IssuedCouponContextProvider",
     );
   }
 
   return context;
 };
 
-export const useIssuedCouponDispatch = () => {
+export const useIssuedCouponDispatchContext = () => {
   const context = useContext(IssuedCouponDispatchContext);
 
   if (context === undefined) {
     throw new Error(
-      "useIssuedCouponDispatch must be used within a IssuedCouponContextProvider",
+      "useIssuedCouponDispatchContext must be used within a IssuedCouponContextProvider",
     );
   }
 

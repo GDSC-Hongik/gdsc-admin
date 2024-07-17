@@ -9,7 +9,7 @@ export const useRecruitmentRoundStateContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitmentRoundState must be used within a RecruitmentRoundContextProvider",
+      "useRecruitmentRoundStateContext must be used within a RecruitmentRoundContextProvider",
     );
   }
 
@@ -21,7 +21,7 @@ export const useRecruitmentRoundDispatchContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitmentRoundDispatch must be used within a RecruitmentRoundContextProvider",
+      "useRecruitmentRoundDispatchContext must be used within a RecruitmentRoundContextProvider",
     );
   }
 
