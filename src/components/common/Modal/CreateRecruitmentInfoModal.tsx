@@ -24,9 +24,9 @@ export default function CreateRecruitmentInfoModal({
   const [recruitmentModalInfo, setRecruitmentModalInfo] = useState<RecruitmentModalInfoType>({
     semesterStartDate: null,
     semesterEndDate: null,
-    academicYear: null,
-    semester: null,
-    fee: null,
+    academicYear: "",
+    semester: "",
+    fee: "",
   });
 
   const { mutate } = useCreateRecruitmentMutation();
