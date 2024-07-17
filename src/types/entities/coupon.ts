@@ -1,3 +1,5 @@
+import { MemberInfoType } from "./member";
+
 export type CouponInfoType = {
   name: string;
   discountAmount: null | number;
@@ -59,3 +61,10 @@ export type CouponSearchInfoContextType = {
   text: string;
   variant: SearchVariantType;
 };
+
+export type SelectedCouponProvisionMemberType = Pick<
+  MemberInfoType,
+  "studentId" | "name" | "phone" | "discordUsername" | "nickname"
+> & { id: MemberInfoType["memberId"] };
+
+export type SelectedCouponProvisionMemberListType = SelectedCouponProvisionMemberType[];

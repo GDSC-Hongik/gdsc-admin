@@ -1,6 +1,11 @@
 import { apiClient } from ".";
-import { CouponListResponseDtoType, IssuedCouponListResponseDtoType } from "@/types/dtos/coupon";
-import { SearchVariantType } from "@/types/entities/coupon";
+import {
+  CouponListResponseDtoType,
+  CouponProvisionMemberListResponseDtoType,
+  IssuedCouponListResponseDtoType,
+} from "@/types/dtos/coupon";
+import { SearchVariantType as CouponSearchVariantType } from "@/types/entities/coupon";
+import { SearchVariantType as MemberSearchVariantType } from "@/types/entities/member";
 
 export const couponApi = {
   getCouponList: async (): Promise<CouponListResponseDtoType> => {
@@ -21,7 +26,7 @@ export const couponApi = {
   getIssuedCouponList: async (
     page: number,
     size: number,
-    searchVariant: SearchVariantType,
+    searchVariant: CouponSearchVariantType,
     searchText: string,
   ): Promise<IssuedCouponListResponseDtoType> => {
     if (searchText && searchVariant) {
@@ -40,6 +45,26 @@ export const couponApi = {
 
   issueCoupon: async (body: { couponId: number; memberIds: number[] }) => {
     const response = await apiClient.post("/admin/coupons/issued", body);
+    return response.data;
+  },
+
+  getCouponProvisionMemberList: async (
+    page: number,
+    size: number,
+    searchVariant: MemberSearchVariantType,
+    searchText: string,
+  ): Promise<CouponProvisionMemberListResponseDtoType> => {
+    if (searchText && searchVariant) {
+      const searchUrl = `/admin/members?role=REGULAR,ASSOCIATE?${searchVariant}=${searchText}&page=${page}&size=${size}`;
+
+      const response = await apiClient.get(searchUrl);
+      return response.data;
+    }
+
+    const commonUrl = `/admin/members?role=REGULAR,ASSOCIATE?page=${page}&size=${size}`;
+
+    const response = await apiClient.get(commonUrl);
+
     return response.data;
   },
 };
