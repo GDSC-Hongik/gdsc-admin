@@ -93,13 +93,16 @@ export default function RecruitmentRoundInfoModal({
       return;
     }
 
-    const { name, startDate, endDate, recruitmentRoundId, roundType } = roundModalInfo;
+    const { name, startDate, endDate, recruitmentRoundId, roundType, academicYear, semester } =
+      roundModalInfo;
 
     if (isEdit) {
       mutate(
         {
-          recruitmentRoundId: recruitmentRoundId,
+          recruitmentRoundId,
           body: {
+            academicYear: Number(academicYear),
+            semesterType: semester === "1" ? "FIRST" : "SECOND",
             name,
             startDate: startDate!.toDate().toISOString(),
             endDate: endDate!.toDate().toISOString(),

@@ -37,6 +37,8 @@ export const recruitmentApi = {
   editRecruitmentRound: async (
     recruitmentRoundId: number,
     body: {
+      academicYear: number;
+      semesterType: SemesterVariantType;
       name: string;
       startDate: string;
       endDate: string;

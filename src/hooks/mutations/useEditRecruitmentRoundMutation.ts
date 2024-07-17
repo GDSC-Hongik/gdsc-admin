@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { recruitmentApi } from "@/apis/recruitmentApi";
+import { SemesterVariantType } from "@/types/entities/recruitment";
 
 export default function useEditRecruitmentRoundMutation() {
   return useMutation({
@@ -10,6 +11,8 @@ export default function useEditRecruitmentRoundMutation() {
     }: {
       recruitmentRoundId: number;
       body: {
+        academicYear: number;
+        semesterType: SemesterVariantType;
         name: string;
         startDate: string;
         endDate: string;
