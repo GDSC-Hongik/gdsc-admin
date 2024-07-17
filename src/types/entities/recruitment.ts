@@ -49,7 +49,7 @@ export type RecruitmentRoundModalInfoType = Pick<
 export type RecruitmentModalInfoType = {
   semesterStartDate: Dayjs | null;
   semesterEndDate: Dayjs | null;
-  academicYear: number | null;
-  semester: string | null;
-  fee: number | null;
+  academicYear: number | "";
+  semester: string | "";
+  fee: number | "";
 };
