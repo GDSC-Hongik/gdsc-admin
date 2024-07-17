@@ -58,12 +58,12 @@ export default function RecruitmentInfoTable() {
         hideFooter
       />
       <DemoteMembersModal
-        key={demoteMemberModalIdRef.current}
+        key={`demote-${demoteMemberModalIdRef.current}`}
         open={demoteModalOpen}
         onClose={handleCloseDemoteModal}
       />
       <CreateRecruitmentInfoModal
-        key={createSemesterModalIdRef.current}
+        key={`create-${createSemesterModalIdRef.current}`}
         open={createSemesterInfoModalOpen}
         onClose={handleCloseCreateSemesterInfoModal}
       />
