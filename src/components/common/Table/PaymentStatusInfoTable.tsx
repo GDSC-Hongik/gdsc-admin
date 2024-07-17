@@ -2,15 +2,15 @@
 import styled from "@emotion/styled";
 import { DataGrid } from "@mui/x-data-grid";
 import {
-  usePaymentStatusSearchInfoDispatch,
-  usePaymentStatusSearchInfoState,
-} from "@/hooks/contexts/usePaymentStatusSearchInfoContext";
+  usePaymentStatusDispatchContext,
+  usePaymentStatusStateContext,
+} from "@/hooks/contexts/usePaymentStatusContext";
 
 export default function PaymentStatusInfoTable() {
   // const [] = useState(false);
 
-  const { paginationModel } = usePaymentStatusSearchInfoState();
-  const { setPaginationModel } = usePaymentStatusSearchInfoDispatch();
+  const { paginationModel } = usePaymentStatusStateContext();
+  const { setPaginationModel } = usePaymentStatusDispatchContext();
 
   return (
     <>

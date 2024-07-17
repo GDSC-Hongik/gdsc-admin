@@ -4,8 +4,8 @@ import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import RecruitmentRoundInfoModal from "../Modal/RecruitmentRoundInfoModal";
 import {
-  useRecruitmentRoundState,
-  useRecruitmentRoundDispatch,
+  useRecruitmentRoundStateContext,
+  useRecruitmentRoundDispatchContext,
 } from "@/hooks/contexts/useRecruitmentRoundContext";
 import useGetRecruitmentRoundQuery from "@/hooks/queries/useGetRecruitmentRoundQuery";
 import {
@@ -21,8 +21,8 @@ export default function RecruitmentRoundInfoTable() {
 
   const recruitmentRoundList = useGetRecruitmentRoundQuery();
 
-  const { createRoundModalOpen } = useRecruitmentRoundState();
-  const { setCreateRoundModalOpen } = useRecruitmentRoundDispatch();
+  const { createRoundModalOpen } = useRecruitmentRoundStateContext();
+  const { setCreateRoundModalOpen } = useRecruitmentRoundDispatchContext();
 
   const editRoundInfo = recruitmentRoundList.find(
     data => data.recruitmentRoundId === editRoundInfoId,

@@ -1,7 +1,7 @@
 import CouponProvisionHeader from "@/components/common/Header/CouponProvisionHeader";
 import CouponProvisionInfoTable from "@/components/common/Table/CouponProvisionInfoTable";
 import Title from "@/components/common/Title";
-import CouponProvisionSearchInfoContextProvider from "@/contexts/CouponProvisionSearchInfoContext";
+import CouponProvisionContextProvider from "@/contexts/CouponProvisionContext";
 
 export default function CouponProvisionPage() {
   return (
@@ -10,10 +10,10 @@ export default function CouponProvisionPage() {
         variant={"couponProvision"}
         descriptionText={"코어 멤버가 생성한 쿠폰을 지급합니다."}
       />
-      <CouponProvisionSearchInfoContextProvider>
+      <CouponProvisionContextProvider>
         <CouponProvisionHeader />
         <CouponProvisionInfoTable />
-      </CouponProvisionSearchInfoContextProvider>
+      </CouponProvisionContextProvider>
     </>
   );
 }

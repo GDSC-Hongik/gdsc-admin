@@ -3,16 +3,16 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
 import DemoteMembersModal from "../Modal/DemoteMembersModal";
 import {
-  useRecruitmentState,
-  useRecruitmentDispatch,
+  useRecruitmentStateContext,
+  useRecruitmentDispatchContext,
 } from "@/hooks/contexts/useRecruitmentContext";
 import useGetRecruitmentsQuery from "@/hooks/queries/useGetRecruitmentsQuery";
 import { RecruitmentType } from "@/types/entities/recruitment";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
 
 export default function RecruitmentInfoTable() {
-  const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitmentState();
-  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentDispatch();
+  const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitmentStateContext();
+  const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentDispatchContext();
 
   const recruitmentList = useGetRecruitmentsQuery();
 

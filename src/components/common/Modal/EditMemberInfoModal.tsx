@@ -11,7 +11,7 @@ import {
   Box,
 } from "@mui/material";
 import XIcon from "@/assets/x.svg?react";
-import { emailSelectMenu } from "@/constants/table";
+import { emailSelectMenu } from "@/constants/member";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { typo } from "@/styles/typo";
@@ -26,7 +26,7 @@ type EditInfoModalProps = {
   memberInfo: EditMemberInfoType;
 };
 
-export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoModalProps) {
+export default function EditMemberInfoModal({ open, onClose, memberInfo }: EditInfoModalProps) {
   const [modalMemberInfo, setModalMemberInfo] = useState({
     ...memberInfo,
     discordUsername: memberInfo.discordUsername || null,
@@ -53,19 +53,7 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
     return departmentList.filter(department => !removedDepartments.includes(department.code));
   }, [departmentList, removedDepartments]);
 
-  const { mutate } = useEditMemberInfoMutation(
-    memberId,
-    {
-      studentId,
-      name,
-      phone: formatPhoneNumber(phone),
-      department: departmentCode,
-      email: `${emailUsername}@${domain}`,
-      discordUsername: discordUsername,
-      nickname: nickname,
-    },
-    () => onClose(),
-  );
+  const { mutate } = useEditMemberInfoMutation();
 
   const handleEditMemberInfo = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -82,7 +70,19 @@ export default function EditInfoModal({ open, onClose, memberInfo }: EditInfoMod
   };
 
   const handleClickSave = () => {
-    mutate();
+    mutate({
+      memberId,
+      body: {
+        studentId,
+        name,
+        phone: formatPhoneNumber(phone),
+        department: departmentCode,
+        email: `${emailUsername}@${domain}`,
+        discordUsername: discordUsername,
+        nickname: nickname,
+      },
+      onSuccess: () => onClose(),
+    });
   };
 
   const handleClickDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {

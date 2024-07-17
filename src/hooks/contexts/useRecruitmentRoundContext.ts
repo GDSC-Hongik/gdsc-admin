@@ -4,24 +4,24 @@ import {
   RecruitmentRoundDispatchContext,
 } from "@/contexts/RecruitmentRoundContext";
 
-export const useRecruitmentRoundState = () => {
+export const useRecruitmentRoundStateContext = () => {
   const context = useContext(RecruitmentRoundStateContext);
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitmentRoundState must be used within a RecruitmentRoundContextProvider",
+      "useRecruitmentRoundStateContext must be used within a RecruitmentRoundContextProvider",
     );
   }
 
   return context;
 };
 
-export const useRecruitmentRoundDispatch = () => {
+export const useRecruitmentRoundDispatchContext = () => {
   const context = useContext(RecruitmentRoundDispatchContext);
 
   if (context === undefined) {
     throw new Error(
-      "useRecruitmentRoundDispatch must be used within a RecruitmentRoundContextProvider",
+      "useRecruitmentRoundDispatchContext must be used within a RecruitmentRoundContextProvider",
     );
   }
 

@@ -3,12 +3,15 @@ import { toast } from "react-toastify";
 import { recruitmentApi } from "@/apis/recruitmentApi";
 import { SemesterVariantType } from "@/types/entities/recruitment";
 
-export default function useDemoteAllMemberMutation(
-  academicYear: number,
-  semesterType: SemesterVariantType | null,
-) {
+type DemoteAllMemberMutationArgumentType = {
+  academicYear: number;
+  semesterType: SemesterVariantType | null;
+};
+
+export default function useDemoteAllMemberMutation() {
   return useMutation({
-    mutationFn: () => recruitmentApi.demoteAllMember(academicYear, semesterType),
+    mutationFn: ({ academicYear, semesterType }: DemoteAllMemberMutationArgumentType) =>
+      recruitmentApi.demoteAllMember(academicYear, semesterType),
     onSuccess: () => {
       toast.success("정회원 일괄 강등하였습니다!");
     },

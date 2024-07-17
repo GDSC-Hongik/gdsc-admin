@@ -12,20 +12,17 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
-import { memberInfoSelectMenu } from "@/constants/table";
-import {
-  useAllMembersSearchInfoDispatch,
-  useAllMembersSearchInfoState,
-} from "@/hooks/contexts/useAllMembersSearchInfoContext";
+import { memberInfoSelectMenu } from "@/constants/member";
+import { useAllMembersDispatchContext, useAllMembersStateContext } from "@/hooks/contexts/useAllMembersContext";
 import { downloadExcelFile } from "@/utils/excel";
 
 export default function AllMembersHeader() {
-  const [selectedMemberInfoVariant, setSelectedMemberInfoVariant] = useState(1);
+  const [selectedSearchInfoVariant, setSelectedSearchInfoVariant] = useState(1);
 
-  const { setSearchInfo, setPaginationModel } = useAllMembersSearchInfoDispatch();
+  const { setSearchInfo, setPaginationModel } = useAllMembersDispatchContext();
   const {
     searchInfo: { text: searchText },
-  } = useAllMembersSearchInfoState();
+  } = useAllMembersStateContext();
 
   const handleClickExcelDownloadButton = async () => {
     try {
@@ -43,7 +40,7 @@ export default function AllMembersHeader() {
     }));
   };
 
-  const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
+  const handleChangeSelectSearchInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
     setSearchInfo(prevInfo => ({
@@ -51,7 +48,7 @@ export default function AllMembersHeader() {
       variant: memberInfoSelectMenu[targetIndex]["type"],
       text: "",
     }));
-    setSelectedMemberInfoVariant(targetIndex + 1);
+    setSelectedSearchInfoVariant(targetIndex + 1);
     handleResetPage();
   };
 
@@ -72,8 +69,8 @@ export default function AllMembersHeader() {
           <InputLabel>Type</InputLabel>
           <Select
             label="Type"
-            value={selectedMemberInfoVariant}
-            onChange={handleChangeSelectMemberInfoVariant}
+            value={selectedSearchInfoVariant}
+            onChange={handleChangeSelectSearchInfoVariant}
           >
             {memberInfoSelectMenu.map(menu => (
               <MenuItem value={menu.value} key={menu.value}>

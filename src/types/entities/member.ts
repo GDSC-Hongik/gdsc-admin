@@ -6,7 +6,7 @@ export type ManagementVariant =
   | "recruitmentRound"
   | "coupon"
   | "couponProvision"
-  | "couponProvisionMembers";
+  | "issuedCoupon";
 
 export type EditMemberInfoType = Exclude<MemberInfoType, "requirement">;
 
@@ -52,11 +52,6 @@ type MembersSearchVariantType = [
 
 export type SearchVariantType = MembersSearchVariantType[number] | null;
 
-export type SearchInfoType = {
-  text: string;
-  variant: SearchVariantType;
-};
-
 export type DetailMemberInfoType = {
   name: string;
   studentId: string;
@@ -88,3 +83,7 @@ export type MemberTypeSelectMenuType = {
   name: string;
   type: "GUEST" | "ASSOCIATE";
 }[];
+
+export type MemberVariantType = "ASSOCIATE" | "GUEST";
+
+export type DepartmentType = { code: string; name: string };

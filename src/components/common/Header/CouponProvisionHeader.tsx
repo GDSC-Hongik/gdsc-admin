@@ -11,11 +11,11 @@ import {
   styled,
   TextField,
 } from "@mui/material";
-import { memberInfoSelectMenu } from "@/constants/table";
+import { memberInfoSelectMenu } from "@/constants/member";
 import {
-  useCouponProvisionSearchInfoDispatch,
-  useCouponProvisionSearchInfoState,
-} from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
+  useCouponProvisionDispatchContext,
+  useCouponProvisionStateContext,
+} from "@/hooks/contexts/useCouponProvisionContext";
 import useGetCouponListQuery from "@/hooks/queries/useGetCouponListQuery";
 import { CouponListResponseDtoType } from "@/types/dtos/coupon";
 
@@ -24,14 +24,12 @@ export default function CouponProvisionHeader() {
 
   const couponList = useGetCouponListQuery();
 
+  const { setSearchInfo, setPaginationModel, setSelectedCouponId, setProvisionModalOpen } =
+    useCouponProvisionDispatchContext();
   const {
-    setSearchText,
-    setSearchVariant,
-    setPaginationModel,
-    setSelectedCouponId,
-    setProvisionModalOpen,
-  } = useCouponProvisionSearchInfoDispatch();
-  const { searchText, selectedCouponId } = useCouponProvisionSearchInfoState();
+    searchInfo: { text: searchText },
+    selectedCouponId,
+  } = useCouponProvisionStateContext();
 
   const getFilteredCouponList = (couponList: CouponListResponseDtoType) => {
     const newCouponList: string[] = [];
@@ -56,8 +54,11 @@ export default function CouponProvisionHeader() {
   const handleChangeSelectMemberInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setSearchVariant?.(memberInfoSelectMenu[targetIndex]["type"]);
-    setSearchText?.("");
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      variant: memberInfoSelectMenu[targetIndex]["type"],
+      text: "",
+    }));
     setSelectedMemberInfoVariant(targetIndex + 1);
     handleResetPage();
   };
@@ -66,7 +67,10 @@ export default function CouponProvisionHeader() {
     const text = e.target.value;
     text.length === 1 && handleResetPage();
 
-    setSearchText?.(text);
+    setSearchInfo(prevSearchInfo => ({
+      ...prevSearchInfo,
+      text,
+    }));
   };
 
   const handleChangeSelectedCoupon = (e: SelectChangeEvent<unknown>) => {
