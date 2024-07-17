@@ -7,6 +7,7 @@ import {
   useCouponProvisionStateContext,
 } from "@/hooks/contexts/useCouponProvisionContext";
 import useGetCouponProvisionMemberListQuery from "@/hooks/queries/useGetCouponProvisionMemberListQuery";
+import { SelectedCouponProvisionMemberListType } from "@/types/entities/coupon";
 
 export default function CouponProvisionInfoTable() {
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
@@ -26,7 +27,7 @@ export default function CouponProvisionInfoTable() {
     searchText,
   );
 
-  const selectedMemberList = couponProvisionMemberList
+  const selectedMemberList: SelectedCouponProvisionMemberListType = couponProvisionMemberList
     .filter(member => rowSelectionModel.includes(member.memberId))
     .map(member => ({
       id: member.memberId,
