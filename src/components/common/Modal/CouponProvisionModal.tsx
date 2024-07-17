@@ -4,11 +4,12 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
 import { useCouponProvisionStateContext } from "@/hooks/contexts/useCouponProvisionContext";
 import useIssueCouponMutation from "@/hooks/mutations/useIssueCouponMutation";
+import { SelectedCouponProvisionMemberListType } from "@/types/entities/coupon";
 
 type DetailInfoModalPropsType = {
   open: boolean;
   onClose: () => void;
-  detailInfo: any;
+  detailInfo: SelectedCouponProvisionMemberListType;
 };
 
 export default function CouponProvisionModal({
@@ -20,7 +21,7 @@ export default function CouponProvisionModal({
   const { mutate } = useIssueCouponMutation();
 
   const handleClickCouponProvision = () => {
-    const memberIds = detailInfo.map((info: any) => info.id);
+    const memberIds = detailInfo.map(info => info.id);
 
     if (!selectedCouponId) {
       toast.error("선택된 쿠폰이 없습니다.");
