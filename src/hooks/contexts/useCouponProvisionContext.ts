@@ -9,7 +9,7 @@ export const useCouponProvisionStateContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "useCouponProvisionState must be used within a CouponProvisionContextProvider",
+      "useCouponProvisionStateContext must be used within a CouponProvisionContextProvider",
     );
   }
 
@@ -21,7 +21,7 @@ export const useCouponProvisionDispatchContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "useCouponProvisionDispatch must be used within a CouponProvisionContextProvider",
+      "useCouponProvisionDispatchContext must be used within a CouponProvisionContextProvider",
     );
   }
 

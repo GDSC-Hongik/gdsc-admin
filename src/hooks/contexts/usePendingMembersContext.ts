@@ -9,7 +9,7 @@ export const usePendingMembersStateContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "usePendingMembersState must be used within a PendingMembersContextProvider",
+      "usePendingMembersStateContext must be used within a PendingMembersContextProvider",
     );
   }
 
@@ -21,7 +21,7 @@ export const usePendingMembersDispatchContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "usePendingMembersDispatch must be used within a PendingMembersContextProvider",
+      "usePendingMembersDispatchContext must be used within a PendingMembersContextProvider",
     );
   }
 

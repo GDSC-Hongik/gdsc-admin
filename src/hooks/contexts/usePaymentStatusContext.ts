@@ -9,7 +9,7 @@ export const usePaymentStatusStateContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "usePaymentStatusState must be used within a PaymentStatusContextProvider",
+      "usePaymentStatusStateContext must be used within a PaymentStatusContextProvider",
     );
   }
 
@@ -21,7 +21,7 @@ export const usePaymentStatusDispatchContext = () => {
 
   if (context === undefined) {
     throw new Error(
-      "usePaymentStatusDispatch must be used within a PaymentStatusContextProvider",
+      "usePaymentStatusDispatchContext must be used within a PaymentStatusContextProvider",
     );
   }
 

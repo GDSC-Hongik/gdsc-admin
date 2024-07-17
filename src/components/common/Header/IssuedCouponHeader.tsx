@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import { couponStatusSelectMenu, issuedCouponInfoSelectMenu } from "@/constants/coupon";
 import {
-  useIssuedCouponDispatch,
-  useIssuedCouponState,
+  useIssuedCouponDispatchContext,
+  useIssuedCouponStateContext,
 } from "@/hooks/contexts/useIssuedCouponContext";
 
 export default function IssuedCouponHeader() {
@@ -21,10 +21,10 @@ export default function IssuedCouponHeader() {
     text: 1,
   });
 
-  const { setSearchInfo, setPaginationModel } = useIssuedCouponDispatch();
+  const { setSearchInfo, setPaginationModel } = useIssuedCouponDispatchContext();
   const {
     searchInfo: { text: searchText },
-  } = useIssuedCouponState();
+  } = useIssuedCouponStateContext();
 
   const handleResetPage = () => {
     setPaginationModel(prevPaginationModel => ({
