@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { QueryKey } from "@/constants/queryKey";
 import { useCouponProvisionStateContext } from "@/hooks/contexts/useCouponProvisionContext";
 import useIssueCouponMutation from "@/hooks/mutations/useIssueCouponMutation";
 import { SelectedCouponProvisionMemberListType } from "@/types/entities/coupon";
@@ -20,6 +22,8 @@ export default function CouponProvisionModal({
   const { selectedCouponId } = useCouponProvisionStateContext();
   const { mutate } = useIssueCouponMutation();
 
+  const queryClient = useQueryClient();
+
   const handleClickCouponProvision = () => {
     const memberIds = detailInfo.map(info => info.id);
 
@@ -37,7 +41,13 @@ export default function CouponProvisionModal({
         memberIds,
       },
       {
-        onSuccess: onClose,
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QueryKey.issuedCouponList],
+          });
+          toast.success("쿠폰이 발급되었습니다.");
+          onClose();
+        },
       },
     );
   };

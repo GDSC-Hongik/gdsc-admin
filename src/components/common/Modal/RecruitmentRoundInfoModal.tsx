@@ -13,7 +13,10 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
+import { useQueryClient } from "@tanstack/react-query";
 import dayjs, { Dayjs } from "dayjs";
+import { toast } from "react-toastify";
+import { QueryKey } from "@/constants/queryKey";
 import useEditRecruitmentRoundMutation from "@/hooks/mutations/useEditRecruitmentRoundMutation";
 import {
   FilteredRecruitmentRoundInfoType,
@@ -44,6 +47,8 @@ export default function RecruitmentRoundInfoModal({
   });
 
   const { mutate } = useEditRecruitmentRoundMutation();
+
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!editRoundInfo) {
@@ -102,7 +107,13 @@ export default function RecruitmentRoundInfoModal({
           },
         },
         {
-          onSuccess: () => onClose(),
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: [QueryKey.recruitmentRound],
+            });
+            toast.success("모집 회차 정보가 수정되었습니다.");
+            onClose();
+          },
         },
       );
       return;

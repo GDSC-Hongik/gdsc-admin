@@ -12,9 +12,6 @@ export default function useDemoteAllMemberMutation() {
   return useMutation({
     mutationFn: ({ academicYear, semesterType }: DemoteAllMemberMutationArgumentType) =>
       recruitmentApi.demoteAllMember(academicYear, semesterType),
-    onSuccess: () => {
-      toast.success("정회원 일괄 강등하였습니다!");
-    },
     onError: (error: any) => {
       toast.error(error.response.data.errorMessage);
     },

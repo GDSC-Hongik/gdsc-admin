@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { toast } from "react-toastify";
 import WarningIcon from "@/assets/warning.svg?react";
 import useDemoteAllMemberMutation from "@/hooks/mutations/useDemoteAllMemberMutation";
 
@@ -27,12 +28,19 @@ export default function DemoteMembersModal({ open, onClose }: DemoteMembersModal
   };
 
   const handleClickDemote = () => {
-    mutate({
-      academicYear: Number(academicInfo.academicYear),
-      semesterType:
-        academicInfo.semester === "1" ? "FIRST" : academicInfo.semester === "2" ? "SECOND" : null,
-    });
-    onClose();
+    mutate(
+      {
+        academicYear: Number(academicInfo.academicYear),
+        semesterType:
+          academicInfo.semester === "1" ? "FIRST" : academicInfo.semester === "2" ? "SECOND" : null,
+      },
+      {
+        onSuccess: () => {
+          toast.success("정회원 일괄 강등하였습니다!");
+          onClose();
+        },
+      },
+    );
   };
 
   return (

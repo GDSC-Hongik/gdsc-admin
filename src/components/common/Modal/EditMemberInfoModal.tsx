@@ -10,8 +10,11 @@ import {
   SelectChangeEvent,
   Box,
 } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import XIcon from "@/assets/x.svg?react";
 import { emailSelectMenu } from "@/constants/member";
+import { QueryKey } from "@/constants/queryKey";
 import useEditMemberInfoMutation from "@/hooks/mutations/useEditMemberInfoMutation";
 import useGetDepartmentListQuery from "@/hooks/queries/useGetDepartmentListQuery";
 import { typo } from "@/styles/typo";
@@ -49,6 +52,8 @@ export default function EditMemberInfoModal({ open, onClose, memberInfo }: EditI
 
   const { departmentList } = useGetDepartmentListQuery(departmentSearchText);
 
+  const queryClient = useQueryClient();
+
   const searchedDepartmentList = useMemo(() => {
     return departmentList.filter(department => !removedDepartments.includes(department.code));
   }, [departmentList, removedDepartments]);
@@ -70,19 +75,31 @@ export default function EditMemberInfoModal({ open, onClose, memberInfo }: EditI
   };
 
   const handleClickSave = () => {
-    mutate({
-      memberId,
-      body: {
-        studentId,
-        name,
-        phone: formatPhoneNumber(phone),
-        department: departmentCode,
-        email: `${emailUsername}@${domain}`,
-        discordUsername: discordUsername,
-        nickname: nickname,
+    mutate(
+      {
+        memberId,
+        body: {
+          studentId,
+          name,
+          phone: formatPhoneNumber(phone),
+          department: departmentCode,
+          email: `${emailUsername}@${domain}`,
+          discordUsername: discordUsername,
+          nickname: nickname,
+        },
       },
-      onSuccess: () => onClose(),
-    });
+      {
+        onSuccess: () => {
+          Promise.all([
+            queryClient.invalidateQueries({
+              queryKey: [QueryKey.allMemberList],
+            }),
+          ]);
+          toast.success("수정 완료되었습니다.");
+          onClose();
+        },
+      },
+    );
   };
 
   const handleClickDepartmentItem = (departmentItem: DepartmentListResponseDtoType) => {
