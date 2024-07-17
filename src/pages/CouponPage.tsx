@@ -1,16 +1,16 @@
 import CouponHeader from "@/components/common/Header/CouponHeader";
 import CouponInfoTable from "@/components/common/Table/CouponInfoTable";
 import Title from "@/components/common/Title";
-import CouponSearchInfoContextProvider from "@/contexts/CouponContext";
+import CouponContextProvider from "@/contexts/CouponContext";
 
 export default function CouponPage() {
   return (
     <>
       <Title variant={"coupon"} descriptionText={"코어 멤버가 생성한 쿠폰을 관리합니다."} />
-      <CouponSearchInfoContextProvider>
+      <CouponContextProvider>
         <CouponHeader />
         <CouponInfoTable />
-      </CouponSearchInfoContextProvider>
+      </CouponContextProvider>
     </>
   );
 }
