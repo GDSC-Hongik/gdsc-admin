@@ -1,6 +1,7 @@
+import { useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
+import CreateRecruitmentInfoModal from "../Modal/CreateRecruitmentInfoModal";
 import DemoteMembersModal from "../Modal/DemoteMembersModal";
 import {
   useRecruitmentStateContext,
@@ -13,6 +14,9 @@ import { formatDateWithDot } from "@/utils/validation/formatDate";
 export default function RecruitmentInfoTable() {
   const { demoteModalOpen, createSemesterInfoModalOpen } = useRecruitmentStateContext();
   const { setDemoteModalOpen, setCreateSemesterInfoModalOpen } = useRecruitmentDispatchContext();
+
+  const demoteMemberModalIdRef = useRef(0);
+  const createSemesterModalIdRef = useRef(0);
 
   const recruitmentList = useGetRecruitmentsQuery();
 
@@ -32,10 +36,12 @@ export default function RecruitmentInfoTable() {
   };
 
   const handleCloseDemoteModal = () => {
+    demoteMemberModalIdRef.current += 1;
     setDemoteModalOpen(false);
   };
 
   const handleCloseCreateSemesterInfoModal = () => {
+    createSemesterModalIdRef.current += 1;
     setCreateSemesterInfoModalOpen(false);
   };
 
@@ -51,8 +57,13 @@ export default function RecruitmentInfoTable() {
         disableColumnSorting
         hideFooter
       />
-      <DemoteMembersModal open={demoteModalOpen} onClose={handleCloseDemoteModal} />
-      <CreateSemesterInfoModal
+      <DemoteMembersModal
+        key={`demote-${demoteMemberModalIdRef.current}`}
+        open={demoteModalOpen}
+        onClose={handleCloseDemoteModal}
+      />
+      <CreateRecruitmentInfoModal
+        key={`create-${createSemesterModalIdRef.current}`}
         open={createSemesterInfoModalOpen}
         onClose={handleCloseCreateSemesterInfoModal}
       />

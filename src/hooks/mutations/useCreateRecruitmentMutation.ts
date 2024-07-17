@@ -3,15 +3,18 @@ import { toast } from "react-toastify";
 import { recruitmentApi } from "@/apis/recruitmentApi";
 import { SemesterVariantType } from "@/types/entities/recruitment";
 
-type DemoteAllMemberMutationArgumentType = {
+type CreateRecruitmentMutationArgumentType = {
+  semesterStartDate: string;
+  semesterEndDate: string;
   academicYear: number;
-  semesterType: SemesterVariantType | null;
+  semesterType: SemesterVariantType;
+  fee: number;
 };
 
-export default function useDemoteAllMemberMutation() {
+export default function useCreateRecruitmentMutation() {
   return useMutation({
-    mutationFn: ({ academicYear, semesterType }: DemoteAllMemberMutationArgumentType) =>
-      recruitmentApi.demoteAllMember(academicYear, semesterType),
+    mutationFn: (body: CreateRecruitmentMutationArgumentType) =>
+      recruitmentApi.createRecruitment(body),
     onError: (error: any) => {
       toast.error(error.response.data.errorMessage);
     },

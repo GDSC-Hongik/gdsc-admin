@@ -1,19 +1,90 @@
+import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import { Modal, Typography, Box, Button, TextField } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
+import { useQueryClient } from "@tanstack/react-query";
+import { Dayjs } from "dayjs";
+import { toast } from "react-toastify";
 import WarningIcon from "@/assets/warning.svg?react";
+import { QueryKey } from "@/constants/queryKey";
+import useCreateRecruitmentMutation from "@/hooks/mutations/useCreateRecruitmentMutation";
+import { RecruitmentModalInfoType } from "@/types/entities/recruitment";
 
-type CreateSemesterInfoModalPropsType = {
+type CreateRecruitmentInfoModalPropsType = {
   open: boolean;
   onClose: () => void;
 };
 
-export default function CreateSemesterInfoModal({
+export default function CreateRecruitmentInfoModal({
   open,
   onClose,
-}: CreateSemesterInfoModalPropsType) {
+}: CreateRecruitmentInfoModalPropsType) {
+  const [recruitmentModalInfo, setRecruitmentModalInfo] = useState<RecruitmentModalInfoType>({
+    semesterStartDate: null,
+    semesterEndDate: null,
+    academicYear: "",
+    semester: "",
+    fee: "",
+  });
+
+  const { mutate } = useCreateRecruitmentMutation();
+
+  const queryClient = useQueryClient();
+
+  const { semesterStartDate, semesterEndDate, academicYear, semester, fee } = recruitmentModalInfo;
+
+  const handleChangeRecruitmentModalInfo = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+
+    setRecruitmentModalInfo(prevModalInfo => ({
+      ...prevModalInfo,
+      [name]: value,
+    }));
+  };
+
+  const handleChangeDate = (
+    name: "semesterStartDate" | "semesterEndDate",
+    newDate: Dayjs | null,
+  ) => {
+    if (!newDate) {
+      return;
+    }
+
+    setRecruitmentModalInfo(prevModalInfo => ({
+      ...prevModalInfo,
+      [name]: newDate,
+    }));
+  };
+
+  const handleClickCreateRecruitment = () => {
+    if (!semesterStartDate || !semesterEndDate || !academicYear || !fee) {
+      return;
+    }
+
+    mutate(
+      {
+        semesterStartDate: semesterStartDate.toDate().toISOString(),
+        semesterEndDate: semesterEndDate.toDate().toISOString(),
+        academicYear,
+        semesterType: semester === "1" ? "FIRST" : "SECOND",
+        fee,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QueryKey.recruitment],
+          });
+          toast.success("리크루팅이 생성되었습니다.");
+          onClose();
+        },
+      },
+    );
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
@@ -24,9 +95,9 @@ export default function CreateSemesterInfoModal({
             <StyledTextField
               placeholder="연도"
               size="small"
-              value={""}
+              value={academicYear}
               name="academicYear"
-              onChange={() => {}}
+              onChange={handleChangeRecruitmentModalInfo}
             />
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item2" }}>
@@ -34,9 +105,9 @@ export default function CreateSemesterInfoModal({
             <StyledTextField
               placeholder="학기"
               size="small"
-              value={""}
+              value={semester}
               name="semester"
-              onChange={() => {}}
+              onChange={handleChangeRecruitmentModalInfo}
             />
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item3" }}>
@@ -44,21 +115,29 @@ export default function CreateSemesterInfoModal({
             <StyledTextField
               placeholder="회비"
               size="small"
-              value={""}
+              value={fee}
               name="fee"
-              onChange={() => {}}
+              onChange={handleChangeRecruitmentModalInfo}
             />
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item4" }}>
             <StyledText>학기 시작일</StyledText>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <StyledDatePicker name="endDate" onChange={() => {}} />
+              <StyledDatePicker
+                name="semesterStartDate"
+                value={semesterStartDate}
+                onChange={date => handleChangeDate("semesterStartDate", date)}
+              />
             </LocalizationProvider>
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item5" }}>
             <StyledText>학기 종료일</StyledText>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <StyledDatePicker name="endDate" onChange={() => {}} />
+              <StyledDatePicker
+                name="semesterEndDate"
+                value={semesterEndDate}
+                onChange={date => handleChangeDate("semesterEndDate", date)}
+              />
             </LocalizationProvider>
           </StyledInfoWrapper>
         </StyledContentWrapper>
@@ -68,7 +147,7 @@ export default function CreateSemesterInfoModal({
             1차 신청기간 시작 전에 수동으로 [일괄 강등하기] 버튼을 눌러야 해요.
           </StyledWarningText>
         </StyledWarningTextWrapper>
-        <StyledButton size="large" variant="contained" onClick={() => {}}>
+        <StyledButton size="large" variant="contained" onClick={handleClickCreateRecruitment}>
           {"생성하기"}
         </StyledButton>
       </StyledModalContentWrapper>

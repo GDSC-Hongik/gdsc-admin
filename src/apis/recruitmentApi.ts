@@ -18,6 +18,17 @@ export const recruitmentApi = {
     return response.data;
   },
 
+  createRecruitment: async (body: {
+    semesterStartDate: string;
+    semesterEndDate: string;
+    academicYear: number;
+    semesterType: SemesterVariantType;
+    fee: number;
+  }) => {
+    const response = await apiClient.post("/admin/recruitments", body);
+    return response.data;
+  },
+
   getRecruitmentRound: async (): Promise<RecruitmentRoundResponseDtoType> => {
     const response = await apiClient.get("/admin/recruitments/rounds");
     return response.data;
