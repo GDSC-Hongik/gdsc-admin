@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import CreateSemesterInfoModal from "../Modal/CreateSemesterInfoModal";
+import CreateRecruitmentInfoModal from "../Modal/CreateRecruitmentInfoModal";
 import DemoteMembersModal from "../Modal/DemoteMembersModal";
 import {
   useRecruitmentStateContext,
@@ -52,7 +52,7 @@ export default function RecruitmentInfoTable() {
         hideFooter
       />
       <DemoteMembersModal open={demoteModalOpen} onClose={handleCloseDemoteModal} />
-      <CreateSemesterInfoModal
+      <CreateRecruitmentInfoModal
         open={createSemesterInfoModalOpen}
         onClose={handleCloseCreateSemesterInfoModal}
       />

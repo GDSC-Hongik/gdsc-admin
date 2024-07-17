@@ -5,15 +5,15 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import WarningIcon from "@/assets/warning.svg?react";
 
-type CreateSemesterInfoModalPropsType = {
+type CreateRecruitmentInfoModalPropsType = {
   open: boolean;
   onClose: () => void;
 };
 
-export default function CreateSemesterInfoModal({
+export default function CreateRecruitmentInfoModal({
   open,
   onClose,
-}: CreateSemesterInfoModalPropsType) {
+}: CreateRecruitmentInfoModalPropsType) {
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
