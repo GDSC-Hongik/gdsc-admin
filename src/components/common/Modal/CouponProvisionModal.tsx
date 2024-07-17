@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
-import { useCouponProvisionSearchInfoState } from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
+import { useCouponProvisionStateContext } from "@/hooks/contexts/useCouponProvisionContext";
 import useIssueCouponMutation from "@/hooks/mutations/useIssueCouponMutation";
 
 type DetailInfoModalPropsType = {
@@ -16,7 +16,7 @@ export default function CouponProvisionModal({
   onClose,
   detailInfo,
 }: DetailInfoModalPropsType) {
-  const { selectedCouponId } = useCouponProvisionSearchInfoState();
+  const { selectedCouponId } = useCouponProvisionStateContext();
   const { mutate } = useIssueCouponMutation();
 
   const handleClickCouponProvision = () => {

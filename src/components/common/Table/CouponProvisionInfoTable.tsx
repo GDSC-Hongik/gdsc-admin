@@ -3,18 +3,21 @@ import styled from "@emotion/styled";
 import { DataGrid, GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import CouponProvisionModal from "../Modal/CouponProvisionModal";
 import {
-  useCouponProvisionSearchInfoDispatch,
-  useCouponProvisionSearchInfoState,
-} from "@/hooks/contexts/useCouponProvisionSearchInfoContext";
+  useCouponProvisionDispatchContext,
+  useCouponProvisionStateContext,
+} from "@/hooks/contexts/useCouponProvisionContext";
 import useGetCouponProvisionMemberListQuery from "@/hooks/queries/useGetCouponProvisionMemberListQuery";
 
 export default function CouponProvisionInfoTable() {
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
-  const { paginationModel, provisionModalOpen, searchVariant, searchText } =
-    useCouponProvisionSearchInfoState();
+  const {
+    paginationModel,
+    provisionModalOpen,
+    searchInfo: { variant: searchVariant, text: searchText },
+  } = useCouponProvisionStateContext();
   const { setPaginationModel, setProvisionModalOpen, setSelectedCouponId } =
-    useCouponProvisionSearchInfoDispatch();
+    useCouponProvisionDispatchContext();
 
   const { couponProvisionMemberList = [], totalElements } = useGetCouponProvisionMemberListQuery(
     paginationModel.page,
