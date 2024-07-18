@@ -10,16 +10,13 @@ export const pendingMemberApi = {
     searchText: string,
     memberVariant: MemberVariantType,
   ): Promise<PendingMemberListResponseDtoType> => {
-    if (searchText && searchVariant) {
-      const searchUrl = `admin/members?role=${memberVariant}&${searchVariant}=${searchText}&page=${page}&size=${size}`;
+    let url = `admin/members?role=${memberVariant}&page=${page}&size=${size}`;
 
-      const response = await apiClient.get(searchUrl);
-      return response.data;
+    if (searchText && searchVariant) {
+      url += `&${searchVariant}=${searchText}`;
     }
 
-    const commonUrl = `admin/members?role=${memberVariant}&page=${page}&size=${size}`;
-
-    const response = await apiClient.get(commonUrl);
+    const response = await apiClient.get(url);
     return response.data;
   },
 };
