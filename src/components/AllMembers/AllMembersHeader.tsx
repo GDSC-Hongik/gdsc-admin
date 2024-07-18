@@ -13,7 +13,10 @@ import {
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import { memberInfoSelectMenu } from "@/constants/member";
-import { useAllMembersDispatchContext, useAllMembersStateContext } from "@/hooks/contexts/useAllMembersContext";
+import {
+  useAllMembersDispatchContext,
+  useAllMembersStateContext,
+} from "@/hooks/contexts/useAllMembersContext";
 import { downloadExcelFile } from "@/utils/excel";
 
 export default function AllMembersHeader() {
@@ -25,12 +28,8 @@ export default function AllMembersHeader() {
   } = useAllMembersStateContext();
 
   const handleClickExcelDownloadButton = async () => {
-    try {
-      const data = await allMemberApi.getMemberInfoExcel();
-      downloadExcelFile(data, "members");
-    } catch (error) {
-      toast.error("오류가 발생했습니다.");
-    }
+    const data = await allMemberApi.getMemberInfoExcel();
+    downloadExcelFile(data, "members");
   };
 
   const handleResetPage = () => {
