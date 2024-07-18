@@ -1,5 +1,5 @@
 import { RouteObject, createBrowserRouter, Navigate } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
+import Layout from "@/components/@layout/Layout";
 import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemesterPage";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
