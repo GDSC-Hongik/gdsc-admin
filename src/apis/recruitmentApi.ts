@@ -3,7 +3,7 @@ import {
   RecruitmentResponseDtoType,
   RecruitmentRoundResponseDtoType,
 } from "@/types/dtos/recruitment";
-import { SemesterVariantType } from "@/types/entities/recruitment";
+import { RoundVariantType, SemesterVariantType } from "@/types/entities/recruitment";
 
 export const recruitmentApi = {
   demoteAllMember: async (academicYear: number, semesterType: SemesterVariantType | null) => {
@@ -34,9 +34,23 @@ export const recruitmentApi = {
     return response.data;
   },
 
+  createRecruitmentRound: async (body: {
+    academicYear: number;
+    semesterType: SemesterVariantType;
+    name: string;
+    startDate: string;
+    endDate: string;
+    roundType: RoundVariantType;
+  }) => {
+    const response = await apiClient.post("/admin/recruitments/rounds", body);
+    return response.data;
+  },
+
   editRecruitmentRound: async (
     recruitmentRoundId: number,
     body: {
+      academicYear: number;
+      semesterType: SemesterVariantType;
       name: string;
       startDate: string;
       endDate: string;

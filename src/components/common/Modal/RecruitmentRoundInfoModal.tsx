@@ -17,7 +17,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import dayjs, { Dayjs } from "dayjs";
 import { toast } from "react-toastify";
 import { QueryKey } from "@/constants/queryKey";
-import useEditRecruitmentRoundMutation from "@/hooks/mutations/useEditRecruitmentRoundMutation";
+import useCreateRecruitmentRoundMutation from "@/hooks/mutations/useCreateRecruitmentRoundMutation";
+import useEditRecruitmentRoundMutation, {
+  EditRecruitmentRoundMutationArgumentType,
+} from "@/hooks/mutations/useEditRecruitmentRoundMutation";
 import {
   FilteredRecruitmentRoundInfoType,
   RecruitmentRoundModalInfoType,
@@ -46,7 +49,8 @@ export default function RecruitmentRoundInfoModal({
     name: editRoundInfo?.name ?? "",
   });
 
-  const { mutate } = useEditRecruitmentRoundMutation();
+  const { mutate: editMutate } = useEditRecruitmentRoundMutation();
+  const { mutate: createMutate } = useCreateRecruitmentRoundMutation();
 
   const queryClient = useQueryClient();
 
@@ -93,32 +97,47 @@ export default function RecruitmentRoundInfoModal({
       return;
     }
 
-    const { name, startDate, endDate, recruitmentRoundId, roundType } = roundModalInfo;
+    const { name, startDate, endDate, recruitmentRoundId, roundType, academicYear, semester } =
+      roundModalInfo;
+
+    const mutationBody: EditRecruitmentRoundMutationArgumentType["body"] = {
+      academicYear: Number(academicYear),
+      semesterType: semester === "1" ? "FIRST" : "SECOND",
+      name,
+      startDate: startDate!.toDate().toISOString(),
+      endDate: endDate!.toDate().toISOString(),
+      roundType: roundType === "1차" ? "FIRST" : "SECOND",
+    };
+
+    const mutationSuccessHandler = () => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKey.recruitmentRound],
+      });
+      toast.success(`모집 회차 정보가 ${isEdit ? "수정" : "생성"}되었습니다.`);
+      onClose();
+    };
 
     if (isEdit) {
-      mutate(
+      editMutate(
         {
-          recruitmentRoundId: recruitmentRoundId,
-          body: {
-            name,
-            startDate: startDate!.toDate().toISOString(),
-            endDate: endDate!.toDate().toISOString(),
-            roundType: roundType === "1차" ? "FIRST" : "SECOND",
-          },
+          recruitmentRoundId,
+          body: mutationBody,
         },
         {
-          onSuccess: () => {
-            queryClient.invalidateQueries({
-              queryKey: [QueryKey.recruitmentRound],
-            });
-            toast.success("모집 회차 정보가 수정되었습니다.");
-            onClose();
-          },
+          onSuccess: mutationSuccessHandler,
         },
       );
       return;
     }
-    console.log(roundModalInfo);
+
+    createMutate(
+      {
+        body: mutationBody,
+      },
+      {
+        onSuccess: mutationSuccessHandler,
+      },
+    );
   };
 
   const { academicYear, semester, roundType, startDate, endDate, name } = roundModalInfo;

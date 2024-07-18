@@ -3,8 +3,7 @@ import { toast } from "react-toastify";
 import { recruitmentApi } from "@/apis/recruitmentApi";
 import { RoundVariantType, SemesterVariantType } from "@/types/entities/recruitment";
 
-export type EditRecruitmentRoundMutationArgumentType = {
-  recruitmentRoundId: number;
+type CreateRecruitmentRoundMutationArgumentType = {
   body: {
     academicYear: number;
     semesterType: SemesterVariantType;
@@ -15,10 +14,10 @@ export type EditRecruitmentRoundMutationArgumentType = {
   };
 };
 
-export default function useEditRecruitmentRoundMutation() {
+export default function useCreateRecruitmentRoundMutation() {
   return useMutation({
-    mutationFn: ({ recruitmentRoundId, body }: EditRecruitmentRoundMutationArgumentType) =>
-      recruitmentApi.editRecruitmentRound(recruitmentRoundId, body),
+    mutationFn: ({ body }: CreateRecruitmentRoundMutationArgumentType) =>
+      recruitmentApi.createRecruitmentRound(body),
     onError: (error: any) => {
       toast.error(error.response.data.errorMessage);
     },
