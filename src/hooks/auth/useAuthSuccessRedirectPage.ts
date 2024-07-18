@@ -1,12 +1,8 @@
 import { useEffect } from "react";
 import { isEmpty } from "lodash";
 import { useSearchParams } from "react-router-dom";
+import { Params } from "@/constants/auth";
 import useAuthStorage from "@/hooks/auth/useAuthStorage";
-
-const enum Params {
-  AccessToken = "access",
-  RefreshToken = "refresh",
-}
 
 export default function useAuthSuccessRedirectPage() {
   const { setAuthData } = useAuthStorage();
@@ -20,8 +16,7 @@ export default function useAuthSuccessRedirectPage() {
 
   useEffect(() => {
     setAuthData({ accessToken, refreshToken });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, refreshToken]);
+  }, [accessToken, refreshToken, setAuthData]);
 
   return { isSuccess };
 }
