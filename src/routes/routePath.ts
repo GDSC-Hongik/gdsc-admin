@@ -14,8 +14,8 @@ const RoutePath = {
   Recruitment: "/recruitment",
   RecruitmentRound: "/recruitment/round",
 
-  AllMemberHistoryPerSemester: "history/all-member-per-semester",
-  PaymentStatusHistoryPerSemester: "history/payment-status-per-semester",
+  AllMemberHistoryPerSemester: "/history/all-member-per-semester",
+  PaymentStatusHistoryPerSemester: "/history/payment-status-per-semester",
 
   Signin: "/sign-in",
 
