@@ -1,5 +1,5 @@
-import RecruitmentRoundHeader from "@/components/common/Header/RecruitmentRoundHeader";
-import RecruitmentRoundInfoTable from "@/components/common/Table/RecruitmentRoundInfoTable";
+import RecruitmentRoundHeader from "@/components/RecruitmentRound/RecruitmentRoundHeader";
+import RecruitmentRoundInfoTable from "@/components/RecruitmentRound/RecruitmentRoundInfoTable";
 import Title from "@/components/common/Title";
 import RecruitmentRoundContextProvider from "@/contexts/RecruitmentRoundContext";
 
