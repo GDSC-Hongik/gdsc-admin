@@ -23,13 +23,17 @@ import { EditMemberInfoType } from "@/types/entities/member";
 import { memberInfoValidation } from "@/utils/validation";
 import { formatPhoneNumber } from "@/utils/validation/formatPhoneNumber";
 
-type EditInfoModalProps = {
+type EditMemberInfoModalProps = {
   open: boolean;
   onClose: () => void;
   memberInfo: EditMemberInfoType;
 };
 
-export default function EditMemberInfoModal({ open, onClose, memberInfo }: EditInfoModalProps) {
+export default function EditMemberInfoModal({
+  open,
+  onClose,
+  memberInfo,
+}: EditMemberInfoModalProps) {
   const [modalMemberInfo, setModalMemberInfo] = useState({
     ...memberInfo,
     discordUsername: memberInfo.discordUsername || null,

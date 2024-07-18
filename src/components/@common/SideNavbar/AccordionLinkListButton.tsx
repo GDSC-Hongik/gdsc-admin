@@ -7,7 +7,8 @@ import StarIcon from "@/assets/star.svg?react";
 import { palette } from "@/styles/palette";
 import { typo } from "@/styles/typo";
 
-export type LinkButtonPropsType = { label: string; path: string };
+type LinkButtonPropsType = { label: string; path: string };
+
 type LinkButtonLabelType = "회원 관리" | "회비 관리" | "리크루팅 관리" | "히스토리";
 
 type AccordionLinkListButtonPropsType<T extends LinkButtonLabelType> = {
