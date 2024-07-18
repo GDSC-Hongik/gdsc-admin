@@ -1,6 +1,6 @@
+import Title from "@/components/@common/Title";
 import IssuedCouponHeader from "@/components/IssuedCoupon/IssuedCouponHeader";
 import IssuedCouponInfoTable from "@/components/IssuedCoupon/IssuedCouponInfoTable";
-import Title from "@/components/@common/Title";
 import IssuedCouponContextProvider from "@/contexts/IssuedCouponContext";
 
 export default function IssuedCouponPage() {

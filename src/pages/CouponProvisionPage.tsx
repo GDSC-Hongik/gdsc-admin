@@ -1,6 +1,6 @@
+import Title from "@/components/@common/Title";
 import CouponProvisionHeader from "@/components/CouponProvision/CouponProvisionHeader";
 import CouponProvisionInfoTable from "@/components/CouponProvision/CouponProvisionInfoTable";
-import Title from "@/components/@common/Title";
 import CouponProvisionContextProvider from "@/contexts/CouponProvisionContext";
 
 export default function CouponProvisionPage() {
