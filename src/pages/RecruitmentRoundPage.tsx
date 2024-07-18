@@ -1,6 +1,6 @@
 import RecruitmentRoundHeader from "@/components/RecruitmentRound/RecruitmentRoundHeader";
 import RecruitmentRoundInfoTable from "@/components/RecruitmentRound/RecruitmentRoundInfoTable";
-import Title from "@/components/common/Title";
+import Title from "@/components/@common/Title";
 import RecruitmentRoundContextProvider from "@/contexts/RecruitmentRoundContext";
 
 export default function RecruitmentRoundPage() {

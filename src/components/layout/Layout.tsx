@@ -1,7 +1,7 @@
 import { Button, Stack, styled } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import SideNavbar from "@/components/common/SideNavbar";
+import SideNavbar from "@/components/@common/SideNavbar";
 import useAuthStorage from "@/hooks/useAuthStorage";
 import RoutePath from "@/routes/routePath";
 
