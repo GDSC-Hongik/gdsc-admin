@@ -1,5 +1,5 @@
-import AllMembersHeader from "@/components/common/Header/AllMembersHeader";
-import AllMembersInfoTable from "@/components/common/Table/AllMembersInfoTable";
+import AllMembersHeader from "@/components/AllMembers/AllMembersHeader";
+import AllMembersInfoTable from "@/components/AllMembers/AllMembersInfoTable";
 import Title from "@/components/common/Title";
 import AllMembersContextProvider from "@/contexts/AllMembersContext";
 

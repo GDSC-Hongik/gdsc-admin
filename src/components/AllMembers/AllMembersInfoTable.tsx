@@ -4,7 +4,7 @@ import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import EditInfoMemberModal from "../Modal/EditMemberInfoModal";
+import EditInfoMemberModal from "./EditMemberInfoModal";
 
 import { QueryKey } from "@/constants/queryKey";
 import {
