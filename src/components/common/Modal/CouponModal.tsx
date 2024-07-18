@@ -32,7 +32,10 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
   };
 
   const handleClickSubmit = () => {
-    if (!couponInfo.discountAmount) {
+    const { name, discountAmount } = couponInfo;
+
+    if (!name || !discountAmount) {
+      toast.error(`채워지지 않는 필드가 있어요. 모든 필드를 채워주세요!`);
       return;
     }
 
@@ -43,9 +46,6 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
         });
         toast.success("쿠폰이 생성되었습니다.");
         onClose();
-      },
-      onError: (error: any) => {
-        toast.error(error.response.data.errorMessage);
       },
     });
   };

@@ -117,6 +117,11 @@ export default function RecruitmentRoundInfoModal({
       onClose();
     };
 
+    if (!academicYear || !semester || !name || !startDate || !endDate || !roundType) {
+      toast.error(`채워지지 않는 필드가 있어요. 모든 필드를 채워주세요!`);
+      return;
+    }
+
     if (isEdit) {
       editMutate(
         {
