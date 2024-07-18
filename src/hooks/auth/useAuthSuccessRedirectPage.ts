@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { isEmpty } from "lodash";
 import { useSearchParams } from "react-router-dom";
 import { Params } from "@/constants/auth";
 import useAuthStorage from "@/hooks/auth/useAuthStorage";
@@ -12,7 +11,7 @@ export default function useAuthSuccessRedirectPage() {
   const accessToken = searchParams.get(Params.AccessToken);
   const refreshToken = searchParams.get(Params.AccessToken);
 
-  const isSuccess = !isEmpty(accessToken);
+  const isSuccess = !!accessToken;
 
   useEffect(() => {
     setAuthData({ accessToken, refreshToken });

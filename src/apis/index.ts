@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 import { toast } from "react-toastify";
 import { BASE_URL } from "src/environment";
-import useAuthStorage from "@/hooks/useAuthStorage";
+import useAuthStorage from "@/hooks/auth/useAuthStorage";
 import { ErrorResponse } from "@/types/entities/error";
 
 const createApiClient = (): AxiosInstance => {
@@ -15,9 +15,9 @@ const createApiClient = (): AxiosInstance => {
   });
 
   apiClient.interceptors.request.use(config => {
-    // const authStorage = useAuthStorage();
+    const authStorage = useAuthStorage();
 
-    const accessToken = "";
+    const accessToken = authStorage.accessToken;
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
