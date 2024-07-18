@@ -2,9 +2,15 @@ import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import EditInfoMemberModal from "../Modal/EditMemberInfoModal";
 
-import { useAllMembersStateContext, useAllMembersDispatchContext } from "@/hooks/contexts/useAllMembersContext";
+import { QueryKey } from "@/constants/queryKey";
+import {
+  useAllMembersStateContext,
+  useAllMembersDispatchContext,
+} from "@/hooks/contexts/useAllMembersContext";
 import useDeleteMemberMutation from "@/hooks/mutations/useDeleteMemberMutation";
 import useGetAllMemberListQuery from "@/hooks/queries/useGetAllMemberListQuery";
 import { EditMemberInfoType, MemberInfoType } from "@/types/entities/member";
@@ -34,6 +40,8 @@ export default function AllMembersInfoTable() {
     searchInfo: { text: searchText, variant: searchVariant },
   } = useAllMembersStateContext();
   const { setPaginationModel } = useAllMembersDispatchContext();
+
+  const queryClient = useQueryClient();
 
   const { allMemberList = [], totalElements } = useGetAllMemberListQuery(
     paginationModel.page,
@@ -92,7 +100,14 @@ export default function AllMembersInfoTable() {
 
   const handleClickDeleteMember = (row: GridRowModel) => {
     const targetMemberId = row.id;
-    mutate(targetMemberId);
+    mutate(targetMemberId, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QueryKey.allMemberList],
+        });
+        toast.success("탈퇴 처리 완료하였습니다.");
+      },
+    });
   };
 
   const handleCloseModal = () => {
