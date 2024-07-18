@@ -68,3 +68,10 @@ export type SelectedCouponProvisionMemberType = Pick<
 > & { id: MemberInfoType["memberId"] };
 
 export type SelectedCouponProvisionMemberListType = SelectedCouponProvisionMemberType[];
+
+export type CreateCouponBodyType = { name: string; discountAmount: number | null };
+
+export type IssueCouponBodyType = {
+  couponId: number;
+  memberIds: number[];
+};

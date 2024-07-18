@@ -4,7 +4,7 @@ import {
   CouponProvisionMemberListResponseDtoType,
   IssuedCouponListResponseDtoType,
 } from "@/types/dtos/coupon";
-import { SearchVariantType as CouponSearchVariantType } from "@/types/entities/coupon";
+import { CreateCouponBodyType, IssueCouponBodyType, SearchVariantType as CouponSearchVariantType } from "@/types/entities/coupon";
 import { SearchVariantType as MemberSearchVariantType } from "@/types/entities/member";
 
 export const couponApi = {
@@ -13,12 +13,12 @@ export const couponApi = {
     return response.data;
   },
 
-  createCoupon: async (body: { name: string; discountAmount: number | null }) => {
+  createCoupon: async (body: CreateCouponBodyType): Promise<void> => {
     const response = await apiClient.post("/admin/coupons", body);
     return response.data;
   },
 
-  revokeIssuedCoupon: async (issuedCouponId: number) => {
+  revokeIssuedCoupon: async (issuedCouponId: number): Promise<void> => {
     const response = await apiClient.delete(`/admin/coupons/issued/${issuedCouponId}`);
     return response.data;
   },
@@ -29,21 +29,17 @@ export const couponApi = {
     searchVariant: CouponSearchVariantType,
     searchText: string,
   ): Promise<IssuedCouponListResponseDtoType> => {
-    if (searchText && searchVariant) {
-      const searchUrl = `/admin/coupons/issued?${searchVariant}=${searchText}&page=${page}&size=${size}`;
+    let url = `admin/coupons/issued?page=${page}&size=${size}`;
 
-      const response = await apiClient.get(searchUrl);
-      return response.data.content;
+    if (searchText && searchVariant) {
+      url += `&${searchVariant}=${searchText}`;
     }
 
-    const commonUrl = `/admin/coupons/issued?page=${page}&size=${size}`;
-
-    const response = await apiClient.get(commonUrl);
-
+    const response = await apiClient.get(url);
     return response.data.content;
   },
 
-  issueCoupon: async (body: { couponId: number; memberIds: number[] }) => {
+  issueCoupon: async (body: IssueCouponBodyType): Promise<void> => {
     const response = await apiClient.post("/admin/coupons/issued", body);
     return response.data;
   },
@@ -54,17 +50,13 @@ export const couponApi = {
     searchVariant: MemberSearchVariantType,
     searchText: string,
   ): Promise<CouponProvisionMemberListResponseDtoType> => {
-    if (searchText && searchVariant) {
-      const searchUrl = `/admin/members?role=REGULAR,ASSOCIATE?${searchVariant}=${searchText}&page=${page}&size=${size}`;
+    let url = `/admin/members?role=REGULAR,ASSOCIATE?page=${page}&size=${size}`;
 
-      const response = await apiClient.get(searchUrl);
-      return response.data;
+    if (searchText && searchVariant) {
+      url += `&${searchVariant}=${searchText}`;
     }
 
-    const commonUrl = `/admin/members?role=REGULAR,ASSOCIATE?page=${page}&size=${size}`;
-
-    const response = await apiClient.get(commonUrl);
-
-    return response.data;
+    const response = await apiClient.get(url);
+    return response.data.content;
   },
 };
