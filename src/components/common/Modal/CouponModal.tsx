@@ -1,6 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { QueryKey } from "@/constants/queryKey";
 import useCreateCouponMutation from "@/hooks/mutations/useCreateCouponMutation";
 import { CouponInfoType } from "@/types/entities/coupon";
 
@@ -17,6 +20,8 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
 
   const { mutate: createCouponMutate } = useCreateCouponMutation();
 
+  const queryClient = useQueryClient();
+
   const handleChangeCouponInfo = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value, name } = e.target;
 
@@ -31,8 +36,18 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
       return;
     }
 
-    createCouponMutate(couponInfo);
-    onClose();
+    createCouponMutate(couponInfo, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QueryKey.couponList],
+        });
+        toast.success("쿠폰이 생성되었습니다.");
+        onClose();
+      },
+      onError: (error: any) => {
+        toast.error(error.response.data.errorMessage);
+      },
+    });
   };
 
   return (
