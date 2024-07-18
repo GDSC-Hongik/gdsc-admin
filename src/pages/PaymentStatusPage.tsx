@@ -1,5 +1,5 @@
-import PaymentStatusHeader from "@/components/common/Header/PaymentStatusHeader";
-import PaymentStatusInfoTable from "@/components/common/Table/PaymentStatusInfoTable";
+import PaymentStatusHeader from "@/components/PaymentStatus/PaymentStatusHeader";
+import PaymentStatusInfoTable from "@/components/PaymentStatus/PaymentStatusInfoTable";
 import Title from "@/components/common/Title";
 import PaymentStatusContextProvider from "@/contexts/PaymentStatusContext";
 
