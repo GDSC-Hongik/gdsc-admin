@@ -1,7 +1,6 @@
 import { Button, Stack, styled } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ApiErrorBoundary from "@/components/common/ApiErrorBoundary";
 import SideNavbar from "@/components/common/SideNavbar";
 import useAuthStorage from "@/hooks/useAuthStorage";
 import RoutePath from "@/routes/routePath";
@@ -21,22 +20,20 @@ export default function Layout() {
   };
 
   return (
-    <ApiErrorBoundary>
-      <StyledLayoutWrapper>
-        <SideNavbar />
-        <StyledBodyWrapper>
-          <Outlet />
-          <StyledButton
-            variant={"outlined"}
-            size={"large"}
-            color={"primary"}
-            onClick={handleClickLogout}
-          >
-            로그아웃
-          </StyledButton>
-        </StyledBodyWrapper>
-      </StyledLayoutWrapper>
-    </ApiErrorBoundary>
+    <StyledLayoutWrapper>
+      <SideNavbar />
+      <StyledBodyWrapper>
+        <Outlet />
+        <StyledButton
+          variant={"outlined"}
+          size={"large"}
+          color={"primary"}
+          onClick={handleClickLogout}
+        >
+          로그아웃
+        </StyledButton>
+      </StyledBodyWrapper>
+    </StyledLayoutWrapper>
   );
 }
 
