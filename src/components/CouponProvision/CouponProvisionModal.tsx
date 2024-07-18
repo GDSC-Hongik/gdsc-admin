@@ -8,7 +8,7 @@ import { useCouponProvisionStateContext } from "@/hooks/contexts/useCouponProvis
 import useIssueCouponMutation from "@/hooks/mutations/useIssueCouponMutation";
 import { SelectedCouponProvisionMemberListType } from "@/types/entities/coupon";
 
-type DetailInfoModalPropsType = {
+type CouponProvisionModalPropsType = {
   open: boolean;
   onClose: () => void;
   detailInfo: SelectedCouponProvisionMemberListType;
@@ -18,7 +18,7 @@ export default function CouponProvisionModal({
   open,
   onClose,
   detailInfo,
-}: DetailInfoModalPropsType) {
+}: CouponProvisionModalPropsType) {
   const { selectedCouponId } = useCouponProvisionStateContext();
   const { mutate } = useIssueCouponMutation();
 

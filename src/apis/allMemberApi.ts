@@ -1,6 +1,6 @@
 import { apiClient } from ".";
 import { AllMemberListResponseDtoType, DepartmentListResponseDtoType } from "@/types/dtos/member";
-import { SearchVariantType } from "@/types/entities/member";
+import { EditMemberInfoBodyType, SearchVariantType } from "@/types/entities/member";
 
 export const allMemberApi = {
   getAllMemberList: async (
@@ -9,20 +9,17 @@ export const allMemberApi = {
     searchVariant: SearchVariantType,
     searchText: string,
   ): Promise<AllMemberListResponseDtoType> => {
-    if (searchText && searchVariant) {
-      const searchUrl = `admin/members?role=REGULAR&${searchVariant}=${searchText}&page=${page}&size=${size}`;
+    let url = `admin/members?role=REGULAR&page=${page}&size=${size}`;
 
-      const response = await apiClient.get(searchUrl);
-      return response.data;
+    if (searchText && searchVariant) {
+      url += `&${searchVariant}=${searchText}`;
     }
 
-    const commonUrl = `admin/members?role=REGULAR&page=${page}&size=${size}`;
-
-    const response = await apiClient.get(commonUrl);
+    const response = await apiClient.get(url);
     return response.data;
   },
 
-  deleteMember: async (memberId: number) => {
+  deleteMember: async (memberId: number): Promise<void> => {
     const response = await apiClient.delete(`admin/members/${memberId}`);
     return response.data;
   },
@@ -34,18 +31,7 @@ export const allMemberApi = {
     return response.data;
   },
 
-  editMemberInfo: async (
-    memberId: number,
-    body: {
-      studentId: string;
-      name: string;
-      phone: string;
-      department: string;
-      email: string;
-      discordUsername: string | null;
-      nickname: string | null;
-    },
-  ) => {
+  editMemberInfo: async (memberId: number, body: EditMemberInfoBodyType) => {
     const response = await apiClient.put(`admin/members/${memberId}`, body);
     return response.data;
   },

@@ -53,3 +53,20 @@ export type RecruitmentModalInfoType = {
   semester: string | "";
   fee: number | "";
 };
+
+export type CreateRecruitmentBodyType = {
+  semesterStartDate: string;
+  semesterEndDate: string;
+  academicYear: number;
+  semesterType: SemesterVariantType;
+  fee: number;
+};
+
+export type RecruitmentRoundBodyType = {
+  academicYear: number;
+  semesterType: SemesterVariantType;
+  name: string;
+  startDate: string;
+  endDate: string;
+  roundType: RoundVariantType;
+};

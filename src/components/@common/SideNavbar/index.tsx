@@ -2,11 +2,11 @@ import { styled, Stack } from "@mui/material";
 import LogoIcon from "@/assets/logo.svg?react";
 import AccordionLinkListButton from "@/components/@common/SideNavbar/AccordionLinkListButton";
 import {
-  historyLinkButtonInfoList,
   membersLinkButtonInfoList,
   paymentLinkButtonInfoList,
   recruitmentLinkButtonInfoList,
-} from "@/constants/sideNavbar";
+  historyLinkButtonInfoList,
+} from "@/constants/common";
 
 export default function SideNavbar() {
   return (

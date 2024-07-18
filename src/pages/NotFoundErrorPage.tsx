@@ -5,10 +5,12 @@ import RoutePath from "@/routes/routePath";
 export default function NotFoundErrorPage() {
   const navigate = useNavigate();
 
+  const handleClickNavigateToHome = () => navigate(RoutePath.Index);
+
   return (
     <Stack>
       <Typography>페이지를 찾을 수 없습니다.</Typography>
-      <Button onClick={() => navigate(RoutePath.Index)}>홈으로 돌아가기</Button>
+      <Button onClick={handleClickNavigateToHome}>홈으로 돌아가기</Button>
     </Stack>
   );
 }
