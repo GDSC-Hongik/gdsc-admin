@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import CreateRecruitmentInfoModal from "../Modal/CreateRecruitmentInfoModal";
-import DemoteMembersModal from "../Modal/DemoteMembersModal";
+import CreateRecruitmentInfoModal from "./CreateRecruitmentInfoModal";
+import DemoteMembersModal from "./DemoteMembersModal";
 import {
   useRecruitmentStateContext,
   useRecruitmentDispatchContext,

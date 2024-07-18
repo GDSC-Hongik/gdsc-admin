@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import CouponModal from "../Modal/CouponModal";
+import CouponModal from "./CouponModal";
 import { useCouponDispatchContext, useCouponStateContext } from "@/hooks/contexts/useCouponContext";
 import useGetCouponListQuery from "@/hooks/queries/useGetCouponListQuery";
 import { CouponListResponseDtoType } from "@/types/dtos/coupon";

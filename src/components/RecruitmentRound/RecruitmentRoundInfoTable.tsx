@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
-import RecruitmentRoundInfoModal from "../Modal/RecruitmentRoundInfoModal";
+import RecruitmentRoundInfoModal from "./RecruitmentRoundInfoModal";
 import {
   useRecruitmentRoundStateContext,
   useRecruitmentRoundDispatchContext,

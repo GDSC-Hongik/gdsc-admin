@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import useAuthSuccessRedirectPage from "@/hooks/useAuthSuccessRedirectPage";
+import useAuthSuccessRedirectPage from "@/hooks/auth/useAuthSuccessRedirectPage";
 import RoutePath from "@/routes/routePath";
 
 export default function AuthSuccessRedirectPage() {

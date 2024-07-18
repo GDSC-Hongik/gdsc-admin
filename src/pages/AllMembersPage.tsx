@@ -1,6 +1,6 @@
-import AllMembersHeader from "@/components/common/Header/AllMembersHeader";
-import AllMembersInfoTable from "@/components/common/Table/AllMembersInfoTable";
-import Title from "@/components/common/Title";
+import Title from "@/components/@common/Title";
+import AllMembersHeader from "@/components/AllMembers/AllMembersHeader";
+import AllMembersInfoTable from "@/components/AllMembers/AllMembersInfoTable";
 import AllMembersContextProvider from "@/contexts/AllMembersContext";
 
 export default function AllMembersPage() {
