@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@emotion/react";
+import styled from "@emotion/styled";
 import { createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -29,10 +30,14 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={Router} fallbackElement={null} />
         <ReactQueryDevtools />
-        <ToastContainer />
+        <StyledToastContainer />
       </QueryClientProvider>
     </ThemeProvider>
   );
 }
 
 export default App;
+
+const StyledToastContainer = styled(ToastContainer)({
+  width: "420px",
+});
