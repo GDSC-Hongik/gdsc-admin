@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { DataGrid, GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
-import CouponProvisionModal from "../Modal/CouponProvisionModal";
+import CouponProvisionModal from "./CouponProvisionModal";
 import {
   useCouponProvisionDispatchContext,
   useCouponProvisionStateContext,
