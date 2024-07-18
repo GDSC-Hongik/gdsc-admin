@@ -61,7 +61,8 @@ export default function CreateRecruitmentInfoModal({
   };
 
   const handleClickCreateRecruitment = () => {
-    if (!semesterStartDate || !semesterEndDate || !academicYear || !fee) {
+    if (!semesterStartDate || !semesterEndDate || !academicYear || !fee || !semester) {
+      toast.error(`채워지지 않는 필드가 있어요. 모든 필드를 채워주세요!`);
       return;
     }
 

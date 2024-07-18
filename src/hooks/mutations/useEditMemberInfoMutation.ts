@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 
 type EditMemberInfoMutationArgumentType = {
@@ -19,8 +18,5 @@ export default function useEditMemberInfoMutation() {
   return useMutation({
     mutationFn: ({ memberId, body }: EditMemberInfoMutationArgumentType) =>
       allMemberApi.editMemberInfo(memberId, body),
-    onError: (error: any) => {
-      toast.error(error.response.data.errorMessage);
-    },
   });
 }

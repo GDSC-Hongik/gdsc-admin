@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
+import { toast } from "react-toastify";
 import { BASE_URL } from "src/environment";
 import useAuthStorage from "@/hooks/useAuthStorage";
+import { ErrorResponse } from "@/types/entities/error";
 
 const createApiClient = (): AxiosInstance => {
   const apiClient = axios.create({
@@ -9,6 +11,7 @@ const createApiClient = (): AxiosInstance => {
     headers: {
       "Content-Type": "application/json",
     },
+    withCredentials: true,
   });
 
   apiClient.interceptors.request.use(config => {
@@ -32,6 +35,8 @@ const createApiClient = (): AxiosInstance => {
         authStorage.clearAuthData();
 
         return Promise.reject(error);
+      } else {
+        toast.error((error.response?.data as ErrorResponse).errorMessage);
       }
     },
   );

@@ -28,11 +28,17 @@ export default function DemoteMembersModal({ open, onClose }: DemoteMembersModal
   };
 
   const handleClickDemote = () => {
+    const { academicYear, semester } = academicInfo;
+
+    if (!academicYear || !semester) {
+      toast.error(`채워지지 않는 필드가 있어요. 모든 필드를 채워주세요!`);
+      return;
+    }
+
     mutate(
       {
-        academicYear: Number(academicInfo.academicYear),
-        semesterType:
-          academicInfo.semester === "1" ? "FIRST" : academicInfo.semester === "2" ? "SECOND" : null,
+        academicYear: Number(academicYear),
+        semesterType: semester === "1" ? "FIRST" : "SECOND",
       },
       {
         onSuccess: () => {

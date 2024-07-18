@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { QueryKey } from "@/constants/queryKey";
 import { useIssuedCouponStateContext } from "@/hooks/contexts/useIssuedCouponContext";
 import useRevokeIssuedCouponMutation from "@/hooks/mutations/useRevokeIssuedCouponMutation";
 import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
@@ -23,6 +26,8 @@ export default function IssuedCouponInfoTable() {
 
   const { mutate } = useRevokeIssuedCouponMutation();
 
+  const queryClient = useQueryClient();
+
   const getFilteredIssuedCouponList = (issuedCouponList: IssuedCouponType[]) => {
     return issuedCouponList.map(issuedCoupon => ({
       id: issuedCoupon.issuedCouponId,
@@ -39,7 +44,14 @@ export default function IssuedCouponInfoTable() {
   };
 
   const handleClickRevokeCoupon = (couponId: number) => {
-    mutate(couponId);
+    mutate(couponId, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QueryKey.issuedCouponList],
+        });
+        toast.success("쿠폰을 회수하였습니다.");
+      },
+    });
   };
 
   return (
