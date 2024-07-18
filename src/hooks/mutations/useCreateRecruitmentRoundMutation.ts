@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { recruitmentApi } from "@/apis/recruitmentApi";
 import { RoundVariantType, SemesterVariantType } from "@/types/entities/recruitment";
 
@@ -18,8 +17,5 @@ export default function useCreateRecruitmentRoundMutation() {
   return useMutation({
     mutationFn: ({ body }: CreateRecruitmentRoundMutationArgumentType) =>
       recruitmentApi.createRecruitmentRound(body),
-    onError: (error: any) => {
-      toast.error(error.response.data.errorMessage);
-    },
   });
 }

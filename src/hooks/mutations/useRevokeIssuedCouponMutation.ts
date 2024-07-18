@@ -14,8 +14,5 @@ export default function useRevokeIssuedCouponMutation() {
       });
       toast.success("쿠폰을 회수하였습니다.");
     },
-    onError: (error: any) => {
-      toast.error(error.response.data.errorMessage);
-    },
   });
 }
