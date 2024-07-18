@@ -1,9 +1,5 @@
+import { CookieKeys } from "@/constants/auth";
 import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
-
-const enum CookieKeys {
-  AccessToken = "accessToken",
-  RefreshToken = "refreshToken",
-}
 
 export default function useAuthStorage() {
   const accessToken = getCookie(CookieKeys.AccessToken);
