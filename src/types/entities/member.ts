@@ -87,3 +87,13 @@ export type MemberTypeSelectMenuType = {
 export type MemberVariantType = "ASSOCIATE" | "GUEST";
 
 export type DepartmentType = { code: string; name: string };
+
+export type EditMemberInfoBodyType = {
+  studentId: string;
+  name: string;
+  phone: string;
+  department: string;
+  email: string;
+  discordUsername: string | null;
+  nickname: string | null;
+};
