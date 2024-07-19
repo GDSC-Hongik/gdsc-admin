@@ -8,6 +8,7 @@ type CreateRecruitmentMutationArgumentType = {
   academicYear: number;
   semesterType: SemesterVariantType;
   fee: number;
+  feeName: string;
 };
 
 export default function useCreateRecruitmentMutation() {
