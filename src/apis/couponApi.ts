@@ -61,6 +61,6 @@ export const couponApi = {
     }
 
     const response = await apiClient.get(url);
-    return response.data.content;
+    return response.data;
   },
 };
