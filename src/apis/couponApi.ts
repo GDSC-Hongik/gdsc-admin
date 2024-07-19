@@ -50,7 +50,7 @@ export const couponApi = {
     searchVariant: MemberSearchVariantType,
     searchText: string,
   ): Promise<CouponProvisionMemberListResponseDtoType> => {
-    let url = `/admin/members?role=REGULAR,ASSOCIATE?page=${page}&size=${size}`;
+    let url = `/admin/members?roles=REGULAR,ASSOCIATE?page=${page}&size=${size}`;
 
     if (searchText && searchVariant) {
       url += `&${searchVariant}=${searchText}`;

@@ -9,7 +9,7 @@ export const allMemberApi = {
     searchVariant: SearchVariantType,
     searchText: string,
   ): Promise<AllMemberListResponseDtoType> => {
-    let url = `admin/members?role=REGULAR&page=${page}&size=${size}`;
+    let url = `admin/members?roles=REGULAR&page=${page}&size=${size}`;
 
     if (searchText && searchVariant) {
       url += `&${searchVariant}=${searchText}`;
