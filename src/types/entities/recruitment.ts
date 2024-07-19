@@ -7,10 +7,10 @@ export type RoundVariantType = "FIRST" | "SECOND";
 export type RecruitmentType = {
   recruitmentId: number;
   semester: string;
-  roundType: RoundVariantType;
   semesterStartDate: string;
   semesterEndDate: string;
   recruitmentFee: number;
+  feeName: string;
 };
 
 export type RecruitmentRoundType = "1차" | "2차";
