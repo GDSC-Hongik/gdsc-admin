@@ -39,5 +39,5 @@ function App() {
 export default App;
 
 const StyledToastContainer = styled(ToastContainer)({
-  width: "420px",
+  width: "fit-content",
 });
