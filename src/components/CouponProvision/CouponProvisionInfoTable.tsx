@@ -105,7 +105,7 @@ const columns: GridColDef[] = [
     headerName: "학번",
     headerAlign: "left",
     align: "left",
-    width: 75,
+    width: 85,
     resizable: false,
     editable: false,
   },
