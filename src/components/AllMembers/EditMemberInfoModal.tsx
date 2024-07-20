@@ -79,15 +79,7 @@ export default function EditMemberInfoModal({
   };
 
   const handleClickSave = () => {
-    if (
-      !name ||
-      !studentId ||
-      !phone ||
-      !departmentCode ||
-      !emailUsername ||
-      !discordUsername ||
-      !nickname
-    ) {
+    if (!name || !studentId || !phone || !departmentCode || !emailUsername) {
       toast.error(`채워지지 않는 필드가 있어요. 모든 필드를 채워주세요!`);
       return;
     }

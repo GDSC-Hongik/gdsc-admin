@@ -10,7 +10,7 @@ export const pendingMemberApi = {
     searchText: string,
     memberVariant: MemberVariantType,
   ): Promise<PendingMemberListResponseDtoType> => {
-    let url = `admin/members?role=${memberVariant}&page=${page}&size=${size}`;
+    let url = `admin/members?roles=${memberVariant}&page=${page}&size=${size}`;
 
     if (searchText && searchVariant) {
       url += `&${searchVariant}=${searchText}`;

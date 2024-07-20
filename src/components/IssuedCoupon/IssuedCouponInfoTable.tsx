@@ -76,7 +76,7 @@ const getColumns = (handleClickRevokeCoupon: (couponId: number) => void): GridCo
     headerName: "학번",
     headerAlign: "left",
     align: "left",
-    width: 70,
+    width: 80,
     resizable: false,
     editable: false,
   },

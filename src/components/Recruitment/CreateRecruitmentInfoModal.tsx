@@ -27,13 +27,15 @@ export default function CreateRecruitmentInfoModal({
     academicYear: "",
     semester: "",
     fee: "",
+    feeName: "",
   });
 
   const { mutate } = useCreateRecruitmentMutation();
 
   const queryClient = useQueryClient();
 
-  const { semesterStartDate, semesterEndDate, academicYear, semester, fee } = recruitmentModalInfo;
+  const { semesterStartDate, semesterEndDate, academicYear, semester, fee, feeName } =
+    recruitmentModalInfo;
 
   const handleChangeRecruitmentModalInfo = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -61,7 +63,7 @@ export default function CreateRecruitmentInfoModal({
   };
 
   const handleClickCreateRecruitment = () => {
-    if (!semesterStartDate || !semesterEndDate || !academicYear || !fee || !semester) {
+    if (!semesterStartDate || !semesterEndDate || !academicYear || !fee || !semester || !feeName) {
       toast.error(`채워지지 않는 필드가 있어요. 모든 필드를 채워주세요!`);
       return;
     }
@@ -73,6 +75,7 @@ export default function CreateRecruitmentInfoModal({
         academicYear,
         semesterType: semester === "1" ? "FIRST" : "SECOND",
         fee,
+        feeName,
       },
       {
         onSuccess: () => {
@@ -122,6 +125,16 @@ export default function CreateRecruitmentInfoModal({
             />
           </StyledInfoWrapper>
           <StyledInfoWrapper sx={{ gridArea: "item4" }}>
+            <StyledText>회비 이름</StyledText>
+            <StyledTextField
+              placeholder="이름"
+              size="small"
+              value={feeName}
+              name="feeName"
+              onChange={handleChangeRecruitmentModalInfo}
+            />
+          </StyledInfoWrapper>
+          <StyledInfoWrapper sx={{ gridArea: "item5" }}>
             <StyledText>학기 시작일</StyledText>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <StyledDatePicker
@@ -131,7 +144,7 @@ export default function CreateRecruitmentInfoModal({
               />
             </LocalizationProvider>
           </StyledInfoWrapper>
-          <StyledInfoWrapper sx={{ gridArea: "item5" }}>
+          <StyledInfoWrapper sx={{ gridArea: "item6" }}>
             <StyledText>학기 종료일</StyledText>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <StyledDatePicker
@@ -248,8 +261,8 @@ const StyledContentWrapper = styled(Box)({
   gridTemplateColumns: "repeat(3, 1fr)",
   gridTemplateAreas: `
     "item1 item2 ."
-    "item3 . ."
-    "item4 item5 ."
+    "item3 item4 ."
+    "item5 item6 ."
   `,
   gap: "10px",
   alignContent: "space-between",

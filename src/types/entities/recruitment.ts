@@ -7,10 +7,10 @@ export type RoundVariantType = "FIRST" | "SECOND";
 export type RecruitmentType = {
   recruitmentId: number;
   semester: string;
-  roundType: RoundVariantType;
   semesterStartDate: string;
   semesterEndDate: string;
   recruitmentFee: number;
+  feeName: string;
 };
 
 export type RecruitmentRoundType = "1차" | "2차";
@@ -50,8 +50,9 @@ export type RecruitmentModalInfoType = {
   semesterStartDate: Dayjs | null;
   semesterEndDate: Dayjs | null;
   academicYear: number | "";
-  semester: string | "";
+  semester: string;
   fee: number | "";
+  feeName: string;
 };
 
 export type CreateRecruitmentBodyType = {
@@ -60,6 +61,7 @@ export type CreateRecruitmentBodyType = {
   academicYear: number;
   semesterType: SemesterVariantType;
   fee: number;
+  feeName: string;
 };
 
 export type RecruitmentRoundBodyType = {

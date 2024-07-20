@@ -22,7 +22,14 @@ export default function RecruitmentInfoTable() {
 
   const getFilteredRecruitmentInfo = (recruitmentInfo: RecruitmentType[]) => {
     return recruitmentInfo.map(info => {
-      const { recruitmentId, semester, semesterStartDate, semesterEndDate, recruitmentFee } = info;
+      const {
+        recruitmentId,
+        semester,
+        semesterStartDate,
+        semesterEndDate,
+        recruitmentFee,
+        feeName,
+      } = info;
 
       return {
         id: recruitmentId,
@@ -30,7 +37,8 @@ export default function RecruitmentInfoTable() {
         semester: semester.slice(5, 6),
         semesterStartDate: formatDateWithDot(semesterStartDate),
         semesterEndDate: formatDateWithDot(semesterEndDate),
-        recruitmentFee: recruitmentFee,
+        feeName,
+        recruitmentFee,
       };
     });
   };
@@ -105,10 +113,19 @@ const columns: GridColDef[] = [
     editable: false,
   },
   {
+    field: "feeName",
+    headerName: "회비 이름",
+    headerAlign: "left",
+    width: 225,
+    resizable: false,
+    editable: false,
+  },
+  {
     field: "recruitmentFee",
     headerName: "회비",
     headerAlign: "left",
-    width: 125,
+    minWidth: 125,
+    flex: 1,
     resizable: false,
     editable: false,
   },

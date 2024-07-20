@@ -4,7 +4,11 @@ import {
   CouponProvisionMemberListResponseDtoType,
   IssuedCouponListResponseDtoType,
 } from "@/types/dtos/coupon";
-import { CreateCouponBodyType, IssueCouponBodyType, SearchVariantType as CouponSearchVariantType } from "@/types/entities/coupon";
+import {
+  CreateCouponBodyType,
+  IssueCouponBodyType,
+  SearchVariantType as CouponSearchVariantType,
+} from "@/types/entities/coupon";
 import { SearchVariantType as MemberSearchVariantType } from "@/types/entities/member";
 
 export const couponApi = {
@@ -50,13 +54,13 @@ export const couponApi = {
     searchVariant: MemberSearchVariantType,
     searchText: string,
   ): Promise<CouponProvisionMemberListResponseDtoType> => {
-    let url = `/admin/members?role=REGULAR,ASSOCIATE?page=${page}&size=${size}`;
+    let url = `/admin/members?roles=REGULAR,ASSOCIATE&page=${page}&size=${size}`;
 
     if (searchText && searchVariant) {
       url += `&${searchVariant}=${searchText}`;
     }
 
     const response = await apiClient.get(url);
-    return response.data.content;
+    return response.data;
   },
 };
