@@ -1,6 +1,8 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
+import PaymentDetailInfoModal from "./PaymentDetailInfoModal";
 import {
   usePaymentStatusDispatchContext,
   usePaymentStatusStateContext,
@@ -26,6 +28,8 @@ const mockData: PaymentListType = [
 ];
 
 export default function PaymentStatusInfoTable() {
+  const [paymentDetailInfoModalOpen, setPaymentDetailInfoModalOpen] = useState(false);
+
   const { paginationModel } = usePaymentStatusStateContext();
   const { setPaginationModel } = usePaymentStatusDispatchContext();
 
@@ -62,11 +66,19 @@ export default function PaymentStatusInfoTable() {
     });
   };
 
+  const handleClose = () => {
+    setPaymentDetailInfoModalOpen(false);
+  };
+
+  const handleClickDetailInfo = (paymentId: number) => {
+    setPaymentDetailInfoModalOpen(true);
+  };
+
   return (
     <>
       <StyledDataGrid
         rows={getFilteredPaymentList(mockData)}
-        columns={columns}
+        columns={getColumns(handleClickDetailInfo)}
         rowCount={0}
         paginationMode="server"
         pageSizeOptions={[5, 25, 100]}
@@ -78,11 +90,12 @@ export default function PaymentStatusInfoTable() {
         disableColumnMenu
         disableColumnSorting
       />
+      <PaymentDetailInfoModal open={paymentDetailInfoModalOpen} onClose={handleClose} />
     </>
   );
 }
 
-const columns: GridColDef[] = [
+const getColumns = (handleClickDetailInfo: (paymentId: number) => void): GridColDef[] => [
   {
     field: "orderId",
     headerName: "결제번호",
@@ -181,7 +194,11 @@ const columns: GridColDef[] = [
     renderCell: (params: GridCellParams) => {
       return (
         <StyledButtonWrapper flexDirection={"row"}>
-          <StyledButton variant="outlined" color="secondary" onClick={() => {}}>
+          <StyledButton
+            variant="outlined"
+            color="secondary"
+            onClick={() => handleClickDetailInfo(params.row.id)}
+          >
             상세 정보
           </StyledButton>
         </StyledButtonWrapper>
