@@ -30,6 +30,8 @@ const mockData: PaymentListType = [
 export default function PaymentStatusInfoTable() {
   const [paymentDetailInfoModalOpen, setPaymentDetailInfoModalOpen] = useState(false);
 
+  const [selectedPaymentId, setSelectedPaymentId] = useState(0);
+
   const { paginationModel } = usePaymentStatusStateContext();
   const { setPaginationModel } = usePaymentStatusDispatchContext();
 
@@ -67,10 +69,12 @@ export default function PaymentStatusInfoTable() {
   };
 
   const handleClose = () => {
+    setSelectedPaymentId(0);
     setPaymentDetailInfoModalOpen(false);
   };
 
   const handleClickDetailInfo = (paymentId: number) => {
+    setSelectedPaymentId(paymentId);
     setPaymentDetailInfoModalOpen(true);
   };
 
@@ -90,7 +94,11 @@ export default function PaymentStatusInfoTable() {
         disableColumnMenu
         disableColumnSorting
       />
-      <PaymentDetailInfoModal open={paymentDetailInfoModalOpen} onClose={handleClose} />
+      <PaymentDetailInfoModal
+        open={paymentDetailInfoModalOpen}
+        onClose={handleClose}
+        selectedPaymentId={selectedPaymentId}
+      />
     </>
   );
 }
@@ -122,7 +130,7 @@ const getColumns = (handleClickDetailInfo: (paymentId: number) => void): GridCol
   },
   {
     field: "status",
-    headerName: "결제상태",
+    headerName: "주문상태",
     headerAlign: "left",
     width: 80,
     resizable: false,
