@@ -102,7 +102,7 @@ const StyledHeaderLeftColWrapper = styled(Stack)({
 });
 
 const StyledFormWrapper = styled(FormControl)({
-  width: "180px",
+  width: "220px",
 });
 
 const StyledTextField = styled(TextField)({
