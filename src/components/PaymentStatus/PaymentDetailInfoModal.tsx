@@ -1,4 +1,5 @@
 import { Box, Button, Modal, styled, Typography } from "@mui/material";
+import useGetPaymentDetailInfoQuery from "@/hooks/queries/useGetPaymentDetailInfoQuery";
 
 type PaymentDetailInfoModalPropsType = {
   open: boolean;
@@ -6,115 +7,18 @@ type PaymentDetailInfoModalPropsType = {
   selectedPaymentId: number;
 };
 
-const mockData = {
-  version: "string",
-  paymentKey: "string",
-  type: "string",
-  orderId: "string",
-  orderName: "string",
-  mId: "string",
-  currency: "string",
-  method: "string",
-  totalAmount: 0,
-  balanceAmount: 0,
-  status: "string",
-  requestedAt: "2024-07-27T07:46:02.798Z",
-  approvedAt: "2024-07-27T07:46:02.798Z",
-  useEscrow: true,
-  lastTransactionKey: "string",
-  suppliedAmount: 0,
-  vat: 0,
-  cultureExpense: true,
-  taxFreeAmount: 0,
-  taxExemtionAmount: 0,
-  cancels: [
-    {
-      cancelAmount: 0,
-      cancelReason: "string",
-      taxFreeAmount: 0,
-      refundableAmount: 0,
-      easyPayDiscountAmount: 0,
-      canceledAt: "2024-07-27T07:46:02.798Z",
-      transactionKey: "string",
-      receiptKey: "string",
-      cancelStatus: "string",
-      cancelRequestId: "string",
-    },
-  ],
-  isPartialCancelable: true,
-  card: {
-    amount: 0,
-    issuerCode: "string",
-    acquirerCode: "string",
-    number: "string",
-    installmentPlanMonths: 0,
-    approveNo: "string",
-    useCardPoint: true,
-    cardType: "string",
-    ownerType: "string",
-    acquireStatus: "string",
-    isInterestFree: true,
-    interestPayer: "string",
-  },
-  transfer: {
-    bankCode: "string",
-    settlementStatus: "string",
-  },
-  receipt: {
-    url: "string",
-  },
-  checkout: {
-    url: "string",
-  },
-  easyPay: {
-    provider: "string",
-    amount: 0,
-    discountAmount: 0,
-  },
-  country: "string",
-  failure: {
-    code: "string",
-    message: "string",
-  },
-  cashReceipt: {
-    type: "string",
-    receiptKey: "string",
-    issueNumber: "string",
-    receiptUrl: "string",
-    amount: 0,
-    taxFreeAmount: 0,
-    taxExemptionAmount: 0,
-  },
-  cashReceipts: [
-    {
-      receiptKey: "string",
-      orderId: "string",
-      orderName: "string",
-      type: "string",
-      issueNumber: "string",
-      receiptUrl: "string",
-      businessNumber: "string",
-      transactionType: "string",
-      amount: 0,
-      taxFreeAmount: 0,
-      issueStatus: "string",
-      failure: {},
-      customerIdentityNumber: "string",
-      requestedAt: "2024-07-27T07:46:02.798Z",
-    },
-  ],
-};
-
 export default function PaymentDetailInfoModal({
   open,
   onClose,
   selectedPaymentId,
 }: PaymentDetailInfoModalPropsType) {
+  const { paymentDetailInfo } = useGetPaymentDetailInfoQuery(selectedPaymentId);
+
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
         <StyledTitle>상세 결제 내역</StyledTitle>
-        <StyledContent>{renderPaymentInfo(mockData)}</StyledContent>
+        <StyledContent>{renderPaymentInfo(paymentDetailInfo)}</StyledContent>
         <Button variant="outlined" color="error">
           환불
         </Button>
