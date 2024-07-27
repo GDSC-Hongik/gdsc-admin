@@ -1,5 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
-import { PaginationModelType, SearchInfoType } from "@/types/entities/common";
+import { PaginationModelType } from "@/types/entities/common";
+import { SearchInfoType } from "@/types/entities/payment";
 
 type PaymentStatusContextProviderPropsType = {
   children: ReactNode;
@@ -18,7 +19,7 @@ type PaymentStatusStateDispatchType = {
 const defaultState: PaymentStatusStateContextType = {
   searchInfo: {
     text: "",
-    variant: "studentId",
+    variant: "orderId",
   },
   paginationModel: {
     pageSize: 5,
@@ -26,15 +27,12 @@ const defaultState: PaymentStatusStateContextType = {
   },
 };
 
-export const PaymentStatusStateContext =
-  createContext<PaymentStatusStateContextType>(defaultState);
+export const PaymentStatusStateContext = createContext<PaymentStatusStateContextType>(defaultState);
 
-export const PaymentStatusDispatchContext = createContext<PaymentStatusStateDispatchType>(
-  {
-    setSearchInfo: () => {},
-    setPaginationModel: () => {},
-  },
-);
+export const PaymentStatusDispatchContext = createContext<PaymentStatusStateDispatchType>({
+  setSearchInfo: () => {},
+  setPaginationModel: () => {},
+});
 
 export default function PaymentStatusContextProvider({
   children,

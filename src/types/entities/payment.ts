@@ -13,3 +13,12 @@ export type PaymentType = {
 };
 
 export type PaymentListType = PaymentType[];
+
+type PaymentSearchVariantType = ["studentId", "memberName", "nanoId", "orderId", "semester"];
+
+export type SearchVariantType = PaymentSearchVariantType[number] | null;
+
+export type SearchInfoType = {
+  text: string;
+  variant: SearchVariantType;
+};
