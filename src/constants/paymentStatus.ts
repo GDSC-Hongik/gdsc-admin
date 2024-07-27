@@ -6,7 +6,7 @@ export const paymentInfoSelectMenu = [
   },
   {
     value: "2",
-    name: "활동학기",
+    name: "활동학기 (ex. 2024-1)",
     type: "semester",
   },
   {

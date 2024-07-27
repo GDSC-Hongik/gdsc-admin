@@ -3,7 +3,7 @@ export const enum QueryKey {
   memberInfoList = "memberInfoList",
   pendingMemberList = "pendingMemberList",
   departmentList = "departmentList",
-  paymentStatusMemberList = "paymentStatusMemberList",
+  paymentList = "paymentList",
   paymentDetailInfo = 'paymentDetailInfo',
   couponList = "couponList",
   couponProvisionMemberList = "couponProvisionMemberList",

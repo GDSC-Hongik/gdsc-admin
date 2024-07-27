@@ -7,33 +7,28 @@ import {
   usePaymentStatusDispatchContext,
   usePaymentStatusStateContext,
 } from "@/hooks/contexts/usePaymentStatusContext";
+import useGetPaymentListQuery from "@/hooks/queries/useGetPaymentListQuery";
 import { PaymentListType } from "@/types/entities/payment";
 import { formatDateWithText } from "@/utils/validation/formatDate";
 import { formatPrice } from "@/utils/validation/formatPrice";
-
-const mockData: PaymentListType = [
-  {
-    orderId: 1,
-    semester: "2024-1",
-    memberName: "홍서현",
-    status: "PENDING",
-    studentId: "C111206",
-    nanoId: "nsodisfnsoin4i3on3",
-    paymentKey: "nsodisfnsoin4i3on3",
-    totalAmount: "20000",
-    discountAmount: "5000",
-    finalPaymentAmount: "15000",
-    approvedAt: "2024-07-25T10:28:46.366Z",
-  },
-];
 
 export default function PaymentStatusInfoTable() {
   const [paymentDetailInfoModalOpen, setPaymentDetailInfoModalOpen] = useState(false);
 
   const [selectedPaymentId, setSelectedPaymentId] = useState(0);
 
-  const { paginationModel } = usePaymentStatusStateContext();
+  const {
+    paginationModel,
+    searchInfo: { text: searchText, variant: searchVariant },
+  } = usePaymentStatusStateContext();
   const { setPaginationModel } = usePaymentStatusDispatchContext();
+
+  const { paymentList = [], totalElements } = useGetPaymentListQuery(
+    paginationModel.page,
+    paginationModel.pageSize,
+    searchVariant,
+    searchText,
+  );
 
   const getFilteredPaymentList = (paymentList: PaymentListType) => {
     return paymentList.map(payment => {
@@ -81,9 +76,9 @@ export default function PaymentStatusInfoTable() {
   return (
     <>
       <StyledDataGrid
-        rows={getFilteredPaymentList(mockData)}
+        rows={getFilteredPaymentList(paymentList)}
         columns={getColumns(handleClickDetailInfo)}
-        rowCount={0}
+        rowCount={totalElements}
         paginationMode="server"
         pageSizeOptions={[5, 25, 100]}
         paginationModel={paginationModel}
