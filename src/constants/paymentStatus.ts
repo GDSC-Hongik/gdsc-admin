@@ -24,4 +24,9 @@ export const paymentInfoSelectMenu = [
     name: "주문 nanoId",
     type: "nanoId",
   },
+  {
+    value: "6",
+    name: "결제일 (ex. 2024-08-21)",
+    type: "approvedDate",
+  },
 ];

@@ -1,5 +1,6 @@
 import { apiClient } from ".";
 import { SearchVariantType } from "@/types/entities/payment";
+import { formatDateWithDash } from "@/utils/validation/formatDate";
 
 export const paymentStatusApi = {
   getPaymentList: async (
@@ -18,6 +19,16 @@ export const paymentStatusApi = {
         }
 
         url += `&academicYear=${academicYear}&semesterType=${semester === "1" ? "FIRST" : "SECOND"}`;
+      } else if (searchVariant === "approvedDate") {
+        const [, , day] = searchText.split("-");
+
+        if (!day) {
+          return;
+        }
+
+        const formattedDate = formatDateWithDash(searchText);
+
+        url += `&${searchVariant}=${formattedDate}`;
       } else {
         url += `&${searchVariant}=${searchText}`;
       }
