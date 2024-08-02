@@ -42,4 +42,11 @@ export const paymentStatusApi = {
     const response = await apiClient.get(`/admin/orders/${orderId}`);
     return response.data;
   },
+
+  cancelPayment: async (orderId: number, cancelReason: string) => {
+    const response = await apiClient.post(`/admin/orders/${orderId}/cancel`, {
+      cancelReason,
+    });
+    return response.data;
+  },
 };
