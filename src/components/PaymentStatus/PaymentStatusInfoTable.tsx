@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { Button, Stack } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
@@ -73,12 +73,22 @@ export default function PaymentStatusInfoTable() {
     setPaymentDetailInfoModalOpen(true);
   };
 
+  const rowCountRef = useRef(totalElements || 0);
+
+  const rowCount = useMemo(() => {
+    if (totalElements !== undefined) {
+      rowCountRef.current = totalElements;
+    }
+
+    return rowCountRef.current;
+  }, [totalElements]);
+
   return (
     <>
       <StyledDataGrid
         rows={getFilteredPaymentList(paymentList)}
         columns={getColumns(handleClickDetailInfo)}
-        rowCount={totalElements}
+        rowCount={rowCount}
         paginationMode="server"
         pageSizeOptions={[5, 25, 100]}
         paginationModel={paginationModel}
