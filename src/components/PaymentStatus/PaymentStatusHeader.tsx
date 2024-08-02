@@ -9,11 +9,12 @@ import {
   TextField,
   SelectChangeEvent,
 } from "@mui/material";
-import { memberInfoSelectMenu } from "@/constants/member";
+import { paymentInfoSelectMenu } from "@/constants/paymentStatus";
 import {
   usePaymentStatusDispatchContext,
   usePaymentStatusStateContext,
 } from "@/hooks/contexts/usePaymentStatusContext";
+import { SearchInfoType } from "@/types/entities/payment";
 
 export default function PaymentStatusHeader() {
   const [selectedSearchInfoVariant, setSelectedSearchInfoVariant] = useState<number>(1);
@@ -33,11 +34,14 @@ export default function PaymentStatusHeader() {
   const handleChangeSelectSearchInfoVariant = (e: SelectChangeEvent<unknown>) => {
     const targetIndex = (e.target.value as number) - 1;
 
-    setSearchInfo(prevSearchInfo => ({
-      ...prevSearchInfo,
-      variant: memberInfoSelectMenu[targetIndex]["type"],
-      text: "",
-    }));
+    setSearchInfo(
+      prevSearchInfo =>
+        ({
+          ...prevSearchInfo,
+          variant: paymentInfoSelectMenu[targetIndex]["type"],
+          text: "",
+        }) as SearchInfoType,
+    );
     setSelectedSearchInfoVariant(targetIndex + 1);
     handleResetPage();
   };
@@ -62,7 +66,7 @@ export default function PaymentStatusHeader() {
             value={selectedSearchInfoVariant}
             onChange={handleChangeSelectSearchInfoVariant}
           >
-            {memberInfoSelectMenu.map(title => (
+            {paymentInfoSelectMenu.map(title => (
               <MenuItem value={title.value} key={title.value}>
                 {title.name}
               </MenuItem>
@@ -98,7 +102,7 @@ const StyledHeaderLeftColWrapper = styled(Stack)({
 });
 
 const StyledFormWrapper = styled(FormControl)({
-  width: "180px",
+  width: "220px",
 });
 
 const StyledTextField = styled(TextField)({
