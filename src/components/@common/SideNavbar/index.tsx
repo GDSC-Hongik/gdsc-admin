@@ -20,6 +20,12 @@ export default function SideNavbar() {
           linkButtonInfoList={recruitmentLinkButtonInfoList}
         />
         <AccordionLinkListButton label="히스토리" linkButtonInfoList={historyLinkButtonInfoList} />
+        <AccordionLinkListButton
+          label="결제위젯 어드민"
+          path={
+            "https://dashboard.tosspayments.com/payment-widget-service/tm/931024/ui-setting-list"
+          }
+        />
       </StyledLinkWrapper>
     </StyledSideNavbarWrapper>
   );

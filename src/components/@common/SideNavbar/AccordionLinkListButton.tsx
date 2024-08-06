@@ -4,19 +4,25 @@ import { Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import DownArrowIcon from "@/assets/down-arrow.svg?react";
 import StarIcon from "@/assets/star.svg?react";
+import TossIcon from "@/assets/toss.svg?react";
 import { palette } from "@/styles/palette";
 import { typo } from "@/styles/typo";
 
 type LinkButtonPropsType = { label: string; path: string };
 
-type LinkButtonLabelType = "회원 관리" | "회비 관리" | "리크루팅 관리" | "히스토리";
+type LinkButtonLabelType =
+  | "회원 관리"
+  | "회비 관리"
+  | "리크루팅 관리"
+  | "히스토리"
+  | "결제위젯 어드민";
 
 type AccordionLinkListButtonPropsType<T extends LinkButtonLabelType> = {
   label: T;
   linkButtonInfoList?: T extends "회원 관리" | "회비 관리" | "히스토리" | "리크루팅 관리"
     ? LinkButtonPropsType[]
     : undefined;
-  path?: T extends "히스토리" | "리크루팅 관리" ? string : undefined;
+  path?: T extends "히스토리" | "리크루팅 관리" | "결제위젯 어드민" ? string : undefined;
 };
 
 export default function AccordionLinkListButton<T extends LinkButtonLabelType>({
@@ -42,7 +48,7 @@ export default function AccordionLinkListButton<T extends LinkButtonLabelType>({
         onClick={handleClickLinkButton}
         active={pathname === path ? 1 : 0}
       >
-        <StarIcon />
+        {label === "결제위젯 어드민" ? <TossIcon /> : <StarIcon />}
         <StyledRightElement>
           <Typography css={typo.body1}>{label}</Typography>
           {!!linkButtonInfoList && <StyledDownArrowIcon expanded={expanded ? 1 : 0} />}
