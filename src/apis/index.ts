@@ -29,10 +29,8 @@ const createApiClient = (): AxiosInstance => {
   apiClient.interceptors.response.use(
     response => response,
     (error: AxiosError) => {
-      const authStorage = useAuthStorage();
-
-      if (error.response?.status === 401) {
-        authStorage.clearAuthData();
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        sessionStorage.setItem("isLogin", "false");
 
         return Promise.reject(error);
       } else {

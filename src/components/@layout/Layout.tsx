@@ -2,19 +2,17 @@ import { Button, Stack, styled } from "@mui/material";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SideNavbar from "@/components/@common/SideNavbar";
-import useAuthStorage from "@/hooks/auth/useAuthStorage";
 import RoutePath from "@/routes/routePath";
 
 export default function Layout() {
-  const { clearAuthData, isEmptyToken } = useAuthStorage();
   const navigate = useNavigate();
 
-  if (isEmptyToken) {
+  if (!sessionStorage.getItem("isLogin")) {
     return <Navigate to={RoutePath.Signin} />;
   }
 
   const handleClickLogout = () => {
-    clearAuthData();
+    sessionStorage.setItem("isLogin", "false");
     toast.success("로그아웃 성공");
     navigate(RoutePath.Signin);
   };
