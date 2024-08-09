@@ -30,7 +30,7 @@ const createApiClient = (): AxiosInstance => {
     response => response,
     (error: AxiosError) => {
       if (error.response?.status === 401 || error.response?.status === 403) {
-        sessionStorage.setItem("isLogin", "false");
+        sessionStorage.clear();
 
         return Promise.reject(error);
       } else {

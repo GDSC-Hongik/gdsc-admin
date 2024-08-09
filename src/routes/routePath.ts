@@ -19,9 +19,9 @@ const RoutePath = {
 
   Signin: "/sign-in",
 
-  AuthorizedSuccess: "/social-login/redirect",
   AuthorizedError: "/authorized-error",
   GithubLoginRedirect: `${BASE_URL}/oauth2/authorization/github`,
+  AuthServerRedirect: "/social-login/redirect",
 
   Error: "/error",
 } as const;

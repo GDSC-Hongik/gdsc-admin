@@ -158,7 +158,8 @@ export default function CreateRecruitmentInfoModal({
         <StyledWarningTextWrapper>
           <WarningIcon />
           <StyledWarningText color="error">
-            1차 신청기간 시작 전에 수동으로 [일괄 강등하기] 버튼을 눌러야 해요.
+            1차 신청기간 시작 전에 수동으로 [일괄 강등하기] 버튼을 눌러야 해요. <br />
+            학기 정보는 당일에는 생성할 수 없어요. 미리 생성 부탁드려요.
           </StyledWarningText>
         </StyledWarningTextWrapper>
         <StyledButton size="large" variant="contained" onClick={handleClickCreateRecruitment}>
@@ -248,6 +249,7 @@ const StyledButton = styled(Button)({
 
 const StyledWarningTextWrapper = styled(Box)({
   display: "flex",
+  alignItems: "center",
   gap: "10px",
 });
 

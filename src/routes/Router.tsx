@@ -3,7 +3,7 @@ import Layout from "@/components/@layout/Layout";
 import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemesterPage";
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
-import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
+import { AuthServerRedirectPage } from "@/pages/AuthServerRedirectPage";
 import CouponPage from "@/pages/CouponPage";
 import CouponProvisionPage from "@/pages/CouponProvisionPage";
 import IssuedCouponPage from "@/pages/IssuedCouponPage";
@@ -41,11 +41,11 @@ const routes: RouteObject[] = [
     ],
   },
   { path: RoutePath.Signin, element: <SigninPage /> },
+  { path: RoutePath.AuthServerRedirect, element: <AuthServerRedirectPage /> },
   {
     path: RoutePath.AuthorizedError,
     element: <AuthErrorPage />,
   },
-  { path: RoutePath.AuthorizedSuccess, element: <AuthSuccessRedirectPage /> },
   { path: "*", element: <NotFoundErrorPage /> },
 ];
 

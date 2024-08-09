@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import { Params } from "@/constants/auth";
 import useAuthStorage from "@/hooks/auth/useAuthStorage";
+import RoutePath from "@/routes/routePath";
 
-export default function useAuthSuccessRedirectPage() {
+export const AuthServerRedirectPage = () => {
   const { setAuthData } = useAuthStorage();
 
   const [searchParams] = useSearchParams();
@@ -11,11 +12,10 @@ export default function useAuthSuccessRedirectPage() {
   const accessToken = searchParams.get(Params.AccessToken);
   const refreshToken = searchParams.get(Params.AccessToken);
 
-  const isSuccess = !!accessToken;
-
   useEffect(() => {
     setAuthData({ accessToken, refreshToken });
+    sessionStorage.setItem("isLogin", "true");
   }, [accessToken, refreshToken, setAuthData]);
 
-  return { isSuccess };
-}
+  return <Navigate to={RoutePath.Index} />;
+};

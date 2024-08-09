@@ -5,8 +5,6 @@ import RoutePath from "@/routes/routePath";
 
 export default function SigninPage() {
   const handleClick = () => {
-    sessionStorage.setItem("isLogin", "true");
-
     setTimeout(function () {
       document.location.href = RoutePath.GithubLoginRedirect;
     }, 250);
