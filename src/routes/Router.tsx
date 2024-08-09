@@ -4,7 +4,6 @@ import AllMemberHistoryPerSemesterPage from "@/pages/AllMemberHistoryPerSemester
 import AllMembersPage from "@/pages/AllMembersPage";
 import AuthErrorPage from "@/pages/AuthErrorPage";
 import { AuthServerRedirectPage } from "@/pages/AuthServerRedirectPage";
-import AuthSuccessRedirectPage from "@/pages/AuthSuccessRedirectPage";
 import CouponPage from "@/pages/CouponPage";
 import CouponProvisionPage from "@/pages/CouponProvisionPage";
 import IssuedCouponPage from "@/pages/IssuedCouponPage";
@@ -47,7 +46,6 @@ const routes: RouteObject[] = [
     path: RoutePath.AuthorizedError,
     element: <AuthErrorPage />,
   },
-  { path: RoutePath.AuthorizedSuccess, element: <AuthSuccessRedirectPage /> },
   { path: "*", element: <NotFoundErrorPage /> },
 ];
 
