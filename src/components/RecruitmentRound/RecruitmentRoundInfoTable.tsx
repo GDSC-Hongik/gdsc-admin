@@ -10,7 +10,6 @@ import {
 import useGetRecruitmentRoundQuery from "@/hooks/queries/useGetRecruitmentRoundQuery";
 import {
   RecruitmentRoundInfoType,
-  RecruitmentRoundType,
   FilteredRecruitmentRoundInfoType,
 } from "@/types/entities/recruitment";
 import { formatDateWithDot } from "@/utils/validation/formatDate";
@@ -29,14 +28,14 @@ export default function RecruitmentRoundInfoTable() {
   );
 
   const formatRecruitmentRoundInfo = (info: RecruitmentRoundInfoType) => {
-    const { recruitmentRoundId, semester, roundType, startDate, endDate, name } = info;
+    const { recruitmentRoundId, semester, round, startDate, endDate, name } = info;
 
     return {
       startDate: formatDateWithDot(startDate) ?? "",
       endDate: formatDateWithDot(endDate) ?? "",
       name: name ?? "",
       semester: semester.slice(5, 6) ?? "",
-      roundType: (roundType === "FIRST" ? "1차" : "2차") as RecruitmentRoundType,
+      roundType: round,
       id: recruitmentRoundId ?? 0,
       academicYear: semester.slice(0, 4) ?? "",
     };

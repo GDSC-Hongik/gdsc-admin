@@ -30,7 +30,7 @@ export type RecruitmentRoundInfoType = Pick<
   RecruitmentRoundBaseInfoType,
   "recruitmentRoundId" | "semester" | "startDate" | "endDate" | "name"
 > & {
-  roundType: RoundVariantType;
+  round: "1차" | "2차";
 };
 
 export type FilteredRecruitmentRoundInfoType = Pick<
