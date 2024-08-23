@@ -49,3 +49,9 @@ export const formatDateWithDash = (date: Date | string) => {
 
   return `${year}-${month}-${day}`;
 };
+
+export const toKSTISOString = (date: Date) => {
+  const offset = date.getTimezoneOffset() * 60000;
+  const adjustedDate = new Date(date.getTime() - offset);
+  return adjustedDate.toISOString();
+};

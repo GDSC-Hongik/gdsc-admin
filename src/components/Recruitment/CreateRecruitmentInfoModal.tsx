@@ -11,6 +11,7 @@ import WarningIcon from "@/assets/warning.svg?react";
 import { QueryKey } from "@/constants/queryKey";
 import useCreateRecruitmentMutation from "@/hooks/mutations/useCreateRecruitmentMutation";
 import { RecruitmentModalInfoType } from "@/types/entities/recruitment";
+import { toKSTISOString } from "@/utils/validation/formatDate";
 
 type CreateRecruitmentInfoModalPropsType = {
   open: boolean;
@@ -70,8 +71,8 @@ export default function CreateRecruitmentInfoModal({
 
     mutate(
       {
-        semesterStartDate: semesterStartDate.toDate().toISOString(),
-        semesterEndDate: semesterEndDate.toDate().toISOString(),
+        semesterStartDate: toKSTISOString(semesterStartDate.toDate()),
+        semesterEndDate: toKSTISOString(semesterEndDate.toDate()),
         academicYear,
         semesterType: semester === "1" ? "FIRST" : "SECOND",
         fee,

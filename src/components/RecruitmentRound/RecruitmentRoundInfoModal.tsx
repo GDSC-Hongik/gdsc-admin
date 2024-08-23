@@ -25,6 +25,7 @@ import {
   FilteredRecruitmentRoundInfoType,
   RecruitmentRoundModalInfoType,
 } from "@/types/entities/recruitment";
+import { toKSTISOString } from "@/utils/validation/formatDate";
 
 export type RecruitmentRoundInfoModalPropsType = {
   open: boolean;
@@ -104,8 +105,8 @@ export default function RecruitmentRoundInfoModal({
       academicYear: Number(academicYear),
       semesterType: semester === "1" ? "FIRST" : "SECOND",
       name,
-      startDate: startDate!.toDate().toISOString(),
-      endDate: endDate!.toDate().toISOString(),
+      startDate: toKSTISOString(startDate!.toDate()),
+      endDate: toKSTISOString(endDate!.toDate()),
       roundType: roundType === "1차" ? "FIRST" : "SECOND",
     };
 
