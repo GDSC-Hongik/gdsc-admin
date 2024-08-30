@@ -9,10 +9,13 @@ export default function useGetIssuedCouponListQuery(
   searchVariant: SearchVariantType,
   searchText: string,
 ) {
-  const { data = [] } = useQuery({
+  const { data } = useQuery({
     queryKey: [QueryKey.issuedCouponList, page, size, searchVariant, searchText],
     queryFn: () => couponApi.getIssuedCouponList(page, size, searchVariant, searchText),
   });
 
-  return data;
+  const issuedCouponList = data?.content;
+  const totalElements = data?.totalElements;
+
+  return { issuedCouponList, totalElements };
 }

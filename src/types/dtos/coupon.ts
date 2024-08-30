@@ -4,7 +4,9 @@ import { MemberInfoType } from "../entities/member";
 
 export type CouponListResponseDtoType = CouponType[];
 
-export type IssuedCouponListResponseDtoType = IssuedCouponType[];
+export type IssuedCouponListResponseDtoType = {
+  content: IssuedCouponType[];
+} & PaginationElementType;
 
 export type CouponProvisionMemberListResponseDtoType = {
   content: MemberInfoType[];

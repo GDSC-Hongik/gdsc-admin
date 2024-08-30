@@ -1,10 +1,11 @@
+import { useRef, useMemo } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { QueryKey } from "@/constants/queryKey";
-import { useIssuedCouponStateContext } from "@/hooks/contexts/useIssuedCouponContext";
+import { useIssuedCouponDispatchContext, useIssuedCouponStateContext } from "@/hooks/contexts/useIssuedCouponContext";
 import useRevokeIssuedCouponMutation from "@/hooks/mutations/useRevokeIssuedCouponMutation";
 import useGetIssuedCouponListQuery from "@/hooks/queries/useGetIssuedCouponListQuery";
 import { IssuedCouponType } from "@/types/entities/coupon";
@@ -16,8 +17,9 @@ export default function IssuedCouponInfoTable() {
     paginationModel,
     searchInfo: { variant: searchVariant, text: searchText },
   } = useIssuedCouponStateContext();
+  const { setPaginationModel } = useIssuedCouponDispatchContext();
 
-  const issuedCouponList = useGetIssuedCouponListQuery(
+  const { issuedCouponList = [], totalElements } = useGetIssuedCouponListQuery(
     paginationModel.page,
     paginationModel.pageSize,
     searchVariant,
@@ -54,6 +56,16 @@ export default function IssuedCouponInfoTable() {
     });
   };
 
+  const rowCountRef = useRef(totalElements || 0);
+
+  const rowCount = useMemo(() => {
+    if (totalElements !== undefined) {
+      rowCountRef.current = totalElements;
+    }
+
+    return rowCountRef.current;
+  }, [totalElements]);
+
   return (
     <>
       <StyledDataGrid
@@ -64,7 +76,11 @@ export default function IssuedCouponInfoTable() {
         disableColumnFilter
         disableColumnMenu
         disableColumnSorting
-        hideFooterPagination
+        pageSizeOptions={[5, 25, 100]}
+        rowCount={rowCount}
+        paginationMode="server"
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
       />
     </>
   );
