@@ -53,7 +53,7 @@ const columns: GridColDef[] = [
     headerName: "이름",
     headerAlign: "left",
     align: "left",
-    width: 180,
+    minWidth: 200,
     resizable: false,
     editable: false,
   },

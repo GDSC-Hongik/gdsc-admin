@@ -166,7 +166,7 @@ const getColumns = (handleClickDetailInfo: (paymentId: number) => void): GridCol
     field: "paymentKey",
     headerName: "결제 키",
     headerAlign: "left",
-    minWidth: 200,
+    minWidth: 220,
     flex: 1,
     resizable: false,
     editable: false,
