@@ -10,7 +10,6 @@ import {
 import useGetPaymentListQuery from "@/hooks/queries/useGetPaymentListQuery";
 import { PaymentListType } from "@/types/entities/payment";
 import { formatDateWithText } from "@/utils/validation/formatDate";
-import { formatPrice } from "@/utils/validation/formatPrice";
 
 export default function PaymentStatusInfoTable() {
   const [paymentDetailInfoModalOpen, setPaymentDetailInfoModalOpen] = useState(false);
@@ -55,9 +54,9 @@ export default function PaymentStatusInfoTable() {
         studentId,
         nanoId,
         paymentKey,
-        totalAmount: formatPrice(totalAmount),
-        discountAmount: formatPrice(discountAmount),
-        finalPaymentAmount: formatPrice(finalPaymentAmount),
+        totalAmount,
+        discountAmount,
+        finalPaymentAmount,
         approvedAt: approvedAt ? formatDateWithText(approvedAt) : "",
       };
     });
