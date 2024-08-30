@@ -122,7 +122,7 @@ const getColumns = (handleClickRevokeCoupon: (couponId: number) => void): GridCo
     headerName: "쿠폰",
     headerAlign: "left",
     align: "left",
-    minWidth: 190,
+    minWidth: 220,
     flex: 1,
     resizable: false,
     editable: false,
