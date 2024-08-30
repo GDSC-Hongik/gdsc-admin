@@ -40,7 +40,7 @@ export const couponApi = {
     }
 
     const response = await apiClient.get(url);
-    return response.data.content;
+    return response.data;
   },
 
   issueCoupon: async (body: IssueCouponBodyType): Promise<void> => {
