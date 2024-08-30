@@ -176,7 +176,7 @@ const getColumns = (
     field: "departmentName",
     headerName: "소속 학과",
     headerAlign: "left",
-    minWidth: 140,
+    minWidth: 300,
     flex: 1,
     resizable: false,
     editable: false,

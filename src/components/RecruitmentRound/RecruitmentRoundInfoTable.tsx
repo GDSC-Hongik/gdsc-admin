@@ -140,7 +140,7 @@ const getColumns = (
     field: "name",
     headerName: "모집 회차 이름",
     headerAlign: "left",
-    minWidth: 190,
+    minWidth: 230,
     flex: 1,
     resizable: false,
     editable: false,

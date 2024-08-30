@@ -119,7 +119,7 @@ const columns: GridColDef[] = [
     field: "email",
     headerName: "이메일",
     headerAlign: "left",
-    minWidth: 175,
+    minWidth: 230,
     flex: 1,
     resizable: false,
     editable: false,
