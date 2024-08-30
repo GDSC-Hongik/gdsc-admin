@@ -58,7 +58,7 @@ export default function PaymentStatusInfoTable() {
         totalAmount: formatPrice(totalAmount),
         discountAmount: formatPrice(discountAmount),
         finalPaymentAmount: formatPrice(finalPaymentAmount),
-        approvedAt: formatDateWithText(approvedAt),
+        approvedAt: approvedAt ? formatDateWithText(approvedAt) : "",
       };
     });
   };
