@@ -148,7 +148,7 @@ const getColumns = (handleClickDetailInfo: (paymentId: number) => void): GridCol
     field: "studentId",
     headerName: "학번",
     headerAlign: "left",
-    minWidth: 80,
+    minWidth: 90,
     flex: 1,
     resizable: false,
     editable: false,
