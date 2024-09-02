@@ -17,7 +17,7 @@ export const paymentInfoSelectMenu = [
   {
     value: "4",
     name: "이름",
-    type: "memberName",
+    type: "name",
   },
   {
     value: "5",
