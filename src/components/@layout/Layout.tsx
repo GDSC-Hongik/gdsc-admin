@@ -42,7 +42,7 @@ const StyledLayoutWrapper = styled(Stack)({
 });
 
 const StyledBodyWrapper = styled(Stack)({
-  width: "956px",
+  width: "90%",
   overflow: "auto",
   padding: "78px 80px",
 });
