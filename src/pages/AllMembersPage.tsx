@@ -10,7 +10,7 @@ import useLogoutMutation from "@/hooks/mutations/useLogoutMutation";
 import RoutePath from "@/routes/routePath";
 
 export default function AllMembersPage() {
-  const [hasAccess, setHasAccess] = useState(false);
+  const [hasAccess, setHasAccess] = useState<boolean | null>(null);
   const { mutate } = useLogoutMutation();
 
   useEffect(() => {
@@ -19,18 +19,23 @@ export default function AllMembersPage() {
         member: { manageRole },
       } = await allMemberApi.getDashboardInfo();
 
-      if (manageRole === "ADMIN") {
+      if (manageRole !== "ADMIN") {
+        toast.error("어드민 권한이 없는 사용자입니다.");
+        mutate();
+        setHasAccess(false);
+      } else {
         setHasAccess(true);
       }
     };
 
     fetchManageRoleInfo();
-  }, []);
+  }, [mutate]);
+
+  if (hasAccess === null) {
+    return null;
+  }
 
   if (!hasAccess) {
-    toast.error("어드민 권한이 없는 사용자입니다.");
-    mutate();
-
     return <Navigate to={RoutePath.Signin} />;
   }
 
