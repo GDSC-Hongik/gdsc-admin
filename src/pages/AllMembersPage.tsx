@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { allMemberApi } from "@/apis/allMemberApi";
 import Title from "@/components/@common/Title";
@@ -8,18 +9,29 @@ import AllMembersContextProvider from "@/contexts/AllMembersContext";
 import useLogoutMutation from "@/hooks/mutations/useLogoutMutation";
 import RoutePath from "@/routes/routePath";
 
-export default async function AllMembersPage() {
-  const navigate = useNavigate();
+export default function AllMembersPage() {
+  const [hasAccess, setHasAccess] = useState(false);
   const { mutate } = useLogoutMutation();
 
-  const {
-    member: { manageRole },
-  } = await allMemberApi.getDashboardInfo();
+  useEffect(() => {
+    const fetchManageRoleInfo = async () => {
+      const {
+        member: { manageRole },
+      } = await allMemberApi.getDashboardInfo();
 
-  if (manageRole !== "ADMIN") {
+      if (manageRole === "ADMIN") {
+        setHasAccess(true);
+      }
+    };
+
+    fetchManageRoleInfo();
+  }, []);
+
+  if (!hasAccess) {
     toast.error("어드민 권한이 없는 사용자입니다.");
     mutate();
-    navigate(RoutePath.Signin);
+
+    return <Navigate to={RoutePath.Signin} />;
   }
 
   return (
