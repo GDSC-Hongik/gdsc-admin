@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { allMemberApi } from "@/apis/allMemberApi";
+import useLogoutMutation from "@/hooks/mutations/useLogoutMutation";
 import RoutePath from "@/routes/routePath";
 
 export const AuthServerRedirectPage = () => {
   const navigate = useNavigate();
+  const { mutate } = useLogoutMutation();
 
   useEffect(() => {
     const fetchManageRoleInfo = async () => {
@@ -17,11 +19,12 @@ export const AuthServerRedirectPage = () => {
         return;
       }
 
+      mutate();
       navigate(RoutePath.Signin);
     };
 
     fetchManageRoleInfo();
-  }, [navigate]);
+  }, [mutate, navigate]);
 
   return <Navigate to={RoutePath.Index} />;
 };
