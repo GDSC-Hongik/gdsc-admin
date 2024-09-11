@@ -1,5 +1,9 @@
 import { apiClient } from ".";
-import { AllMemberListResponseDtoType, DepartmentListResponseDtoType } from "@/types/dtos/member";
+import {
+  AllMemberListResponseDtoType,
+  DashboardInfoResponseDtoType,
+  DepartmentListResponseDtoType,
+} from "@/types/dtos/member";
 import { EditMemberInfoBodyType, SearchVariantType } from "@/types/entities/member";
 
 export const allMemberApi = {
@@ -38,6 +42,11 @@ export const allMemberApi = {
 
   getMemberInfoExcel: async (): Promise<string> => {
     const response = await apiClient.get("admin/members/excel", { responseType: "arraybuffer" });
+    return response.data;
+  },
+
+  getDashboardInfo: async (): Promise<DashboardInfoResponseDtoType> => {
+    const response = await apiClient.get("onboarding/members/me/dashboard");
     return response.data;
   },
 };

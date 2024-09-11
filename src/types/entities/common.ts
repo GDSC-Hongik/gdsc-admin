@@ -9,3 +9,5 @@ export type SearchInfoType = {
   text: string;
   variant: SearchVariantType;
 };
+
+export type RequirementType = "UNSATISFIED" | "IN_PROGRESS" | "SATISFIED";
