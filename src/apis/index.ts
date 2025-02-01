@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 import { toast } from "react-toastify";
-import { BASE_URL } from "src/environment";
+import { BASE_URL } from "@/environment";
 import useAuthStorage from "@/hooks/auth/useAuthStorage";
 import { ErrorResponse } from "@/types/entities/error";
 
@@ -20,7 +20,6 @@ const createApiClient = (): AxiosInstance => {
     const authStorage = useAuthStorage();
 
     const accessToken = authStorage.accessToken;
-    console.log(DEV_AUTH_TOKEN);
     if (accessToken || DEV_AUTH_TOKEN) {
       config.headers.Authorization = `Bearer ${accessToken || DEV_AUTH_TOKEN}`;
     }

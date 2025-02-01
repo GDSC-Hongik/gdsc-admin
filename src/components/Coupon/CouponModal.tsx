@@ -1,11 +1,13 @@
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { ClassNames } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Button from "wowds-ui/Button";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
+import TextField from "wowds-ui/TextField";
 import { QueryKey } from "@/constants/queryKey";
 import useCreateCouponMutation from "@/hooks/mutations/useCreateCouponMutation";
 import useGetStudyListQuery from "@/hooks/queries/useGetStudyListQuery";
@@ -28,12 +30,37 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
     studyId: null,
   });
 
+  const queryClient = useQueryClient();
+
   const studyList = useGetStudyListQuery();
+
+  const { mutate: createCouponMutate } = useCreateCouponMutation();
+
+  const isButtonDisabled =
+    couponInfo.name !== null &&
+    couponInfo.name !== "" &&
+    couponInfo.discountAmount !== null &&
+    couponInfo.couponType !== null &&
+    (couponInfo.couponType === "ADMIN" || couponInfo.studyId !== null);
+
+  const handleChangeName = (value: string) => {
+    setCouponInfo(prevCouponInfo => ({
+      ...prevCouponInfo,
+      name: value,
+    }));
+  };
+  const handleChangeDiscountAmount = (value: string) => {
+    setCouponInfo(prevCouponInfo => ({
+      ...prevCouponInfo,
+      discountAmount: Number(value),
+    }));
+  };
 
   const handleChangeCouponType = (value: { selectedValue: string; selectedText: ReactNode }) => {
     setCouponInfo(prevCouponInfo => ({
       ...prevCouponInfo,
       couponType: value.selectedValue as CouponInfoType["couponType"],
+      studyId: value.selectedValue === "ADMIN" ? null : prevCouponInfo.studyId,
     }));
   };
 
@@ -43,29 +70,8 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
       studyId: Number(value.selectedValue) as CouponInfoType["studyId"],
     }));
   };
-  const { mutate: createCouponMutate } = useCreateCouponMutation();
-
-  const queryClient = useQueryClient();
-
-  const handleChangeCouponTypeCouponInfo = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { value, name } = e.target;
-
-    setCouponInfo(prevCouponInfo => ({
-      ...prevCouponInfo,
-      [name]: value,
-    }));
-  };
 
   const handleClickSubmit = () => {
-    const { name, discountAmount } = couponInfo;
-
-    if (!name || !discountAmount) {
-      toast.error(`채워지지 않는 필드가 있어요. 모든 필드를 채워주세요!`);
-      return;
-    }
-
     createCouponMutate(couponInfo as CouponInfoType, {
       onSuccess: () => {
         queryClient.invalidateQueries({
@@ -80,79 +86,74 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
   return (
     <Modal open={open} onClose={onClose}>
       <StyledModalContentWrapper>
-        <StyledTitle>{"쿠폰 생성"}</StyledTitle>
+        <StyledTitle>쿠폰 생성</StyledTitle>
         <StyledContent>
-          <>
-            <StyledInfoWrapper>
-              <StyledText>이름</StyledText>
-              <StyledTextField
-                placeholder="이름"
-                size="small"
-                value={couponInfo.name}
-                name="name"
-                onChange={handleChangeCouponTypeCouponInfo}
-              />
-            </StyledInfoWrapper>
-            <StyledInfoWrapper>
-              <StyledText>할인금액</StyledText>
-              <StyledTextField
-                placeholder="금액"
-                size="small"
-                value={couponInfo.discountAmount}
-                name="discountAmount"
-                onChange={handleChangeCouponTypeCouponInfo}
-              />
-            </StyledInfoWrapper>
-          </>
-          <ClassNames>
-            {({ css }) => (
-              <StyledInfoRow>
-                <DropDown
-                  label="쿠폰 종류"
-                  placeholder="선택하세요"
-                  value={couponInfo.couponType}
-                  onChange={handleChangeCouponType}
-                  className={css`
-                    width: 22.375rem !important;
-                    align-items: flex-start;
-                    & > button {
-                      width: 100%;
-                    }
-                  `}
-                >
-                  <DropDownOption value="ADMIN" text="어드민" />
-                  <DropDownOption value="STUDY_COMPLETION" text="스터디 수료" />
-                </DropDown>
-                {couponInfo.couponType === "STUDY_COMPLETION" && (
-                  <DropDown
-                    label="스터디 이름"
-                    placeholder="선택하세요"
-                    value={String(couponInfo.studyId)}
-                    onChange={handleChangeStudyId}
-                    className={css`
-                      width: 22.375rem !important;
-                      align-items: flex-start;
-                      & > button {
-                        width: 100%;
-                      }
-                    `}
-                  >
-                    {studyList.map(study => (
-                      <DropDownOption
-                        key={study.studyId}
-                        value={String(study.studyId)}
-                        text={study.title}
-                      />
-                    ))}
-                  </DropDown>
-                )}
-              </StyledInfoRow>
-            )}
-          </ClassNames>
+          <StyledInfoWrapper>
+            <TextField
+              label="이름"
+              placeholder="이름"
+              value={couponInfo.name}
+              onChange={handleChangeName}
+            />
+            <TextField
+              label="할인 금액"
+              placeholder="금액"
+              value={couponInfo.discountAmount === null ? "" : String(couponInfo.discountAmount)}
+              onChange={handleChangeDiscountAmount}
+            />
 
-          <StyledButton size="large" variant="contained" onClick={handleClickSubmit}>
-            {"생성하기"}
-          </StyledButton>
+            <ClassNames>
+              {({ css }) => {
+                const dropdownClass = css`
+                  width: 22.375rem !important;
+                  align-items: flex-start;
+                  & > button {
+                    width: 100%;
+                  }
+                `;
+
+                return (
+                  <StyledInfoRow>
+                    <DropDown
+                      label="쿠폰 종류"
+                      placeholder="선택하세요"
+                      value={couponInfo.couponType}
+                      onChange={handleChangeCouponType}
+                      className={dropdownClass}
+                    >
+                      <DropDownOption value="ADMIN" text="어드민" />
+                      <DropDownOption value="STUDY_COMPLETION" text="스터디 수료" />
+                    </DropDown>
+
+                    {couponInfo.couponType === "STUDY_COMPLETION" && (
+                      <DropDown
+                        label="스터디 이름"
+                        placeholder="선택하세요"
+                        value={String(couponInfo.studyId)}
+                        onChange={handleChangeStudyId}
+                        className={dropdownClass}
+                      >
+                        {studyList.map(study => (
+                          <DropDownOption
+                            key={study.studyId}
+                            value={String(study.studyId)}
+                            text={study.title}
+                          />
+                        ))}
+                      </DropDown>
+                    )}
+                  </StyledInfoRow>
+                );
+              }}
+            </ClassNames>
+          </StyledInfoWrapper>
+          <Button
+            disabled={isButtonDisabled}
+            style={{ width: "20.5rem" }}
+            onClick={handleClickSubmit}
+          >
+            생성하기
+          </Button>
         </StyledContent>
       </StyledModalContentWrapper>
     </Modal>
@@ -181,15 +182,6 @@ const StyledTitle = styled(Typography)({
   letterSpacing: "-0.32px",
 });
 
-const StyledText = styled(Typography)({
-  color: "#6B6B6B",
-  fontFamily: "SUIT v1",
-  fontSize: "14px",
-  fontWeight: 600,
-  lineHeight: "14px",
-  letterSpacing: "-0.14px",
-});
-
 const StyledInfoRow = styled("div")({
   display: "flex",
   gap: "10px",
@@ -210,42 +202,3 @@ const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
   alignItems: "flex-start",
   gap: "8px",
 }));
-
-const StyledTextField = styled(TextField)({
-  "width": "274px",
-
-  ".MuiInputBase-root": {
-    borderRadius: 4,
-    border: "1px solid #C2C2C2",
-    padding: "8px 14px",
-    height: "40px",
-  },
-
-  ".MuiInputBase-input": {
-    padding: 0,
-    fontFamily: "Pretendard",
-    fontSize: "14px",
-    fontWeight: 500,
-    lineHeight: "22.4px",
-  },
-
-  "fieldset": {
-    border: "none",
-  },
-
-  ".MuiInputBase-input::placeholder": {
-    color: "#C2C2C2",
-  },
-});
-
-const StyledButton = styled(Button)({
-  width: "328px",
-  height: "48px",
-  padding: "16px 0",
-  marginTop: "auto",
-  fontFamily: "SUIT v1",
-  fontSize: "16px",
-  fontWeight: 600,
-  lineHeight: "16px",
-  letterSpacing: "-0.16px",
-});

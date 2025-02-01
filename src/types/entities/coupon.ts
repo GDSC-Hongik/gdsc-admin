@@ -3,6 +3,8 @@ import { MemberInfoType } from "./member";
 export type CouponInfoType = {
   name: string;
   discountAmount: null | number;
+  couponType: "ADMIN" | "STUDY_COMPLETION";
+  studyId: null | number;
 };
 
 export type DetailCouponInfoType = {
