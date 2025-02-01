@@ -54,8 +54,8 @@ dependencies:
     specifier: ^0.1.6
     version: 0.1.6
   wowds-ui:
-    specifier: ^0.1.19
-    version: 0.1.21(next@14.2.23)(react-dom@18.3.1)(react@18.3.1)
+    specifier: ^0.2.0
+    version: 0.2.0(next@14.2.23)(react-dom@18.3.1)(react@18.3.1)
   zustand:
     specifier: ^4.4.7
     version: 4.5.6(@types/react@18.3.18)(react@18.3.1)
@@ -8023,8 +8023,8 @@ packages:
     resolution: {integrity: sha512-/7xLOIvHNTuOfMhSM+JfPF6MaDwS5jC6JN7JXPvo3T52l63Wy63cNskwWrZ1WaD5fHvuG9Il4p9AOB8+zp/ppg==}
     dev: false
 
-  /wowds-ui@0.1.21(next@14.2.23)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-7BKQsxYACLUYHsNI9ivb9fEn9ShTaVpPpU9qJLzHqspwJTa6S1ACX0WcOIEXeNlgcH+afQQCs2irumzNJY1WsA==}
+  /wowds-ui@0.2.0(next@14.2.23)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-f3Le98hITXl3Mn2iVCvRCCvZcEx7Now0AJAjT+hNlbZcYWK/HVAy0eUZNKixdEq6FwQ0/SbSEsMEIxp8S4szfA==}
     peerDependencies:
       next: ^14.1.1
       react: ^18.2.0
