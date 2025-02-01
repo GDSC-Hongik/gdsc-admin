@@ -4,6 +4,8 @@ import { BASE_URL } from "src/environment";
 import useAuthStorage from "@/hooks/auth/useAuthStorage";
 import { ErrorResponse } from "@/types/entities/error";
 
+const DEV_AUTH_TOKEN = import.meta.env.VITE_DEV_AUTH_TOKEN;
+
 const createApiClient = (): AxiosInstance => {
   const apiClient = axios.create({
     baseURL: BASE_URL,
@@ -18,9 +20,9 @@ const createApiClient = (): AxiosInstance => {
     const authStorage = useAuthStorage();
 
     const accessToken = authStorage.accessToken;
-
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+    console.log(DEV_AUTH_TOKEN);
+    if (accessToken || DEV_AUTH_TOKEN) {
+      config.headers.Authorization = `Bearer ${accessToken || DEV_AUTH_TOKEN}`;
     }
 
     return config;
