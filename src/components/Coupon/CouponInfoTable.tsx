@@ -27,6 +27,7 @@ export default function CouponInfoTable() {
       name: coupon.name,
       discountAmount: formatPrice(coupon.discountAmount),
       createdAt: formatDateWithText(coupon.createdAt),
+      couponType: coupon.couponType,
     }));
   };
 
@@ -69,6 +70,16 @@ const columns: GridColDef[] = [
   {
     field: "createdAt",
     headerName: "생성 일시",
+    headerAlign: "left",
+    align: "left",
+    minWidth: 200,
+    flex: 1,
+    resizable: false,
+    editable: false,
+  },
+  {
+    field: "couponType",
+    headerName: "쿠폰 종류",
     headerAlign: "left",
     align: "left",
     minWidth: 200,

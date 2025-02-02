@@ -36,7 +36,7 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
 
   const { mutate: createCouponMutate } = useCreateCouponMutation();
 
-  const isButtonDisabled =
+  const isCouponInfoComplete =
     couponInfo.name !== null &&
     couponInfo.name !== "" &&
     couponInfo.discountAmount !== null &&
@@ -148,7 +148,7 @@ export default function CouponModal({ open, onClose }: CouponModalPropsType) {
             </ClassNames>
           </StyledInfoWrapper>
           <Button
-            disabled={isButtonDisabled}
+            disabled={!isCouponInfoComplete}
             style={{ width: "20.5rem" }}
             onClick={handleClickSubmit}
           >
