@@ -188,11 +188,14 @@ const StyledInfoRow = styled("div")({
 });
 
 const StyledContent = styled(Box)({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  justifyContent: "space-between",
-  height: "490px",
+  "display": "flex",
+  "flexDirection": "column",
+  "alignItems": "flex-start",
+  "justifyContent": "space-between",
+  "height": "490px",
+  "& > :last-child": {
+    alignSelf: "center",
+  },
 });
 
 const StyledInfoWrapper = styled(Box)<{ height?: number }>(({ height }) => ({
