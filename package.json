@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "HTTPS=true SSL_CRT_FILE=localhost.pem SSL_KEY_FILE=localhost-key.pem vite",
+    "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "preview": "vite preview",
     "postinstall": "husky install",
     "cypress": "cypress open",
@@ -27,7 +27,9 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
     "react-toastify": "^10.0.4",
-    "typescript": "^4.9.4",
+    "typescript": "^5.7.3",
+    "wowds-icons": "^0.1.6",
+    "wowds-ui": "^0.2.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {

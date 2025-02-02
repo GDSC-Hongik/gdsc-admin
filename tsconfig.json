@@ -8,7 +8,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -19,23 +19,24 @@
     "noFallthroughCasesInSwitch": true,
     "jsxImportSource": "@emotion/react",
     /* 절대 경로 */
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["src/*"],
-      "apis/*": ["src/apis/*"],
-      "assets/*": ["src/assets/*"],
-      "components/*": ["src/components/*"],
-      "constants/*": ["src/constants/*"],
-      "hooks/*": ["src/hooks/*"],
-      "pages/*": ["src/pages/*"],
-      "store/*": ["src/store/*"],
-      "styles/*": ["src/styles/*"],
-      "tests/*": ["src/__tests__/*"],
-      "types/*": ["src/types/*"],
-      "utils/*": ["src/utils/*"],
-      "routes/*": ["src/routes/*"]
+      "@/*": ["*"],
+      "apis/*": ["apis/*"],
+      "assets/*": ["assets/*"],
+      "components/*": ["components/*"],
+      "constants/*": ["constants/*"],
+      "hooks/*": ["hooks/*"],
+      "pages/*": ["pages/*"],
+      "store/*": ["store/*"],
+      "styles/*": ["styles/*"],
+      "tests/*": ["__tests__/*"],
+      "types/*": ["types/*"],
+      "utils/*": ["utils/*"],
+      "routes/*": ["routes/*"]
     }
   },
   "include": ["src", "**/*.*"],
+  "exclude": ["vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
