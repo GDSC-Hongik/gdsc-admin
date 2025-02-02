@@ -8,8 +8,11 @@ export default function useGetStudyListQuery() {
     queryFn: () => studyApi.getStudyList(),
   });
 
-  return data.map(study => ({
-    studyId: study.studyId,
-    title: study.title,
-  }));
+  return data
+    .map(study => ({
+      studyId: study.studyId,
+      title: study.title,
+      openingDate: new Date(study.openingDate),
+    }))
+    .sort((a, b) => b.openingDate.getTime() - a.openingDate.getTime());
 }
