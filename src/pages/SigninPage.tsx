@@ -1,6 +1,7 @@
 import { Stack, styled } from "@mui/material";
 import LogoIcon from "@/assets/logo.svg?react";
 import { GitHubButton } from "@/components/@common/GitHubButton";
+import { BASE_URL } from "@/environment";
 import RoutePath from "@/routes/routePath";
 
 export default function SigninPage() {
