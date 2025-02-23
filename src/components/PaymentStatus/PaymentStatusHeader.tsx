@@ -48,7 +48,9 @@ export default function PaymentStatusHeader() {
 
   const handleChangeText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const text = e.target.value;
-    text.length === 1 && handleResetPage();
+    if (text.length === 1) {
+      handleResetPage();
+    }
 
     setSearchInfo(prevSearchInfo => ({
       ...prevSearchInfo,
