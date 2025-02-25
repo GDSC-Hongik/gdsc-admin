@@ -1,8 +1,12 @@
 import { MemberInfoType } from "./member";
 
+export type CouponTypeType = "ADMIN" | "STUDY_COMPLETION";
+
 export type CouponInfoType = {
   name: string;
   discountAmount: null | number;
+  couponType: CouponTypeType;
+  studyId: null | number;
 };
 
 export type DetailCouponInfoType = {
@@ -38,6 +42,7 @@ export type CouponType = {
   name: string;
   discountAmount: number;
   createdAt: string;
+  couponType: CouponTypeType;
 };
 
 type CouponSearchVariantType = [
